@@ -1,0 +1,24 @@
+services:
+  bind9:
+    image: ubuntu/bind9:latest
+    container_name: bind9-dns
+    restart: unless-stopped
+    ports:
+      - "53:53/udp"      # DNS UDP
+      - "53:53/tcp"      # DNS TCP
+      - "953:953/tcp"    # rndc control (可選)
+    volumes:
+      - ./bind/config:/etc/bind
+      - ./bind/cache:/var/cache/bind
+      - ./bind/logs:/var/log/bind
+      - ./bind/zones:/var/lib/bind/zones
+    environment:
+      - TZ=Asia/Taipei
+    networks:
+      - dns-network
+    command: /usr/sbin/named -f -c /etc/bind/named.conf -u bind
+
+networks:
+  dns-network:
+    driver: bridge
+

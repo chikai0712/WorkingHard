@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>成語遊戲 - Idiom Game</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="header">
+            <h1>📚 成語遊戲</h1>
+            <div class="header-actions">
+                <button id="startGameBtn" class="btn btn-primary">🎮 開始遊戲</button>
+                <button id="gameModeBtn" class="btn btn-info">⚙️ 遊戲模式</button>
+                <button id="helpBtn" class="btn btn-secondary">❓ 說明</button>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Game Selection -->
+            <section id="gameSelection" class="game-selection">
+                <div class="welcome-screen">
+                    <h2>歡迎來到成語遊戲！</h2>
+                    <p>選擇一個遊戲模式開始遊玩</p>
+                    
+                    <div class="game-modes">
+                        <div class="mode-card" data-mode="picture-guess">
+                            <div class="mode-icon">📖</div>
+                            <h3>看解釋猜成語</h3>
+                            <p>根據成語解釋猜測正確的成語</p>
+                        </div>
+                        <div class="mode-card" data-mode="fill-blank">
+                            <div class="mode-icon">✍️</div>
+                            <h3>填空題</h3>
+                            <p>根據提示填寫成語中的空格</p>
+                        </div>
+                        <div class="mode-card" data-mode="guess-meaning">
+                            <div class="mode-icon">💡</div>
+                            <h3>猜意思</h3>
+                            <p>根據成語猜測其含義</p>
+                        </div>
+                        <div class="mode-card" data-mode="word-chain">
+                            <div class="mode-icon">🔗</div>
+                            <h3>接龍</h3>
+                            <p>根據前一個成語的最後一個字接下去</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Game Area -->
+            <section id="gameArea" class="game-area hidden">
+                <div class="game-header">
+                    <div class="score-info">
+                        <span>分數: <span id="score">0</span></span>
+                        <span>正確: <span id="correctCount">0</span></span>
+                        <span>錯誤: <span id="wrongCount">0</span></span>
+                    </div>
+                    <div class="game-controls-top">
+                        <button id="hintBtn" class="btn btn-warning">💡 提示</button>
+                        <button id="skipBtn" class="btn btn-secondary">⏭️ 跳過</button>
+                        <button id="endGameBtn" class="btn btn-danger">🏁 結束</button>
+                    </div>
+                </div>
+
+                <div class="game-content" id="gameContent">
+                    <!-- 遊戲內容將動態載入 -->
+                </div>
+            </section>
+
+            <!-- Result Screen -->
+            <section id="resultScreen" class="result-screen hidden">
+                <div class="result-content">
+                    <h2 id="resultTitle">遊戲結束</h2>
+                    <div class="result-stats">
+                        <div class="stat-item">
+                            <span class="stat-label">總分數:</span>
+                            <span class="stat-value" id="finalScore">0</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">正確題數:</span>
+                            <span class="stat-value" id="finalCorrect">0</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">錯誤題數:</span>
+                            <span class="stat-value" id="finalWrong">0</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">正確率:</span>
+                            <span class="stat-value" id="finalRate">0%</span>
+                        </div>
+                    </div>
+                    <div class="result-actions">
+                        <button id="playAgainBtn" class="btn btn-primary">🔄 再玩一次</button>
+                        <button id="backToMenuBtn" class="btn btn-secondary">🏠 返回主選單</button>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Help Modal -->
+    <div id="helpModal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>❓ 遊戲說明</h2>
+                <button class="modal-close" id="closeHelpBtn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <h3>遊戲模式說明：</h3>
+                <ul>
+                    <li><strong>填空題：</strong>根據提示填寫成語中的空格，例如「一___二___」</li>
+                    <li><strong>猜意思：</strong>根據成語選擇正確的含義</li>
+                    <li><strong>接龍：</strong>根據前一個成語的最後一個字，接出下一個成語</li>
+                    <li><strong>找成語：</strong>從一段文字中找出隱藏的成語</li>
+                </ul>
+                <h3>操作說明：</h3>
+                <ul>
+                    <li>點擊「提示」可以獲得提示</li>
+                    <li>點擊「跳過」可以跳過當前題目</li>
+                    <li>答對可以獲得分數，答錯會扣分</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script src="idioms.js"></script>
+    <script src="picture-generator.js"></script>
+    <script src="game.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
+

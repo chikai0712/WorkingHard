@@ -1,0 +1,19 @@
+options {
+    directory "/var/lib/bind";
+    
+    // Listen on all interfaces
+    listen-on port 53 { any; };
+    listen-on-v6 port 53 { any; };
+    
+    // Allow queries
+    allow-query { any; };
+    allow-recursion { any; };
+    
+    // Forwarders
+    forwarders {
+        8.8.8.8;
+        8.8.4.4;
+    };
+    forward only;
+};
+

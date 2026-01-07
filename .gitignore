@@ -1,0 +1,80 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+.venv
+*.egg-info/
+dist/
+build/
+
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+
+# 輸出文件
+*.json
+*.csv
+*.xlsx
+data/
+logs/
+*.log
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*.sublime-project
+*.sublime-workspace
+
+# 系統文件
+.DS_Store
+Thumbs.db
+*.tmp
+*.bak
+
+# 環境變數（包含敏感資訊）
+.env
+.env.local
+.env.*.local
+
+# Cookies 和敏感資訊
+xe_cookies.json
+*.key
+*.pem
+*.crt
+
+# 編譯文件
+*.class
+*.dll
+*.exe
+*.o
+*.so
+
+# 備份文件
+*.backup
+*.old
+
+# 測試覆蓋率
+.coverage
+htmlcov/
+.pytest_cache/
+
+# 資料庫
+*.db
+*.sqlite
+*.sqlite3
+
+# 臨時文件
+tmp/
+temp/
+*.tmp
+
