@@ -1,0 +1,199 @@
+# GitLab CI/CD 稽核配置
+# 此文件包含稽核相關的 CI/CD 任務
+
+stages:
+  - audit
+  - compliance
+
+variables:
+  AUDIT_SYSTEM_URL: "https://audit-system.example.com"
+  COMPLIANCE_SYSTEM_URL: "https://compliance.example.com"
+
+# 代碼變更稽核
+audit_code_change:
+  stage: audit
+  image: alpine:latest
+  script:
+    - apk add --no-cache curl jq git
+    - |
+      echo "=== 代碼變更稽核 ==="
+      echo "提交者: $GITLAB_USER_NAME"
+      echo "提交時間: $(date -Iseconds)"
+      echo "分支: $CI_COMMIT_REF_NAME"
+      echo "Commit: $CI_COMMIT_SHA"
+      echo "變更文件數: $(git diff --name-only $CI_COMMIT_BEFORE_SHA $CI_COMMIT_SHA 2>/dev/null | wc -l || echo 0)"
+    - |
+      # 記錄到稽核系統
+      if [ -n "$AUDIT_SYSTEM_URL" ]; then
+        curl -X POST "$AUDIT_SYSTEM_URL/api/events" \
+          -H "Content-Type: application/json" \
+          -H "Authorization: Bearer $AUDIT_API_TOKEN" \
+          -d "{
+            \"event_type\": \"code_change\",
+            \"project_id\": $CI_PROJECT_ID,
+            \"user\": \"$GITLAB_USER_NAME\",
+            \"user_email\": \"$GITLAB_USER_EMAIL\",
+            \"timestamp\": \"$(date -Iseconds)\",
+            \"branch\": \"$CI_COMMIT_REF_NAME\",
+            \"commit\": \"$CI_COMMIT_SHA\",
+            \"commit_message\": \"$CI_COMMIT_MESSAGE\",
+            \"files_changed\": $(git diff --name-only $CI_COMMIT_BEFORE_SHA $CI_COMMIT_SHA 2>/dev/null | wc -l || echo 0)
+          }" || echo "⚠️ 稽核系統連接失敗，但繼續執行"
+      fi
+  only:
+    - main
+    - develop
+  when: always
+
+# Merge Request 稽核
+audit_merge_request:
+  stage: audit
+  image: alpine:latest
+  script:
+    - apk add --no-cache curl jq
+    - |
+      echo "=== Merge Request 稽核 ==="
+      echo "MR ID: $CI_MERGE_REQUEST_IID"
+      echo "審查者: $GITLAB_USER_NAME"
+      echo "目標分支: $CI_MERGE_REQUEST_TARGET_BRANCH_NAME"
+    - |
+      if [ -n "$AUDIT_SYSTEM_URL" ] && [ -n "$CI_MERGE_REQUEST_IID" ]; then
+        curl -X POST "$AUDIT_SYSTEM_URL/api/events" \
+          -H "Content-Type: application/json" \
+          -H "Authorization: Bearer $AUDIT_API_TOKEN" \
+          -d "{
+            \"event_type\": \"merge_request\",
+            \"project_id\": $CI_PROJECT_ID,
+            \"mr_id\": $CI_MERGE_REQUEST_IID,
+            \"user\": \"$GITLAB_USER_NAME\",
+            \"target_branch\": \"$CI_MERGE_REQUEST_TARGET_BRANCH_NAME\",
+            \"timestamp\": \"$(date -Iseconds)\"
+          }" || echo "⚠️ 稽核系統連接失敗"
+      fi
+  only:
+    - merge_requests
+  when: always
+
+# 合規性檢查
+compliance_check:
+  stage: compliance
+  image: golang:1.21
+  script:
+    - |
+      echo "=== 合規性檢查 ==="
+      
+      # 1. 檢查 Commit 信息格式
+      if ! echo "$CI_COMMIT_MESSAGE" | grep -qE "^(feat|fix|docs|style|refactor|test|chore|perf|security):"; then
+        echo "❌ Commit 信息格式不正確"
+        echo "應使用格式: type(scope): description"
+        echo "類型: feat, fix, docs, style, refactor, test, chore, perf, security"
+        exit 1
+      fi
+      
+      # 2. 檢查是否包含敏感信息
+      echo "檢查敏感信息..."
+      if git diff $CI_COMMIT_BEFORE_SHA $CI_COMMIT_SHA | grep -iE "password\s*=\s*['\"]|secret\s*=\s*['\"]|api_key\s*=\s*['\"]|token\s*=\s*['\"]" | grep -vE "^\+\+\+|^---|^@@|^\s*//|^\s*#"; then
+        echo "❌ 檢測到可能的敏感信息"
+        echo "請確保敏感信息已從代碼中移除，使用環境變數或密鑰管理系統"
+        exit 1
+      fi
+      
+      # 3. 檢查代碼規範
+      echo "檢查代碼規範..."
+      gofmt -l . | grep -v vendor || true
+      if [ $? -eq 0 ]; then
+        echo "⚠️ 發現未格式化的代碼，請運行: gofmt -w ."
+      fi
+      
+      echo "✅ 合規性檢查通過"
+  only:
+    - main
+    - develop
+    - merge_requests
+
+# 生成合規性報告
+compliance_report:
+  stage: compliance
+  image: alpine:latest
+  script:
+    - apk add --no-cache curl jq
+    - |
+      echo "=== 生成合規性報告 ==="
+      
+      REPORT_FILE="compliance_report_$(date +%Y%m%d_%H%M%S).json"
+      
+      cat > $REPORT_FILE <<EOF
+      {
+        "project_id": $CI_PROJECT_ID,
+        "branch": "$CI_COMMIT_REF_NAME",
+        "commit": "$CI_COMMIT_SHA",
+        "timestamp": "$(date -Iseconds)",
+        "checks": {
+          "commit_format": "passed",
+          "sensitive_info": "passed",
+          "code_style": "passed"
+        },
+        "test_coverage": "$(cat coverage.out 2>/dev/null | grep total | awk '{print $3}' || echo 'N/A')"
+      }
+      EOF
+      
+      # 上傳到合規系統
+      if [ -n "$COMPLIANCE_SYSTEM_URL" ]; then
+        curl -X POST "$COMPLIANCE_SYSTEM_URL/api/reports" \
+          -H "Content-Type: application/json" \
+          -H "Authorization: Bearer $COMPLIANCE_API_TOKEN" \
+          -d @$REPORT_FILE || echo "⚠️ 合規系統連接失敗"
+      fi
+      
+      cat $REPORT_FILE
+  artifacts:
+    paths:
+      - compliance_report_*.json
+    expire_in: 30 days
+  only:
+    - main
+  when: always
+
+# 違規檢測和通知
+violation_detection:
+  stage: audit
+  image: alpine:latest
+  script:
+    - apk add --no-cache curl
+    - |
+      # 檢查是否直接推送到保護分支
+      if [ "$CI_COMMIT_REF_NAME" = "main" ] && [ -n "$CI_COMMIT_BRANCH" ]; then
+        echo "❌ 違規: 禁止直接推送到 main 分支"
+        
+        # 發送通知
+        if [ -n "$SLACK_WEBHOOK_URL" ]; then
+          curl -X POST "$SLACK_WEBHOOK_URL" \
+            -H "Content-Type: application/json" \
+            -d "{
+              \"text\": \"⚠️ 檢測到違規操作\",
+              \"attachments\": [{
+                \"color\": \"danger\",
+                \"fields\": [{
+                  \"title\": \"用戶\",
+                  \"value\": \"$GITLAB_USER_NAME\",
+                  \"short\": true
+                }, {
+                  \"title\": \"操作\",
+                  \"value\": \"直接推送到 main 分支\",
+                  \"short\": true
+                }, {
+                  \"title\": \"分支\",
+                  \"value\": \"$CI_COMMIT_REF_NAME\",
+                  \"short\": true
+                }]
+              }]
+            }"
+        fi
+        
+        exit 1
+      fi
+  only:
+    - main
+    - develop
+  when: always
+

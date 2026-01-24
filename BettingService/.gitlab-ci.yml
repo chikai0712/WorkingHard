@@ -1,0 +1,134 @@
+stages:
+  - audit
+  - security-scan
+  - build
+  - image-scan
+  - test
+  - compliance-check
+  - deploy-canary
+  - deploy-production
+
+variables:
+  DOCKER_REGISTRY: registry.example.com
+  IMAGE_NAME: betting-service/order-service
+  K8S_NAMESPACE: betting-service
+  DOCKER_DRIVER: overlay2
+  DOCKER_TLS_CERTDIR: "/certs"
+
+before_script:
+  - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+
+# 引入稽核和安全掃描配置
+include:
+  - local: '.gitlab-ci-audit.yml'
+  - local: '.gitlab-ci-security.yml'
+
+build:
+  stage: build
+  image: docker:latest
+  services:
+    - docker:dind
+  before_script:
+    - apk add --no-cache curl
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+  script:
+    - echo "🔨 構建 Docker 鏡像..."
+    - docker build -t $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA -f deploy/docker/Dockerfile.order-service .
+    - docker tag $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA $CI_REGISTRY_IMAGE:latest
+    - docker tag $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
+    
+    # 鏡像簽名（使用 Docker Content Trust）
+    - |
+      if [ -n "$DOCKER_CONTENT_TRUST" ]; then
+        echo "🔐 簽名 Docker 鏡像..."
+        export DOCKER_CONTENT_TRUST=1
+        docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
+        docker push $CI_REGISTRY_IMAGE:latest
+      else
+        echo "⚠️  Docker Content Trust 未啟用，僅推送未簽名鏡像"
+        docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
+        docker push $CI_REGISTRY_IMAGE:latest
+        docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
+      fi
+  only:
+    - main
+    - develop
+  dependencies:
+    - sast_gosec
+    - sast_semgrep
+    - sast_secrets
+    - dependency_scan_trivy
+  tags:
+    - docker
+
+test:
+  stage: test
+  image: golang:1.21
+  script:
+    - echo "🧪 運行測試..."
+    - go mod download
+    - go test ./... -v -coverprofile=coverage.out
+    - go tool cover -func=coverage.out
+  coverage: '/total:\s+\(statements\)\s+(\d+\.\d+)%/'
+  artifacts:
+    reports:
+      coverage_report:
+        coverage_format: cobertura
+        path: coverage.out
+    paths:
+      - coverage.out
+    expire_in: 1 week
+  only:
+    - main
+    - develop
+    - merge_requests
+
+deploy-canary:
+  stage: deploy-canary
+  image: bitnami/kubectl:latest
+  script:
+    - echo "🚀 部署金絲雀版本..."
+    - kubectl config use-context $KUBE_CONTEXT
+    - kubectl set image deployment/order-service-canary order-service=$CI_REGISTRY_IMAGE:$CI_COMMIT_SHA -n $K8S_NAMESPACE
+    - kubectl rollout status deployment/order-service-canary -n $K8S_NAMESPACE --timeout=5m
+    - echo "✅ 金絲雀部署完成，等待驗證..."
+    - sleep 60  # 等待服務啟動
+    - |
+      if [ -f scripts/verify_canary.sh ]; then
+        chmod +x scripts/verify_canary.sh
+        ./scripts/verify_canary.sh || exit 1
+      fi
+  environment:
+    name: canary
+    url: https://canary.betting-service.example.com
+  only:
+    - main
+  when: on_success
+  tags:
+    - kubernetes
+
+deploy-production:
+  stage: deploy-production
+  image: bitnami/kubectl:latest
+  script:
+    - echo "🚀 開始生產環境部署..."
+    - kubectl config use-context $KUBE_CONTEXT
+    - |
+      if [ -f scripts/gradual_rollout.sh ]; then
+        chmod +x scripts/gradual_rollout.sh
+        ./scripts/gradual_rollout.sh $CI_COMMIT_SHA
+      else
+        echo "⚠️  漸進式部署腳本不存在，使用標準滾動更新"
+        kubectl set image deployment/order-service-production order-service=$CI_REGISTRY_IMAGE:$CI_COMMIT_SHA -n $K8S_NAMESPACE
+        kubectl rollout status deployment/order-service-production -n $K8S_NAMESPACE --timeout=10m
+      fi
+    - echo "✅ 生產環境部署完成"
+  environment:
+    name: production
+    url: https://betting-service.example.com
+  only:
+    - main
+  when: manual  # 需要手動觸發
+  tags:
+    - kubernetes
+

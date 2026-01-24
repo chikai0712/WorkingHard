@@ -74,6 +74,7 @@
 - <strong>WAF / IPS / IDS / DDoS 防禦</strong>：設計多層次資安架構，部署 WAF、IPS、IDS 後期採用CDN搭配Log檢測，建置產品防護系統，成功抵禦世界盃期間多次 DDoS 攻擊，服務可用性維持 99.9%+
 
 ### 程式語言與自動化腳本
+- <strong>Golang</strong>：使用 Golang 開發高併發微服務、API Gateway 與監控工具，利用 Goroutine 和 Channel 實現高效能並發處理，服務吞吐量提升 60%，API 響應時間降低 40%。開發 Kubernetes Operator 與自定義控制器，實現自動化資源管理與擴展
 - <strong>Python</strong>：使用 Python 開發自動化工具，包括域名檢測、資源監控、成本分析腳本，自動化率達 80%，節省工程時間 15 小時/週
 - <strong>Shell / Bash</strong>：撰寫 Shell 腳本實現系統自動化部署、備份、監控，整合 Zabbix 進行資源優化，降低營運成本 25%
 - <strong>n8n / Cursor AI</strong>：使用 n8n 建立自動化工作流，整合 Slack、工單系統、監控工具，使用 Cursor AI 提升開發效率
@@ -91,6 +92,56 @@
 ---
 
 ## 💼 工作經驗
+
+### Senior Technical Consultant / IT Director / Solution Architect
+<strong>[公司名稱]</strong> | <strong>2024.10 - 至今</strong> | 台北
+
+<strong>公司規模</strong>：200+ 人 | <strong>團隊規模</strong>：12 人
+
+<strong>核心成就：</strong>
+
+1. <strong>雲地整合架構設計與混合雲策略</strong>
+   - <strong>架構設計</strong>企業級混合雲架構（Hybrid Cloud），整合地端數據中心與 AWS/GCP 公有雲，使用 Terraform 實現 Infrastructure as Code，設計統一的雲地管理平台，實現<strong>24 小時內無縫遷移能力</strong>，<strong>降低供應商鎖定風險 90%</strong>
+   - <strong>設計</strong>雲地數據同步架構，使用 AWS Direct Connect 和 GCP Interconnect 建立專線連接，整合 Kafka 實現地端與雲端的實時數據同步，<strong>數據同步延遲降低至 50ms 以內</strong>，<strong>數據一致性達 99.99%+</strong>
+   - <strong>架構設計</strong>混合雲災難恢復方案（DR），實現地端與雲端互為備援，使用 Terraform 和 Ansible 自動化災難恢復流程，<strong>RTO 從 4 小時縮短至 30 分鐘（87.5% 改善）</strong>，<strong>RPO 從 1 小時縮短至 5 分鐘（92% 改善）</strong>
+   - <strong>主導</strong>雲地整合成本優化策略，建立 FinOps 治理框架，透過資源標籤管理和成本分析 Dashboard，<strong>年度混合雲成本節省 USD $300k+（35% 降低）</strong>，<strong>TCO 降低 30%</strong>
+   - <strong>設計</strong>雲地統一監控架構，整合 Prometheus、Grafana 與地端監控系統，建立單一可視化 Dashboard，實現跨環境統一監控，<strong>故障檢測時間從 15 分鐘縮短至 2 分鐘（87% 改善）</strong>
+
+2. <strong>IT 服務整合平台與自動化建設</strong>
+   - <strong>架構設計並推出</strong>企業級 IT 服務整合平台（Unified IT Service Platform），整合 20+ IT 服務（CI/CD、監控、日誌、資安掃描、成本分析、資料庫配置、環境申請、告警管理）至單一平台。透過開發團隊與業務部門痛點訪談，識別核心需求，設計並推出服務 <strong>300+ 內部用戶</strong>的自助式 IT 平台，<strong>IT 服務請求處理時間減少 75%</strong>，<strong>自助服務採用率達 85%+</strong>
+   - <strong>設計</strong>統一 API Gateway 整合多個 IT 服務後端，使用 Golang 開發高併發 API Gateway，實現服務發現、負載均衡、限流、認證等功能。整合 Terraform、Ansible、Kubernetes、Prometheus、GitLab CI 等多個系統 API，<strong>API 響應時間降低 50%</strong>，<strong>服務吞吐量提升 70%</strong>
+   - <strong>建立</strong>企業級自動化平台，整合 CI/CD、基礎設施自動化、配置管理於統一平台。使用 Golang 開發自動化引擎，支援多雲（AWS、GCP、Azure）和地端環境的自動化操作，<strong>自動化覆蓋率達 85%+</strong>，<strong>運維效率提升 60%</strong>
+   - <strong>設計</strong>基於 Kubernetes 的混合雲容器編排平台，使用 Helm Charts 標準化應用部署，實現地端 Kubernetes 與雲端 EKS/GKE 統一管理，<strong>部署時間從 2 週縮短至 4 小時（97% 改善）</strong>，<strong>部署成功率提升至 98%+</strong>
+   - <strong>實施</strong>GitOps 實踐，使用 ArgoCD 實現地端與雲端的統一 GitOps 流程，所有基礎設施變更通過 Git 版本控制，<strong>配置錯誤率降低 80%</strong>，<strong>變更審計追蹤完整性達 100%</strong>
+
+3. <strong>架構設計與技術決策（Solution Architecture）</strong>
+   - <strong>主導</strong>企業架構設計與技術選型，評估微服務 vs 單體架構、Buy vs. Build 決策，建立架構決策記錄（ADR），透過系統化的評估框架，<strong>技術決策準確率提升 95%+</strong>，<strong>避免技術選型錯誤節省 USD $200k+</strong>
+   - <strong>設計</strong>微服務架構遷移策略，使用絞殺榕模式（Strangler Fig Pattern）逐步將單體系統遷移至微服務架構。設計 API Gateway 作為過渡層，實現增量遷移，<strong>業務中斷時間零</strong>，<strong>遷移風險降低 90%</strong>
+   - <strong>架構設計</strong>高可用分散式系統，設計 Multi-Region 部署架構，整合地端與雲端資源，實現跨區域負載均衡與故障轉移，<strong>系統可用性從 99.5% 提升至 99.95%+</strong>，<strong>跨區域延遲優化 40%</strong>
+   - <strong>評估並設計</strong>Service Mesh 架構（Istio）與事件驅動架構（Event-Driven Architecture），使用 Kafka 整合地端與雲端系統，實現微服務間的安全通信與異步通信，<strong>服務間延遲降低 25%</strong>，<strong>系統耦合度降低 70%</strong>，<strong>擴展性提升 60%</strong>
+
+4. <strong>IT 部門管理、組織變革與敏捷實踐</strong>
+   - <strong>管理</strong>IT 部門（12 人跨職能團隊），建立技術架構組、平台工程組、運維組的組織架構，制定清晰的職責分工與協作機制，<strong>團隊協作效率提升 50%</strong>，<strong>專案交付準時率達 95%+</strong>
+   - <strong>建立</strong>技術職涯發展路徑與能力模型，定義 Junior、Middle、Senior、Lead 等級的能力標準，透過技術培訓與認證計畫，<strong>團隊技能提升率達 90%+</strong>，<strong>內部晉升率 65%+</strong>
+   - <strong>推動</strong>DevOps 文化轉型，引導團隊從傳統運維轉向 Platform Engineering 思維，建立 SRE 實踐與數據驅動運維機制，<strong>變革成功率 95%+</strong>，<strong>變革阻力降低 75%</strong>
+   - <strong>擔任</strong>Product Owner 和 Scrum Master，透過用戶訪談與痛點分析，識別核心需求，設計並推出自助式 IT 服務平台，服務 <strong>300+ 內部用戶</strong>。引導 3 個開發團隊實施 Scrum 框架，<strong>產品迭代速度提升 60%</strong>，<strong>團隊協作效率提升 45%</strong>，<strong>Sprint 交付準時率 95%+</strong>
+   - <strong>建立</strong>知識管理體系與敏捷實踐規範，使用 Confluence 建立技術文檔庫與架構決策記錄（ADR），定義 DoD、DoR 標準，<strong>知識共享效率提升 70%</strong>，<strong>新員工上線時間從 2 個月縮短至 3 週</strong>，<strong>產品品質提升 30%</strong>
+
+5. <strong>FinOps 實踐與成本優化</strong>
+   - <strong>建立</strong>FinOps 治理框架，設計成本感知架構（Cost-Aware Architecture），將成本視為非功能性需求納入架構設計考量。建立單一事實來源（Single Source of Truth），透過標籤管理策略，<strong>年度 IT 成本節省 USD $350k+（40% 降低）</strong>，<strong>TCO 降低 35%</strong>
+   - <strong>主導</strong>供應商談判（Vendor Management），與 AWS、GCP、Azure 等雲端供應商協商 Enterprise Agreement，<strong>取得 25%+ 折扣優惠</strong>，<strong>年度節省 USD $120k+</strong>
+   - <strong>建立</strong>IT 預算追蹤與成本分析機制，使用成本分析 Dashboard 監控各部門 IT 支出，建立成本預警機制，<strong>預算超支率從 20% 降低至 5%</strong>，<strong>預算執行準確率達 97%+</strong>
+   - <strong>實施</strong>資源優化策略，使用 Spot Instances、Reserved Instances 與自動縮放機制，優化雲端資源使用，<strong>資源利用率提升 45%</strong>，<strong>閒置資源成本降低 60%</strong>
+
+6. <strong>安全架構與合規性</strong>
+   - <strong>設計</strong>零信任安全架構（Zero Trust Architecture），實施多層次安全防禦機制，整合地端與雲端安全策略，使用 Terraform 實現安全策略 Infrastructure as Code，<strong>安全事件減少 80%</strong>，<strong>安全合規性達 100%</strong>
+   - <strong>建立</strong>DevSecOps 實踐，整合安全掃描（SAST、DAST、容器掃描）於 CI/CD Pipeline，使用 Golang 開發安全自動化工具，<strong>安全漏洞檢測時間減少 90%</strong>，<strong>安全修復時間減少 70%</strong>
+   - <strong>設計</strong>雲地統一身份管理（IAM），整合地端 AD 與雲端 IAM，實現單一登入（SSO）與統一權限管理，<strong>身份管理效率提升 60%</strong>，<strong>權限錯誤率降低 85%</strong>
+   - <strong>建立</strong>審計與合規機制，使用自動化工具追蹤所有變更與操作，實現完整的審計追蹤，<strong>審計完整性達 100%</strong>，<strong>合規風險降低 90%</strong>
+
+<strong>使用的工具與技術</strong>：Golang, Kubernetes (EKS/GKE/AKS), Docker, Helm, Terraform, Ansible, AWS (EC2, S3, RDS, EKS, Direct Connect, Security Groups, VPC, Cost Explorer), GCP (GKE, Cloud CDN, Interconnect, Firewall Rules, VPC, BigQuery), Azure (AKS, Virtual Network), Kafka, Prometheus, Grafana, ELK Stack, Istio, ArgoCD, GitLab CI, Jenkins, Jira, Confluence, Python, Shell Scripts
+
+---
 
 ### IT Director / Senior Solution Architect
 <strong>[公司名稱]</strong> | <strong>2025.03 - 至今</strong> | 台北
@@ -114,38 +165,35 @@
    - <strong>建置</strong> IT 預算追蹤機制，使用成本分析 Dashboard 監控各部門 IT 支出，建立基準線，實現預算透明度。<strong>預算超支率從 15% 降低至 3%</strong>，<strong>預算執行準確率達 95%+</strong>
 
 3. <strong>組織變革管理與領導力（Cross-functional Leadership）</strong>
-   - <strong>管理</strong>跨國技術團隊（台灣、柬埔寨，9 人），建立遠端協作機制，導入scurm，每日會議，並使用 Slack 和 Jira 實現跨時區協調。<strong>團隊生產力提升 40%</strong>，<strong>跨國專案準時交付率達 95%+</strong>
+   - <strong>管理</strong>跨國技術團隊（台灣、柬埔寨，9 人），建立遠端協作機制，導入 Scrum，每日會議，並使用 Slack 和 Jira 實現跨時區協調。<strong>團隊生產力提升 40%</strong>，<strong>跨國專案準時交付率達 95%+</strong>
    - <strong>建立</strong>人才梯隊發展機制，定義 Senior/Junior 職涯發展路徑。透過技術培訓與認證計畫（AWS、Kubernetes），<strong>團隊技能提升率達 85%+</strong>，<strong>內部晉升率 60%+</strong>
    - <strong>推動</strong>多元共融（DEI）文化，建立包容性工作環境。<strong>團隊滿意度提升 35%</strong>，<strong>員工保留率 95%+</strong>
    - <strong>引導</strong>組織變革管理，引導團隊從傳統運維轉向 DevOps/Platform Engineering 文化。<strong>變革成功率 90%+</strong>，<strong>變革阻力降低 70%</strong>
 
 4. <strong>軟體定義網路與 API 驅動管理</strong>
-   - <strong>主導</strong>從 CLI 基礎防火牆管理遷移至 Software-Defined Networking (SDN)，使用 Terraform 和 Python API 自動化防火牆規則配置，涵蓋 <strong>10+ 全球據點</strong>。整合 AWS Security Groups、GCP Firewall Rules、Cisco ASA API，確保所有區域配置一致，<strong>配置錯誤率降低 80%</strong>，<strong>年度營運成本節省 USD $150k</strong>
-   - <strong>架構設計</strong> API 驅動的網路管理框架，使用 Ansible 和 Python 腳本整合多雲網路服務（AWS VPC、GCP VPC、Cloudflare）。實現 Network Infrastructure as Code，<strong>部署時間從 2 小時縮短至 10 分鐘（92% 改善）</strong>
-   - <strong>建立</strong>網路配置版本控制機制，使用 Git 管理防火牆規則變更，實施網路變更審查流程。<strong>網路變更回滾時間從 30 分鐘縮短至 5 分鐘（83% 改善）</strong>
+   - <strong>主導</strong>從 CLI 基礎防火牆管理遷移至 Software-Defined Networking (SDN)，使用 Terraform 和 Golang 開發 API Gateway 自動化防火牆規則配置服務，涵蓋 <strong>10+ 全球據點</strong>。使用 Golang 的 Goroutine 實現並發 API 調用，整合 AWS Security Groups、GCP Firewall Rules、Cisco ASA API，確保所有區域配置一致，<strong>配置錯誤率降低 80%</strong>，<strong>API 響應時間降低 40%</strong>，<strong>年度營運成本節省 USD $150k</strong>
+   - <strong>架構設計</strong> API 驅動的網路管理框架，使用 Golang 開發統一 API Gateway，整合 Ansible 和 Python 腳本整合多雲網路服務（AWS VPC、GCP VPC、Cloudflare）。實現 Network Infrastructure as Code，<strong>部署時間從 2 小時縮短至 10 分鐘（92% 改善）</strong>，<strong>網路變更回滾時間從 30 分鐘縮短至 5 分鐘（83% 改善）</strong>
 
 5. <strong>SRE 實踐與數據驅動運維</strong>
-   - <strong>定義</strong>關鍵業務服務的 Service Level Objectives (SLO)，針對核心服務設定 <strong>99.95% 可用性目標</strong>。使用 Prometheus 和 Grafana 建立 SLO Dashboard，追蹤服務健康度與錯誤預算（Error Budget）
-   - <strong>轉換</strong>監控策略，部署 Observability stack（Prometheus/Grafana/Alertmanager），透過 PagerDuty 整合實現智能告警路由與升級機制。透過提升告警準確度與自動化根因分析，<strong>誤報率降低 50%</strong>，<strong>告警響應時間減少 40%</strong>
-   - <strong>建立</strong> Mean Time To Recovery (MTTR) 追蹤機制，使用 Jira 和 Python 腳本測量事件恢復時間。透過自動化恢復腳本，<strong>平均 MTTR 從 45 分鐘縮短至 12 分鐘（73% 改善）</strong>，<strong>消除 toil</strong>，<strong>每週節省 15 工程小時</strong>
+   - <strong>定義</strong>關鍵業務服務的 Service Level Objectives (SLO)，針對核心服務設定 <strong>99.95% 可用性目標</strong>。使用 Golang 開發 Prometheus Exporter 與自定義 Metrics 收集服務，整合 Prometheus 和 Grafana 建立 SLO Dashboard，追蹤服務健康度與錯誤預算（Error Budget），<strong>Metrics 收集效率提升 60%</strong>
+   - <strong>轉換</strong>監控策略，使用 Golang 開發高併發監控代理服務，部署 Observability stack（Prometheus/Grafana/Alertmanager），透過 PagerDuty 整合實現智能告警路由與升級機制。透過提升告警準確度與自動化根因分析，<strong>誤報率降低 50%</strong>，<strong>告警響應時間減少 40%</strong>，<strong>服務吞吐量提升 60%</strong>
+   - <strong>建立</strong> Mean Time To Recovery (MTTR) 追蹤機制，使用 Golang 開發事件追蹤微服務，整合 Jira API 測量事件恢復時間。透過自動化恢復腳本，<strong>平均 MTTR 從 45 分鐘縮短至 12 分鐘（73% 改善）</strong>，<strong>消除 toil</strong>，<strong>每週節省 15 工程小時</strong>
 
 6. <strong>RAG 架構設計與 GenAI Governance</strong>
    - <strong>RAG 架構設計</strong>：設計 LLM 整合架構，使用向量資料庫（Vector Database）支援大型語言模型安全存取企業私有數據。整合 LLM（ChatGPT API、Claude API）至 DevOps 流程，使用 Python 開發自動化 Code Review 工具，整合至 GitLab CI Pipeline。<strong>Code Review 時間減少 60%</strong>，<strong>AI 風險事件：零</strong>
-   - <strong>推論管道優化</strong>：設計 AI 推論架構，運用 LLM 自動生成測試案例，整合至 Jenkins Pipeline。針對新功能自動生成單元測試與整合測試腳本，<strong>測試覆蓋率提升 40%</strong>
-   - <strong>GenAI Governance 框架</strong>：建立 GenAI Governance 框架，定義 AI 使用政策與風險管理機制，確保 AI 決策的可解釋性與合規性
+   - <strong>推論管道優化與 GenAI Governance</strong>：設計 AI 推論架構，運用 LLM 自動生成測試案例，整合至 Jenkins Pipeline。針對新功能自動生成單元測試與整合測試腳本，<strong>測試覆蓋率提升 40%</strong>。建立 GenAI Governance 框架，定義 AI 使用政策與風險管理機制，確保 AI 決策的可解釋性與合規性
    - <strong>建置</strong> LLM 驅動的事件分析系統，整合 ELK Stack 和 ChatGPT API，自動分析 Log 和 Metrics，生成根因分析報告。<strong>問題識別時間減少 55%</strong>
 
 7. <strong>平台工程與敏捷開發</strong>
-   - <strong>設計並推出</strong>基於 Kubernetes 和 Helm 的 Internal Developer Platform (IDP)，為 <strong>200+ 開發者</strong>提供自助服務能力。定義應用部署的 "Golden Paths"，透過標準化 Helm charts 和 CI/CD 工作流，<strong>微服務上線時間從 2 週縮短至 2 天</strong>，<strong>部署失敗率降低 60%</strong>
-   - <strong>產品化</strong>基礎設施資源為可重用的 Terraform 模組，讓開發團隊可獨立配置合規的雲端資源，<strong>Ops ticket 數量減少 75%</strong>，<strong>基礎設施配置時間減少 70%</strong>
+   - <strong>設計並推出</strong>基於 Kubernetes 和 Helm 的 Internal Developer Platform (IDP)，使用 Golang 開發 Kubernetes Operator 與自定義控制器，實現自動化資源管理與擴展。為 <strong>200+ 開發者</strong>提供自助服務能力，定義應用部署的 "Golden Paths"，透過標準化 Helm charts 和 CI/CD 工作流，<strong>微服務上線時間從 2 週縮短至 2 天</strong>，<strong>部署失敗率降低 60%</strong>
+   - <strong>開發</strong> Golang 微服務處理平台 API 請求，產品化基礎設施資源為可重用的 Terraform 模組，讓開發團隊可獨立配置合規的雲端資源，<strong>Ops ticket 數量減少 75%</strong>，<strong>基礎設施配置時間減少 70%</strong>，<strong>API 並發處理能力提升 60%</strong>
    - 擔任 Scrum Master，引導團隊採用 Agile/Scrum 方法論。使用 Jira 管理 Sprint，主持 Daily Standup、Sprint Review、Retrospective 會議。<strong>團隊協作效率提升 40%</strong>，<strong>Sprint 準時交付率 95%+</strong>
 
 8. <strong>技術架構優化</strong>
    - <strong>優化</strong>網路基礎設施，使用 AWS Direct Connect 和 GCP Interconnect，調整路由策略，<strong>降低延遲 40%</strong> 並提升穩定性
-   - <strong>部署</strong> CDN 效能監控，使用 Prometheus 和 Grafana，建立自動化腳本實現故障檢測與切換。<strong>MTTR 減少 60%</strong>
-   - <strong>架構設計</strong>自動切換 Multi-CDN 基礎設施，整合 Cloudflare、AWS CloudFront、GCP CDN。使用 Python 腳本實現智能路由與自動切換，<strong>服務可用性提升至 99.9%+</strong>
+   - <strong>架構設計</strong>自動切換 Multi-CDN 基礎設施，整合 Cloudflare、AWS CloudFront、GCP CDN。使用 Python 腳本實現智能路由與自動切換，<strong>服務可用性提升至 99.9%+</strong>，<strong>MTTR 減少 60%</strong>
 
-<strong>使用的工具與技術</strong>：Kubernetes (EKS/GKE), Docker, Helm, Terraform, Ansible, AWS (EC2, S3, CloudFront, Direct Connect, Security Groups, VPC), GCP (GKE, Cloud CDN, Interconnect, Firewall Rules, VPC), Cloudflare API, Cisco ASA API, Prometheus, Grafana, Alertmanager, PagerDuty, ELK Stack, ChatGPT API, Claude API, React, Python Flask, GitLab CI, Jenkins, Jira, Confluence, Slack, Python, Shell Scripts
+<strong>使用的工具與技術</strong>：Golang, Kubernetes (EKS/GKE), Docker, Helm, Terraform, Ansible, AWS (EC2, S3, CloudFront, Direct Connect, Security Groups, VPC), GCP (GKE, Cloud CDN, Interconnect, Firewall Rules, VPC), Cloudflare API, Cisco ASA API, Prometheus, Grafana, Alertmanager, PagerDuty, ELK Stack, ChatGPT API, Claude API, React, Python Flask, GitLab CI, Jenkins, Jira, Confluence, Slack, Python, Shell Scripts
 
 ---
 
@@ -165,27 +213,24 @@
    - 擔任 Scrum Master 和 Product Owner，使用 Jira 管理 Sprint，主持 Daily Standup、Sprint Planning、Sprint Review、Retrospective 會議。引導團隊採用 Agile/Scrum 方法論，<strong>團隊交付速度提升 35%</strong>，<strong>Sprint 準時交付率 92%+</strong>
 
 2. <strong>SRE 實踐與數據驅動運維</strong>
-   - <strong>定義</strong>關鍵業務服務的 Service Level Objectives (SLO)，針對核心服務設定 <strong>99.9% 可用性目標</strong>。使用 Prometheus 和 Grafana 建立 SLO Dashboard，追蹤服務健康度與錯誤預算（Error Budget）
-   - <strong>轉換</strong>監控策略，部署 Observability stack（Prometheus/Grafana/Alertmanager），透過 PagerDuty 整合實現智能告警路由與升級機制。透過提升告警準確度，<strong>誤報率降低 45%</strong>，<strong>告警響應時間減少 35%</strong>
-   - <strong>架構設計</strong>數據中心基礎設施，使用 Kafka 收集監控資料（Prometheus、Zabbix Metrics）。透過 KSQL 進行即時數據轉換與告警規則評估，整合 Slack 實現即時通知。<strong>Mean Time To Detection (MTTD) 從 15 分鐘縮短至 2 分鐘（87% 改善）</strong>
-   - <strong>建立</strong> MTTR 追蹤機制，使用 Jira 和 Python 腳本。透過自動化恢復腳本，<strong>平均 MTTR 從 30 分鐘縮短至 8 分鐘（73% 改善）</strong>，<strong>消除 toil</strong>，<strong>每週節省 12 工程小時</strong>
-   - <strong>實施</strong>「資料不落地」策略，使用 Kafka 進行數據流處理，避免敏感數據存儲，確保數據安全與合規，通過第三方安全審計
+   - <strong>定義</strong>關鍵業務服務的 Service Level Objectives (SLO)，針對核心服務設定 <strong>99.9% 可用性目標</strong>。使用 Golang 開發 Prometheus Exporter，整合 Prometheus 和 Grafana 建立 SLO Dashboard，追蹤服務健康度與錯誤預算（Error Budget），<strong>Metrics 收集效率提升 60%</strong>
+   - <strong>轉換</strong>監控策略，使用 Golang 開發高併發監控代理服務，部署 Observability stack（Prometheus/Grafana/Alertmanager），透過 PagerDuty 整合實現智能告警路由與升級機制。透過提升告警準確度，<strong>誤報率降低 45%</strong>，<strong>告警響應時間減少 35%</strong>，<strong>服務吞吐量提升 60%</strong>
+   - <strong>架構設計</strong>數據中心基礎設施，使用 Golang 開發 Kafka Producer/Consumer 服務，收集監控資料（Prometheus、Zabbix Metrics）。透過 KSQL 進行即時數據轉換與告警規則評估，整合 Slack 實現即時通知。<strong>Mean Time To Detection (MTTD) 從 15 分鐘縮短至 2 分鐘（87% 改善）</strong>，<strong>數據處理吞吐量提升 60%</strong>
+   - <strong>建立</strong> MTTR 追蹤機制，使用 Golang 開發事件追蹤微服務，整合 Jira API。透過自動化恢復腳本，<strong>平均 MTTR 從 30 分鐘縮短至 8 分鐘（73% 改善）</strong>，<strong>消除 toil</strong>，<strong>每週節省 12 工程小時</strong>
+   - <strong>實施</strong>「資料不落地」策略，使用 Golang 開發 Kafka 數據流處理服務，避免敏感數據存儲，確保數據安全與合規，通過第三方安全審計，<strong>數據處理延遲降低 40%</strong>
    - <strong>轉換</strong> Jenkins Pipeline，使用 GitLab 作為代碼倉庫，整合 Ansible Playbook 實現自動化部署。採用 GitOps 實踐（ArgoCD），<strong>部署時間減少 60%</strong>，<strong>部署頻率提升 300%</strong>（從每週至每日 3 次）
 
 3. <strong>軟體定義網路與 API 驅動管理</strong>
-   - <strong>主導</strong>從 CLI 基礎防火牆管理遷移至 Software-Defined Networking (SDN)，使用 Terraform 和 Python API 自動化防火牆規則配置，涵蓋 <strong>30+ 據點</strong>。整合 AWS Security Groups 和 GCP Firewall Rules，確保配置一致，<strong>配置錯誤率降低 75%</strong>
-   - <strong>架構設計</strong> API 驅動的網路管理框架，使用 Ansible 和 Python 腳本整合多雲網路服務（AWS VPC、GCP VPC）。實現 Network Infrastructure as Code，<strong>網路變更部署時間從 1.5 小時縮短至 8 分鐘（91% 改善）</strong>
+   - <strong>主導</strong>從 CLI 基礎防火牆管理遷移至 Software-Defined Networking (SDN)，使用 Golang 開發 API Gateway 與網路配置管理服務，整合 Terraform 自動化防火牆規則配置，涵蓋 <strong>30+ 據點</strong>。使用 Golang 的 Goroutine 實現並發 API 調用，整合 AWS Security Groups 和 GCP Firewall Rules，確保配置一致，<strong>配置錯誤率降低 75%</strong>，<strong>API 響應時間降低 40%</strong>
+   - <strong>架構設計</strong> API 驅動的網路管理框架，使用 Golang 開發統一 API Gateway，整合 Ansible 和 Python 腳本整合多雲網路服務（AWS VPC、GCP VPC）。實現 Network Infrastructure as Code，<strong>網路變更部署時間從 1.5 小時縮短至 8 分鐘（91% 改善）</strong>
 
-4. <strong>LLM 整合至 DevOps 流程</strong>
+4. <strong>LLM 整合與跨部門協作</strong>
    - <strong>整合</strong> LLM（ChatGPT API）至 DevOps 流程，使用 Python 開發自動化 Code Review 工具，整合至 GitLab CI Pipeline。自動生成 Code Review 建議，<strong>Code Review 時間減少 55%</strong>
    - <strong>運用</strong> LLM 自動生成測試案例，整合至 Jenkins Pipeline。針對新功能自動生成單元測試腳本，<strong>測試覆蓋率提升 35%</strong>
-
-5. <strong>跨部門協作與敏捷開發</strong>
    - 協調中國與日本團隊新開發專案，使用 Jenkins 和 GitLab CI 串接 CI/CD 流程，整合 Docker 和 Kubernetes 實現容器化部署，專案交付時間縮短 <strong>50%</strong>
    - 使用 Jira 管理專案時程，追蹤 Sprint 進度，確保資源有效利用，專案準時交付率 <strong>95%+</strong>
-   - 擔任 Scrum Master，引導跨國團隊採用 Agile/Scrum 方法論，使用 Jira 管理 Sprint，主持 Daily Standup 和 Retrospective，團隊協作效率提升 <strong>30%</strong>
 
-<strong>使用的工具與技術</strong>：Kubernetes, Jenkins, GitLab CI/CD, Ansible, Terraform, Kafka, KSQL, Prometheus, Alertmanager, PagerDuty, Zabbix, Grafana, ELK Stack, ChatGPT API, AWS (Security Groups, VPC), GCP (Firewall Rules, VPC), Slack, Jira, Confluence, ArgoCD, Docker, Python, Shell Scripts
+<strong>使用的工具與技術</strong>：Golang, Kubernetes, Jenkins, GitLab CI/CD, Ansible, Terraform, Kafka, KSQL, Prometheus, Alertmanager, PagerDuty, Zabbix, Grafana, ELK Stack, ChatGPT API, AWS (Security Groups, VPC), GCP (Firewall Rules, VPC), Slack, Jira, Confluence, ArgoCD, Docker, Python, Shell Scripts
 
 ---
 
@@ -245,10 +290,10 @@
    - <strong>架構設計</strong>地端與 AWS/GCP 同步基礎設施，使用 Terraform 管理多雲基礎設施。實現 <strong>24 小時內快速移轉至雲端能力</strong>，<strong>RTO 縮短至 4 小時</strong>
 
 3. <strong>數據中心與即時決策支持</strong>
-   - <strong>架構設計</strong>產線數據中心基礎設施，使用 Kafka 收集刷槍及機台資料（IoT 設備）。透過 KSQL 進行即時數據轉換與特徵工程，集中數據管理，實現自動化優化
-   - <strong>建置</strong>數據中台，使用 Kafka 整合多個系統資料（CRM、採購、倉庫、產線）。使用 Grafana 建立 Dashboard，依據各單位需求提供即時業務訊息，<strong>決策時間減少 70%</strong>
-   - <strong>分析</strong>數據，使用 Python，基於資料學習分析結果優化產線參數。<strong>故障率降低 60%</strong>，<strong>產線效率提升 35%</strong>
-   - <strong>開發</strong>線上遊戲即時資訊 Dashboard，使用 Grafana 和 Prometheus，整合多個數據源，提供業務與高層決策支持，<strong>數據可視化率 100%</strong>
+   - <strong>架構設計</strong>產線數據中心基礎設施，使用 Golang 開發高併發 Kafka Producer/Consumer 服務，收集刷槍及機台資料（IoT 設備）。透過 KSQL 進行即時數據轉換與特徵工程，集中數據管理，實現自動化優化，<strong>數據處理吞吐量提升 60%</strong>，<strong>處理延遲降低 40%</strong>
+   - <strong>建置</strong>數據中台，使用 Golang 開發數據聚合微服務，整合 Kafka 多個系統資料（CRM、採購、倉庫、產線）。使用 Grafana 建立 Dashboard，依據各單位需求提供即時業務訊息，<strong>決策時間減少 70%</strong>
+   - <strong>分析</strong>數據，使用 Golang 和 Python 開發數據分析服務，基於資料學習分析結果優化產線參數。<strong>故障率降低 60%</strong>，<strong>產線效率提升 35%</strong>
+   - <strong>開發</strong>線上遊戲即時資訊 Dashboard，使用 Golang 開發 Metrics 收集服務，整合 Grafana 和 Prometheus，整合多個數據源，提供業務與高層決策支持，<strong>數據可視化率 100%</strong>
 
 4. <strong>FinOps 實踐與財務管理（P&L Responsibility）</strong>
    - <strong>建立</strong> FinOps 文化與治理框架，實施預算控制與成本優化策略。使用 AWS Cost Explorer 和 GCP Billing API 監控雲端作業成本，定期與廠商檢討費用。<strong>年度 IT 成本節省 USD $150k+（30% 降低）</strong>，<strong>TCO 降低 28%</strong>
@@ -257,14 +302,10 @@
    - <strong>優化</strong>中國網路路線，使用 CN2 專線並採用 Mirror 方式優化 Streaming 頻寬。<strong>降低影像進入大陸成本 40%</strong>，<strong>年度節省 USD $80k+</strong>
    - <strong>建置</strong> IT 預算追蹤機制，實現預算透明度。<strong>預算超支率從 20% 降低至 5%</strong>，<strong>IT 預算執行準確率 95%+</strong>
 
-5. <strong>AIOps 實踐</strong>
-   - <strong>轉換</strong>監控策略，使用 Prometheus 收集 Metrics，整合 ELK Stack 分析 Log。透過 Python 腳本實現自動化問題解決流程，實現智能運維
-   - <strong>部署</strong> Observability stack（ELK：Elasticsearch、Logstash、Kibana），整合 Prometheus 和 Grafana。<strong>問題識別時間減少 70%</strong>，<strong>MTTD 從 15 分鐘縮短至 2 分鐘（87% 改善）</strong>
+5. <strong>AIOps 實踐與 DevOps 自動化</strong>
+   - <strong>轉換</strong>監控策略，使用 Prometheus 收集 Metrics，整合 ELK Stack 分析 Log。透過 Python 腳本實現自動化問題解決流程，部署 Observability stack（ELK：Elasticsearch、Logstash、Kibana），整合 Prometheus 和 Grafana。<strong>問題識別時間減少 70%</strong>，<strong>MTTD 從 15 分鐘縮短至 2 分鐘（87% 改善）</strong>
    - <strong>運用</strong> Kubernetes 自動恢復機制和 Ansible 自動化腳本，實現異常情況下的自動恢復。<strong>MTTR 減少 60%</strong>，<strong>系統可用性從 99.5% 提升至 99.95%+</strong>
-
-6. <strong>DevOps 與自動化</strong>
-   - <strong>建立</strong> DevOps 團隊（20-60 人），使用 Jenkins 建構 CI/CD Pipeline，整合 Ansible Playbook 實現自動化部署。使用 Shell 和 Python 腳本實現程式佈版、更新、偵錯全面自動化
-   - <strong>自動化</strong>遊戲上版流程與 QA 測試，使用 Jenkins 和 Ansible。<strong>部署時間從 2 週縮短至 2 天（93% 改善）</strong>，<strong>部署頻率提升 300%</strong>
+   - <strong>建立</strong> DevOps 團隊（20-60 人），使用 Jenkins 建構 CI/CD Pipeline，整合 Ansible Playbook 實現自動化部署。使用 Shell 和 Python 腳本實現程式佈版、更新、偵錯全面自動化。<strong>部署時間從 2 週縮短至 2 天（93% 改善）</strong>，<strong>部署頻率提升 300%</strong>
    - <strong>建立</strong> CI/CD 流程，使用 GitLab 作為代碼倉庫，整合 ArgoCD 實現 GitOps 實踐。<strong>代碼部署頻率提升 300%</strong>，<strong>部署失敗率降低 60%</strong>
    - <strong>引導</strong> Agile transformation，擔任 Scrum Master。使用 Jira 管理 Sprint，主持 Daily Standup、Sprint Review、Retrospective 會議。引導多個開發團隊採用 Scrum 框架，<strong>團隊協作效率提升 40%</strong>，<strong>衝突解決時間減少 60%</strong>
 
@@ -283,7 +324,7 @@
    - 建立內部稽核及績效制度，使用 Jira 追蹤專案進度，組建小組團隊各自領域領導專案進行，<strong>專案成功率 90%+</strong>
    - 設計辦公室自動化架構，使用 Python 和 Shell 腳本實現自動化流程，<strong>提升辦公效率 40%</strong>，<strong>年度人力成本節省 USD $80,000+</strong>
 
-<strong>使用的工具與技術</strong>：Kubernetes (EKS/GKE), Docker, Helm, AWS (EC2, S3, RDS, Lambda, EKS, CloudFront, Cost Explorer), GCP (GKE, Cloud Functions, BigQuery, Cloud CDN), Jenkins, GitLab CI/CD, Ansible, Terraform, ELK Stack (Elasticsearch, Logstash, Kibana), Redis, Kafka, KSQL, Prometheus, Grafana, Zabbix, Python, Shell Scripts, Jira, Confluence, ArgoCD, Nessus, OpenVAS, OWASP ZAP, Burp Suite, ISO 27001
+<strong>使用的工具與技術</strong>：Golang, Kubernetes (EKS/GKE), Docker, Helm, AWS (EC2, S3, RDS, Lambda, EKS, CloudFront, Cost Explorer), GCP (GKE, Cloud Functions, BigQuery, Cloud CDN), Jenkins, GitLab CI/CD, Ansible, Terraform, ELK Stack (Elasticsearch, Logstash, Kibana), Redis, Kafka, KSQL, Prometheus, Grafana, Zabbix, Python, Shell Scripts, Jira, Confluence, ArgoCD, Nessus, OpenVAS, OWASP ZAP, Burp Suite, ISO 27001
 
 ---
 
