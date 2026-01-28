@@ -98,9 +98,9 @@
 ## 💼 工作經驗
 
 ### Senior Technical Consultant / IT Director / Solution Architect
-<strong>[公司名稱]</strong> | <strong>2024.10 - 至今</strong> | 台北
+<strong>[公司名稱]</strong> | <strong>2024.12 - 至今</strong> | 台北
 
-<strong>公司規模</strong>：200+ 人 | <strong>團隊規模</strong>：12 人
+<strong>公司規模</strong>：200+ 人 | <strong>團隊規模</strong>：16 人
 
 <strong>核心成就：</strong>
 
@@ -147,63 +147,10 @@
 
 ---
 
-### IT Director / Senior Solution Architect
-<strong>[公司名稱]</strong> | <strong>2025.03 - 至今</strong> | 台北
-
-<strong>公司規模</strong>：120 人 | <strong>團隊規模</strong>：9 人
-
-<strong>核心成就：</strong>
-
-1. <strong>企業架構設計與數位轉型路徑圖</strong>
-   - <strong>主導</strong>制定全面的數位轉型路徑圖，對齊技術架構設計與商業目標。推出整合 的統一 IT 服務平台，<strong>年度營運成本降低 25% (USD $300k)</strong>，透過提升開發者生產力<strong>產生 USD $2M 新年度營收</strong>，<strong>客戶 NPS 提升 12 點</strong>
-   - <strong>架構設計</strong>整合 15+ IT 服務（CI/CD、監控、日誌、資安掃描、成本分析）至統一平台。透過開發團隊痛點訪談，識別核心需求（資料庫配置、環境配置、告警管理），<strong>設計並推出</strong>服務 <strong>200+ 開發者</strong>的自助式 IT 平台
-   - <strong>Buy vs. Build 決策</strong>：評估自助式資料庫配置功能，決定採用自建方案（Terraform + Ansible）而非購買 SaaS，因為此功能是核心競爭力且需要深度整合。使用 Terraform 和 Ansible 實現自動化資料庫部署，<strong>將資料庫配置時間從 3 天縮短至 5 分鐘（99.7% 改善）</strong>，<strong>消除 90% 手動配置錯誤</strong>，<strong>年度人力成本節省 USD $150k+</strong>
-   - <strong>產品化</strong>基礎設施資源至統一自助服務入口，使用 React 和 Python Flask，讓 <strong>200+ 開發者</strong>可獨立配置合規的雲端資源。<strong>自助服務採用率達 85%+</strong>，<strong>IT 服務請求處理時間減少 70%</strong>
-   - 擔任 Product Owner，使用 Agile/Scrum 方法論，透過 Sprint Planning、User Story 撰寫、Sprint Review 持續優化平台功能，<strong>產品迭代速度提升 50%</strong>
-
-2. <strong>多雲架構設計與 FinOps 實踐（P&L Responsibility）</strong>
-   - <strong>多雲架構設計</strong>：設計 AWS、GCP 多雲架構，使用 Terraform 實現跨雲 Infrastructure as Code，避免供應商鎖定（Vendor Lock-in），實現 <strong>24 小時內快速移轉能力</strong>
-   - <strong>成本感知架構設計</strong>：設計具備「成本感知（Cost-Aware）」的架構，將成本視為與性能、安全性同等重要的非功能性需求。建立 FinOps 治理框架，實施預算控制與成本優化策略。建立單一事實來源（Single Source of Truth），透過嚴格的標籤管理（Tagging）策略，優化多雲架構與 Spot Instances 使用，<strong>達成年度雲端成本節省 USD $200k+（30% 降低）</strong>，<strong>TCO 降低 25%</strong>
-   - <strong>主導</strong>供應商談判（Vendor Management），與 AWS、GCP、Cloudflare 簽訂 Enterprise Agreement，<strong>取得 20%+ 折扣優惠</strong>，<strong>年度節省 USD $80k+</strong>
-   - <strong>財務責任</strong>：計算每個技術決策的投資回報率（ROI）。設計的新架構支持業務部門新產品上線，<strong>間接貢獻 USD $2M 年度營收增長</strong>
-   - <strong>建置</strong> IT 預算追蹤機制，使用成本分析 Dashboard 監控各部門 IT 支出，建立基準線，實現預算透明度。<strong>預算超支率從 15% 降低至 3%</strong>，<strong>預算執行準確率達 95%+</strong>
-
-3. <strong>組織變革管理與領導力（Cross-functional Leadership）</strong>
-   - <strong>管理</strong>跨國技術團隊（台灣、大陸，9 人），建立遠端協作機制，導入 Scrum，每日會議，並使用 Slack 和 Jira 實現跨區域協調。<strong>團隊生產力提升 40%</strong>，<strong>跨國專案準時交付率達 95%+</strong>
-   - <strong>建立</strong>人才梯隊發展機制，定義 Senior/Junior 職涯發展路徑。透過技術培訓與認證計畫（AWS、Kubernetes），<strong>團隊技能提升率達 85%+</strong>，<strong>內部晉升率 60%+</strong>
-   - <strong>推動</strong>多元共融（DEI）文化，建立包容性工作環境。<strong>團隊滿意度提升 35%</strong>，<strong>員工保留率 95%+</strong>
-   - <strong>引導</strong>組織變革管理，引導團隊從傳統運維轉向 DevOps/Platform Engineering 文化。<strong>變革成功率 90%+</strong>，<strong>變革阻力降低 70%</strong>
-
-4. <strong>軟體定義網路與 API 驅動管理</strong>
-   - <strong>主導</strong>從 CLI 基礎防火牆管理遷移至 Software-Defined Networking (SDN)，使用 Terraform 和 Golang 開發 API Gateway 自動化防火牆規則配置服務，涵蓋 <strong>10+ 全球據點</strong>。使用 Golang 的 Goroutine 實現並發 API 調用，整合 AWS Security Groups、GCP Firewall Rules、Cisco ASA API，確保所有區域配置一致，<strong>配置錯誤率降低 80%</strong>，<strong>API 響應時間降低 40%</strong>，<strong>年度營運成本節省 USD $150k</strong>
-   - <strong>架構設計</strong> API 驅動的網路管理框架，使用 Golang 開發統一 API Gateway，整合 Ansible 和 Python 腳本整合多雲網路服務（AWS VPC、GCP VPC、Cloudflare）。實現 Network Infrastructure as Code，<strong>部署時間從 2 小時縮短至 10 分鐘（92% 改善）</strong>，<strong>網路變更回滾時間從 30 分鐘縮短至 5 分鐘（83% 改善）</strong>
-
-5. <strong>SRE 實踐與數據驅動運維</strong>
-   - <strong>定義</strong>關鍵業務服務的 Service Level Objectives (SLO)，針對核心服務設定 <strong>99.95% 可用性目標</strong>。使用 Golang 開發 Prometheus Exporter 與自定義 Metrics 收集服務，整合 Prometheus 和 Grafana 建立 SLO Dashboard，追蹤服務健康度與錯誤預算（Error Budget），<strong>Metrics 收集效率提升 60%</strong>
-   - <strong>轉換</strong>監控策略，使用 Golang 開發高併發監控代理服務，部署 Observability stack（Prometheus/Grafana/Alertmanager），透過 PagerDuty 整合實現智能告警路由與升級機制。透過提升告警準確度與自動化根因分析，<strong>誤報率降低 50%</strong>，<strong>告警響應時間減少 40%</strong>，<strong>服務吞吐量提升 60%</strong>
-   - <strong>建立</strong> Mean Time To Recovery (MTTR) 追蹤機制，使用 Golang 開發事件追蹤微服務，整合 Jira API 測量事件恢復時間。透過自動化恢復腳本，<strong>平均 MTTR 從 45 分鐘縮短至 12 分鐘（73% 改善）</strong>，<strong>消除 toil</strong>，<strong>每週節省 15 工程小時</strong>
-
-6. <strong>RAG 架構設計與 GenAI Governance</strong>
-   - <strong>RAG 架構設計</strong>：設計 LLM 整合架構，使用向量資料庫（Vector Database）支援大型語言模型安全存取企業私有數據。整合 LLM（ChatGPT API、Claude API）至 DevOps 流程，使用 Python 開發自動化 Code Review 工具，整合至 GitLab CI Pipeline。<strong>Code Review 時間減少 60%</strong>，<strong>AI 風險事件：零</strong>
-   - <strong>建置</strong> LLM 驅動的事件分析系統，整合 ELK Stack 和 ChatGPT API，自動分析 Log 和 Metrics，生成根因分析報告。<strong>問題識別時間減少 55%</strong>
-
-7. <strong>平台工程與敏捷開發</strong>
-   - <strong>設計並推出</strong>基於 Kubernetes 和 Helm，使用 Golang 開發 Kubernetes Operator 與自定義控制器，實現自動化資源管理與擴展。為 <strong>200+ 開發者</strong>提供自助服務能力，定義應用部署的 "Golden Paths"，透過標準化 Helm charts 和 CI/CD 工作流，<strong>微服務上線時間從 2 週縮短至 2 天</strong>，<strong>部署失敗率降低 60%</strong>
-   - <strong>開發</strong> Golang 微服務處理平台 API 請求，產品化基礎設施資源為可重用的 Terraform 模組，讓開發團隊可獨立配置合規的雲端資源，<strong>Ops ticket 數量減少 75%</strong>，<strong>基礎設施配置時間減少 70%</strong>，<strong>API 並發處理能力提升 60%</strong>
-   - 擔任 Scrum Master，引導團隊採用 Agile/Scrum 方法論。使用 Jira 管理 Sprint，主持 Daily Standup、Sprint Review、Retrospective 會議。<strong>團隊協作效率提升 40%</strong>，<strong>Sprint 準時交付率 95%+</strong>
-
-8. <strong>技術架構優化</strong>
-   - <strong>優化</strong>網路基礎設施，使用 AWS Direct Connect 和 GCP Interconnect，調整路由策略，<strong>降低延遲 40%</strong> 並提升穩定性
-   - <strong>架構設計</strong>自動切換 Multi-CDN 基礎設施，整合 Cloudflare、AWS CloudFront、GCP CDN。使用 Python 腳本實現智能路由與自動切換，<strong>服務可用性提升至 99.9%+</strong>，<strong>MTTR 減少 60%</strong>
-
-<strong>使用的工具與技術</strong>：Golang, Kubernetes (EKS/GKE), Docker, Helm, Terraform, Ansible, AWS (EC2, S3, CloudFront, Direct Connect, Security Groups, VPC), GCP (GKE, Cloud CDN, Interconnect, Firewall Rules, VPC), Cloudflare API, Cisco ASA API, Prometheus, Grafana, Alertmanager, PagerDuty, ELK Stack, ChatGPT API, Claude API, React, Python Flask, GitLab CI, Jenkins, Jira, Confluence, Slack, Python, Shell Scripts
-
----
-
 ### DevOps Manager
-<strong>AXIOM</strong> | <strong>2024.04 - 2024.12</strong> | 台北
+<strong> 星鏈科技 </strong> | <strong>2023.07 - 2024.12</strong> | 台北
 
-<strong>公司規模</strong>：120 人 | <strong>團隊規模</strong>：6 人
+<strong>公司規模</strong>：120 人 | <strong>團隊規模</strong>：13 人
 
 <strong>核心成就：</strong>
 
@@ -240,7 +187,7 @@
 ### Security Operation Center Manager
 <strong>Mlytics</strong> | <strong>2022.07 - 2023.06</strong> | 台北
 
-<strong>公司規模</strong>：60 人 | <strong>團隊規模</strong>：12 人
+<strong>公司規模</strong>：60 人 | <strong>團隊規模</strong>：15 人
 
 <strong>核心成就：</strong>
 
@@ -283,13 +230,12 @@
 
 1. <strong>數位轉型策略與商業成果</strong>
    - <strong>主導</strong>制定全面的數位轉型路徑圖，對齊技術策略與商業目標。引導公司技術轉型，保留傳統機台同時建構線上遊戲平台，成功完成企業轉型（線上老虎機）。<strong>營收成長 200%+（從 USD $50M 成長至 USD $150M+）</strong>，<strong>年度利潤提升 180%</strong>
-   - <strong>整合</strong> GenAI 至客戶服務流程與智能推薦引擎，<strong>年度營運成本降低 USD $5M</strong>，<strong>客戶 NPS 分數提升 15 點（從 45 提升至 60）</strong>，<strong>客戶留存率提升 35%</strong>
+   - <strong>整合</strong> GenAI 至客戶服務流程與智能推薦引擎，<strong>年度營運成本降低 TWD $5M</strong>，<strong>客戶滿意度 分數提升 15 點（從 45 提升至 60）</strong>，<strong>客戶留存率提升 35%</strong>
    - <strong>架構設計</strong>真人視訊基礎設施與新增魚機遊戲功能，使用 Redis 實現高併發連線管理，整合 CDN 分散流量。支援 <strong>17 萬+ 同時在線玩家</strong>，系統穩定運行，<strong>新產品營收貢獻 USD $80M+</strong>
    - 參與 C-Level 決策會議，使用技術路線圖規劃公司數位轉型計畫，制定分階段實施策略。<strong>數位轉型 ROI 達 350%+</strong>
 
 2. <strong>平台工程與容器化</strong>
    - <strong>工程化</strong>高可用基礎設施，部署 Kubernetes (EKS/GKE)，使用 Horizontal Pod Autoscaling (HPA) 實現全自動服務擴展。應對瞬間大量玩家連線需求（<strong>17 萬+ 同時在線</strong>），<strong>環境資源浪費降低 40%</strong>，<strong>年度節省 USD $200k+</strong>
-   - <strong>定義</strong>應用部署的 "Golden Paths"，透過標準化 Helm charts，逐步將現有運營環境遷移至 K8s。讓開發團隊適應 K8s 自動擴展架構，<strong>部署失敗率降低 60%</strong>
    - <strong>架構設計</strong>地端與 AWS/GCP 同步基礎設施，使用 Terraform 管理多雲基礎設施。實現 <strong>24 小時內快速移轉至雲端能力</strong>，<strong>RTO 縮短至 4 小時</strong>
 
 3. <strong>數據中心與即時決策支持</strong>
@@ -312,20 +258,17 @@
    - <strong>建立</strong> CI/CD 流程，使用 GitLab 作為代碼倉庫，整合 ArgoCD 實現 GitOps 實踐。<strong>代碼部署頻率提升 300%</strong>，<strong>部署失敗率降低 60%</strong>
    - <strong>引導</strong> Agile transformation，擔任 Scrum Master。使用 Jira 管理 Sprint，主持 Daily Standup、Sprint Review、Retrospective 會議。引導多個開發團隊採用 Scrum 框架，<strong>團隊協作效率提升 40%</strong>，<strong>衝突解決時間減少 60%</strong>
 
-7. <strong>企業資安韌性與風險管理（Cyber Resilience）</strong>
-   - 建立企業資安韌性（Cyber Resilience）架構，實施多層次資安防禦與災難恢復機制，<strong>資安事件響應時間減少 65%</strong>，<strong>業務連續性提升至 99.95%+</strong>，<strong>資安事件造成的業務損失降低 80%</strong>
+6.
    - 擔任資安主管，使用 Nessus 和 OpenVAS 進行安全掃描，建立 ISO 27001 文件體系，協助完成 <strong>ISO 27001 稽核</strong>，一次性通過認證，<strong>合規風險降低 90%</strong>
    - 實施系統資安防禦，整合弱掃工具（Nessus）和黑白箱測試（OWASP ZAP），安全漏洞發現率提升 <strong>95%</strong>，攻擊面減少 <strong>40%</strong>，<strong>資安事件發生率降低 70%</strong>
    - 建立黑白箱流程，使用 OWASP ZAP 和 Burp Suite 檢測網站與平台漏洞，整合至 CI/CD 流程，實現 Shift-Left Security，<strong>安全漏洞修復時間減少 60%</strong>
 
 8. <strong>組織變革管理與領導力（Cross-functional Leadership）</strong>
-   - 管理跨國技術團隊（20-60 人），建立遠端團隊協作機制，實現跨時區協作，<strong>團隊生產力提升 50%</strong>，<strong>跨國專案交付準時率 92%+</strong>
+   - 管理技術團隊（60 人），同時管理開發與IT 部門，改變會議型態，<strong>團隊生產力提升 50%</strong>，<strong>專案交付準時率 92%+</strong>
    - 建立人才梯隊建設機制，制定技術職能發展路徑，透過技術培訓與認證計畫（AWS、Kubernetes），<strong>團隊技能提升率 90%+</strong>，<strong>內部晉升率 65%+</strong>
-   - 推動多元共融（DEI）文化，建立包容性工作環境，<strong>團隊滿意度提升 40%</strong>，<strong>員工保留率 95%+</strong>，<strong>離職率降低 60%</strong>
    - 建立 <strong>24 小時值班團隊</strong>，使用 Confluence 建立值班流程 SOP 和內部 KB，制定教育訓練課程，<strong>值班效率提升 45%</strong>
    - 實施組織變革管理，引導團隊從傳統運維轉向 DevOps/Platform Engineering 文化，<strong>變革成功率 95%+</strong>，<strong>變革阻力降低 75%</strong>
    - 建立內部稽核及績效制度，使用 Jira 追蹤專案進度，組建小組團隊各自領域領導專案進行，<strong>專案成功率 90%+</strong>
-   - 設計辦公室自動化架構，使用 Python 和 Shell 腳本實現自動化流程，<strong>提升辦公效率 40%</strong>，<strong>年度人力成本節省 USD $80,000+</strong>
 
 <strong>使用的工具與技術</strong>：Golang, Kubernetes (EKS/GKE), Docker, Helm, AWS (EC2, S3, RDS, Lambda, EKS, CloudFront, Cost Explorer), GCP (GKE, Cloud Functions, BigQuery, Cloud CDN), Jenkins, GitLab CI/CD, Ansible, Terraform, ELK Stack (Elasticsearch, Logstash, Kibana), Redis, Kafka, KSQL, Prometheus, Grafana, Zabbix, Python, Shell Scripts, Jira, Confluence, ArgoCD, Nessus, OpenVAS, OWASP ZAP, Burp Suite, ISO 27001
 
@@ -334,7 +277,7 @@
 ### Information Technology Division Manager
 <strong>Malaysia Business Collaboration Technology</strong> | <strong>2014.04 - 2015.01</strong> | 台北/馬來西亞
 
-<strong>公司規模</strong>：30 人 | <strong>團隊規模</strong>：12 人
+<strong>公司規模</strong>：30 人 | <strong>團隊規模</strong>：20 人
 
 <strong>核心成就：</strong>
 
@@ -369,7 +312,7 @@
 ### Information Technology Division Manager
 <strong>New Weather Force (Philippines) / Bulewell (Taiwan)</strong> | <strong>2013.11 - 2014.08</strong> | 台北/菲律賓
 
-<strong>公司規模</strong>：120 人 | <strong>團隊規模</strong>：12 人
+<strong>公司規模</strong>：120 人 | <strong>團隊規模</strong>：28 人
 
 <strong>核心成就：</strong>
 
@@ -397,7 +340,7 @@
 ### Game Technology Department Manager
 <strong>Gamania Digital Co., Ltd. (遊戲橘子)</strong> | <strong>2011.11 - 2013.06</strong> | 台北
 
-<strong>公司規模</strong>：1,000 人 | <strong>團隊規模</strong>：20 人
+<strong>公司規模</strong>：1,000 人 | <strong>團隊規模</strong>：32 人
 
 <strong>核心成就：</strong>
 
