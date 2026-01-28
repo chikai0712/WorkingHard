@@ -26,24 +26,28 @@
 ### 架構模式決策與現代化
 - <strong>微服務 vs 單體架構權衡</strong>：基於團隊成熟度、業務複雜度與成本考量，制定架構模式決策框架。評估微服務的複雜性成本（DevOps 成熟度、監控、服務間通信）與單體的簡單性優勢，選擇最適架構模式，避免「分佈式單體」災難，<strong>開發速度提升 40%</strong>，<strong>基礎設施成本降低 60%</strong>
 - <strong>絞殺榕模式（Strangler Fig Pattern）</strong>：設計並實施遺留系統現代化策略，使用 API Gateway 作為攔截層，逐步將核心模組（用戶認證、庫存查詢）遷移至微服務架構，實現增量遷移，<strong>降低重寫風險 90%</strong>，<strong>業務中斷時間零</strong>
-- <strong>Buy vs. Build 決策框架</strong>：建立系統化的 Buy vs. Build 決策矩陣，評估核心競爭力、上市時間（Time to Market）、總體擁有成本（TCO）。主導 CRM 系統選型分析，建議採用 SaaS 方案替代自建，<strong>節省 USD $500k 開發預算</strong>，<strong>上線時間縮短 6 個月</strong>
-
+- <strong>Buy vs. Build 決策框架</strong>：建立系統化的 Buy vs. Build 決策，評估核心競爭力、上市時間（Time to Market）、總體擁有成本（TCO）。主導 CRM 系統選型分析，建議採用 SaaS 方案替代自建，<strong>節省 USD $500k 開發預算</strong>，<strong>上線時間縮短 6 個月</strong>
+- <strong>DNS 架構評估</strong>：在免費與付費中尋找平衡點，讓重要服務可以最高程度可用性99.99%
+  
 ### 策略規劃與數位轉型
 - <strong>數位轉型路徑圖（Digital Transformation Roadmap）</strong>：制定並執行數位轉型策略，對齊技術策略與商業目標，實現營收成長 200%+，年度成本節省 USD $500,000+
-- <strong>技術債管理（Tech Debt Management）</strong>：識別並管理技術債，透過重構與現代化，系統可用性從 99.5% 提升至 99.95%+，維護成本降低 40%
+- <strong>技術債管理（Tech Debt Management）</strong>：識別並管理技術債，透過重構與現代化，系統可用性從 80% 提升至 99.95%+，維護成本降低 40%
 - <strong>併購後 IT 整合（M&A Integration）</strong>：規劃並執行併購後的 IT 整合，統一系統架構與流程，整合時間縮短 50%，整合成本降低 35%
+- <strong>IT 工具整合 </strong>：IT 整體盤點，將工具做一體式整合，減少紀錄四散、問題查找難度，整體第一線效率提高60% ;並且重新建構KB，提供IT 文件資訊並整合於Slack，IT 資訊提供類作業降低80％時間
 
 ### 財務管理與 FinOps
-- <strong>FinOps 實踐與成本感知架構</strong>：設計具備「成本感知（Cost-Aware）」的架構，將成本視為與性能、安全性同等重要的非功能性需求。建立 FinOps 治理框架，實施預算控制與成本優化策略，建立單一事實來源（Single Source of Truth），透過嚴格的標籤管理（Tagging）策略，年度雲端成本節省 USD $500,000+，TCO 降低 25-30%
+- <strong>FinOps 實踐與成本感知架構</strong>：設計具備「成本提醒（Cost-Aware）」的架構，將成本視為與性能、安全性同等重要的非功能性需求。建立 FinOps 治理框架，實施預算控制與成本優化策略，透過有制度管理策略，年度雲端成本節省 USD $500,000+，TCO 降低 25-30%
 - <strong>預算控制（Budget Control）</strong>：建立 IT 預算追蹤機制，實現預算透明度，預算超支率從 15-20% 降低至 3-5%，預算執行準確率 95%+
 - <strong>供應商談判（Vendor Management）</strong>：主導供應商談判，與 AWS、GCP、Cloudflare 等供應商協商 Enterprise Agreement，取得 20-25% 折扣優惠，年度節省 USD $80,000-$100,000+
-- <strong>P&L Responsibility 與影子 P&L</strong>：負責 IT 部門損益管理，建立影子 P&L 概念，計算每個技術決策的投資回報率（ROI）。透過成本優化與效率提升，年度 IT 成本節省 USD $500,000+，IT ROI 達 350%+，設計的新架構間接貢獻 USD $10M 年度營收增長
+- <strong>P&L Responsibility </strong>：負責 IT 部門損益管理，建立影子 P&L 概念，計算每個技術決策的投資回報率（ROI）。透過成本優化與效率提升，年度 IT 成本節省 USD $500,000+，IT ROI 達 350%+，設計的新架構間接貢獻 USD $10M 年度營收增長
 
 ### 領導力與組織變革
 - <strong>遠端團隊管理（Global Team Management）</strong>：管理跨國技術團隊（最多 60 人），建立遠端團隊協作機制，團隊生產力提升 40-50%，跨國專案交付準時率 92-95%+
 - <strong>人才梯隊建設（Talent Retention）</strong>：建立人才梯隊建設機制，制定技術職能發展路徑，團隊技能提升率 85-90%+，內部晉升率 60-65%+，員工保留率 95%+
 - <strong>多元共融（DEI）</strong>：推動多元共融文化，建立包容性工作環境，團隊滿意度提升 35-40%，離職率降低 60%
-- <strong>組織變革管理（Change Management）</strong>：引導團隊從傳統運維轉向 DevOps/Platform Engineering 文化，變革成功率 90-95%+，變革阻力降低 70-75%
+- <strong>組織變革管理（Change Management）</strong>：引導團隊從傳統運維轉向 DevOps/Platform Engineering 文化，變革成功率 90-95%+，變革阻力降低 70-75%，設定客戶滿意指標
+- <strong>團隊思維引導（Change Management）</strong>：以使用單位考量為出發點，密切與需求單位溝通，確實解決團隊痛點，以產品販賣的精神讓用戶滿意，我們是在<strong>“銷售一個能解決通苦的產品”<strong>，而非只是將產品做出來
+
 
 ### 新興科技與治理
 - <strong>RAG（檢索增強生成）架構設計</strong>：設計 LLM 整合架構，使用向量資料庫（Vector Database）支援大型語言模型安全存取企業私有數據，整合 ChatGPT API、Claude API 至 DevOps 流程，<strong>Code Review 時間減少 60%</strong>，<strong>AI 風險事件零發生</strong>
@@ -57,16 +61,16 @@
 - <strong>Kubernetes / Docker / EKS / Helm</strong>：設計並實施 Kubernetes 容器編排平台，使用 Helm Charts 標準化應用部署，實現自動擴展（HPA）應對 17 萬CCU 同時在線流量，資源利用率提升 40%
 
 ### 雲原生與多雲架構
-- <strong>多雲架構設計</strong>：設計 AWS、GCP 多雲架構，使用 Terraform 實現跨雲 Infrastructure as Code，避免供應商鎖定（Vendor Lock-in），實現 <strong>24 小時內快速移轉能力</strong>，透過 Spot Instances 和 Reserved Instances 策略，年度成本降低 30%
-- <strong>Kubernetes 跨區域高可用架構</strong>：設計 Multi-Region K8s 架構（EKS/GKE），使用 Helm Charts 標準化應用部署，實現自動擴展（HPA）應對 <strong>17 萬+ 同時在線流量</strong>，<strong>資源利用率提升 40%</strong>
-- <strong>AWS</strong>：使用 EC2、S3、RDS、Lambda、EKS 建構高可用架構，透過 CloudFormation 實現 Infrastructure as Code，使用 Cost Management 工具監控與優化成本，年度節省 USD $500,000+
+- <strong>多雲架構設計</strong>：設計 AWS、GCP 多雲架構，使用 Terraform 實現跨雲 Infrastructure as Code，避免供應商鎖定（Vendor Lock-in），實現 <strong>24 小時內快速移轉能力</strong>，年度成本降低 30%
+- <strong>Kubernetes 跨區域高可用架構</strong>：設計基於 Multi-Region K8s 的標準化服務框架。透過統一的 Helm Charts 模板與自動擴展 (HPA) 機制，消除維運瓶頸，在支撐 17 萬+ 高併發流量 的同時，優化了 40% 的運算資源效率。
+- <strong>AWS</strong>：了解並使用 雲端服務 建構高可用架構，實現 Infrastructure as Code，使用 Cost Management 工具監控與優化成本，年度節省 USD $300,000+
 - <strong>GCP</strong>：使用 GKE 部署容器化服務，透過 Cloud Functions 實現 Serverless 架構，使用 BigQuery 進行數據分析，降低運算成本 40%
-- <strong>Service Mesh 設計</strong>：評估並設計 Istio Service Mesh 架構，實現微服務間的安全通信與流量管理，<strong>服務間延遲降低 25%</strong>，<strong>安全策略統一管理</strong>
+- <strong>Service Mesh 設計</strong>：評估並主導 Istio Service Mesh 架構導入，實施 mTLS 零信任安全模型，實現微服務間的安全策略統一管理。透過 Istio 的流量治理與熔斷機制 (Circuit Breaking)，提升系統韌性，並利用分散式追蹤 (Distributed Tracing) 將故障排查時間 (MTTR) 縮短 25%。
 
 ### 數據中心與 AI 基礎設施
 - <strong>Kafka / KSQL</strong>：使用 Kafka 建構高吞吐量數據中心，處理產線 IoT 數據與系統 Log，透過 KSQL 進行即時數據轉換與特徵工程，實現即時決策，數據處理延遲從分鐘級降至秒級
 - <strong>ELK Stack (Elasticsearch, Logstash, Kibana)</strong>：搭建 ELK 日誌分析平台，整合多個系統 Log，使用 Kibana 建立 Dashboard，重新做資料整理與問題定位．除錯時間減少 70%，並實現自動化告警
-- <strong>Prometheus / Grafana / Zabbix</strong>：使用 Prometheus 收集 Metrics，透過 Grafana 建立監控 Dashboard，使用 Zabbix 監控基礎設施，實現故障檢測時間從 15 分鐘縮短至 2 分鐘
+- <strong>Prometheus / Grafana / Zabbix</strong>：使用 Prometheus 收集 Metrics，透過 Grafana 建立監控 Dashboard，使用 Zabbix 監控基礎設施，並重新Review數據呈現，抓出關鍵數據，實現故障檢測時間從 15 分鐘縮短至 2 分鐘
 
 ### 資安與合規
 - <strong>ISO 27001</strong>：擔任資安主管，規劃並實施 ISO 27001 資訊安全管理系統，成功通過稽核認證
@@ -74,17 +78,17 @@
 - <strong>WAF / IPS / IDS / DDoS 防禦</strong>：設計多層次資安架構，部署 WAF、IPS、IDS 後期採用CDN搭配Log檢測，建置產品防護系統，成功抵禦世界盃期間多次 DDoS 攻擊，服務可用性維持 99.9%+
 
 ### 程式語言與自動化腳本
-- <strong>Golang</strong>：使用 Golang 開發高併發微服務、API Gateway 與監控工具，利用 Goroutine 和 Channel 實現高效能並發處理，服務吞吐量提升 60%，API 響應時間降低 40%。開發 Kubernetes Operator 與自定義控制器，實現自動化資源管理與擴展
+- <strong>Golang</strong>：使用 Golang 開發高併發微服務、API Gateway 與監控工具，服務吞吐量提升 60%，API 響應時間降低 40%。開發 Kubernetes Operator 與自定義控制器，實現自動化資源管理與擴展
 - <strong>Python</strong>：使用 Python 開發自動化工具，包括域名檢測、資源監控、成本分析腳本，自動化率達 80%，節省工程時間 15 小時/週
 - <strong>Shell / Bash</strong>：撰寫 Shell 腳本實現系統自動化部署、備份、監控，整合 Zabbix 進行資源優化，降低營運成本 25%
 - <strong>n8n / Cursor AI</strong>：使用 n8n 建立自動化工作流，整合 Slack、工單系統、監控工具，使用 Cursor AI 提升開發效率
 
 ### 網路與 CDN
-- <strong>跨國網路設計</strong>：規劃台灣、中國、菲律賓、柬埔寨跨國網路架構，設計 CN2 線路優化中國大陸訪問速度，降低頻寬成本 40%
-- <strong>Multi-CDN 架構</strong>：設計智能 CDN 選擇機制，整合 Cloudflare、AWS CloudFront、GCP CDN，實現自動故障切換，服務可用性提升至 99.9%+
+- <strong>跨國網路設計</strong>：規劃台灣、中國、菲律賓、柬埔寨、馬來西亞跨國網路架構，設計 CN2 線路優化中國大陸訪問速度，優化視訊傳輸架構，降低頻寬成本 40%
+- <strong>Multi-CDN 架構</strong>：設計智能 CDN 自動選擇機制，整合 Cloudflare、AWS CloudFront、GCP CDN，bybit、阿里、騰訊等多家CDN，實現RUM自動故障切換，服務可用性提升至 99.9%+
 
 ### Agile 與 Scrum
-- <strong>Jira / Confluence / Azure DevOps</strong>：使用 Jira 管理 Product Backlog 和 Sprint Planning，透過 Confluence 建立團隊知識庫，使用 Azure DevOps 整合 CI/CD 流程
+- <strong>Jira / Confluence / Azure DevOps</strong>：使用 Jira 管理 Product Backlog 和 Sprint Planning，透過 Confluence 建立團隊知識庫，Jenkins、Git 整合 CI/CD 流程
 - <strong>Product Owner</strong>：擔任 PO 角色，透過訪談開發團隊痛點，識別核心需求，設計並推出自助式服務功能（如資料庫配置、環境申請），撰寫 User Story 並定義驗收標準，管理 Product Backlog 優先級，專案交付準時率 95%+
 - <strong>Scrum Master</strong>：擔任 SM 角色，引導團隊實施 Scrum 框架，主持 Daily Standup、Sprint Planning、Sprint Review、Retrospective，解決團隊衝突與障礙，團隊協作效率提升 40%，Sprint 交付準時率 92%+
 - <strong>敏捷開發實踐</strong>：使用 Sprint Planning 規劃迭代目標，透過 Daily Standup 追蹤進度，使用 Sprint Review 展示成果，透過 Retrospective 持續改進，團隊交付速度提升 35-50%
@@ -104,20 +108,20 @@
    - <strong>架構設計</strong>企業級混合雲架構（Hybrid Cloud），整合地端數據中心與 AWS/GCP 公有雲，使用 Terraform 實現 Infrastructure as Code，設計統一的雲地管理平台，實現<strong>24 小時內無縫遷移能力</strong>，<strong>降低供應商鎖定風險 90%</strong>
    - <strong>設計</strong>雲地數據同步架構，使用 AWS Direct Connect 和 GCP Interconnect 建立專線連接，整合 Kafka 實現地端與雲端的實時數據同步，<strong>數據同步延遲降低至 50ms 以內</strong>，<strong>數據一致性達 99.99%+</strong>
    - <strong>架構設計</strong>混合雲災難恢復方案（DR），實現地端與雲端互為備援，使用 Terraform 和 Ansible 自動化災難恢復流程，<strong>RTO 從 4 小時縮短至 30 分鐘（87.5% 改善）</strong>，<strong>RPO 從 1 小時縮短至 5 分鐘（92% 改善）</strong>
-   - <strong>主導</strong>雲地整合成本優化策略，建立 FinOps 治理框架，透過資源標籤管理和成本分析 Dashboard，<strong>年度混合雲成本節省 USD $300k+（35% 降低）</strong>，<strong>TCO 降低 30%</strong>
+   - <strong>主導</strong>雲地整合成本優化策略，建立 FinOps 治理框架，透過資源tag管理和成本分析 Dashboard，<strong>年度混合雲成本節省 USD $300k+（35% 降低）</strong>，<strong>TCO 降低 30%</strong>
    - <strong>設計</strong>雲地統一監控架構，整合 Prometheus、Grafana 與地端監控系統，建立單一可視化 Dashboard，實現跨環境統一監控，<strong>故障檢測時間從 15 分鐘縮短至 2 分鐘（87% 改善）</strong>
 
 2. <strong>IT 服務整合平台與自動化建設</strong>
    - <strong>架構設計並推出</strong>企業級 IT 服務整合平台（Unified IT Service Platform），整合 20+ IT 服務（CI/CD、監控、日誌、資安掃描、成本分析、資料庫配置、環境申請、告警管理）至單一平台。透過開發團隊與業務部門痛點訪談，識別核心需求，設計並推出服務 <strong>300+ 內部用戶</strong>的自助式 IT 平台，<strong>IT 服務請求處理時間減少 75%</strong>，<strong>自助服務採用率達 85%+</strong>
    - <strong>設計</strong>統一 API Gateway 整合多個 IT 服務後端，使用 Golang 開發高併發 API Gateway，實現服務發現、負載均衡、限流、認證等功能。整合 Terraform、Ansible、Kubernetes、Prometheus、GitLab CI 等多個系統 API，<strong>API 響應時間降低 50%</strong>，<strong>服務吞吐量提升 70%</strong>
-   - <strong>建立</strong>企業級自動化平台，整合 CI/CD、基礎設施自動化、配置管理於統一平台。使用 Golang 開發自動化引擎，支援多雲（AWS、GCP、Azure）和地端環境的自動化操作，<strong>自動化覆蓋率達 85%+</strong>，<strong>運維效率提升 60%</strong>
+   - <strong>建立</strong>企業級自動化平台，整合 CI/CD、基礎設施自動化、配置管理於統一平台。使用 Golang 開發自動化引擎，支援多雲（AWS、GCP）和地端環境的自動化操作，<strong>自動化覆蓋率達 85%+</strong>，<strong>運維效率提升 60%</strong>
    - <strong>設計</strong>基於 Kubernetes 的混合雲容器編排平台，使用 Helm Charts 標準化應用部署，實現地端 Kubernetes 與雲端 EKS/GKE 統一管理，<strong>部署時間從 2 週縮短至 4 小時（97% 改善）</strong>，<strong>部署成功率提升至 98%+</strong>
    - <strong>實施</strong>GitOps 實踐，使用 ArgoCD 實現地端與雲端的統一 GitOps 流程，所有基礎設施變更通過 Git 版本控制，<strong>配置錯誤率降低 80%</strong>，<strong>變更審計追蹤完整性達 100%</strong>
 
 3. <strong>架構設計與技術決策（Solution Architecture）</strong>
    - <strong>主導</strong>企業架構設計與技術選型，評估微服務 vs 單體架構、Buy vs. Build 決策，建立架構決策記錄（ADR），透過系統化的評估框架，<strong>技術決策準確率提升 95%+</strong>，<strong>避免技術選型錯誤節省 USD $200k+</strong>
    - <strong>設計</strong>微服務架構遷移策略，使用絞殺榕模式（Strangler Fig Pattern）逐步將單體系統遷移至微服務架構。設計 API Gateway 作為過渡層，實現增量遷移，<strong>業務中斷時間零</strong>，<strong>遷移風險降低 90%</strong>
-   - <strong>架構設計</strong>高可用分散式系統，設計 Multi-Region 部署架構，整合地端與雲端資源，實現跨區域負載均衡與故障轉移，<strong>系統可用性從 99.5% 提升至 99.95%+</strong>，<strong>跨區域延遲優化 40%</strong>
+   - <strong>架構設計</strong>高可用分散式系統，設計 Multi-Region 部署架構，整合地端與雲端資源，實現跨區域負載均衡與故障轉移，<strong>系統可用性從 80% 提升至 99.95%+</strong>，<strong>跨區域延遲優化 40%</strong>
    - <strong>評估並設計</strong>Service Mesh 架構（Istio）與事件驅動架構（Event-Driven Architecture），使用 Kafka 整合地端與雲端系統，實現微服務間的安全通信與異步通信，<strong>服務間延遲降低 25%</strong>，<strong>系統耦合度降低 70%</strong>，<strong>擴展性提升 60%</strong>
 
 4. <strong>IT 部門管理、組織變革與敏捷實踐</strong>
@@ -151,7 +155,7 @@
 <strong>核心成就：</strong>
 
 1. <strong>企業架構設計與數位轉型路徑圖</strong>
-   - <strong>主導</strong>制定全面的數位轉型路徑圖，對齊技術架構設計與商業目標。推出整合 GenAI 至客戶服務流程的統一 IT 服務平台，<strong>年度營運成本降低 25% (USD $300k)</strong>，透過提升開發者生產力<strong>產生 USD $2M 新年度營收</strong>，<strong>客戶 NPS 提升 12 點</strong>
+   - <strong>主導</strong>制定全面的數位轉型路徑圖，對齊技術架構設計與商業目標。推出整合 的統一 IT 服務平台，<strong>年度營運成本降低 25% (USD $300k)</strong>，透過提升開發者生產力<strong>產生 USD $2M 新年度營收</strong>，<strong>客戶 NPS 提升 12 點</strong>
    - <strong>架構設計</strong>整合 15+ IT 服務（CI/CD、監控、日誌、資安掃描、成本分析）至統一平台。透過開發團隊痛點訪談，識別核心需求（資料庫配置、環境配置、告警管理），<strong>設計並推出</strong>服務 <strong>200+ 開發者</strong>的自助式 IT 平台
    - <strong>Buy vs. Build 決策</strong>：評估自助式資料庫配置功能，決定採用自建方案（Terraform + Ansible）而非購買 SaaS，因為此功能是核心競爭力且需要深度整合。使用 Terraform 和 Ansible 實現自動化資料庫部署，<strong>將資料庫配置時間從 3 天縮短至 5 分鐘（99.7% 改善）</strong>，<strong>消除 90% 手動配置錯誤</strong>，<strong>年度人力成本節省 USD $150k+</strong>
    - <strong>產品化</strong>基礎設施資源至統一自助服務入口，使用 React 和 Python Flask，讓 <strong>200+ 開發者</strong>可獨立配置合規的雲端資源。<strong>自助服務採用率達 85%+</strong>，<strong>IT 服務請求處理時間減少 70%</strong>
@@ -161,11 +165,11 @@
    - <strong>多雲架構設計</strong>：設計 AWS、GCP 多雲架構，使用 Terraform 實現跨雲 Infrastructure as Code，避免供應商鎖定（Vendor Lock-in），實現 <strong>24 小時內快速移轉能力</strong>
    - <strong>成本感知架構設計</strong>：設計具備「成本感知（Cost-Aware）」的架構，將成本視為與性能、安全性同等重要的非功能性需求。建立 FinOps 治理框架，實施預算控制與成本優化策略。建立單一事實來源（Single Source of Truth），透過嚴格的標籤管理（Tagging）策略，優化多雲架構與 Spot Instances 使用，<strong>達成年度雲端成本節省 USD $200k+（30% 降低）</strong>，<strong>TCO 降低 25%</strong>
    - <strong>主導</strong>供應商談判（Vendor Management），與 AWS、GCP、Cloudflare 簽訂 Enterprise Agreement，<strong>取得 20%+ 折扣優惠</strong>，<strong>年度節省 USD $80k+</strong>
-   - <strong>影子 P&L 與財務責任</strong>：建立影子 P&L 概念，計算每個技術決策的投資回報率（ROI）。設計的新架構支持業務部門新產品上線，<strong>間接貢獻 USD $2M 年度營收增長</strong>
+   - <strong>財務責任</strong>：計算每個技術決策的投資回報率（ROI）。設計的新架構支持業務部門新產品上線，<strong>間接貢獻 USD $2M 年度營收增長</strong>
    - <strong>建置</strong> IT 預算追蹤機制，使用成本分析 Dashboard 監控各部門 IT 支出，建立基準線，實現預算透明度。<strong>預算超支率從 15% 降低至 3%</strong>，<strong>預算執行準確率達 95%+</strong>
 
 3. <strong>組織變革管理與領導力（Cross-functional Leadership）</strong>
-   - <strong>管理</strong>跨國技術團隊（台灣、柬埔寨，9 人），建立遠端協作機制，導入 Scrum，每日會議，並使用 Slack 和 Jira 實現跨時區協調。<strong>團隊生產力提升 40%</strong>，<strong>跨國專案準時交付率達 95%+</strong>
+   - <strong>管理</strong>跨國技術團隊（台灣、大陸，9 人），建立遠端協作機制，導入 Scrum，每日會議，並使用 Slack 和 Jira 實現跨區域協調。<strong>團隊生產力提升 40%</strong>，<strong>跨國專案準時交付率達 95%+</strong>
    - <strong>建立</strong>人才梯隊發展機制，定義 Senior/Junior 職涯發展路徑。透過技術培訓與認證計畫（AWS、Kubernetes），<strong>團隊技能提升率達 85%+</strong>，<strong>內部晉升率 60%+</strong>
    - <strong>推動</strong>多元共融（DEI）文化，建立包容性工作環境。<strong>團隊滿意度提升 35%</strong>，<strong>員工保留率 95%+</strong>
    - <strong>引導</strong>組織變革管理，引導團隊從傳統運維轉向 DevOps/Platform Engineering 文化。<strong>變革成功率 90%+</strong>，<strong>變革阻力降低 70%</strong>
@@ -181,11 +185,10 @@
 
 6. <strong>RAG 架構設計與 GenAI Governance</strong>
    - <strong>RAG 架構設計</strong>：設計 LLM 整合架構，使用向量資料庫（Vector Database）支援大型語言模型安全存取企業私有數據。整合 LLM（ChatGPT API、Claude API）至 DevOps 流程，使用 Python 開發自動化 Code Review 工具，整合至 GitLab CI Pipeline。<strong>Code Review 時間減少 60%</strong>，<strong>AI 風險事件：零</strong>
-   - <strong>推論管道優化與 GenAI Governance</strong>：設計 AI 推論架構，運用 LLM 自動生成測試案例，整合至 Jenkins Pipeline。針對新功能自動生成單元測試與整合測試腳本，<strong>測試覆蓋率提升 40%</strong>。建立 GenAI Governance 框架，定義 AI 使用政策與風險管理機制，確保 AI 決策的可解釋性與合規性
    - <strong>建置</strong> LLM 驅動的事件分析系統，整合 ELK Stack 和 ChatGPT API，自動分析 Log 和 Metrics，生成根因分析報告。<strong>問題識別時間減少 55%</strong>
 
 7. <strong>平台工程與敏捷開發</strong>
-   - <strong>設計並推出</strong>基於 Kubernetes 和 Helm 的 Internal Developer Platform (IDP)，使用 Golang 開發 Kubernetes Operator 與自定義控制器，實現自動化資源管理與擴展。為 <strong>200+ 開發者</strong>提供自助服務能力，定義應用部署的 "Golden Paths"，透過標準化 Helm charts 和 CI/CD 工作流，<strong>微服務上線時間從 2 週縮短至 2 天</strong>，<strong>部署失敗率降低 60%</strong>
+   - <strong>設計並推出</strong>基於 Kubernetes 和 Helm，使用 Golang 開發 Kubernetes Operator 與自定義控制器，實現自動化資源管理與擴展。為 <strong>200+ 開發者</strong>提供自助服務能力，定義應用部署的 "Golden Paths"，透過標準化 Helm charts 和 CI/CD 工作流，<strong>微服務上線時間從 2 週縮短至 2 天</strong>，<strong>部署失敗率降低 60%</strong>
    - <strong>開發</strong> Golang 微服務處理平台 API 請求，產品化基礎設施資源為可重用的 Terraform 模組，讓開發團隊可獨立配置合規的雲端資源，<strong>Ops ticket 數量減少 75%</strong>，<strong>基礎設施配置時間減少 70%</strong>，<strong>API 並發處理能力提升 60%</strong>
    - 擔任 Scrum Master，引導團隊採用 Agile/Scrum 方法論。使用 Jira 管理 Sprint，主持 Daily Standup、Sprint Review、Retrospective 會議。<strong>團隊協作效率提升 40%</strong>，<strong>Sprint 準時交付率 95%+</strong>
 
