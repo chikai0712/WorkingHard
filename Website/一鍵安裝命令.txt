@@ -1,0 +1,14 @@
+# 複製以下命令到終端機執行
+
+# 修復 Homebrew 權限並安裝 AWS CLI
+sudo chown -R $(whoami) /opt/homebrew /Users/$(whoami)/Library/Logs/Homebrew && \
+brew install awscli && \
+aws --version
+
+# 如果成功，會顯示 AWS CLI 版本
+# 然後執行配置：
+aws configure
+
+# 配置完成後，執行設定腳本：
+cd ~/Desktop/Project/Website
+./setup-aws-key.sh
