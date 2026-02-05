@@ -8,10 +8,8 @@ services:
     container_name: bind-dns-local
     restart: unless-stopped
     ports:
-      - "127.0.0.1:53:53/udp"  # 本機存取
-      - "127.0.0.1:53:53/tcp"  # 本機存取
-      - "0.0.0.0:5353:53/udp"  # 區域網路存取（UDP）
-      - "0.0.0.0:5353:53/tcp"  # 區域網路存取（TCP）
+      - "0.0.0.0:53:53/udp"  # 對外開放標準 DNS 埠（UDP）
+      - "0.0.0.0:53:53/tcp"  # 對外開放標準 DNS 埠（TCP）
     # 只掛載 config（內含 config/zones/），避免映像唯讀導致掛載失敗
     volumes:
       - ./config:/etc/bind:ro
