@@ -1,0 +1,23 @@
+options {
+    directory "/var/cache/bind";
+
+    // 1. 基本設定
+    recursion yes;
+    allow-query { any; };
+    
+    // 2. ⚠️ 務必保持關閉 DNSSEC
+    dnssec-validation no;
+
+    forwarders { };
+    listen-on-v6 { any; };
+};
+
+// 3. 👇 新增這段日誌設定
+logging {
+    channel query_log {
+        file "/dev/stderr";    // 輸出到 Docker Log
+        print-time yes;
+        severity info;
+    };
+    category queries { query_log; };
+};

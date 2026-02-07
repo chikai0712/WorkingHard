@@ -1,11 +1,20 @@
 #!/bin/bash
 # -------------------------------------------------------------------------------
-# DNS 查詢監控腳本 - 測試 DNS 解析（UDP 53 埠）
-# 功能：持續測試 AWS 和 Google NS 的 DNS 查詢功能
+# DNS 查詢監控腳本 v1.0 - 測試 DNS 解析與故障切換
+# 功能：
+#   1. 持續監控 AWS 和 Google NS 的 DNS 查詢功能
+#   2. 支援 dig 直接查詢模式（預設）
+#   3. 支援 dig +trace 遞迴追蹤模式（--trace）
+#   4. 即時顯示查詢狀態與統計
+#   5. 記錄完整日誌供事後分析
 # 
 # 用法：
-#   bash ./dns-query-monitor.sh [間隔秒數] [測試域名]
-#   例如：bash ./dns-query-monitor.sh 1 www.clouddeployment168.site
+#   基本模式：bash ./dns-query-monitor.sh [間隔秒數] [測試域名]
+#   追蹤模式：bash ./dns-query-monitor.sh --trace [間隔秒數] [測試域名]
+#   
+# 範例：
+#   bash ./dns-query-monitor.sh 1 www.clouddeployment168.site
+#   bash ./dns-query-monitor.sh --trace 5 www.clouddeployment168.site
 #
 # 預設間隔：1 秒
 # 預設測試域名：www.clouddeployment168.site
@@ -20,12 +29,44 @@ GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 CYAN='\033[0;36m'
 BLUE='\033[0;34m'
+MAGENTA='\033[0;35m'
 NC='\033[0m'
 
+# 解析參數
+USE_TRACE=false
+INTERVAL=1
+TEST_DOMAIN="www.clouddeployment168.site"
+
+for arg in "$@"; do
+    case "$arg" in
+        --trace)
+            USE_TRACE=true
+            ;;
+        --help|-h)
+            echo "用法: $0 [選項] [間隔秒數] [測試域名]"
+            echo ""
+            echo "選項:"
+            echo "  --trace    使用 dig +trace 遞迴追蹤模式"
+            echo "  --help     顯示此幫助訊息"
+            echo ""
+            echo "範例:"
+            echo "  $0 1 www.example.com          # 每秒直接查詢"
+            echo "  $0 --trace 5 www.example.com  # 每 5 秒追蹤查詢"
+            exit 0
+            ;;
+        *)
+            if [[ "$arg" =~ ^[0-9]+$ ]]; then
+                INTERVAL="$arg"
+            elif [[ "$arg" != --* ]]; then
+                TEST_DOMAIN="$arg"
+            fi
+            ;;
+    esac
+done
+
 # 配置
-INTERVAL="${1:-1}"
-TEST_DOMAIN="${2:-www.clouddeployment168.site}"
 DNS_TIMEOUT=2
+TRACE_TIMEOUT=10
 LOG_FILE="/tmp/dns_query_monitor_$(date +%Y%m%d_%H%M%S).log"
 
 # AWS Route53 NS IPs
@@ -56,14 +97,14 @@ cleanup() {
 
 trap cleanup INT TERM
 
-# DNS 查詢單個 NS
-query_dns() {
+# DNS 直接查詢單個 NS（預設模式）
+query_dns_direct() {
     local ns_ip=$1
     local name=$2
     local domain=$3
     local timestamp=$(date '+%Y-%m-%d %H:%M:%S')
     
-    # 使用 dig 查詢，設定超時
+    # 使用 dig 直接查詢指定 NS，設定超時
     local dig_output
     local start_time=$(date +%s.%N 2>/dev/null || date +%s)
     
@@ -94,30 +135,77 @@ query_dns() {
     fi
 }
 
-# 主監控循環
-main() {
-    clear
-    echo -e "${GREEN}=== DNS 查詢監控（UDP 53 埠）===${NC}\n"
-    echo -e "測試域名: ${CYAN}${TEST_DOMAIN}${NC}"
-    echo -e "監控間隔: ${CYAN}${INTERVAL} 秒${NC}"
-    echo -e "DNS 超時: ${CYAN}${DNS_TIMEOUT} 秒${NC}"
-    echo -e "日誌檔案: ${CYAN}$LOG_FILE${NC}"
-    echo -e "按 ${YELLOW}Ctrl+C${NC} 停止監控\n"
-    echo -e "${BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}\n"
+# DNS 追蹤查詢（dig +trace 模式）
+query_dns_trace() {
+    local domain=$1
+    local timestamp=$(date '+%Y-%m-%d %H:%M:%S')
     
-    # 寫入日誌標頭
-    {
-        echo "=== DNS 查詢監控日誌 ==="
-        echo "開始時間: $(date '+%Y-%m-%d %H:%M:%S')"
-        echo "測試域名: ${TEST_DOMAIN}"
-        echo "監控間隔: ${INTERVAL} 秒"
-        echo "DNS 超時: ${DNS_TIMEOUT} 秒"
-        echo "AWS NS: ${AWS_NS[*]}"
-        echo "Google NS: ${GOOGLE_NS[*]}"
-        echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-        echo ""
-    } > "$LOG_FILE"
+    echo -e "${MAGENTA}執行 dig +trace 遞迴追蹤...${NC}"
     
+    local start_time=$(date +%s.%N 2>/dev/null || date +%s)
+    local trace_output
+    local trace_file=$(mktemp)
+    
+    # 執行 dig +trace，捕獲完整輸出
+    set +e
+    dig +trace +nodnssec "$domain" A > "$trace_file" 2>&1
+    local dig_status=$?
+    set -e
+    
+    local end_time=$(date +%s.%N 2>/dev/null || date +%s)
+    local query_time=$(echo "$end_time - $start_time" | bc 2>/dev/null || echo "0")
+    local query_time_ms=$(echo "$query_time * 1000" | bc 2>/dev/null | cut -d'.' -f1)
+    
+    trace_output=$(cat "$trace_file")
+    
+    # 分析追蹤結果
+    local final_ip=$(echo "$trace_output" | grep -E "^${domain}\." | grep -E "IN\s+A\s+" | awk '{print $NF}' | grep -E '^[0-9.]+$' | head -1)
+    local ns_used=$(echo "$trace_output" | grep "Received" | tail -1 | grep -oE '[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+' | head -1)
+    
+    # 檢查是否有超時或錯誤
+    local has_timeout=$(echo "$trace_output" | grep -c "timed out\|connection refused\|no servers" || true)
+    
+    if [ -n "$final_ip" ]; then
+        if [ "$has_timeout" -gt 0 ]; then
+            echo -e "${YELLOW}⚠${NC} 追蹤成功但有 ${has_timeout} 次超時 - ${query_time_ms}ms → $final_ip"
+            echo -e "   ${CYAN}最終使用 NS: ${ns_used:-未知}${NC}"
+        else
+            echo -e "${GREEN}✓${NC} 追蹤成功 - ${query_time_ms}ms → $final_ip"
+            echo -e "   ${CYAN}最終使用 NS: ${ns_used:-未知}${NC}"
+        fi
+        
+        # 顯示追蹤路徑摘要
+        echo -e "   ${BLUE}追蹤路徑:${NC}"
+        echo "$trace_output" | grep -E "^\." | head -3 | sed 's/^/     /'
+        echo "$trace_output" | grep -E "^${domain%.*}\." | head -2 | sed 's/^/     /'
+        echo "$trace_output" | grep -E "^${domain}\." | grep "IN A" | sed 's/^/     /'
+        
+        echo "[$timestamp] TRACE_SUCCESS | ${query_time_ms}ms | $final_ip | NS: $ns_used | Timeouts: $has_timeout" >> "$LOG_FILE"
+        echo "$trace_output" >> "$LOG_FILE"
+        echo "---" >> "$LOG_FILE"
+        
+        rm -f "$trace_file"
+        return 0
+    else
+        echo -e "${RED}✗${NC} 追蹤失敗 - ${query_time_ms}ms"
+        echo -e "   ${RED}錯誤: 無法解析最終 IP${NC}"
+        
+        # 顯示錯誤訊息
+        if [ "$has_timeout" -gt 0 ]; then
+            echo -e "   ${YELLOW}偵測到 ${has_timeout} 次超時${NC}"
+        fi
+        
+        echo "[$timestamp] TRACE_FAILED | ${query_time_ms}ms | Timeouts: $has_timeout" >> "$LOG_FILE"
+        echo "$trace_output" >> "$LOG_FILE"
+        echo "---" >> "$LOG_FILE"
+        
+        rm -f "$trace_file"
+        return 1
+    fi
+}
+
+# 主監控循環 - 直接查詢模式
+monitor_direct() {
     local round=1
     
     while true; do
@@ -135,7 +223,7 @@ main() {
         for i in "${!AWS_NS[@]}"; do
             local ip="${AWS_NS[$i]}"
             local name="AWS-NS-$((i+1))"
-            if query_dns "$ip" "$name" "$TEST_DOMAIN"; then
+            if query_dns_direct "$ip" "$name" "$TEST_DOMAIN"; then
                 aws_success=$((aws_success + 1))
             fi
         done
@@ -147,7 +235,7 @@ main() {
         for i in "${!GOOGLE_NS[@]}"; do
             local ip="${GOOGLE_NS[$i]}"
             local name="Google-NS-$((i+1))"
-            if query_dns "$ip" "$name" "$TEST_DOMAIN"; then
+            if query_dns_direct "$ip" "$name" "$TEST_DOMAIN"; then
                 google_success=$((google_success + 1))
             fi
         done
@@ -183,6 +271,91 @@ main() {
         round=$((round + 1))
         sleep "$INTERVAL"
     done
+}
+
+# 主監控循環 - 追蹤模式
+monitor_trace() {
+    local round=1
+    
+    while true; do
+        local timestamp=$(date '+%Y-%m-%d %H:%M:%S')
+        echo -e "${CYAN}[$timestamp] 第 $round 輪追蹤監控${NC}\n"
+        
+        # 執行 dig +trace
+        if query_dns_trace "$TEST_DOMAIN"; then
+            echo -e "\n${GREEN}✓ 本輪追蹤成功${NC}"
+        else
+            echo -e "\n${RED}✗ 本輪追蹤失敗${NC}"
+        fi
+        
+        echo -e "${BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}\n"
+        
+        round=$((round + 1))
+        sleep "$INTERVAL"
+    done
+}
+
+# 主程式
+main() {
+    # 檢查 dig 是否可用
+    if ! command -v dig &> /dev/null; then
+        echo -e "${RED}錯誤: 找不到 dig 命令${NC}"
+        echo "請安裝 bind-tools (Linux) 或 bind (macOS)"
+        echo "  macOS: brew install bind"
+        echo "  Ubuntu/Debian: sudo apt-get install dnsutils"
+        echo "  CentOS/RHEL: sudo yum install bind-utils"
+        exit 1
+    fi
+    
+    clear
+    echo -e "${GREEN}=== DNS 查詢監控 v1.0 ===${NC}\n"
+    
+    if [ "$USE_TRACE" = true ]; then
+        echo -e "模式: ${MAGENTA}dig +trace 遞迴追蹤${NC}"
+        echo -e "說明: 從根 DNS 開始追蹤，觀察完整解析路徑與故障切換"
+    else
+        echo -e "模式: ${CYAN}dig 直接查詢${NC}"
+        echo -e "說明: 直接查詢各個 NS，測試可用性"
+    fi
+    
+    echo ""
+    echo -e "測試域名: ${CYAN}${TEST_DOMAIN}${NC}"
+    echo -e "監控間隔: ${CYAN}${INTERVAL} 秒${NC}"
+    
+    if [ "$USE_TRACE" = true ]; then
+        echo -e "追蹤超時: ${CYAN}${TRACE_TIMEOUT} 秒${NC}"
+    else
+        echo -e "DNS 超時: ${CYAN}${DNS_TIMEOUT} 秒${NC}"
+    fi
+    
+    echo -e "日誌檔案: ${CYAN}$LOG_FILE${NC}"
+    echo -e "按 ${YELLOW}Ctrl+C${NC} 停止監控\n"
+    echo -e "${BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}\n"
+    
+    # 寫入日誌標頭
+    {
+        echo "=== DNS 查詢監控日誌 v1.0 ==="
+        echo "開始時間: $(date '+%Y-%m-%d %H:%M:%S')"
+        echo "模式: $([ "$USE_TRACE" = true ] && echo "dig +trace 追蹤" || echo "dig 直接查詢")"
+        echo "測試域名: ${TEST_DOMAIN}"
+        echo "監控間隔: ${INTERVAL} 秒"
+        if [ "$USE_TRACE" = true ]; then
+            echo "追蹤超時: ${TRACE_TIMEOUT} 秒"
+        else
+            echo "DNS 超時: ${DNS_TIMEOUT} 秒"
+            echo "AWS NS: ${AWS_NS[*]}"
+            echo "Google NS: ${GOOGLE_NS[*]}"
+        fi
+        echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+        echo ""
+    } > "$LOG_FILE"
+    
+    # 根據模式選擇監控函數
+    if [ "$USE_TRACE" = true ]; then
+        monitor_trace
+    else
+        monitor_direct
+    fi
 }
 
 main "$@"
