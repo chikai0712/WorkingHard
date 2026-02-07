@@ -93,8 +93,8 @@
 
 ## 💼 工作經驗
 
-### Senior Technical Consultant / IT Director / Solution Architect
-<strong>[Unition]</strong> | <strong>2024.10 - 至今</strong> | 台北 | <strong>團隊規模</strong>：12 人
+### Senior Technical Consultant / Solution Architect
+<strong>[Unition]</strong> | <strong>2024.12 - 至今</strong> | 台北 | <strong>團隊規模</strong>：12 人
 
 <strong>核心成就：</strong>
 
@@ -117,36 +117,8 @@
 
 ---
 
-### IT Director / Senior Solution Architect
-<strong>[星鏈科技]</strong> | <strong>2025.03 - 至今</strong> | 台北 | <strong>團隊規模</strong>：9 人
-
-<strong>核心成就：</strong>
-
-<strong>數位轉型與平台工程</strong>
-- <strong>主導</strong>數位轉型路徑圖，推出整合 GenAI 的統一 IT 服務平台（15+ 服務），<strong>年度營運成本降低 USD $300k（25%），產生 USD $2M 新營收，客戶 NPS 提升 12 點</strong>。透過痛點訪談識別核心需求，<strong>設計並推出</strong>自助式平台服務 <strong>200+ 開發者</strong>
-- <strong>Buy vs. Build 決策</strong>：評估資料庫配置功能，採用自建方案（Terraform + Ansible）而非 SaaS，<strong>配置時間從 3 天縮至 5 分鐘（99.7% 改善），消除 90% 錯誤，年度節省 USD $150k+</strong>。產品化基礎設施資源（React + Python Flask），<strong>自助服務採用率 85%+，IT 請求處理時間減少 70%</strong>
-- <strong>設計並推出</strong>基於 K8s 和 Helm 的 IDP，使用 Golang 開發 Operator 與控制器。為 <strong>200+ 開發者</strong>提供自助服務，定義 "Golden Paths"，<strong>微服務上線從 2 週縮至 2 天，部署失敗率降低 60%</strong>。開發 Golang 微服務處理平台 API，產品化 Terraform 模組，<strong>Ops ticket 減少 75%，配置時間減少 70%，API 並發能力提升 60%</strong>
-- 擔任 PO 與 SM，使用 Agile/Scrum，<strong>產品迭代速度提升 50%，團隊協作效率提升 40%，Sprint 準時交付率 95%+</strong>
-
-<strong>多雲架構與 FinOps（P&L Responsibility）</strong>
-- <strong>設計</strong>AWS、GCP 多雲架構，使用 Terraform 實現跨雲 IaC，<strong>24 小時內快速移轉能力</strong>。設計成本感知架構，建立 FinOps 治理框架，透過標籤管理與 Spot Instances 優化，<strong>年度雲端成本節省 USD $200k+（30%），TCO 降低 25%</strong>
-- <strong>主導</strong>供應商談判，與 AWS、GCP、Cloudflare 簽訂 EA，<strong>取得 20%+ 折扣，年度節省 USD $80k+</strong>。建立影子 P&L，計算技術決策 ROI，<strong>新架構間接貢獻 USD $2M 營收</strong>。建置預算追蹤機制，<strong>預算超支率從 15% 降至 3%，執行準確率 95%+</strong>
-
-<strong>SDN 與 SRE 實踐</strong>
-- <strong>主導</strong>從 CLI 遷移至 SDN，使用 Golang 開發 API Gateway 自動化防火牆配置（10+ 據點）。使用 Goroutine 並發調用，整合 AWS/GCP/Cisco API，<strong>配置錯誤率降低 80%，API 響應降低 40%，年度節省 USD $150k</strong>。架構設計 API 驅動網路管理框架，整合 Ansible 和 Python，<strong>部署從 2 小時縮至 10 分鐘（92%），回滾從 30 分鐘縮至 5 分鐘（83%）</strong>
-- <strong>定義</strong>SLO（99.95% 可用性），使用 Golang 開發 Prometheus Exporter，建立 SLO Dashboard 追蹤錯誤預算，<strong>Metrics 收集效率提升 60%</strong>。開發高併發監控代理，部署 Observability stack，整合 PagerDuty 智能告警，<strong>誤報率降低 50%，響應時間減少 40%，吞吐量提升 60%</strong>。建立 MTTR 追蹤機制，開發事件追蹤微服務，<strong>MTTR 從 45 分鐘縮至 12 分鐘（73%），每週節省 15 工時</strong>
-
-<strong>GenAI 整合與團隊管理</strong>
-- <strong>設計</strong>RAG 架構，使用向量資料庫支援 LLM 安全存取企業數據。整合 ChatGPT/Claude API 至 DevOps，開發自動化 Code Review 工具，<strong>Code Review 時間減少 60%，AI 風險事件零</strong>。設計 AI 推論架構，LLM 自動生成測試案例，<strong>測試覆蓋率提升 40%</strong>。建立 GenAI Governance 框架，確保 AI 可解釋性與合規。建置 LLM 事件分析系統，整合 ELK 和 ChatGPT API，<strong>問題識別時間減少 55%</strong>
-- <strong>管理</strong>跨國團隊（台灣、柬埔寨，9 人），建立遠端協作機制，導入 Scrum，<strong>生產力提升 40%，準時交付率 95%+</strong>。建立人才梯隊，定義職涯路徑，<strong>技能提升率 85%+，內部晉升率 60%+</strong>。推動 DEI 文化，<strong>滿意度提升 35%，保留率 95%+</strong>。引導組織變革至 Platform Engineering，<strong>變革成功率 90%+，阻力降低 70%</strong>
-- <strong>優化</strong>網路基礎設施（Direct Connect + Interconnect），<strong>延遲降低 40%</strong>。架構設計 Multi-CDN 自動切換（Cloudflare/AWS/GCP），<strong>可用性 99.9%+，MTTR 減少 60%</strong>
-
-<strong>技術棧</strong>：Golang, Kubernetes (EKS/GKE), Docker, Helm, Terraform, Ansible, AWS, GCP, Cloudflare API, Cisco ASA API, Prometheus, Grafana, Alertmanager, PagerDuty, ELK Stack, ChatGPT API, Claude API, React, Python Flask, GitLab CI, Jenkins, Jira, Slack
-
----
-
 ### DevOps Manager
-<strong>AXIOM</strong> | <strong>2024.04 - 2024.12</strong> | 台北 | <strong>團隊規模</strong>：6 人
+<strong>星鏈科技</strong> | <strong>2024.04 - 2024.12</strong> | 台北 | <strong>團隊規模</strong>：6 人
 
 <strong>核心成就：</strong>
 
