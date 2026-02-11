@@ -1,0 +1,663 @@
+/* 🎨 爆米花王國 - 樣式表 */
+
+/* ===== 全域設定 ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', 'Microsoft JhengHei', sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+/* ===== 遊戲容器 ===== */
+#game-container {
+    width: 100%;
+    max-width: 1200px;
+    background: linear-gradient(to bottom, #87CEEB 0%, #98D8C8 100%);
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    position: relative;
+}
+
+/* ===== 資源欄 ===== */
+#resource-bar {
+    background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+    padding: 20px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.resource-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+.resource-icon {
+    font-size: 36px;
+    filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.3));
+}
+
+.resource-label {
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+}
+
+.resource-value {
+    font-size: 28px;
+    font-weight: bold;
+    color: #fff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.resource-max,
+.resource-unit {
+    font-size: 18px;
+    color: #fff;
+    opacity: 0.8;
+}
+
+/* ===== 主遊戲區域 ===== */
+#game-area {
+    padding: 30px;
+    min-height: 600px;
+    position: relative;
+    overflow: visible;
+}
+
+/* ===== 城堡 ===== */
+#castle {
+    position: absolute;
+    top: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+}
+
+.castle .building-icon {
+    font-size: 80px;
+    filter: drop-shadow(4px 4px 8px rgba(0, 0, 0, 0.3));
+    animation: float 3s ease-in-out infinite;
+}
+
+.castle .building-name {
+    font-size: 24px;
+    font-weight: bold;
+    color: #fff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    margin-top: 10px;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+/* ===== 生產建築區 ===== */
+#production-area {
+    margin-top: 150px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.building {
+    background: linear-gradient(135deg, #fff 0%, #f0f0f0 100%);
+    border-radius: 20px;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    position: relative;
+}
+
+.building:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+}
+
+.building.locked {
+    background: linear-gradient(135deg, #ccc 0%, #999 100%);
+    cursor: pointer;
+}
+
+.building.locked:hover {
+    transform: translateY(-3px);
+}
+
+.building-icon {
+    font-size: 60px;
+    margin-bottom: 10px;
+    filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+.building.locked .building-icon {
+    filter: grayscale(100%) opacity(0.5);
+}
+
+.building-name {
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.building-level {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.building-status {
+    margin: 10px 0;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 10px;
+    background: #ddd;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #4CAF50 0%, #8BC34A 100%);
+    width: 0%;
+    transition: width 0.1s linear;
+}
+
+.building-info {
+    font-size: 14px;
+    color: #666;
+}
+
+.unlock-cost {
+    font-size: 18px;
+    font-weight: bold;
+    color: #FFD700;
+    margin-top: 10px;
+}
+
+/* ===== 建設區域 ===== */
+#construction-area {
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.construction-slot {
+    width: 120px;
+    height: 120px;
+    background: linear-gradient(135deg, #fff 0%, #f0f0f0 100%);
+    border: 3px dashed #ccc;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.construction-slot:hover {
+    transform: scale(1.05);
+    border-color: #FFD700;
+    background: linear-gradient(135deg, #FFF9E6 0%, #FFE6B3 100%);
+}
+
+.construction-slot.empty .slot-icon {
+    font-size: 40px;
+    color: #ccc;
+}
+
+.construction-slot.empty .slot-label {
+    font-size: 14px;
+    color: #999;
+    margin-top: 5px;
+}
+
+.construction-slot.built {
+    border: 3px solid #4CAF50;
+    background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%);
+}
+
+.construction-slot.built .slot-icon {
+    font-size: 50px;
+}
+
+.construction-slot.built .slot-label {
+    font-size: 12px;
+    color: #333;
+    margin-top: 5px;
+}
+
+/* ===== 控制按鈕 ===== */
+#control-buttons {
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.control-btn {
+    padding: 12px 24px;
+    font-size: 16px;
+    font-weight: bold;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.control-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+}
+
+.control-btn:active {
+    transform: translateY(0);
+}
+
+/* ===== 彈窗 ===== */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal.hidden {
+    display: none;
+}
+
+.modal-content {
+    background: white;
+    border-radius: 20px;
+    padding: 30px;
+    max-width: 500px;
+    width: 90%;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    animation: modalSlideIn 0.3s ease;
+}
+
+@keyframes modalSlideIn {
+    from {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 15px;
+}
+
+.modal-header h2 {
+    font-size: 24px;
+    color: #333;
+}
+
+.modal-close {
+    font-size: 28px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #999;
+    transition: color 0.3s;
+}
+
+.modal-close:hover {
+    color: #333;
+}
+
+.modal-body {
+    text-align: center;
+}
+
+.modal-icon {
+    font-size: 80px;
+    margin: 20px 0;
+}
+
+.modal-info {
+    text-align: left;
+    margin: 20px 0;
+    padding: 15px;
+    background: #f5f5f5;
+    border-radius: 10px;
+}
+
+.modal-info p {
+    margin: 10px 0;
+    font-size: 16px;
+    color: #333;
+}
+
+.modal-upgrade {
+    margin-top: 20px;
+    padding: 20px;
+    background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%);
+    border-radius: 10px;
+}
+
+.modal-upgrade h3 {
+    font-size: 20px;
+    color: #2E7D32;
+    margin-bottom: 15px;
+}
+
+.modal-upgrade p {
+    margin: 10px 0;
+    font-size: 16px;
+    color: #333;
+}
+
+.upgrade-btn {
+    margin-top: 20px;
+    padding: 15px 40px;
+    font-size: 18px;
+    font-weight: bold;
+    background: linear-gradient(135deg, #4CAF50 0%, #8BC34A 100%);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.upgrade-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+}
+
+.upgrade-btn:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* ===== 建設選單 ===== */
+.build-options {
+    max-height: 500px;
+    overflow-y: auto;
+}
+
+.build-category {
+    margin-bottom: 30px;
+}
+
+.build-category h3 {
+    font-size: 20px;
+    color: #333;
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.build-option {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    margin: 10px 0;
+    background: #f5f5f5;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.build-option:hover {
+    background: linear-gradient(135deg, #FFF9E6 0%, #FFE6B3 100%);
+    transform: translateX(5px);
+}
+
+.build-option .build-icon {
+    font-size: 40px;
+    margin-right: 15px;
+}
+
+.build-option .build-info {
+    flex: 1;
+    text-align: left;
+}
+
+.build-name {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+}
+
+.build-cost {
+    font-size: 16px;
+    color: #FF9800;
+    margin: 5px 0;
+}
+
+.build-effect {
+    font-size: 14px;
+    color: #4CAF50;
+}
+
+/* ===== 訂單通知 ===== */
+.notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: white;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    z-index: 999;
+    animation: slideInRight 0.5s ease;
+}
+
+.notification.hidden {
+    display: none;
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(400px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.notification-content {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.notification-icon {
+    font-size: 40px;
+}
+
+.notification-text h3 {
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.notification-text p {
+    font-size: 14px;
+    color: #666;
+    margin: 3px 0;
+}
+
+.notification-timer {
+    font-size: 20px;
+    font-weight: bold;
+    color: #FF5722;
+}
+
+/* ===== Canvas 動畫層 ===== */
+#animation-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 500;
+}
+
+/* ===== 響應式設計 ===== */
+@media (max-width: 768px) {
+    #production-area {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .resource-icon {
+        font-size: 28px;
+    }
+    
+    .resource-value {
+        font-size: 20px;
+    }
+    
+    .building-icon {
+        font-size: 50px;
+    }
+    
+    .castle .building-icon {
+        font-size: 60px;
+    }
+    
+    #construction-area {
+        gap: 10px;
+    }
+    
+    .construction-slot {
+        width: 100px;
+        height: 100px;
+    }
+    
+    .notification {
+        right: 10px;
+        top: 10px;
+        padding: 15px;
+    }
+}
+
+/* ===== 角色系統 ===== */
+.character {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 100;
+    pointer-events: none;
+    transition: left 0.1s linear, top 0.1s linear;
+}
+
+.character-emoji {
+    font-size: 40px;
+    filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.3));
+    transition: transform 0.3s ease;
+}
+
+.character.walking .character-emoji {
+    animation: walk 0.4s steps(2) infinite;
+}
+
+@keyframes walk {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+}
+
+.character-name {
+    font-size: 12px;
+    font-weight: bold;
+    color: #333;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 2px 8px;
+    border-radius: 10px;
+    margin-top: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.character-item {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    font-size: 24px;
+    display: none;
+    animation: bounce 0.5s ease infinite;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+}
+
+/* ===== 動畫效果 ===== */
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+.pulse {
+    animation: pulse 0.5s ease;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-10px); }
+    75% { transform: translateX(10px); }
+}
+
+.shake {
+    animation: shake 0.5s ease;
+}
+
+@keyframes glow {
+    0%, 100% { box-shadow: 0 0 10px rgba(255, 215, 0, 0.5); }
+    50% { box-shadow: 0 0 30px rgba(255, 215, 0, 1); }
+}
+
+.glow {
+    animation: glow 1s ease infinite;
+}
+

@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🏰 爆米花王國 - Popcorn Kingdom</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- 遊戲容器 -->
+    <div id="game-container">
+        
+        <!-- 頂部資源欄 -->
+        <div id="resource-bar">
+            <div class="resource-item">
+                <span class="resource-icon">💰</span>
+                <span class="resource-label">金幣</span>
+                <span class="resource-value" id="gold-value">100</span>
+            </div>
+            <div class="resource-item">
+                <span class="resource-icon">🌽</span>
+                <span class="resource-label">玉米</span>
+                <span class="resource-value" id="corn-value">0</span>
+                <span class="resource-max" id="corn-max">/10</span>
+            </div>
+            <div class="resource-item">
+                <span class="resource-icon">🍿</span>
+                <span class="resource-label">爆米花</span>
+                <span class="resource-value" id="popcorn-value">0</span>
+                <span class="resource-max" id="popcorn-max">/10</span>
+            </div>
+            <div class="resource-item">
+                <span class="resource-icon">😊</span>
+                <span class="resource-label">滿意度</span>
+                <span class="resource-value" id="satisfaction-value">100</span>
+                <span class="resource-unit">%</span>
+            </div>
+        </div>
+
+        <!-- 主遊戲區域 -->
+        <div id="game-area">
+            
+            <!-- 城堡 -->
+            <div id="castle" class="building castle">
+                <div class="building-icon">🏰</div>
+                <div class="building-name">城堡</div>
+            </div>
+
+            <!-- 生產建築區 -->
+            <div id="production-area">
+                
+                <!-- 玉米田 -->
+                <div id="corn-field" class="building unlocked" data-building="cornField">
+                    <div class="building-icon">🌾</div>
+                    <div class="building-name">玉米田</div>
+                    <div class="building-level">Lv.<span id="cornfield-level">1</span></div>
+                    <div class="building-status">
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="cornfield-progress"></div>
+                        </div>
+                    </div>
+                    <div class="building-info">
+                        <span id="cornfield-speed">5</span>秒/個
+                    </div>
+                </div>
+
+                <!-- 市場 -->
+                <div id="market" class="building unlocked" data-building="market">
+                    <div class="building-icon">🏪</div>
+                    <div class="building-name">市場</div>
+                    <div class="building-level">Lv.<span id="market-level">1</span></div>
+                    <div class="building-status">
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="market-progress"></div>
+                        </div>
+                    </div>
+                    <div class="building-info">
+                        <span id="market-speed">3</span>秒/個
+                    </div>
+                </div>
+
+                <!-- 烤爐 -->
+                <div id="oven" class="building locked" data-building="oven">
+                    <div class="building-icon">🔥</div>
+                    <div class="building-name">烤爐</div>
+                    <div class="building-level">🔒</div>
+                    <div class="unlock-cost">💰 100</div>
+                </div>
+
+                <!-- 外送站 -->
+                <div id="delivery" class="building locked" data-building="delivery">
+                    <div class="building-icon">🚚</div>
+                    <div class="building-name">外送站</div>
+                    <div class="building-level">🔒</div>
+                    <div class="unlock-cost">💰 200</div>
+                </div>
+
+            </div>
+
+            <!-- 建設區域 -->
+            <div id="construction-area">
+                <div class="construction-slot empty" data-slot="0">
+                    <div class="slot-icon">➕</div>
+                    <div class="slot-label">空地</div>
+                </div>
+                <div class="construction-slot empty" data-slot="1">
+                    <div class="slot-icon">➕</div>
+                    <div class="slot-label">空地</div>
+                </div>
+                <div class="construction-slot empty" data-slot="2">
+                    <div class="slot-icon">➕</div>
+                    <div class="slot-label">空地</div>
+                </div>
+                <div class="construction-slot empty" data-slot="3">
+                    <div class="slot-icon">➕</div>
+                    <div class="slot-label">空地</div>
+                </div>
+                <div class="construction-slot empty" data-slot="4">
+                    <div class="slot-icon">➕</div>
+                    <div class="slot-label">空地</div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- 控制按鈕 -->
+        <div id="control-buttons">
+            <button id="save-btn" class="control-btn">💾 儲存</button>
+            <button id="reset-btn" class="control-btn">🔄 重置</button>
+            <button id="sound-btn" class="control-btn">🔊 音效</button>
+        </div>
+
+    </div>
+
+    <!-- 升級彈窗 -->
+    <div id="upgrade-modal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modal-title">建築資訊</h2>
+                <button class="modal-close" id="modal-close">✕</button>
+            </div>
+            <div class="modal-body">
+                <div id="modal-icon" class="modal-icon">🌾</div>
+                <div id="modal-info" class="modal-info">
+                    <p><strong>當前等級：</strong><span id="modal-current-level">1</span></p>
+                    <p><strong>當前效果：</strong><span id="modal-current-effect">5秒/個</span></p>
+                </div>
+                <div id="modal-upgrade" class="modal-upgrade">
+                    <h3>升級到 Lv.<span id="modal-next-level">2</span></h3>
+                    <p><strong>升級成本：</strong>💰 <span id="modal-cost">50</span></p>
+                    <p><strong>升級效果：</strong><span id="modal-next-effect">3秒/個</span></p>
+                    <button id="upgrade-btn" class="upgrade-btn">⬆️ 升級</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 建設選單彈窗 -->
+    <div id="build-modal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>選擇建設</h2>
+                <button class="modal-close" id="build-modal-close">✕</button>
+            </div>
+            <div class="modal-body">
+                <div class="build-options">
+                    <div class="build-category">
+                        <h3>🏠 房子（被動收入）</h3>
+                        <div class="build-option" data-build="house1">
+                            <div class="build-icon">🏠</div>
+                            <div class="build-info">
+                                <div class="build-name">小屋</div>
+                                <div class="build-cost">💰 100</div>
+                                <div class="build-effect">+1金幣/秒</div>
+                            </div>
+                        </div>
+                        <div class="build-option" data-build="house2">
+                            <div class="build-icon">🏡</div>
+                            <div class="build-info">
+                                <div class="build-name">房子</div>
+                                <div class="build-cost">💰 500</div>
+                                <div class="build-effect">+5金幣/秒</div>
+                            </div>
+                        </div>
+                        <div class="build-option" data-build="house3">
+                            <div class="build-icon">🏰</div>
+                            <div class="build-info">
+                                <div class="build-name">豪宅</div>
+                                <div class="build-cost">💰 2000</div>
+                                <div class="build-effect">+20金幣/秒</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="build-category">
+                        <h3>🌸 花園（提升效果）</h3>
+                        <div class="build-option" data-build="flower1">
+                            <div class="build-icon">🌸</div>
+                            <div class="build-info">
+                                <div class="build-name">小花</div>
+                                <div class="build-cost">💰 50</div>
+                                <div class="build-effect">滿意度+5%</div>
+                            </div>
+                        </div>
+                        <div class="build-option" data-build="flower2">
+                            <div class="build-icon">🌺</div>
+                            <div class="build-info">
+                                <div class="build-name">大花</div>
+                                <div class="build-cost">💰 200</div>
+                                <div class="build-effect">滿意度+10%</div>
+                            </div>
+                        </div>
+                        <div class="build-option" data-build="tree">
+                            <div class="build-icon">🌳</div>
+                            <div class="build-info">
+                                <div class="build-name">大樹</div>
+                                <div class="build-cost">💰 1000</div>
+                                <div class="build-effect">品質+10%</div>
+                            </div>
+                        </div>
+                        <div class="build-option" data-build="fountain">
+                            <div class="build-icon">⛲</div>
+                            <div class="build-info">
+                                <div class="build-name">噴泉</div>
+                                <div class="build-cost">💰 5000</div>
+                                <div class="build-effect">收益+20%</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 訂單通知 -->
+    <div id="order-notification" class="notification hidden">
+        <div class="notification-content">
+            <div class="notification-icon">📦</div>
+            <div class="notification-text">
+                <h3>新訂單！</h3>
+                <p id="order-text">需要 5 個爆米花</p>
+                <p id="order-reward">獎勵：💰 60</p>
+            </div>
+            <div class="notification-timer" id="order-timer">60s</div>
+        </div>
+    </div>
+
+    <!-- Canvas 動畫層 -->
+    <canvas id="animation-canvas"></canvas>
+
+    <!-- 載入遊戲腳本 -->
+    <script src="resources.js"></script>
+    <script src="buildings.js"></script>
+    <script src="characters.js"></script>
+    <script src="ui.js"></script>
+    <script src="animations.js"></script>
+    <script src="audio.js"></script>
+    <script src="game.js"></script>
+</body>
+</html>
+
