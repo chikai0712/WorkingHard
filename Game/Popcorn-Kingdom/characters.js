@@ -22,6 +22,8 @@ class Character {
         // DOM 元素
         this.element = null;
         this.createDOM();
+        
+        console.log(`✨ 創建角色: ${this.name}`);
     }
     
     createDOM() {
@@ -43,10 +45,14 @@ class Character {
     
     // 設定任務
     assignTask(task) {
-        if (this.state !== 'idle') return false;
+        if (this.state !== 'idle') {
+            console.warn(`⚠️ ${this.name} 不是閒置狀態，無法接受任務`);
+            return false;
+        }
         
         this.currentTask = task;
         this.state = 'walking';
+        console.log(`📋 ${this.name} 接受任務`);
         return true;
     }
     
@@ -55,6 +61,8 @@ class Character {
         this.targetX = x;
         this.targetY = y;
         this.state = 'walking';
+        
+        console.log(`🚶 ${this.name} 開始移動: (${Math.floor(this.x)}, ${Math.floor(this.y)}) → (${Math.floor(x)}, ${Math.floor(y)})`);
         
         // 設定方向
         if (x > this.x) {
@@ -72,6 +80,7 @@ class Character {
         const itemElement = this.element.querySelector('.character-item');
         itemElement.textContent = item.emoji;
         itemElement.style.display = 'block';
+        console.log(`📦 ${this.name} 拾取物品: ${item.emoji}`);
     }
     
     // 放下物品
@@ -81,6 +90,7 @@ class Character {
         const itemElement = this.element.querySelector('.character-item');
         itemElement.textContent = '';
         itemElement.style.display = 'none';
+        console.log(`📤 ${this.name} 放下物品: ${item ? item.emoji : '無'}`);
         return item;
     }
     
@@ -96,6 +106,8 @@ class Character {
                 this.x = this.targetX;
                 this.y = this.targetY;
                 this.state = 'idle';
+                
+                console.log(`🎯 ${this.name} 到達目標 (${Math.floor(this.x)}, ${Math.floor(this.y)})`);
                 
                 // 執行任務
                 if (this.currentTask) {
@@ -154,6 +166,8 @@ class CharacterManager {
     constructor() {
         this.characters = {};
         this.taskQueue = [];
+        
+        console.log('🎭 初始化角色管理器');
         
         // 創建三麗鷗角色
         this.createCharacters();
@@ -230,8 +244,14 @@ class CharacterManager {
     // 創建運送任務
     createDeliveryTask(characterId, fromBuilding, toBuilding, item, onComplete) {
         const character = this.characters[characterId];
-        if (!character || character.state !== 'idle') {
+        if (!character) {
+            console.error('❌ 角色不存在:', characterId);
+            return false;
+        }
+        
+        if (character.state !== 'idle') {
             // 角色忙碌，加入隊列
+            console.log('⏳ 角色忙碌，加入隊列:', characterId);
             this.taskQueue.push({ characterId, fromBuilding, toBuilding, item, onComplete });
             return false;
         }
@@ -255,6 +275,8 @@ class CharacterManager {
             homeY: character.y,
             onComplete: onComplete
         };
+        
+        console.log(`🚶 ${character.name} 開始運送 ${item.emoji} 從 (${Math.floor(task.source.x)}, ${Math.floor(task.source.y)}) 到 (${Math.floor(task.destination.x)}, ${Math.floor(task.destination.y)})`);
         
         // 先移動到取貨點
         character.moveTo(task.source.x, task.source.y);
@@ -291,6 +313,6 @@ class CharacterManager {
     reset() {
         this.positionCharacters();
         this.taskQueue = [];
+        console.log('🔄 角色已重置');
     }
 }
-

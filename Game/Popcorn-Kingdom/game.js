@@ -133,6 +133,11 @@ class PopcornKingdomGame {
         const fromBuilding = document.getElementById(this.getBuildingElementId(event.from));
         const toBuilding = document.getElementById(this.getBuildingElementId(event.building));
         
+        if (!fromBuilding || !toBuilding) {
+            console.error('❌ 建築元素不存在:', event.from, event.building);
+            return;
+        }
+        
         // 決定使用哪個角色
         let characterId;
         let itemEmoji;
@@ -148,7 +153,12 @@ class PopcornKingdomGame {
             itemEmoji = '🍿';
         }
         
-        if (!characterId) return;
+        if (!characterId) {
+            console.error('❌ 無法決定角色:', event.building);
+            return;
+        }
+        
+        console.log(`📦 觸發運送: ${characterId} 運送 ${itemEmoji} 從 ${event.from} 到 ${event.building}`);
         
         // 創建運送任務
         this.characterManager.createDeliveryTask(
@@ -158,6 +168,7 @@ class PopcornKingdomGame {
             { emoji: itemEmoji, type: event.item },
             (item) => {
                 // 運送完成回調
+                console.log(`✅ 運送完成: ${characterId} 送達 ${item.emoji}`);
                 this.onDeliveryComplete(event.building, item);
             }
         );
