@@ -11,13 +11,14 @@
 #   3. 本腳本模擬阻擋其中一個 NS，觀察系統是否切換到另一個
 #
 # 用法：
-#   sudo bash ./dns-failover-test.sh [域名] [AWS_IP] [Google_IP]
-#   例如：sudo bash ./dns-failover-test.sh www.example.com 3.3.3.3 2.2.2.2
+#   sudo bash ./dns-failover-test.sh [域名] [AWS_IP] [Google_IP] [阻擋時間(秒)]
+#   例如：sudo bash ./dns-failover-test.sh www.example.com 3.3.3.3 2.2.2.2 60
 #
 # 預設值：
 #   DOMAIN="www.clouddeployment168.site"
 #   AWS_EC2_IP="35.74.79.10"  # 實際 AWS EC2 IP
 #   GCP_EC2_IP="35.78.244.92"  # 實際 Google EC2 IP
+#   BLOCK_DURATION=180  # 阻擋持續時間（秒），預設 3 分鐘
 # -------------------------------------------------------------------------------
 
 set -e
@@ -26,6 +27,7 @@ set -e
 DOMAIN="${1:-www.clouddeployment168.site}"
 AWS_EC2_IP="${2:-35.74.79.10}"
 GCP_EC2_IP="${3:-35.78.244.92}"
+BLOCK_DURATION="${4:-180}"  # 阻擋持續時間（秒），預設 3 分鐘
 
 # AWS Route53 NS IPs
 AWS_NS=("205.251.197.44" "205.251.199.48" "205.251.192.236" "205.251.195.65")
@@ -306,6 +308,7 @@ main() {
     echo -e "域名: ${CYAN}$DOMAIN${NC}"
     echo -e "預期 AWS EC2 IP: ${CYAN}$AWS_EC2_IP${NC} (顯示: 我是 AWS $AWS_EC2_IP)"
     echo -e "預期 Google EC2 IP: ${CYAN}$GCP_EC2_IP${NC} (顯示: 我是 Google $GCP_EC2_IP)"
+    echo -e "阻擋持續時間: ${CYAN}$BLOCK_DURATION 秒 ($(($BLOCK_DURATION/60)) 分鐘)${NC}"
     echo -e "LOG: ${CYAN}$LOG${NC}"
     echo -e "Debug: ${CYAN}$DEBUG_LOG${NC}"
     echo -e "錯誤 LOG: ${CYAN}$ERROR_LOG${NC}\n"
@@ -367,23 +370,23 @@ main() {
         echo -e "  錯誤詳情: $ERROR_LOG\n"
     fi
     
-    # 持續阻擋 3 分鐘，讓使用者有時間觀察和測試
+    # 持續阻擋指定時間，讓使用者有時間觀察和測試
     echo -e "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
-    echo -e "${CYAN}持續阻擋 AWS NS，維持 3 分鐘${NC}"
+    echo -e "${CYAN}持續阻擋 AWS NS，維持 $BLOCK_DURATION 秒 ($(($BLOCK_DURATION/60)) 分鐘)${NC}"
     echo -e "${CYAN}在此期間，你可以：${NC}"
     echo -e "  - 測試網站連線: curl http://$DOMAIN"
     echo -e "  - 測試 DNS 解析: dig $DOMAIN"
     echo -e "  - 在瀏覽器訪問: http://$DOMAIN"
     echo -e "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}\n"
     
-    # 倒數計時 3 分鐘（180 秒）
-    local remaining=180
+    # 倒數計時
+    local remaining=$BLOCK_DURATION
     while [ $remaining -gt 0 ]; do
         printf "\r${YELLOW}剩餘時間: %02d:%02d${NC} " $((remaining/60)) $((remaining%60))
         sleep 1
         remaining=$((remaining-1))
     done
-    printf "\r${GREEN}✅ 3 分鐘已完成${NC}                    \n\n"
+    printf "\r${GREEN}✅ $BLOCK_DURATION 秒已完成${NC}                    \n\n"
     
     # 清除防火牆規則，準備下一個測試
     echo -e "${YELLOW}清除當前防火牆規則...${NC}"
@@ -424,23 +427,23 @@ main() {
         echo -e "  錯誤詳情: $ERROR_LOG\n"
     fi
     
-    # 持續阻擋 3 分鐘，讓使用者有時間觀察和測試
+    # 持續阻擋指定時間，讓使用者有時間觀察和測試
     echo -e "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
-    echo -e "${CYAN}持續阻擋 Google NS，維持 3 分鐘${NC}"
+    echo -e "${CYAN}持續阻擋 Google NS，維持 $BLOCK_DURATION 秒 ($(($BLOCK_DURATION/60)) 分鐘)${NC}"
     echo -e "${CYAN}在此期間，你可以：${NC}"
     echo -e "  - 測試網站連線: curl http://$DOMAIN"
     echo -e "  - 測試 DNS 解析: dig $DOMAIN"
     echo -e "  - 在瀏覽器訪問: http://$DOMAIN"
     echo -e "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}\n"
     
-    # 倒數計時 3 分鐘（180 秒）
-    local remaining=180
+    # 倒數計時
+    local remaining=$BLOCK_DURATION
     while [ $remaining -gt 0 ]; do
         printf "\r${YELLOW}剩餘時間: %02d:%02d${NC} " $((remaining/60)) $((remaining%60))
         sleep 1
         remaining=$((remaining-1))
     done
-    printf "\r${GREEN}✅ 3 分鐘已完成${NC}                    \n\n"
+    printf "\r${GREEN}✅ $BLOCK_DURATION 秒已完成${NC}                    \n\n"
 
     # -------------------------------------------------------------------------
     # 步驟 4：使用 nslookup 測試真實使用者等待時間

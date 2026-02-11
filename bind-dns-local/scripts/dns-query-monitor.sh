@@ -208,6 +208,22 @@ query_dns_trace() {
 monitor_direct() {
     local round=1
     
+    # 總計統計變數
+    local total_aws_success=0
+    local total_aws_queries=0
+    local total_google_success=0
+    local total_google_queries=0
+    
+    # 各個 NS 的成功次數統計
+    declare -A aws_ns_count
+    declare -A google_ns_count
+    for i in "${!AWS_NS[@]}"; do
+        aws_ns_count["${AWS_NS[$i]}"]=0
+    done
+    for i in "${!GOOGLE_NS[@]}"; do
+        google_ns_count["${GOOGLE_NS[$i]}"]=0
+    done
+    
     while true; do
         local timestamp=$(date '+%Y-%m-%d %H:%M:%S')
         echo -e "${CYAN}[$timestamp] 第 $round 輪監控${NC}"
@@ -223,8 +239,11 @@ monitor_direct() {
         for i in "${!AWS_NS[@]}"; do
             local ip="${AWS_NS[$i]}"
             local name="AWS-NS-$((i+1))"
+            total_aws_queries=$((total_aws_queries + 1))
             if query_dns_direct "$ip" "$name" "$TEST_DOMAIN"; then
                 aws_success=$((aws_success + 1))
+                total_aws_success=$((total_aws_success + 1))
+                aws_ns_count["$ip"]=$((aws_ns_count["$ip"] + 1))
             fi
         done
         
@@ -235,15 +254,18 @@ monitor_direct() {
         for i in "${!GOOGLE_NS[@]}"; do
             local ip="${GOOGLE_NS[$i]}"
             local name="Google-NS-$((i+1))"
+            total_google_queries=$((total_google_queries + 1))
             if query_dns_direct "$ip" "$name" "$TEST_DOMAIN"; then
                 google_success=$((google_success + 1))
+                total_google_success=$((total_google_success + 1))
+                google_ns_count["$ip"]=$((google_ns_count["$ip"] + 1))
             fi
         done
         
         echo ""
         
-        # 顯示統計
-        echo -e "${BLUE}統計:${NC}"
+        # 顯示本輪統計
+        echo -e "${BLUE}本輪統計:${NC}"
         if [ $aws_success -eq $aws_total ]; then
             echo -e "  AWS NS: ${GREEN}$aws_success${NC}/${aws_total} 可查詢"
         elif [ $aws_success -eq 0 ]; then
@@ -260,9 +282,43 @@ monitor_direct() {
             echo -e "  Google NS: ${YELLOW}$google_success${NC}/${google_total} 可查詢"
         fi
         
+        echo ""
+        
+        # 顯示總計統計
+        echo -e "${MAGENTA}總計統計 (累計):${NC}"
+        local aws_success_rate=0
+        local google_success_rate=0
+        if [ $total_aws_queries -gt 0 ]; then
+            aws_success_rate=$(awk "BEGIN {printf \"%.1f\", ($total_aws_success/$total_aws_queries)*100}")
+        fi
+        if [ $total_google_queries -gt 0 ]; then
+            google_success_rate=$(awk "BEGIN {printf \"%.1f\", ($total_google_success/$total_google_queries)*100}")
+        fi
+        
+        echo -e "  AWS NS 總計: ${GREEN}$total_aws_success${NC}/${total_aws_queries} 成功 (${aws_success_rate}%)"
+        echo -e "  Google NS 總計: ${GREEN}$total_google_success${NC}/${total_google_queries} 成功 (${google_success_rate}%)"
+        
+        # 顯示各個 NS 的詳細統計
+        echo ""
+        echo -e "${CYAN}各 NS 成功次數:${NC}"
+        echo -e "  ${YELLOW}AWS Route53:${NC}"
+        for i in "${!AWS_NS[@]}"; do
+            local ip="${AWS_NS[$i]}"
+            local count=${aws_ns_count["$ip"]}
+            echo -e "    NS-$((i+1)) ($ip): ${GREEN}$count${NC} 次"
+        done
+        
+        echo -e "  ${YELLOW}Google Cloud DNS:${NC}"
+        for i in "${!GOOGLE_NS[@]}"; do
+            local ip="${GOOGLE_NS[$i]}"
+            local count=${google_ns_count["$ip"]}
+            echo -e "    NS-$((i+1)) ($ip): ${GREEN}$count${NC} 次"
+        done
+        
         # 寫入統計到日誌
         {
-            echo "[$timestamp] SUMMARY | AWS: $aws_success/$aws_total | Google: $google_success/$google_total"
+            echo "[$timestamp] SUMMARY | Round: $round | AWS: $aws_success/$aws_total | Google: $google_success/$google_total"
+            echo "[$timestamp] TOTAL | AWS: $total_aws_success/$total_aws_queries (${aws_success_rate}%) | Google: $total_google_success/$total_google_queries (${google_success_rate}%)"
             echo ""
         } >> "$LOG_FILE"
         
