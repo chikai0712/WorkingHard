@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>貓咪披薩店 🐱🍕</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="game-container">
+        <!-- 頂部狀態欄 -->
+        <div id="top-bar">
+            <div class="level-container">
+                <div class="level-bar">
+                    <div class="level-progress" id="level-progress"></div>
+                    <span class="level-text" id="level-text">LEVEL 1</span>
+                </div>
+            </div>
+            <div class="money-display">
+                <span class="money-icon">💵</span>
+                <span id="money-amount">30</span>
+            </div>
+        </div>
+
+        <!-- 遊戲主畫面 -->
+        <div id="game-area">
+            <!-- 披薩店背景 -->
+            <div class="pizza-shop">
+                <div class="counter-area">
+                    <div id="cash-register" class="cash-register locked">
+                        <div class="register-icon">🏪</div>
+                        <div class="register-label">收銀台</div>
+                        <div class="register-cost">💵 50</div>
+                    </div>
+                </div>
+                
+                <!-- 顧客排隊區 -->
+                <div class="queue-area" id="queue-area">
+                    <!-- 顧客會動態生成在這裡 -->
+                </div>
+
+                <!-- 貓咪員工區 -->
+                <div class="staff-area" id="staff-area">
+                    <!-- 貓咪員工會動態生成在這裡 -->
+                </div>
+            </div>
+        </div>
+
+        <!-- 底部控制欄 -->
+        <div id="bottom-bar">
+            <button class="shop-button" id="shop-button">
+                <span class="shop-icon">🛒</span>
+                <span>商店</span>
+            </button>
+        </div>
+
+        <!-- 商店面板 -->
+        <div id="shop-panel" class="shop-panel hidden">
+            <div class="shop-content">
+                <h2>🛒 商店</h2>
+                <button class="close-button" id="close-shop">✕</button>
+                
+                <div class="shop-items">
+                    <div class="shop-item" data-item="staff">
+                        <div class="item-icon">🐱</div>
+                        <div class="item-info">
+                            <div class="item-name">雇用貓咪員工</div>
+                            <div class="item-desc">增加服務速度</div>
+                        </div>
+                        <button class="buy-button" data-cost="100">
+                            <span>💵 100</span>
+                        </button>
+                    </div>
+
+                    <div class="shop-item" data-item="register">
+                        <div class="item-icon">🏪</div>
+                        <div class="item-info">
+                            <div class="item-name">購買收銀台</div>
+                            <div class="item-desc">開始營業必備</div>
+                        </div>
+                        <button class="buy-button" data-cost="50">
+                            <span>💵 50</span>
+                        </button>
+                    </div>
+
+                    <div class="shop-item" data-item="oven">
+                        <div class="item-icon">🔥</div>
+                        <div class="item-info">
+                            <div class="item-name">升級烤箱</div>
+                            <div class="item-desc">加快製作速度</div>
+                        </div>
+                        <button class="buy-button" data-cost="150">
+                            <span>💵 150</span>
+                        </button>
+                    </div>
+
+                    <div class="shop-item" data-item="decoration">
+                        <div class="item-icon">✨</div>
+                        <div class="item-info">
+                            <div class="item-name">店面裝飾</div>
+                            <div class="item-desc">吸引更多顧客</div>
+                        </div>
+                        <button class="buy-button" data-cost="200">
+                            <span>💵 200</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 提示訊息 -->
+        <div id="notification" class="notification hidden"></div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>
+

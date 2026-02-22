@@ -1,0 +1,24 @@
+[
+  {
+    "domain": "example.com",
+    "expected_ips": ["93.184.216.34"],
+    "expected_ns": ["a.iana-servers.net", "b.iana-servers.net"],
+    "keyword": "Example Domain",
+    "check_interval": 300
+  },
+  {
+    "domain": "google.com",
+    "expected_ips": ["142.250.185.46"],
+    "expected_ns": ["ns1.google.com", "ns2.google.com"],
+    "keyword": "Google",
+    "check_interval": 300
+  },
+  {
+    "domain": "github.com",
+    "expected_ips": ["140.82.121.4"],
+    "expected_ns": ["ns-1707.awsdns-21.co.uk", "ns-421.awsdns-52.com"],
+    "keyword": "GitHub",
+    "check_interval": 300
+  }
+]
+
