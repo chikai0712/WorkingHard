@@ -1,0 +1,25 @@
+#!/bin/sh
+# check_mysql_slave status
+#
+ip=eth0  #網卡名稱
+mysql_binfile=/wxccpf/service/mysql/bin/mysql
+mysql_user=root  #MySQL資料庫帳號
+mysql_pass=123456  #密碼
+mysql_sockfile=/tmp/mysql.sock
+datetime=`date +"%Y-%m-%d/%H:%M:%S"`   #獲取當前時間
+mysql_slave_logfile=/wxccpf/log/mysql/check_mysql_slave.log   #日誌檔路徑，必須提前創建好
+slave_ip=`ifconfig $ip|grep "inet addr" | awk -F[:" "]+ '{print $4}'`
+status=$($mysql_binfile -u$mysql_user -p$mysql_pass -S $mysql_sockfile -e "show slave status\G" | grep -i "running")
+Slave_IO_Running=`echo $status | grep Slave_IO_Running | awk ' {print $2}'`
+Slave_SQL_Running=`echo $status | grep Slave_SQL_Running | awk '{print $2}'`
+if [ "$Slave_IO_Running" = "Yes" -a "$Slave_SQL_Running" = "Yes" ]
+then
+    echo "Slave is Running!"
+else
+    echo " $datetime $slave_ip Slave is not running!" >> $mysql_slave_logfile
+    $mysql_binfile -u$mysql_user -p$mysql_pass -S $mysql_sockfile -e "SLAVE STOP;"
+    $mysql_binfile -u$mysql_user -p$mysql_pass -S $mysql_sockfile -e "SET GLOBAL SQL_SLAVE_SKIP_COUNTER=1;"
+    $mysql_binfile -u$mysql_user -p$mysql_pass -S $mysql_sockfile -e "SLAVE START;"
+    $mysql_binfile -u$mysql_user -p$mysql_pass -S $mysql_sockfile -e "EXIT"
+fi
+:wq!

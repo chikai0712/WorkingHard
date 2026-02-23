@@ -1,0 +1,280 @@
+#mysql-5.6.28.tar.gz
+#cmake-3.4.3.tar.gz
+#nginx-1.8.1.tar.gz
+#libgd-2.1.1.tar.bz2
+#ibiconv-1.14.tar.gz
+#jpegsrc.v6b.tar.gz
+#php-5.6.20.tar.bz2
+#下載以上套件 放到/usr/local/src/下 適用於CentOS6.5-6.7 64位
+#!/bin/bash
+source_dir=/usr/local/src
+mysql_source=$source_dir/mysql-5.6.28.tar.gz
+cmake_source=$source_dir/cmake-3.4.3.tar.gz
+mysql_dir=$source_dir/mysql-5.6.28
+cmake_dir=$source_dir/cmake-3.4.3
+basedir=/usr/local/mysql
+datadir=/data/mysql/db
+data_error_log=/data/mysql/mysql_error.log
+mysql_sock=/tmp/mysql.sock
+ 
+nginx_source=$source_dir/nginx-1.8.1.tar.gz
+nginx_file=$source_dir/nginx-1.8.1
+nginx_dir=/usr/local/nginx
+ 
+php_source=$source_dir/php-5.6.20.tar.bz2
+php_file=$source_dir/php-5.6.20
+php_dir=/usr/local/php
+libiconv_s=$source_dir/libiconv-1.14.tar.gz
+libiconv=$source_dir/libiconv-1.14
+jpeg_s=$source_dir/jpegsrc.v6b.tar.gz
+jpeg=$source_dir/jpeg-6b
+libgd_s=$source_dir/libgd-2.1.1.tar.bz2
+libgd=$source_dir/libgd-2.1.1
+epel6=http://mirrors.opencas.cn/epel/6/i386/epel-release-6-8.noarch.rpm
+ 
+function check_ok {
+if [ $? -ne 0 ];then
+    echo "Error, Check fial."
+    exit 1
+fi
+}
+ 
+echo "Install MySQL"
+sleep 1
+ 
+function Install_myum {
+for p in gcc gcc-c++ make automake ncurses-devel bison bison-devel
+do
+  check_rpm=`rpm -qa | grep -q ^$p`
+  if [ $? -ne 0 ];then
+    yum install -y $p
+    check_ok
+  else
+    echo $p already installed.
+  fi
+done
+}
+ 
+function Install_Cmake {
+cmake_v=`cmake -version | awk 'NR==1 {print $1}'`
+if [ $cmake_v == "cmake" ];then
+    echo `cmake -version | awk 'NR==1'`
+else
+    tar zxf $cmake_source -C $source_dir
+    cd $cmake_dir && ./bootstrap && make && make install
+    check_ok
+fi
+}
+ 
+function Install_MySQL {
+[ -d $basedir ] || mkdir $basedir
+[ -d $datadir ] || mkdir -p $datadir
+if [ -d /usr/local/mysql/bin -o `ls /usr/local/mysql/ |wc -l` -gt 11 ];then
+    echo "MySQL already installed"
+else
+  groupadd mysql
+  useradd -r -g mysql mysql
+  tar zxf $mysql_source -C $source_dir && cd $mysql_dir
+cmake . \
+-DCMAKE_INSTALL_PREFIX=$basedir \
+-DMYSQL_DATADIR=$datadir \
+-DSYSCONFDIR=/etc \
+-DMYSQL_TCP_PORT=3306 \
+-DMYSQL_USER=mysql \
+-DMYSQL_UNIX_ADDR=$mysql_sock \
+-DWITH_INNOBASE_STORAGE_ENGINE=1 \
+-DWITH_MYISAM_STORAGE_ENGINE=1 \ 
+-DENABLED_LOCAL_INFILE=1 \
+-DWITH_PARTITION_STORAGE_ENGINE=1 \
+-DDEFAULT_CHARSET=utf8 \
+-DEXTRA_CHARSETS=all \ 
+-DDEFAULT_COLLATION=utf8_general_ci \
+-DWITH_MYSQLD_LDFLAGS=-all-static \ 
+-DWITH_CLIENT_LD_FLAGS=-all-static \
+-DWITH_DEBUG=0
+check_ok
+gmake && gmake install
+check_ok 
+fi
+}
+ 
+function Config_MySQL {
+if [ `ls /data/mysql/db/ | wc -l` -gt 3 ];then
+  echo "The system db is exist."
+else
+  chmod +x $mysql_dir/scripts/mysql_install_db.sh
+  $mysql_dir/scripts/mysql_install_db.sh --basedir=/usr/local/mysql --datadir=/data/mysql/db --no-defaults --user=m
+ysql
+  check_ok
+cp $mysql_dir/support-files/mysql.server /etc/init.d/mysqld && chmod 755 /etc/init.d/mysqld
+cat > /etc/my.cnf << EOF
+[mysqld]
+basedir = $basedir
+datadir = $datadir
+port = 3306
+socket = $mysql_sock
+log-error = $data_error_log
+character-set-server = utf8
+external-locking = FALSE
+skip-name-resolv
+wait_timeout = 60
+interactive_timeout = 30
+EOF
+chown -R mysql. $basedir && chown -R mysql. $datadir
+echo -e '#!/bin/bash\nexport PATH=$PATH:/usr/local/mysql/bin' >/etc/profile.d/mysql.sh
+source /etc/profile.d/mysql.sh
+fi
+}
+Install_myum
+Install_Cmake
+Install_MySQL
+Config_MySQL
+/etc/init.d/mysqld restart
+ 
+#Install Nginx
+echo "Install Nginx"
+sleep 1
+ 
+function Install_myum {
+for p in gcc gcc-c++ zlib pcre pcre-devel openssl openssl-devel
+do
+  check_rpm=`rpm -qa | grep -q ^$p`
+  if [ $? -ne 0 ];then
+    yum install -y $p
+    check_ok
+  else
+    echo $p already installed.
+  fi
+done
+}
+ 
+function Install_Nginx {
+if [ -e /etc/nginx/nginx.conf ];then
+  echo "Nginx already installed."
+else
+mkdir /tmp/nginx/client_body -p
+useradd -s /sbin/nologin nginx
+tar zxf $nginx_source -C $source_dir
+cd $nginx_file
+./configure \
+--user=nginx \
+--group=nginx \
+--prefix=$nginx_dir \
+--sbin-path=/usr/sbin/nginx \
+--conf-path=/etc/nginx/nginx.conf \
+--error-log-path=/var/log/nginx/error.log \
+--http-log-path=/var/log/nginx/access.log \
+--http-client-body-temp-path=/tmp/nginx/client_body \
+--http-proxy-temp-path=/tmp/nginx/proxy \
+--http-fastcgi-temp-path=/tmp/nginx/fastcgi \
+--pid-path=/var/run/nginx.pid \
+--lock-path=/var/lock/subsys/nginx \
+--with-http_stub_status_module \
+--with-http_ssl_module \
+--with-http_gzip_static_module \
+--with-pcre \
+--with-http_realip_module \
+--with-http_sub_module
+mkdir /tmp/nginx/client_body -p
+make && make install
+fi
+}
+Install_myum
+Install_Nginx
+nginx -t
+ 
+ 
+echo "Install php"
+sleep 1
+ 
+function Install_myum {
+if [ -e /etc/yum.repos.d/epel.repo ];then
+  echo epel6 already installed
+else
+  rpm -ivh $epel6
+fi
+for p in gcc gcc-c++ libtool libxslt-devel libpng libpng-devel bzip2 bzip2-devel libxml2-devel libXpm-devel libcurl-devel curl libmcrypt expat libxslt freetype freetype-devel libmcrypt-devel autoconf libpng zlib-devel zlib
+do
+  check_rpm=`rpm -qa | grep -q ^$p`
+  if [ $? -ne 0 ];then
+    yum install -y $p
+    check_ok
+  else
+    echo $p already installed.
+  fi
+done
+}
+ 
+function Install_php {
+if [ -e /usr/local/php/etc/php.ini ];then
+  echo "php already installed"
+else
+tar zxf $libiconv_s -C $source_dir
+cd $libiconv
+./configure --prefix=/usr/local/libiconv && make && make install
+check_ok
+tar zxf $jpeg_s -C $source_dir
+mkdir /usr/local/jpeg6 && mkdir /usr/local/jpeg6/{bin,lib,include}
+mkdir /usr/local/jpeg6/man/man1 -p
+cd $jpeg
+cp -rf /usr/share/libtool/config/config.sub . && cp -rf /usr/share/libtool/config/config.guess .
+./configure --prefix=/usr/local/jpeg6 --enable-shared --enable-static
+check_ok
+make && make install
+check_ok
+tar jxf $libgd_s -C $source_dir
+cd $libgd
+./configure --prefix=/usr/local/libgd2 --with-zlib --with-jpeg=/usr/local/jpeg6 --with-png --with-freetype
+check_ok
+make && make install
+check_ok
+useradd -s /sbin/nologin php-fpm
+tar jxf $php_source -C $source_dir
+cd $php_file
+./configure \
+--prefix=$php_dir \
+--with-config-file-path=/usr/local/php/etc \
+--enable-fpm \
+--with-fpm-user=php-fpm \
+--with-fpm-group=php-fpm \
+--with-mysql=/usr/local/mysql \
+--with-mysqli=/usr/local/mysql/bin/mysql_config \
+--with-freetype-dir \
+--with-jpeg-dir=/usr/local/jpeg6 \
+--with-mcrypt \
+--with-gd=/usr/local/libgd2 \
+--with-iconv-dir=/usr/local/libiconv \
+--with-png-dir \
+--with-zlib \
+--with-libxml-dir \
+--with-curl \
+--with-mhash \
+--with-openssl \
+--with-pear \
+--enable-soap \
+--enable-gd-native-ttf \
+--enable-mbstring \
+--enable-exif \
+--enable-sockets \
+--with-gettext \
+--enable-ftp \
+--disable-ipv6 \
+--enable-bcmath \
+--enable-shmop \
+--enable-sysvsem \
+--with-pcre-dir \
+--enable-sockets \
+--with-gettext 
+check_ok
+make
+check_ok
+make install
+check_ok
+fi
+cp $php_file/php.ini-production /usr/local/php/etc/php.ini
+cp $php_file/sapi/fpm/init.d.php-fpm /etc/init.d/php-fpm && chmod 755 /etc/init.d/php-fpm
+cp /usr/local/php/etc/php-fpm.conf.default /usr/local/php/etc/php-fpm.conf
+/usr/local/php/sbin/php-fpm -t
+}
+Install_myum
+Install_php

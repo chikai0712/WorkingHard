@@ -1,0 +1,157 @@
+#!/bin/bash 
+   
+IP_LIST=( 
+192.168.1.100 
+192.168.1.101 
+192.168.1.102 
+192.168.1.103 
+192.168.1.104 
+) 
+   
+#new server ip 
+   
+CMD_LIST=( 
+檢查運行狀態 
+防火牆關 
+關閉遊戲程式 
+更新服務端 
+開啟遊戲程式 
+添加白名單 
+開放防火牆 
+) 
+   
+cat /dev/null > tmp.log 
+   
+function check_status(){ 
+  touch 3.log 
+  for ip in ${IP_LIST[@]} 
+  do
+    nc -z -v -w 1 $ip 8000 >> 3.log 
+  done
+  num=$(cat 3.log | grep succeeded | wc -l) 
+  echo " 
+伺服器一共 ${#IP_LIST[@]} 台 
+開啟狀態有 $num 台 
+關閉狀態有 $((${#IP_LIST[@]}-$num)) 台 
+  " 
+  rm -rf 3.log 
+} 
+   
+   
+function mulu(){ 
+  sep=":"
+  i=0 
+  while (( i < ${#CMD_LIST[@]} ));do 
+    echo "$((i+1))$sep${CMD_LIST[$i]}"
+    let "i=(i+1)"
+  done
+  echo -e  "\033[31;1m 
+all：依次執行上述操作 
+m：查看操作目錄 
+q：退出程式 
+=================================== 
+\033[;0m" 
+} 
+   
+echo -e  "\033[31;1m==== 本程式用來批量執行以下操作 ====\033[;0m"
+mulu 
+   
+cmd=""
+flag=1 
+while [[ $flag == 1 ]];do
+  if [[ -z $n ]] || [[ $n == 0 ]];then
+    read -p "請輸入要執行的操作代號（m查看功能表）: " n 
+  fi
+   
+  if [[ $(seq ${#CMD_LIST[@]}) =~ $n ]] 
+  then
+    echo ; 
+    echo -e -n ">>>正在執行的操作是：\033[33;1m${CMD_LIST[$((n-1))]}\033[;0m,"
+    read -p "確認開始嗎？（yes/no）" c 
+    #echo ">>>正在執行的操作是：${CMD_LIST[$((n-1))]},確認開始嗎？（yes/no）" 
+    if [[ $c == "y" ]] || [[ $c == "yes" ]]; then
+          case $n in
+            1): 
+                check_status;; 
+            2): 
+                cmd="/sbin/iptables-restore /etc/sysconfig/iptables.killrule"
+                ;; 
+            3): 
+                cmd="Control stop";; 
+            4): 
+                /root/ios/rsyncUpdate.sh 
+                ;; 
+            5): 
+                cmd="Control start";; 
+            6): 
+                read -p "請輸入要添加白名單的IP：" bip 
+                cmd="/sbin/iptables -I INPUT 2 -s $bip -j ACCEPT"
+                ;; 
+            7): 
+                cmd="/sbin/iptables-restore /etc/sysconfig/iptables.startrule";; 
+          esac
+          for ip in ${IP_LIST[@]} 
+          do
+            if [ ! -z "$cmd" ]; then
+              salt $ip cmd.run "$cmd" | tee -a tmp.log 2>&1 
+              #echo $cmd 
+                #echo "salt $ip cmd.run '$cmd' | tee -a admin.log" >> 2.log 
+                #echo $cmd 
+                #echo $ip 
+            #else 
+              #pass 
+            fi
+          done
+        fi
+   
+        if [ $? == 0 ]; then
+          echo "執行成功"
+        else
+          echo "執行出錯,error id:$?"
+        fi
+    read -p "請輸入繼續要執行的操作代號: " n 
+    continue
+  else
+    case $n in
+m): 
+  mulu 
+  let "n=0"
+  let "flag=1"
+;; 
+   
+q): 
+  break
+;; 
+   
+all): 
+  echo "^^^^^ 即將開始循序執行以上操作 ^^^^^"
+for ip in ${IP_LIST[@]} 
+do
+  echo ">>>>> 正在操作：$ip <<<<<"
+  salt $ip cmd.run 'iptables-restore /etc/sysconfig/iptables.killrule'
+echo "防火牆已關"
+sleep 1 
+  salt $ip cmd.run 'Control stop'
+echo "程式已經關閉"
+sleep 1 
+  rsync -vacb --backup-dir=/db_backup/$BACKUP_DIR --progress --exclude-from=/root/exclude.list --password-file=/etc/rsyncd.secrets /home/game/wh rsync@$ip::wh/ 
+  salt $ip cmd.run '/home/game/wh.sh'
+echo "服務端已更新完畢"
+#sleep 1 
+  salt $ip cmd.run 'Control start'
+echo "程式已經開啟，GM開服測試"
+sleep 1 
+done
+  break
+;; 
+   
+*): 
+  read -p "輸入錯誤,請重新輸入：" n 
+  let "flag=1"
+;; 
+    esac
+  fi
+   
+done
+   
+echo "OK"

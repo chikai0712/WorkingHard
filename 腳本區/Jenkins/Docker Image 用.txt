@@ -1,0 +1,19 @@
+FROM project/base
+
+USER root
+ENV RAILS_ENV test
+
+ADD gem /opt/project_gem
+WORKDIR /opt/project_gem
+RUN rvm all do bundle install
+RUN apt-get -y install firefox xvfb
+ONBUILD USER root
+ONBUILD ADD . /opt/project
+ONBUILD WORKDIR /opt/project
+ONBUILD RUN rvm all do bundle install
+
+ONBUILD ADD start_services.sh /opt/project/start_services.sh
+ONBUILD RUN chmod +x /opt/project/start_services.sh
+ONBUILD ADD run_tests.sh /opt/project/run_tests.sh
+ONBUILD RUN chmod +x /opt/project/run_tests.sh
+ONBUILD CMD /opt/project/start_services.sh && /opt/project/run_tests.sh

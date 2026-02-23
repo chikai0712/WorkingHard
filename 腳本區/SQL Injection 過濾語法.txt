@@ -1,0 +1,6 @@
+PHP 過瀘 SQL Injection 的語法：
+$name = preg_replace("/[\'\"]+/" , '' ,$name);
+另一種過瀘方式
+$str = "'\"";
+$replace = array("'" => "& #39;", "\"" => "& quot;"); //請自已把 & # , & q 中間的空白移除
+$str = strtr($str, $replace);

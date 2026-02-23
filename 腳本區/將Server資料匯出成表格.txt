@@ -1,0 +1,86 @@
+#取所需要的內網IP
+Int_ip=`ifconfig|awk '/inet addr/ {gsub(/:/," ");print $3}'|egrep "^192.168.18"|head -1`
+#取除該內網ip以及127.0.0.1之外的所有ip
+Out_ip_list=`ifconfig|awk '/inet addr/ {gsub(/:/," ");print $3}'|grep -v $Int_ip|grep -v 127.0.0.1`
+#取記憶體總值，單位為G，四捨五入
+Memory=`free -m|awk '/Mem/ {printf ("%.f\n",$2/1024)}'`
+#取記憶體fr
+ee值，從系統角度看，取的是第一行的free
+Memory_free=`free -m|awk '/Mem/ {printf "%.f\n",$4/1024}'`
+#取CPU核數
+Cpu_num=`grep processor /proc/cpuinfo|wc -l`
+#取伺服器執行時間
+Uptime=`uptime|awk '{print $3}'`
+#取最近15分的負載
+Load=`uptime|awk '{print $12}'`
+#取磁片大於80%的磁片目錄
+Disk=`df -h|awk '{a=+$(NF-1);if(a>=80)print $NF}'`
+#swap分區總值，單位為G，四捨五入
+Swap=`free -m|awk '/Swap/ {printf ("%.f\n",$2/1024)}'`
+#swap分區
+Swap_free=`free -m|awk '/Swap/ {printf "%.f\n",$4/1024}'`
+ 
+生成excel
+excel.py:
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+from xlsxwriter import workbook
+import ConfigParser
+import time
+import sendmail
+def write_excel(file):
+    '''
+    1、設置 Excel 樣式
+    2、將資料寫入到 Excel 中
+    '''
+    # 生成 Excel 檔
+    work = workbook.Workbook(file)
+    # 建立工作表，表名默認
+    worksheet = work.add_worksheet()
+    # 設置字體加粗、字體大小
+    format_title = work.add_format({'bold': True, 'font_size': 16})
+    # 設置水準對齊、垂直對齊
+    format_title.set_align('center')
+    format_title.set_align('vcenter')
+    format_body = work.add_format({'font_size': 14})
+    # 設置樣式，行高、列寬
+    worksheet.set_row(0, 25)
+    worksheet.set_column(0, 7, 30)
+    worksheet.set_column(8,9,50)
+    worksheet.set_column(9,10,100)
+    # 定義表頭
+    title = (
+        '伺服器IP',
+        '記憶體大小 GB',
+        '記憶體剩餘 GB',
+        'Swap大小 GB',
+        'Swap剩餘 GB',
+        '執行時間 天',
+        '系統負載 ',
+        'CPU 核數',
+        '磁片超過80%',
+        '其餘IP',
+    )
+    row = 0
+    col = 0
+    #寫入表頭
+    for item in title:
+        item = unicode(item,"utf-8")
+        worksheet.write(row, col, item, format_title)
+        col+=1
+    #寫入資料
+    cf = ConfigParser.ConfigParser()
+    cf.read('/data/scripts/excel/config_total.txt')
+    for ip in cf.sections():
+        row+=1
+        col = 0
+        for opt in cf.options(ip):
+            key=cf.get(ip,opt)
+            worksheet.write(row,col,key,format_body)
+            col+=1
+    work.close()
+if __name__ == '__main__':
+    Excel_name = "Server_%s.xls" %(time.strftime("%Y-%m-%d", time.localtime()))
+    write_excel(Excel_name)
+    sendmail.send_mail('********@139.com','伺服器巡檢表格','fuliao server message',Excel_name)
+
