@@ -41,7 +41,7 @@ class UptimeChecker:
             }
         """
         url = f"{protocol}://{domain}"
-        start_time = datetime.utcnow()
+        start_time = local_now()
         
         try:
             timeout = aiohttp.ClientTimeout(total=self.timeout)
@@ -52,7 +52,7 @@ class UptimeChecker:
                     allow_redirects=True,
                     ssl=False  # 忽略 SSL 證書錯誤
                 ) as response:
-                    end_time = datetime.utcnow()
+                    end_time = local_now()
                     response_time = int((end_time - start_time).total_seconds() * 1000)
                     
                     # 讀取內容
@@ -80,7 +80,7 @@ class UptimeChecker:
                         'keyword_expected': keyword,
                         'content_length': content_length,
                         'final_url': str(response.url),
-                        'timestamp': datetime.utcnow().isoformat()
+                        'timestamp': local_now().isoformat()
                     }
                     
         except asyncio.TimeoutError:
@@ -89,7 +89,7 @@ class UptimeChecker:
                 'available': False,
                 'error': 'Timeout',
                 'error_type': 'timeout',
-                'timestamp': datetime.utcnow().isoformat()
+                'timestamp': local_now().isoformat()
             }
         except aiohttp.ClientConnectorError as e:
             return {
@@ -97,7 +97,7 @@ class UptimeChecker:
                 'available': False,
                 'error': f'Connection failed: {str(e)}',
                 'error_type': 'connection_error',
-                'timestamp': datetime.utcnow().isoformat()
+                'timestamp': local_now().isoformat()
             }
         except Exception as e:
             logger.error(f"Uptime check failed for {domain}: {e}")
@@ -106,7 +106,7 @@ class UptimeChecker:
                 'available': False,
                 'error': str(e),
                 'error_type': 'unknown',
-                'timestamp': datetime.utcnow().isoformat()
+                'timestamp': local_now().isoformat()
             }
     
     async def check_multiple_protocols(
@@ -143,7 +143,7 @@ class UptimeChecker:
             'http': http_result,
             'best_result': best_result,
             'best_protocol': best_protocol,
-            'timestamp': datetime.utcnow().isoformat()
+            'timestamp': local_now().isoformat()
         }
     
     async def check_ssl_certificate(self, domain: str) -> Dict:
@@ -174,7 +174,7 @@ class UptimeChecker:
                     not_after = cert.get('notAfter')
                     if not_after:
                         expire_date = datetime.strptime(not_after, '%b %d %H:%M:%S %Y %Z')
-                        days_left = (expire_date - datetime.utcnow()).days
+                        days_left = (expire_date - local_now()).days
                     else:
                         days_left = -1
                     
@@ -188,7 +188,7 @@ class UptimeChecker:
                         'expires_in_days': days_left,
                         'issuer': issuer_name,
                         'not_after': not_after,
-                        'timestamp': datetime.utcnow().isoformat()
+                        'timestamp': local_now().isoformat()
                     }
                     
         except Exception as e:
@@ -197,6 +197,6 @@ class UptimeChecker:
                 'status': 'error',
                 'valid': False,
                 'error': str(e),
-                'timestamp': datetime.utcnow().isoformat()
+                'timestamp': local_now().isoformat()
             }
 

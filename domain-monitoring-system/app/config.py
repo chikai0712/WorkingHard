@@ -24,6 +24,9 @@ class Settings(BaseSettings):
     LOG_LEVEL: str = "INFO"
     CHECK_INTERVAL: int = 300  # seconds
     
+    # Timezone
+    TIMEZONE: str = "Asia/Taipei"  # 台北時區 GMT+8
+    
     # DNS Settings
     DNS_TIMEOUT: int = 3  # seconds
     DNS_MAX_RETRIES: int = 2

@@ -8,6 +8,12 @@ from sqlalchemy.orm import relationship
 Base = declarative_base()
 
 
+def get_local_now():
+    """獲取當前本地時間"""
+    from app.timezone_utils import local_now
+    return local_now().replace(tzinfo=None)  # 移除時區信息，因為 TIMESTAMP 不存儲時區
+
+
 class Domain(Base):
     """監控網域主表"""
     __tablename__ = 'domains'
@@ -19,8 +25,10 @@ class Domain(Base):
     keyword = Column(String(500), nullable=True)
     check_interval = Column(Integer, default=300)
     is_active = Column(Boolean, default=True)
-    created_at = Column(TIMESTAMP, default=datetime.utcnow)
-    updated_at = Column(TIMESTAMP, default=datetime.utcnow, onupdate=datetime.utcnow)
+    paused_until = Column(TIMESTAMP, nullable=True)  # 暫停監控直到此時間
+    pause_reason = Column(String(200), nullable=True)  # 暫停原因
+    created_at = Column(TIMESTAMP, default=get_local_now)
+    updated_at = Column(TIMESTAMP, default=get_local_now, onupdate=get_local_now)
 
     # Relationships
     events = relationship("MonitoringEvent", back_populates="domain")
@@ -35,16 +43,19 @@ class Nameserver(Base):
     __tablename__ = 'nameservers'
 
     id = Column(Integer, primary_key=True, autoincrement=True)
-    country_code = Column(String(2), nullable=False, index=True)
-    isp_name = Column(String(100), nullable=False)
+    country_code = Column(String(10), nullable=True, index=True)
+    isp_name = Column(String(100), nullable=True)
     dns_server = Column(INET, nullable=False, unique=True)
+    dns_type = Column(String(20), nullable=True)  # 'regional', 'global', 'isp'
+    isp = Column(String(100), nullable=True)  # ISP 名稱
+    region = Column(String(50), nullable=True)  # 地區
     is_healthy = Column(Boolean, default=True)
     last_check = Column(TIMESTAMP, nullable=True)
     response_time_ms = Column(Integer, nullable=True)
-    created_at = Column(TIMESTAMP, default=datetime.utcnow)
+    created_at = Column(TIMESTAMP, default=get_local_now)
 
     def __repr__(self):
-        return f"<Nameserver(id={self.id}, isp='{self.isp_name}', dns='{self.dns_server}')>"
+        return f"<Nameserver(id={self.id}, isp='{self.isp or self.isp_name}', dns='{self.dns_server}')>"
 
 
 class MonitoringEvent(Base):
@@ -56,7 +67,7 @@ class MonitoringEvent(Base):
     event_type = Column(String(50), nullable=False)  # 'dns_check', 'uptime_check', 'whois_check'
     status = Column(String(20), nullable=False)  # 'ok', 'warning', 'critical'
     details = Column(JSONB, nullable=True)
-    timestamp = Column(TIMESTAMP, default=datetime.utcnow, index=True)
+    timestamp = Column(TIMESTAMP, default=get_local_now, index=True)
 
     # Relationships
     domain = relationship("Domain", back_populates="events")
@@ -75,8 +86,8 @@ class Alert(Base):
     root_cause = Column(String(100), nullable=False)  # 'domain_hijacked', 'isp_blocked', etc.
     evidence = Column(JSONB, nullable=True)
     is_resolved = Column(Boolean, default=False)
-    first_seen = Column(TIMESTAMP, default=datetime.utcnow)
-    last_seen = Column(TIMESTAMP, default=datetime.utcnow)
+    first_seen = Column(TIMESTAMP, default=get_local_now)
+    last_seen = Column(TIMESTAMP, default=get_local_now)
     notified_at = Column(TIMESTAMP, nullable=True)
     resolved_at = Column(TIMESTAMP, nullable=True)
 

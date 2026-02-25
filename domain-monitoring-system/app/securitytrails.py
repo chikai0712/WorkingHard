@@ -5,6 +5,8 @@ import logging
 from typing import Dict, Optional
 from datetime import datetime
 
+from app.timezone_utils import local_now
+
 logger = logging.getLogger(__name__)
 
 
@@ -76,7 +78,7 @@ class SecurityTrailsChecker:
                                     # Check if change is recent
                                     if last_change:
                                         change_date = datetime.fromisoformat(last_change.replace('Z', '+00:00'))
-                                        days_ago = (datetime.utcnow() - change_date.replace(tzinfo=None)).days
+                                        days_ago = (local_now() - change_date.replace(tzinfo=None)).days
                                         if days_ago <= 7:
                                             ns_changed = True
                             

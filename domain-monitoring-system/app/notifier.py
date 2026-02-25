@@ -43,7 +43,7 @@ class SlackNotifier:
                     "title": f"Domain Alert: {domain}",
                     "text": message,
                     "footer": "Domain Monitoring System",
-                    "ts": int(datetime.utcnow().timestamp())
+                    "ts": int(local_now().timestamp())
                 }
             ]
         }

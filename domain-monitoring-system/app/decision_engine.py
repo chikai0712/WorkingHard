@@ -3,6 +3,8 @@ from typing import Dict, Optional, List
 from datetime import datetime
 import logging
 
+from app.timezone_utils import local_now
+
 logger = logging.getLogger(__name__)
 
 
@@ -21,8 +23,8 @@ class AlertDecisionEngine:
             domain: 網域名稱
             checks: {
                 'securitytrails': {'ns_changed': bool, 'whois_changed': bool, 'details': dict},
-                'global_dns': {'resolved_ips': list, 'status': str},
-                'isp_dns': {'failed_isps': list, 'success_rate': float, 'details': dict},
+                'global_dns': {'resolved_ips': list, 'status': str, 'resolution_rate': float, 'whitelist_match_rate': float},
+                'isp_dns': {'failed_isps': list, 'success_rate': float, 'resolution_rate': float, 'whitelist_match_rate': float, 'has_whitelist': bool, 'details': dict},
                 'uptime': {'keyword_match': bool, 'http_status': int, 'available': bool}
             }
             
@@ -46,23 +48,70 @@ class AlertDecisionEngine:
             )
         
         global_dns_ok = checks.get('global_dns', {}).get('status') == 'ok'
-        isp_success_rate = checks.get('isp_dns', {}).get('success_rate', 1.0)
+        isp_data = checks.get('isp_dns', {})
+        resolution_rate = isp_data.get('resolution_rate', 1.0)
+        whitelist_match_rate = isp_data.get('whitelist_match_rate', 1.0)
+        has_whitelist = isp_data.get('has_whitelist', False)
+        blocked_countries = isp_data.get('blocked_countries', [])
+        country_results = isp_data.get('country_results', {})
         
-        # P1: ISP 污染 (全球正常但區域失敗)
-        if global_dns_ok and isp_success_rate < 0.5:
-            failed_isps = checks['isp_dns'].get('failed_isps', [])
+        # 使用適當的成功率指標
+        effective_success_rate = whitelist_match_rate if has_whitelist else resolution_rate
+        
+        # P1: 特定國家被阻擋 (新增：地區性封鎖檢測)
+        if blocked_countries:
+            blocked_country_names = {
+                'VN': '越南',
+                'ID': '印尼',
+                'TW': '台灣',
+                'US': '美國',
+                'CN': '中國'
+            }
+            
+            blocked_list = [
+                f"{blocked_country_names.get(c['country_code'], c['country_code'])} (成功率: {c['success_rate']:.1%})"
+                for c in blocked_countries
+            ]
+            
             return self._create_alert(
                 level='P1',
-                root_cause='isp_blocked',
-                title='區域性 ISP 封鎖或 DNS 污染',
-                description=f'全球解析正常，但 {len(failed_isps)} 個 ISP 解析異常',
+                root_cause='country_blocked',
+                title=f'特定國家 DNS 被阻擋',
+                description=f'檢測到 {len(blocked_countries)} 個國家的 DNS 解析失敗或被阻擋',
                 evidence={
-                    'global_dns': checks['global_dns'],
-                    'failed_isps': failed_isps,
-                    'success_rate': isp_success_rate
+                    'blocked_countries': blocked_countries,
+                    'blocked_list': blocked_list,
+                    'country_results': country_results,
+                    'overall_success_rate': isp_data.get('success_rate', 0)
                 },
-                recommendation='聯絡當地代理商排查路徑，可能需要更換 CDN 節點或 IP'
+                recommendation=f'受影響國家: {", ".join(blocked_list)}。建議聯絡當地代理商排查，可能需要更換 CDN 節點或使用備用域名'
             )
+        
+        # P1: ISP 污染 (全球正常但區域失敗)
+        if global_dns_ok and effective_success_rate < 0.5:
+            failed_isps = isp_data.get('failed_isps', [])
+            
+            # 過濾出真正的錯誤（排除白名單警告）
+            critical_failures = [
+                ns for ns in failed_isps 
+                if ns.get('severity') == 'error'
+            ]
+            
+            # 如果有真正的 DNS 錯誤才告警
+            if critical_failures:
+                return self._create_alert(
+                    level='P1',
+                    root_cause='isp_blocked',
+                    title='區域性 ISP 封鎖或 DNS 污染',
+                    description=f'全球解析正常，但 {len(critical_failures)} 個 DNS 伺服器解析失敗',
+                    evidence={
+                        'global_dns': checks['global_dns'],
+                        'failed_dns_servers': critical_failures[:5],  # 最多顯示 5 個
+                        'resolution_rate': resolution_rate,
+                        'whitelist_match_rate': whitelist_match_rate
+                    },
+                    recommendation='聯絡當地代理商排查路徑，可能需要更換 CDN 節點或 IP'
+                )
         
         # P1: 內容竄改 (DNS 正常但關鍵字不符)
         uptime_data = checks.get('uptime', {})
@@ -82,17 +131,57 @@ class AlertDecisionEngine:
         
         # P2: 配置錯誤 (全部失敗)
         if not global_dns_ok:
-            return self._create_alert(
-                level='P2',
-                root_cause='config_error',
-                title='DNS 配置錯誤',
-                description='全球解析失敗，可能是 DNS 配置問題',
-                evidence={
-                    'global_dns': checks['global_dns'],
-                    'ns_records': checks.get('securitytrails', {}).get('current_ns', [])
-                },
-                recommendation='檢查 DNS 配置，確認 A 記錄和 NS 記錄是否正確'
-            )
+            failed_ns = isp_data.get('failed_nameservers', [])
+            
+            # 只統計真正的 DNS 錯誤
+            critical_failures = [
+                ns for ns in failed_ns 
+                if ns.get('severity') == 'error'
+            ]
+            
+            # 檢查是否所有 DNS 都無法解析（真正的配置錯誤）
+            all_dns_errors = all(
+                'Could not contact DNS servers' in ns.get('error', '') or 
+                'NXDOMAIN' in ns.get('error', '') or
+                'timeout' in ns.get('error', '').lower()
+                for ns in critical_failures
+            ) if critical_failures else False
+            
+            # 只有在真正無法解析時才產生告警
+            if all_dns_errors and resolution_rate == 0:
+                return self._create_alert(
+                    level='P2',
+                    root_cause='config_error',
+                    title='DNS 配置錯誤',
+                    description='所有 DNS 伺服器都無法解析此網域',
+                    evidence={
+                        'global_dns': checks['global_dns'],
+                        'failed_nameservers': critical_failures[:3],  # 只顯示前 3 個
+                        'resolution_rate': resolution_rate
+                    },
+                    recommendation='檢查網域是否已註冊，確認 DNS 記錄是否正確配置'
+                )
+        
+        # P3: 白名單不匹配警告（可選）
+        if has_whitelist and resolution_rate >= 0.5 and whitelist_match_rate < 0.3:
+            warning_resolutions = [
+                ns for ns in failed_ns 
+                if ns.get('severity') == 'warning'
+            ]
+            
+            if warning_resolutions:
+                return self._create_alert(
+                    level='P3',
+                    root_cause='whitelist_mismatch',
+                    title='IP 白名單不匹配',
+                    description=f'DNS 解析正常，但 {len(warning_resolutions)} 個解析結果不在白名單內',
+                    evidence={
+                        'resolution_rate': resolution_rate,
+                        'whitelist_match_rate': whitelist_match_rate,
+                        'mismatched_resolutions': warning_resolutions[:3]
+                    },
+                    recommendation='檢查白名單設定是否正確，或更新預期的 IP 列表'
+                )
         
         # P2: WHOIS 異動 (非緊急但需關注)
         if checks.get('securitytrails', {}).get('whois_changed'):
@@ -127,7 +216,7 @@ class AlertDecisionEngine:
             'description': description,
             'evidence': evidence,
             'recommendation': recommendation,
-            'timestamp': datetime.utcnow().isoformat()
+            'timestamp': local_now().isoformat()
         }
     
     def format_alert_message(self, domain: str, alert: Dict) -> str:
@@ -144,7 +233,8 @@ class AlertDecisionEngine:
         level_emoji = {
             'P0': '🚨',
             'P1': '⚠️',
-            'P2': 'ℹ️'
+            'P2': 'ℹ️',
+            'P3': '💡'
         }
         
         emoji = level_emoji.get(alert['alert_level'], '📢')

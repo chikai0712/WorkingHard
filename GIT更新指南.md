@@ -149,9 +149,144 @@ git checkout -b 新分支名稱
 
 ---
 
+## 推送被拒絕的處理方式
+
+### 錯誤訊息
+```
+! [rejected]        2026-01-24-m8qd -> 2026-01-24-m8qd (non-fast-forward)
+error: failed to push some refs to 'https://github.com/chikai0712/Unition.git'
+hint: Updates were rejected because the tip of your current branch is behind
+hint: its remote counterpart.
+```
+
+這表示遠端分支有新的提交，你需要先同步遠端更改。
+
+### 解決方法 1：使用 Rebase（推薦）
+
+Rebase 會讓提交歷史保持線性，更整潔。
+
+```bash
+cd /Users/ckchiu/Desktop/Project
+
+# 拉取並 rebase
+git pull --rebase
+
+# 如果沒有衝突，直接推送
+git push
+```
+
+**如果有衝突：**
+```bash
+# Git 會告訴你哪些檔案有衝突
+# 1. 打開衝突檔案，尋找並解決衝突標記：
+#    <<<<<<< HEAD
+#    你的更改
+#    =======
+#    遠端的更改
+#    >>>>>>> commit-hash
+
+# 2. 解決衝突後，標記為已解決
+git add 衝突檔案名稱
+
+# 3. 繼續 rebase
+git rebase --continue
+
+# 4. 推送
+git push
+```
+
+**如果想放棄 rebase：**
+```bash
+git rebase --abort
+```
+
+### 解決方法 2：使用 Merge（較簡單）
+
+Merge 會創建一個合併提交，歷史會有分支。
+
+```bash
+cd /Users/ckchiu/Desktop/Project
+
+# 拉取並合併
+git pull
+
+# 如果沒有衝突，直接推送
+git push
+```
+
+**如果有衝突：**
+```bash
+# 1. 解決衝突檔案中的標記
+# 2. 標記為已解決
+git add 衝突檔案名稱
+
+# 3. 完成合併
+git commit
+
+# 4. 推送
+git push
+```
+
+### 解決方法 3：強制推送（危險！）
+
+⚠️ **警告**：這會覆蓋遠端的更改，只在確定要丟棄遠端更改時使用！
+
+```bash
+git push --force
+# 或更安全的版本（不會覆蓋別人的新提交）
+git push --force-with-lease
+```
+
+---
+
+## 衝突解決步驟詳解
+
+### 1. 識別衝突檔案
+```bash
+git status
+# 會顯示 "both modified" 的檔案
+```
+
+### 2. 打開衝突檔案
+衝突標記看起來像這樣：
+```
+<<<<<<< HEAD
+你的本地更改
+=======
+遠端的更改
+>>>>>>> origin/2026-01-24-m8qd
+```
+
+### 3. 解決衝突
+- 保留你的更改：刪除 `=======` 到 `>>>>>>>` 之間的內容
+- 保留遠端更改：刪除 `<<<<<<<` 到 `=======` 之間的內容
+- 保留兩者：手動整合兩邊的更改
+- 刪除所有衝突標記（`<<<<<<<`, `=======`, `>>>>>>>`）
+
+### 4. 標記為已解決
+```bash
+git add 已解決的檔案
+```
+
+### 5. 完成操作
+```bash
+# 如果是 rebase
+git rebase --continue
+
+# 如果是 merge
+git commit
+```
+
+### 6. 推送
+```bash
+git push
+```
+
+---
+
 ## 緊急情況處理
 
-### 如果推送失敗
+### 如果推送失敗（已處理，見上方）
 ```bash
 # 先拉取遠端更改
 git pull --rebase
@@ -176,5 +311,26 @@ git reset --soft HEAD~1
 
 # 完全撤銷提交和更改（危險！）
 git reset --hard HEAD~1
+```
+
+### 如果 rebase 過程中出錯
+```bash
+# 放棄 rebase，回到原始狀態
+git rebase --abort
+
+# 跳過當前衝突的提交（謹慎使用）
+git rebase --skip
+```
+
+### 查看衝突狀態
+```bash
+# 查看哪些檔案有衝突
+git status
+
+# 查看衝突的詳細內容
+git diff
+
+# 查看遠端和本地的差異
+git log --oneline --graph --all
 ```
 

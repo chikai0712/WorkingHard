@@ -6,6 +6,201 @@
     <title>Domain Monitoring Dashboard</title>
     <link rel="stylesheet" href="/static/dashboard.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <style>
+        /* 標籤頁樣式 */
+        .tabs-container {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin: 20px 0;
+            overflow: hidden;
+        }
+
+        .tabs-header {
+            display: flex;
+            border-bottom: 2px solid #e0e0e0;
+            background: #f8f9fa;
+        }
+
+        .tab-button {
+            flex: 1;
+            padding: 15px 20px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 500;
+            color: #666;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .tab-button:hover {
+            background: #e9ecef;
+            color: #333;
+        }
+
+        .tab-button.active {
+            color: #3498db;
+            background: white;
+        }
+
+        .tab-button.active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: #3498db;
+        }
+
+        .tab-content {
+            display: none;
+            padding: 20px;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* DNS 監控器樣式 */
+        .dns-stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .dns-stat-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .dns-stat-value {
+            font-size: 32px;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        .dns-stat-label {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .country-filters {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .country-filter-btn {
+            padding: 8px 16px;
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 14px;
+        }
+
+        .country-filter-btn:hover {
+            border-color: #3498db;
+        }
+
+        .country-filter-btn.active {
+            background: #3498db;
+            color: white;
+            border-color: #3498db;
+        }
+
+        .dns-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 15px;
+        }
+
+        .dns-card {
+            background: white;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            border-left: 4px solid #3498db;
+        }
+
+        .dns-card.healthy {
+            border-left-color: #27ae60;
+        }
+
+        .dns-card.unhealthy {
+            border-left-color: #e74c3c;
+        }
+
+        .dns-ip {
+            font-size: 16px;
+            font-weight: bold;
+            font-family: 'Courier New', monospace;
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+
+        .dns-info {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            font-size: 13px;
+            color: #666;
+        }
+
+        .dns-info-row {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .dns-status-badge {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: bold;
+        }
+
+        .dns-status-badge.healthy {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .dns-status-badge.unhealthy {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .isp-section {
+            margin-bottom: 20px;
+        }
+
+        .isp-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px 8px 0 0;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .isp-count {
+            background: rgba(255,255,255,0.2);
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 13px;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -14,6 +209,9 @@
             <div class="header-content">
                 <h1>🛡️ Domain Monitoring System</h1>
                 <div class="header-stats">
+                    <a href="/static/paused-domains.html" class="paused-link" title="查看暫停的域名">
+                        ⏸️ 暫停列表
+                    </a>
                     <div class="stat-badge">
                         <span class="stat-label">最後更新</span>
                         <span class="stat-value" id="lastUpdate">--</span>
@@ -26,80 +224,149 @@
             </div>
         </header>
 
-        <!-- Summary Cards -->
-        <section class="summary-section">
-            <div class="summary-card total">
-                <div class="card-icon">📊</div>
-                <div class="card-content">
-                    <h3>總域名數</h3>
-                    <p class="card-value" id="totalDomains">--</p>
-                    <span class="card-label">監控中</span>
+        <!-- 標籤頁導航 -->
+        <div class="tabs-container">
+            <div class="tabs-header">
+                <button class="tab-button active" data-tab="overview">📊 總覽</button>
+                <button class="tab-button" data-tab="dns-monitor">🌐 DNS 監控器</button>
+                <button class="tab-button" data-tab="alerts">🔔 告警列表</button>
+                <button class="tab-button" data-tab="events">📝 監控事件</button>
+            </div>
+
+            <!-- 總覽標籤 -->
+            <div class="tab-content active" id="tab-overview">
+
+                <!-- Summary Cards -->
+                <section class="summary-section">
+                    <div class="summary-card total">
+                        <div class="card-icon">📊</div>
+                        <div class="card-content">
+                            <h3>總域名數</h3>
+                            <p class="card-value" id="totalDomains">--</p>
+                            <span class="card-label">監控中</span>
+                        </div>
+                    </div>
+
+                    <div class="summary-card healthy">
+                        <div class="card-icon">✅</div>
+                        <div class="card-content">
+                            <h3>正常</h3>
+                            <p class="card-value" id="healthyDomains">--</p>
+                            <span class="card-label">運行良好</span>
+                        </div>
+                    </div>
+
+                    <div class="summary-card warning">
+                        <div class="card-icon">⚠️</div>
+                        <div class="card-content">
+                            <h3>警告</h3>
+                            <p class="card-value" id="warningDomains">--</p>
+                            <span class="card-label">需要關注</span>
+                        </div>
+                    </div>
+
+                    <div class="summary-card critical">
+                        <div class="card-icon">🚨</div>
+                        <div class="card-content">
+                            <h3>嚴重</h3>
+                            <p class="card-value" id="criticalAlerts">--</p>
+                            <span class="card-label">立即處理</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Domain Test Section -->
+                <section class="test-section">
+                    <div class="test-card">
+                        <div class="test-header">
+                            <h2>🔍 域名即時測試</h2>
+                            <span class="test-subtitle">輸入域名進行即時 DNS 檢查</span>
+                        </div>
+                        <div class="test-form">
+                            <input type="text" id="testDomain" placeholder="例如: google.com" class="test-input">
+                            <button id="testBtn" class="test-btn">開始測試</button>
+                        </div>
+                        <div id="testResult" class="test-result" style="display: none;"></div>
+                    </div>
+                </section>
+
+                <!-- Charts Section -->
+                <section class="charts-section">
+                    <div class="chart-card">
+                        <h3>域名狀態分布</h3>
+                        <canvas id="statusChart"></canvas>
+                    </div>
+                    <div class="chart-card">
+                        <h3>告警趨勢 (24小時)</h3>
+                        <canvas id="alertTrendChart"></canvas>
+                    </div>
+                </section>
+            </div>
+
+            <!-- DNS 監控器標籤 -->
+            <div class="tab-content" id="tab-dns-monitor">
+                <!-- DNS 統計卡片 -->
+                <div class="dns-stats-grid">
+                    <div class="dns-stat-card">
+                        <div class="dns-stat-label">總 DNS 數量</div>
+                        <div class="dns-stat-value" id="dnsTotal">-</div>
+                    </div>
+                    <div class="dns-stat-card">
+                        <div class="dns-stat-label">健康 DNS</div>
+                        <div class="dns-stat-value" id="dnsHealthy">-</div>
+                    </div>
+                    <div class="dns-stat-card">
+                        <div class="dns-stat-label">國家覆蓋</div>
+                        <div class="dns-stat-value" id="dnsCountries">-</div>
+                    </div>
+                    <div class="dns-stat-card">
+                        <div class="dns-stat-label">ISP 數量</div>
+                        <div class="dns-stat-value" id="dnsIsps">-</div>
+                    </div>
+                </div>
+
+                <!-- 國家過濾器 -->
+                <div class="country-filters" id="countryFilters">
+                    <button class="country-filter-btn active" data-country="all">🌍 全部</button>
+                </div>
+
+                <!-- DNS 列表 -->
+                <div id="dnsListContainer">
+                    <div class="loading">載入 DNS 列表中...</div>
                 </div>
             </div>
 
-            <div class="summary-card healthy">
-                <div class="card-icon">✅</div>
-                <div class="card-content">
-                    <h3>正常</h3>
-                    <p class="card-value" id="healthyDomains">--</p>
-                    <span class="card-label">運行良好</span>
-                </div>
+            <!-- 告警列表標籤 -->
+            <div class="tab-content" id="tab-alerts">
+                <section class="alerts-section">
+                    <div class="section-header">
+                        <h2>🔔 告警列表</h2>
+                        <div class="filter-buttons">
+                            <button class="filter-btn active" data-filter="all">全部</button>
+                            <button class="filter-btn" data-filter="P0">P0</button>
+                            <button class="filter-btn" data-filter="P1">P1</button>
+                            <button class="filter-btn" data-filter="P2">P2</button>
+                        </div>
+                    </div>
+                    
+                    <div id="testSummary" class="test-summary" style="display: none;"></div>
+                    
+                    <div class="alerts-container" id="alertsContainer">
+                        <div class="loading">載入中...</div>
+                    </div>
+                </section>
             </div>
 
-            <div class="summary-card warning">
-                <div class="card-icon">⚠️</div>
-                <div class="card-content">
-                    <h3>警告</h3>
-                    <p class="card-value" id="warningDomains">--</p>
-                    <span class="card-label">需要關注</span>
-                </div>
+            <!-- 監控事件標籤 -->
+            <div class="tab-content" id="tab-events">
+                <section class="events-section">
+                    <h2>📝 最近監控事件</h2>
+                    <div class="events-container" id="eventsContainer">
+                        <div class="loading">載入中...</div>
+                    </div>
+                </section>
             </div>
-
-            <div class="summary-card critical">
-                <div class="card-icon">🚨</div>
-                <div class="card-content">
-                    <h3>嚴重</h3>
-                    <p class="card-value" id="criticalAlerts">--</p>
-                    <span class="card-label">立即處理</span>
-                </div>
-            </div>
-        </section>
-
-        <!-- Charts Section -->
-        <section class="charts-section">
-            <div class="chart-card">
-                <h3>域名狀態分布</h3>
-                <canvas id="statusChart"></canvas>
-            </div>
-            <div class="chart-card">
-                <h3>告警趨勢 (24小時)</h3>
-                <canvas id="alertTrendChart"></canvas>
-            </div>
-        </section>
-
-        <!-- Alerts Table -->
-        <section class="alerts-section">
-            <div class="section-header">
-                <h2>🔔 最新告警</h2>
-                <div class="filter-buttons">
-                    <button class="filter-btn active" data-filter="all">全部</button>
-                    <button class="filter-btn" data-filter="P0">P0</button>
-                    <button class="filter-btn" data-filter="P1">P1</button>
-                    <button class="filter-btn" data-filter="P2">P2</button>
-                </div>
-            </div>
-            <div class="alerts-container" id="alertsContainer">
-                <div class="loading">載入中...</div>
-            </div>
-        </section>
-
-        <!-- Recent Events -->
-        <section class="events-section">
-            <h2>📝 最近監控事件</h2>
-            <div class="events-container" id="eventsContainer">
-                <div class="loading">載入中...</div>
-            </div>
-        </section>
+        </div>
     </div>
 
     <script src="/static/dashboard.js"></script>
