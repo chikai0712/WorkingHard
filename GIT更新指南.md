@@ -1,5 +1,33 @@
 # Git 更新指南
 
+## ⭐ 重要提醒：先 Pull 再 Push！
+
+**正確的工作流程：**
+```bash
+# 1. 開始工作前，先拉取遠端最新更改
+git pull --rebase
+
+# 2. 進行你的修改...
+
+# 3. 提交更改
+git add -A
+git commit -m "更新說明"
+
+# 4. 推送前再次確認（可選但推薦）
+git pull --rebase
+
+# 5. 推送
+git push
+```
+
+**為什麼要先 pull？**
+- ✅ 避免歷史分叉，不需要強制推送
+- ✅ 及早在本地發現和解決衝突
+- ✅ 確保在最新的程式碼基礎上工作
+- ✅ 避免覆蓋別人的更改
+
+---
+
 ## 常規更新流程
 
 ### 1. 檢查狀態
@@ -227,13 +255,154 @@ git commit
 git push
 ```
 
-### 解決方法 3：強制推送（危險！）
+### 解決方法 3：強制推送（需謹慎使用）
 
 ⚠️ **警告**：這會覆蓋遠端的更改，只在確定要丟棄遠端更改時使用！
 
 ```bash
+# 推薦：更安全的強制推送（不會覆蓋別人的新提交）
+git push --force-with-lease
+
+# 不推薦：無條件強制推送（可能丟失別人的提交）
 git push --force
-# 或更安全的版本（不會覆蓋別人的新提交）
+```
+
+---
+
+## 為什麼需要強制推送？
+
+### 常見原因
+
+#### 1. 提交歷史被改寫
+當你使用以下命令時，會改變提交的 hash 值：
+- `git commit --amend`：修改最後一次提交
+- `git rebase`：重新整理提交歷史
+- `git reset`：重置提交
+
+這會導致本地和遠端的歷史不一致，Git 無法自動合併。
+
+**範例：**
+```
+遠端: A -> B -> C
+本地: A -> B -> D
+
+C 和 D 是不同的提交，歷史分叉了
+```
+
+#### 2. 在多個地方同時工作
+- 在不同電腦上工作
+- 有其他協作者推送了新提交
+- 但你的本地歷史已經分叉
+
+#### 3. 衝突的提交歷史
+```
+遠端: A -> B -> C (commit hash: b24c247)
+本地: A -> B -> D (commit hash: 761482e)
+
+Git 不知道該保留 C 還是 D
+```
+
+### `--force` vs `--force-with-lease` 的區別
+
+| 命令 | 行為 | 安全性 | 使用場景 |
+|------|------|--------|----------|
+| `git push --force` | 無條件覆蓋遠端 | ⚠️ 危險 | 個人分支，確定沒有其他人的提交 |
+| `git push --force-with-lease` | 只在遠端沒有新提交時覆蓋 | ✅ 較安全 | **推薦使用**，可防止意外覆蓋 |
+
+**`--force-with-lease` 的保護機制：**
+```bash
+# 如果遠端有你不知道的新提交，會拒絕推送
+git push --force-with-lease
+# 輸出：! [rejected] ... (stale info)
+
+# 這時你可以先拉取查看
+git fetch
+git log origin/分支名稱
+```
+
+### 如何避免需要強制推送？
+
+#### 1. 開始工作前先同步
+```bash
+# 每次開始工作前
+git pull --rebase
+```
+
+#### 2. 不要改寫已推送的歷史
+```bash
+# ❌ 避免對已推送的提交使用：
+git commit --amend
+git rebase -i
+git reset --hard
+
+# ✅ 如果需要修改，使用新的提交
+git commit -m "修正之前的錯誤"
+```
+
+#### 3. 使用功能分支
+```bash
+# 在新分支上實驗性工作
+git checkout -b feature-branch
+
+# 完成後合併到主分支
+git checkout main
+git merge feature-branch
+```
+
+#### 4. 定期推送
+```bash
+# 經常推送，避免本地和遠端差距太大
+git push
+```
+
+### 實際案例分析
+
+**你的情況：**
+```
++ b24c247...761482e 2026-01-24-m8qd -> 2026-01-24-m8qd (forced update)
+```
+
+**解讀：**
+- 遠端原本的提交：`b24c247`
+- 你的本地提交：`761482e`
+- 使用 `--force-with-lease` 成功推送 ✅
+
+**可能的原因：**
+1. 你在另一台電腦或之前推送過 `b24c247`
+2. 後來在本地做了修改，產生了新的提交 `761482e`
+3. 兩個提交歷史不同，需要強制推送
+
+### 團隊協作時的注意事項
+
+#### 個人分支
+```bash
+# 在自己的分支上可以安全使用
+git push --force-with-lease
+```
+
+#### 共享分支（如 main、develop）
+```bash
+# ❌ 不要在共享分支上強制推送！
+# 會影響其他團隊成員
+
+# ✅ 應該使用 pull request / merge request
+git checkout -b fix-branch
+git push origin fix-branch
+# 然後在 GitHub 上創建 PR
+```
+
+### 強制推送後的恢復
+
+如果不小心強制推送了錯誤的內容：
+
+```bash
+# 1. 查看 reflog 找到之前的提交
+git reflog
+
+# 2. 恢復到之前的狀態
+git reset --hard HEAD@{n}  # n 是 reflog 中的編號
+
+# 3. 再次強制推送正確的版本
 git push --force-with-lease
 ```
 

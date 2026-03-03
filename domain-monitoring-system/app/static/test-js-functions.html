@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS 功能測試 - Domain IP & 時間解析</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 2rem;
+            color: #2d3748;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 2rem;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .test-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .test-card {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .test-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .test-card h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #667eea;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .test-card h2::before {
+            content: '🧪';
+            font-size: 1.8rem;
+        }
+
+        .input-group {
+            margin-bottom: 1rem;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #4a5568;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 0.875rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .result-box {
+            margin-top: 1.5rem;
+            padding: 1.5rem;
+            background: #f7fafc;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+            display: none;
+        }
+
+        .result-box.show {
+            display: block;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .result-box h3 {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            color: #2d3748;
+        }
+
+        .result-item {
+            padding: 0.75rem;
+            background: white;
+            border-radius: 6px;
+            margin-bottom: 0.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .result-label {
+            font-weight: 600;
+            color: #4a5568;
+        }
+
+        .result-value {
+            color: #667eea;
+            font-family: 'Monaco', 'Courier New', monospace;
+            font-size: 0.95rem;
+        }
+
+        .success {
+            color: #48bb78;
+        }
+
+        .error {
+            color: #f56565;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+
+        .status-badge.success {
+            background: #c6f6d5;
+            color: #22543d;
+        }
+
+        .status-badge.error {
+            background: #fed7d7;
+            color: #742a2a;
+        }
+
+        .info-box {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            margin-top: 2rem;
+        }
+
+        .info-box h2 {
+            color: #667eea;
+            margin-bottom: 1rem;
+        }
+
+        .info-box ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .info-box li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .info-box li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #48bb78;
+            font-weight: bold;
+        }
+
+        .loading {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .dns-list {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .dns-item {
+            padding: 0.5rem;
+            background: white;
+            border-radius: 4px;
+            margin-bottom: 0.25rem;
+            font-size: 0.9rem;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .dns-server {
+            color: #4a5568;
+            font-family: monospace;
+        }
+
+        .dns-status {
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🧪 JS 功能測試工具</h1>
+            <p>測試網站內建 JavaScript 解析 Domain IP 和時間功能</p>
+        </div>
+
+        <div class="test-grid">
+            <!-- Test 1: Domain IP Resolution -->
+            <div class="test-card">
+                <h2>Domain IP 解析測試</h2>
+                <div class="input-group">
+                    <label for="domainInput">輸入域名:</label>
+                    <input type="text" id="domainInput" placeholder="例如: google.com" value="google.com">
+                </div>
+                <button class="btn" onclick="testDomainResolution()">
+                    開始解析
+                </button>
+                <div id="domainResult" class="result-box"></div>
+            </div>
+
+            <!-- Test 2: Time Parsing -->
+            <div class="test-card">
+                <h2>時間解析測試</h2>
+                <div class="input-group">
+                    <label for="timestampInput">輸入時間戳記 (ISO 8601):</label>
+                    <input type="text" id="timestampInput" placeholder="例如: 2026-03-03T10:30:00Z">
+                </div>
+                <button class="btn" onclick="testTimeParsing()">
+                    解析時間
+                </button>
+                <div id="timeResult" class="result-box"></div>
+            </div>
+
+            <!-- Test 3: Multiple Domains -->
+            <div class="test-card">
+                <h2>批量域名測試</h2>
+                <div class="input-group">
+                    <label for="domainsInput">輸入多個域名 (每行一個):</label>
+                    <textarea id="domainsInput" rows="4" style="width: 100%; padding: 0.75rem; border: 2px solid #e2e8f0; border-radius: 8px; font-size: 1rem; font-family: inherit; resize: vertical;">google.com
+facebook.com
+youtube.com</textarea>
+                </div>
+                <button class="btn" onclick="testMultipleDomains()">
+                    批量測試
+                </button>
+                <div id="multiResult" class="result-box"></div>
+            </div>
+
+            <!-- Test 4: Time Formatting -->
+            <div class="test-card">
+                <h2>時間格式化測試</h2>
+                <div class="input-group">
+                    <label>選擇測試時間:</label>
+                    <input type="datetime-local" id="dateTimeInput" style="width: 100%; padding: 0.75rem; border: 2px solid #e2e8f0; border-radius: 8px; font-size: 1rem;">
+                </div>
+                <button class="btn" onclick="testTimeFormatting()">
+                    格式化時間
+                </button>
+                <div id="formatResult" class="result-box"></div>
+            </div>
+        </div>
+
+        <div class="info-box">
+            <h2>📋 測試說明</h2>
+            <ul>
+                <li>Domain IP 解析: 使用 DNS API 查詢域名的 IP 地址</li>
+                <li>時間解析: 測試 JavaScript Date 對象解析各種時間格式</li>
+                <li>批量域名測試: 同時測試多個域名的解析狀態</li>
+                <li>時間格式化: 測試不同的時間顯示格式 (相對時間、絕對時間)</li>
+                <li>所有測試都在瀏覽器端執行,無需後端支持</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        // API Base URL
+        const API_BASE = 'http://localhost:8000/api';
+
+        // Set default datetime to now
+        document.addEventListener('DOMContentLoaded', () => {
+            const now = new Date();
+            const localDateTime = new Date(now.getTime() - now.getTimezoneOffset() * 60000)
+                .toISOString()
+                .slice(0, 16);
+            document.getElementById('dateTimeInput').value = localDateTime;
+            
+            // Set default timestamp
+            document.getElementById('timestampInput').value = new Date().toISOString();
+        });
+
+        // Test 1: Domain IP Resolution
+        async function testDomainResolution() {
+            const domain = document.getElementById('domainInput').value.trim();
+            const resultBox = document.getElementById('domainResult');
+            
+            if (!domain) {
+                showError(resultBox, '請輸入域名');
+                return;
+            }
+
+            resultBox.innerHTML = '<div style="text-align: center;"><div class="loading"></div> 正在解析...</div>';
+            resultBox.classList.add('show');
+
+            try {
+                const startTime = performance.now();
+                
+                // Method 1: Using DNS API
+                const response = await fetch(`${API_BASE}/check/dns`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ domain: domain })
+                });
+
+                const endTime = performance.now();
+                const responseTime = (endTime - startTime).toFixed(2);
+
+                if (response.ok) {
+                    const data = await response.json();
+                    displayDomainResult(resultBox, domain, data, responseTime);
+                } else {
+                    const error = await response.json();
+                    showError(resultBox, error.detail || '解析失敗');
+                }
+            } catch (error) {
+                console.error('Domain resolution error:', error);
+                showError(resultBox, `網絡錯誤: ${error.message}`);
+            }
+        }
+
+        function displayDomainResult(container, domain, data, responseTime) {
+            const results = data.results;
+            const successRate = (results.success_rate * 100).toFixed(1);
+            const validResolutions = results.valid_resolutions || [];
+            const failedNS = results.failed_nameservers || [];
+            
+            let ips = [];
+            if (validResolutions.length > 0) {
+                ips = validResolutions[0].resolved_ips;
+            }
+
+            const statusClass = results.success_rate > 0.8 ? 'success' : 'error';
+            const statusText = results.success_rate > 0.8 ? '✓ 成功' : '✗ 失敗';
+
+            let html = `
+                <h3>解析結果</h3>
+                <div class="result-item">
+                    <span class="result-label">域名:</span>
+                    <span class="result-value">${domain}</span>
+                </div>
+                <div class="result-item">
+                    <span class="result-label">狀態:</span>
+                    <span class="status-badge ${statusClass}">${statusText}</span>
+                </div>
+                <div class="result-item">
+                    <span class="result-label">成功率:</span>
+                    <span class="result-value ${statusClass}">${successRate}% (${results.success_count}/${results.total_checks})</span>
+                </div>
+                <div class="result-item">
+                    <span class="result-label">回應時間:</span>
+                    <span class="result-value">${responseTime} ms</span>
+                </div>
+            `;
+
+            if (ips.length > 0) {
+                html += `
+                    <div class="result-item">
+                        <span class="result-label">解析 IP:</span>
+                        <span class="result-value success">${ips.join(', ')}</span>
+                    </div>
+                `;
+            }
+
+            html += `
+                <div class="result-item">
+                    <span class="result-label">檢查時間:</span>
+                    <span class="result-value">${formatTimestamp(results.timestamp)}</span>
+                </div>
+            `;
+
+            // Show DNS servers
+            if (validResolutions.length > 0 || failedNS.length > 0) {
+                html += '<h3 style="margin-top: 1rem;">DNS 伺服器詳情</h3><div class="dns-list">';
+                
+                validResolutions.forEach(res => {
+                    html += `
+                        <div class="dns-item">
+                            <span class="dns-server">${res.nameserver}</span>
+                            <span class="dns-status success">✓ ${res.resolved_ips.join(', ')} (${res.response_time_ms}ms)</span>
+                        </div>
+                    `;
+                });
+
+                failedNS.forEach(ns => {
+                    html += `
+                        <div class="dns-item">
+                            <span class="dns-server">${ns.nameserver}</span>
+                            <span class="dns-status error">✗ ${ns.error || ns.reason || '失敗'}</span>
+                        </div>
+                    `;
+                });
+
+                html += '</div>';
+            }
+
+            container.innerHTML = html;
+        }
+
+        // Test 2: Time Parsing
+        function testTimeParsing() {
+            const timestamp = document.getElementById('timestampInput').value.trim();
+            const resultBox = document.getElementById('timeResult');
+            
+            if (!timestamp) {
+                showError(resultBox, '請輸入時間戳記');
+                return;
+            }
+
+            resultBox.classList.add('show');
+
+            try {
+                const date = new Date(timestamp);
+                
+                if (isNaN(date.getTime())) {
+                    showError(resultBox, '無效的時間格式');
+                    return;
+                }
+
+                const now = new Date();
+                const diff = Math.floor((now - date) / 1000);
+
+                let html = `
+                    <h3>時間解析結果</h3>
+                    <div class="result-item">
+                        <span class="result-label">原始輸入:</span>
+                        <span class="result-value">${timestamp}</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">ISO 8601:</span>
+                        <span class="result-value">${date.toISOString()}</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">本地時間:</span>
+                        <span class="result-value">${date.toLocaleString('zh-TW')}</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">Unix 時間戳:</span>
+                        <span class="result-value">${date.getTime()}</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">相對時間:</span>
+                        <span class="result-value">${formatRelativeTime(diff)}</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">格式化 (短):</span>
+                        <span class="result-value">${date.toLocaleString('zh-TW', {
+                            month: '2-digit',
+                            day: '2-digit',
+                            hour: '2-digit',
+                            minute: '2-digit'
+                        })}</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">格式化 (長):</span>
+                        <span class="result-value">${date.toLocaleString('zh-TW', {
+                            year: 'numeric',
+                            month: 'long',
+                            day: 'numeric',
+                            hour: '2-digit',
+                            minute: '2-digit',
+                            second: '2-digit',
+                            weekday: 'long'
+                        })}</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">狀態:</span>
+                        <span class="status-badge success">✓ 解析成功</span>
+                    </div>
+                `;
+
+                resultBox.innerHTML = html;
+            } catch (error) {
+                showError(resultBox, `解析錯誤: ${error.message}`);
+            }
+        }
+
+        // Test 3: Multiple Domains
+        async function testMultipleDomains() {
+            const domainsText = document.getElementById('domainsInput').value.trim();
+            const resultBox = document.getElementById('multiResult');
+            
+            if (!domainsText) {
+                showError(resultBox, '請輸入域名列表');
+                return;
+            }
+
+            const domains = domainsText.split('\n').map(d => d.trim()).filter(d => d);
+            
+            if (domains.length === 0) {
+                showError(resultBox, '沒有有效的域名');
+                return;
+            }
+
+            resultBox.innerHTML = `<div style="text-align: center;"><div class="loading"></div> 正在測試 ${domains.length} 個域名...</div>`;
+            resultBox.classList.add('show');
+
+            const results = [];
+            const startTime = performance.now();
+
+            for (const domain of domains) {
+                try {
+                    const response = await fetch(`${API_BASE}/check/dns`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ domain: domain })
+                    });
+
+                    if (response.ok) {
+                        const data = await response.json();
+                        results.push({
+                            domain: domain,
+                            success: true,
+                            data: data.results
+                        });
+                    } else {
+                        results.push({
+                            domain: domain,
+                            success: false,
+                            error: '解析失敗'
+                        });
+                    }
+                } catch (error) {
+                    results.push({
+                        domain: domain,
+                        success: false,
+                        error: error.message
+                    });
+                }
+            }
+
+            const endTime = performance.now();
+            const totalTime = (endTime - startTime).toFixed(2);
+
+            displayMultipleResults(resultBox, results, totalTime);
+        }
+
+        function displayMultipleResults(container, results, totalTime) {
+            const successCount = results.filter(r => r.success).length;
+            const totalCount = results.length;
+            const successRate = ((successCount / totalCount) * 100).toFixed(1);
+
+            let html = `
+                <h3>批量測試結果</h3>
+                <div class="result-item">
+                    <span class="result-label">總域名數:</span>
+                    <span class="result-value">${totalCount}</span>
+                </div>
+                <div class="result-item">
+                    <span class="result-label">成功:</span>
+                    <span class="result-value success">${successCount}</span>
+                </div>
+                <div class="result-item">
+                    <span class="result-label">失敗:</span>
+                    <span class="result-value error">${totalCount - successCount}</span>
+                </div>
+                <div class="result-item">
+                    <span class="result-label">成功率:</span>
+                    <span class="result-value">${successRate}%</span>
+                </div>
+                <div class="result-item">
+                    <span class="result-label">總耗時:</span>
+                    <span class="result-value">${totalTime} ms</span>
+                </div>
+                <h3 style="margin-top: 1rem;">詳細結果</h3>
+                <div class="dns-list">
+            `;
+
+            results.forEach(result => {
+                if (result.success) {
+                    const data = result.data;
+                    const rate = (data.success_rate * 100).toFixed(0);
+                    const ips = data.valid_resolutions.length > 0 ? 
+                        data.valid_resolutions[0].resolved_ips.join(', ') : 'N/A';
+                    
+                    html += `
+                        <div class="dns-item">
+                            <span class="dns-server">${result.domain}</span>
+                            <span class="dns-status success">✓ ${rate}% - ${ips}</span>
+                        </div>
+                    `;
+                } else {
+                    html += `
+                        <div class="dns-item">
+                            <span class="dns-server">${result.domain}</span>
+                            <span class="dns-status error">✗ ${result.error}</span>
+                        </div>
+                    `;
+                }
+            });
+
+            html += '</div>';
+            container.innerHTML = html;
+        }
+
+        // Test 4: Time Formatting
+        function testTimeFormatting() {
+            const dateTimeInput = document.getElementById('dateTimeInput').value;
+            const resultBox = document.getElementById('formatResult');
+            
+            if (!dateTimeInput) {
+                showError(resultBox, '請選擇時間');
+                return;
+            }
+
+            resultBox.classList.add('show');
+
+            try {
+                const date = new Date(dateTimeInput);
+                const now = new Date();
+                const diff = Math.floor((now - date) / 1000);
+
+                let html = `
+                    <h3>時間格式化結果</h3>
+                    <div class="result-item">
+                        <span class="result-label">相對時間 (formatTime):</span>
+                        <span class="result-value">${formatTime(date.toISOString())}</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">相對時間 (詳細):</span>
+                        <span class="result-value">${formatRelativeTime(diff)}</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">短格式:</span>
+                        <span class="result-value">${date.toLocaleString('zh-TW', {
+                            month: '2-digit',
+                            day: '2-digit',
+                            hour: '2-digit',
+                            minute: '2-digit'
+                        })}</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">完整格式:</span>
+                        <span class="result-value">${date.toLocaleString('zh-TW')}</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">日期:</span>
+                        <span class="result-value">${date.toLocaleDateString('zh-TW')}</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">時間:</span>
+                        <span class="result-value">${date.toLocaleTimeString('zh-TW')}</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">ISO 8601:</span>
+                        <span class="result-value">${date.toISOString()}</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">UTC 字串:</span>
+                        <span class="result-value">${date.toUTCString()}</span>
+                    </div>
+                `;
+
+                resultBox.innerHTML = html;
+            } catch (error) {
+                showError(resultBox, `格式化錯誤: ${error.message}`);
+            }
+        }
+
+        // Helper Functions
+        function formatTime(timestamp) {
+            const date = new Date(timestamp);
+            const now = new Date();
+            const diff = Math.floor((now - date) / 1000);
+
+            if (diff < 60) return `${diff} 秒前`;
+            if (diff < 3600) return `${Math.floor(diff / 60)} 分鐘前`;
+            if (diff < 86400) return `${Math.floor(diff / 3600)} 小時前`;
+            if (diff < 604800) return `${Math.floor(diff / 86400)} 天前`;
+            
+            return date.toLocaleString('zh-TW', {
+                month: '2-digit',
+                day: '2-digit',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+        }
+
+        function formatRelativeTime(diffInSeconds) {
+            const absDiff = Math.abs(diffInSeconds);
+            const isFuture = diffInSeconds < 0;
+            
+            if (absDiff < 60) {
+                return isFuture ? `${absDiff} 秒後` : `${absDiff} 秒前`;
+            }
+            if (absDiff < 3600) {
+                const mins = Math.floor(absDiff / 60);
+                return isFuture ? `${mins} 分鐘後` : `${mins} 分鐘前`;
+            }
+            if (absDiff < 86400) {
+                const hours = Math.floor(absDiff / 3600);
+                return isFuture ? `${hours} 小時後` : `${hours} 小時前`;
+            }
+            if (absDiff < 604800) {
+                const days = Math.floor(absDiff / 86400);
+                return isFuture ? `${days} 天後` : `${days} 天前`;
+            }
+            if (absDiff < 2592000) {
+                const weeks = Math.floor(absDiff / 604800);
+                return isFuture ? `${weeks} 週後` : `${weeks} 週前`;
+            }
+            if (absDiff < 31536000) {
+                const months = Math.floor(absDiff / 2592000);
+                return isFuture ? `${months} 個月後` : `${months} 個月前`;
+            }
+            const years = Math.floor(absDiff / 31536000);
+            return isFuture ? `${years} 年後` : `${years} 年前`;
+        }
+
+        function formatTimestamp(timestamp) {
+            const date = new Date(timestamp);
+            return date.toLocaleString('zh-TW', {
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit'
+            });
+        }
+
+        function showError(container, message) {
+            container.innerHTML = `
+                <div class="result-item" style="background: #fed7d7; border-left: 4px solid #f56565;">
+                    <span class="result-label">錯誤:</span>
+                    <span class="result-value error">${message}</span>
+                </div>
+            `;
+            container.classList.add('show');
+        }
+    </script>
+</body>
+</html>
+
