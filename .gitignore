@@ -27,6 +27,9 @@ data/
 logs/
 *.log
 
+# GSD planning config (exception for *.json rule above)
+!.planning/config.json
+
 # IDE
 .vscode/
 .idea/

@@ -1,0 +1,48 @@
+---
+description: "STATE.md 強制更新規則 — 確保每次執行後都有存檔點，支援中斷後恢復"
+alwaysApply: true
+---
+
+# State Tracking 強制規則
+
+## 何時必須更新 `.planning/STATE.md`
+
+以下任何動作完成後，**必須立即更新 STATE.md**：
+
+1. 完成 ROADMAP.md 中的任意一個步驟（打勾）
+2. 創建或刪除核心檔案
+3. 修改核心邏輯（非 typo/style 修正）
+4. 跑完測試並得到結果
+5. 遇到阻塞點（Blocker）
+6. 對話即將結束前
+
+## STATE.md 更新格式
+
+每次更新必須包含以下欄位：
+
+```markdown
+### [YYYY-MM-DD HH:MM] — [動作摘要]
+- **Phase**: [當前 Phase 名稱與編號]
+- **Status**: [In progress / Blocked / Complete]
+- **Done**: [剛完成了什麼]
+- **Next**: [下一步是什麼]
+- **Blocker**: [如有阻塞點，描述原因]
+```
+
+## 對話開始時的強制動作
+
+每次新對話開始時，主動執行：
+
+```
+1. 讀取 .planning/STATE.md
+2. 讀取 .planning/ROADMAP.md
+3. 告訴使用者：「目前進度：Phase X，上次停在 [描述]，下一步是 [描述]。」
+4. 詢問：「繼續這個步驟，還是有新任務？」
+```
+
+## 超過 15 輪對話時
+
+主動提示：
+
+> 「對話已經很長了，建議開新視窗並貼上以下指令恢復進度：
+> **Read .planning/STATE.md and .planning/ROADMAP.md, then tell me current progress.**」
