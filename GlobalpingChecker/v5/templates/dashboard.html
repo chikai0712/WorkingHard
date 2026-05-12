@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GlobalpingChecker V5</title>
+<script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:      #0d1117;
+  --bg2:     #111827;
+  --surface: #161f2e;
+  --sur2:    #1e2d45;
+  --border:  #2d4268;
+  --border2: #3a5280;
+  --accent:  #60a5fa;
+  --accent2: #a78bfa;
+  --clean:   #4ade80;
+  --blocked: #f87171;
+  --timeout: #fb923c;
+  --warning: #fcd34d;
+  --partial: #d8b4fe;
+  --muted:   #a0aec0;
+  --dim:     #718096;
+  --txt:     #e2e8f0;
+  --txt2:    #f7fafc;
+  --txt3:    #ffffff;
+}
+[x-cloak]{display:none!important}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:'Inter',sans-serif;
+  background:var(--bg);
+  color:var(--txt);
+  min-height:100vh;
+  overflow-x:hidden;
+  font-size:14px;
+  line-height:1.6;
+}
+.mono{font-family:'JetBrains Mono',monospace}
+::-webkit-scrollbar{width:3px;height:3px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px}
+.wrap{max-width:1440px;margin:0 auto;padding:0 20px}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:12px;overflow:hidden}
+.card-head{
+  padding:11px 18px;
+  border-bottom:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;
+  background:var(--sur2);
+}
+.card-label{
+  font-family:'JetBrains Mono',monospace;
+  font-size:12px;font-weight:600;
+  letter-spacing:.08em;text-transform:uppercase;
+  color:#cbd5e1;
+}
+.dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.dot-live{background:var(--clean);box-shadow:0 0 8px var(--clean);animation:pulse 1.6s ease-in-out infinite}
+.dot-idle{background:var(--muted)}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.45;transform:scale(.8)}}
+.pbar{height:2px;background:var(--border);border-radius:99px;overflow:hidden}
+.pbar-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:99px;transition:width .5s ease}
+.s-CLEAN{color:var(--clean)}.s-BLOCKED{color:var(--blocked)}
+.s-TIMEOUT{color:var(--timeout)}.s-WARNING{color:var(--warning)}
+.s-PARTIAL{color:var(--partial)}.s-API_ERROR{color:var(--muted)}
+.top-badge{
+  display:inline-flex;align-items:center;
+  background:linear-gradient(135deg,#1d4ed8,#6d28d9);
+  color:#e0e7ff;
+  font-family:'JetBrains Mono',monospace;
+  font-size:11px;font-weight:700;
+  padding:3px 8px;border-radius:4px;
+  letter-spacing:.05em;white-space:nowrap;flex-shrink:0;
+}
+.isp-tag{
+  background:var(--sur2);border:1px solid var(--border2);
+  border-radius:5px;
+  font-family:'JetBrains Mono',monospace;
+  font-size:10px;padding:2px 7px;
+  color:var(--txt2);white-space:nowrap;
+  overflow:hidden;text-overflow:ellipsis;
+}
+.sweep-wrap{position:relative;overflow:hidden}
+.sweep-wrap::after{
+  content:'';
+  position:absolute;inset:0;
+  background:linear-gradient(90deg,transparent 0%,rgba(37,99,235,.06) 50%,transparent 100%);
+  animation:sweep 2.6s linear infinite;
+  pointer-events:none;
+}
+@keyframes sweep{from{transform:translateX(-100%)}to{transform:translateX(100%)}}
+.zone-card{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:10px;padding:14px 18px;
+  cursor:pointer;
+  transition:border-color .2s,transform .15s,box-shadow .2s;
+  position:relative;overflow:hidden;
+}
+.zone-card::before{
+  content:'';
+  position:absolute;top:0;left:0;right:0;height:2px;
+  opacity:0;transition:opacity .2s;
+}
+.zone-card:hover{transform:translateY(-2px)}
+.zn::before{background:var(--clean)}
+.za::before{background:var(--blocked)}
+.zp::before{background:var(--warning)}
+.zone-card.zn:hover{border-color:rgba(16,185,129,.4);box-shadow:0 4px 24px rgba(16,185,129,.08)}
+.zone-card.za:hover{border-color:rgba(239,68,68,.4);box-shadow:0 4px 24px rgba(239,68,68,.08)}
+.zone-card.zp:hover{border-color:rgba(245,158,11,.4);box-shadow:0 4px 24px rgba(245,158,11,.08)}
+.zone-card:hover::before{opacity:1}
+.http-badge{
+  display:inline-block;
+  font-family:'JetBrains Mono',monospace;
+  font-size:10px;font-weight:700;
+  padding:2px 6px;border-radius:4px;border:1px solid;
+}
+.h2{color:#10b981;background:rgba(16,185,129,.1);border-color:rgba(16,185,129,.3)}
+.h3{color:#60a5fa;background:rgba(96,165,250,.1);border-color:rgba(96,165,250,.3)}
+.h4{color:#f59e0b;background:rgba(245,158,11,.1);border-color:rgba(245,158,11,.3)}
+.h5{color:#ef4444;background:rgba(239,68,68,.1);border-color:rgba(239,68,68,.3)}
+.h0{color:#475569;background:rgba(71,85,105,.1);border-color:rgba(71,85,105,.2)}
+.btn{font-family:'JetBrains Mono',monospace;font-size:12px;padding:6px 16px;border-radius:6px;border:1px solid;cursor:pointer;transition:background .15s,opacity .15s;background:transparent}
+.btn:hover{opacity:.8}
+.btn:disabled{opacity:.35;cursor:not-allowed}
+.btn-blue{color:#93c5fd;border-color:#2563eb}
+.btn-blue:hover{background:rgba(37,99,235,.2)}
+.btn-amber{color:#fcd34d;border-color:#b45309}
+.btn-amber:hover{background:rgba(180,83,9,.2)}
+.btn-purple{color:#d8b4fe;border-color:#7c3aed}
+.btn-purple:hover{background:rgba(124,58,237,.2)}
+.btn-sm{font-size:11px;padding:4px 12px}
+.tab-btn{
+  font-family:'JetBrains Mono',monospace;
+  font-size:13px;padding:10px 18px;
+  background:transparent;border:none;
+  border-bottom:2px solid transparent;
+  cursor:pointer;color:var(--muted);
+  transition:color .15s,border-color .15s;
+}
+.tab-btn:hover{color:var(--txt2)}
+.tab-active-n{color:var(--clean)!important;border-color:var(--clean)!important}
+.tab-active-a{color:var(--blocked)!important;border-color:var(--blocked)!important}
+.tab-active-p{color:var(--warning)!important;border-color:var(--warning)!important}
+.tab-active-nd{color:var(--partial)!important;border-color:var(--partial)!important}
+.trow{display:grid;align-items:center;padding:8px 16px;border-bottom:1px solid var(--border);transition:background .1s;font-size:12px}
+.trow:last-child{border-bottom:none}
+.trow:hover{background:rgba(255,255,255,.025)}
+.modal-bg{
+  position:fixed;inset:0;z-index:60;
+  display:flex;align-items:center;justify-content:center;
+  padding:16px;background:rgba(0,0,0,.8);
+  backdrop-filter:blur(4px);
+}
+.modal{
+  position:relative;
+  background:var(--surface);
+  border:1px solid var(--border2);
+  border-radius:14px;
+  width:100%;max-width:820px;
+  max-height:90vh;overflow-y:auto;
+  box-shadow:0 20px 60px rgba(0,0,0,.6);
+}
+</style>
+</head>
+<body x-data="dashboard()">
+
+<!-- ══ HEADER ══ -->
+<header style="border-bottom:1px solid var(--border);background:var(--bg2);position:sticky;top:0;z-index:40;">
+  <div class="wrap" style="padding-top:10px;padding-bottom:10px;display:flex;justify-content:space-between;align-items:center;">
+    <div style="display:flex;align-items:center;gap:12px;">
+      <div :class="progress.running ? 'dot dot-live' : 'dot dot-idle'"></div>
+      <span class="mono" style="color:var(--accent);font-size:13px;font-weight:700;">GlobalpingChecker</span>
+      <span class="mono" style="color:var(--muted);font-size:10px;background:var(--sur2);border:1px solid var(--border);padding:1px 7px;border-radius:4px;">v5.0</span>
+      <span class="mono" style="font-size:11px;color:#334155;" x-show="cycleInfo.cycle_name" x-text="cycleInfo.cycle_name"></span>
+    </div>
+    <div style="display:flex;align-items:center;gap:8px;">
+      <!-- Quota pill -->
+      <div style="display:flex;align-items:center;gap:5px;background:var(--sur2);border:1px solid var(--border);border-radius:6px;padding:4px 10px;">
+        <span class="mono" style="font-size:9px;color:var(--muted);letter-spacing:.08em;">QUOTA</span>
+        <span class="mono" style="font-size:12px;font-weight:700;"
+              :style="quota.warning ? 'color:var(--blocked)' : 'color:var(--clean)'"
+              x-text="quota.remaining !== undefined ? quota.remaining : '···'"></span>
+      </div>
+      <span class="mono" style="font-size:10px;color:var(--muted);" x-text="'updated '+lastUpdated"></span>
+      <button @click="triggerCheck()" class="btn" :disabled="progress.running" style="border-color:rgba(52,211,153,.4);color:#34d399;">&#9654; 立即檢測</button>
+      <button @click="stopCheck()" class="btn btn-amber" x-show="progress.running">&#9646;&#9646; 暫停</button>
+      <button @click="recheckAbnormal()" class="btn btn-purple" :disabled="progress.running && !recheckingAbnormal">&#9888; 重檢異常區</button>
+      <button @click="resetDomains()" class="btn btn-amber" x-show="!progress.running">&#8634; 重置域名</button>
+    </div>
+  </div>
+</header>
+
+<main class="wrap" style="padding-top:20px;padding-bottom:48px;display:flex;flex-direction:column;gap:16px;">
+
+<!-- ══ ROW 1: 即時檢測卡 + 節點狀況 ══ -->
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start;">
+
+  <!-- 即時檢測卡 -->
+  <div class="card" :class="progress.running ? 'sweep-wrap' : ''" style="position:relative;">
+    <div class="card-head">
+      <div style="display:flex;align-items:center;gap:8px;">
+        <div :class="progress.running ? 'dot dot-live' : 'dot dot-idle'"></div>
+        <span class="card-label"
+              :style="progress.running ? 'color:var(--clean)' : ''"
+              x-text="progress.running ? '即時檢測中' : '系統待機'"></span>
+        <span class="mono" style="font-size:10px;color:var(--muted);" x-show="progress.running"
+              x-text="progress.current_index + ' / ' + progress.total_domains"></span>
+      </div>
+      <span class="mono" style="font-size:10px;color:var(--muted);"
+            x-text="cycleInfo.cycle_type === 'ABNORMAL_CHECK' ? '🌙 異常區' : cycleInfo.cycle_type === 'NORMAL_CHECK' ? '☀️ 正常區' : ''"></span>
+    </div>
+
+    <div style="padding:18px 20px;">
+      <!-- Running state -->
+      <div x-show="progress.running">
+        <!-- Current domain -->
+        <div style="background:var(--sur2);border:1px solid var(--border2);border-radius:8px;padding:14px 16px;margin-bottom:14px;">
+          <div class="mono" style="font-size:9px;color:var(--muted);letter-spacing:.1em;margin-bottom:8px;">CHECKING DOMAIN</div>
+          <div class="mono" style="font-size:18px;font-weight:700;color:var(--txt3);word-break:break-all;line-height:1.2;" x-text="progress.current_domain || '---'"></div>
+          <div style="margin-top:8px;display:flex;align-items:center;gap:6px;" x-show="progress.current_method">
+            <span style="font-size:10px;color:var(--muted);">Protocol:</span>
+            <span class="mono" style="font-size:10px;color:#60a5fa;background:rgba(96,165,250,.1);padding:1px 6px;border-radius:3px;" x-text="progress.current_method || 'HTTP'">HTTP</span>
+          </div>
+        </div>
+
+        <!-- Active node info -->
+        <div style="background:var(--sur2);border:1px solid var(--border);border-radius:8px;padding:12px 16px;margin-bottom:14px;">
+          <div class="mono" style="font-size:9px;color:var(--muted);letter-spacing:.1em;margin-bottom:10px;">ACTIVE NODE</div>
+          <div style="display:grid;grid-template-columns:auto 1fr 1fr;gap:10px;align-items:start;">
+            <!-- TOP Badge -->
+            <div style="display:flex;flex-direction:column;align-items:center;gap:4px;">
+              <span class="top-badge" x-show="progress.current_node_top" x-text="progress.current_node_top"></span>
+              <span class="mono" style="font-size:9px;color:var(--muted);" x-show="!progress.current_node_top">OTHER</span>
+            </div>
+            <!-- ISP -->
+            <div>
+              <div class="mono" style="font-size:9px;color:var(--muted);margin-bottom:4px;">ISP</div>
+              <div style="font-size:12px;color:var(--txt2);font-weight:500;" x-text="progress.current_node_isp || '---'"></div>
+            </div>
+            <!-- City -->
+            <div>
+              <div class="mono" style="font-size:9px;color:var(--muted);margin-bottom:4px;">CITY</div>
+              <div style="font-size:12px;color:var(--txt2);" x-text="progress.current_node_city || '---'"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Progress bar -->
+        <div class="pbar" style="margin-bottom:10px;">
+          <div class="pbar-fill" :style="'width:'+(progress.total_domains > 0 ? Math.round(progress.current_index/progress.total_domains*100) : 0)+'%'"></div>
+        </div>
+
+        <!-- Stats row -->
+        <div class="mono" style="display:flex;gap:14px;font-size:11px;flex-wrap:wrap;">
+          <span class="s-CLEAN">✓ <span x-text="progress.stats?.clean||0"></span> 正常</span>
+          <span class="s-BLOCKED">✗ <span x-text="progress.stats?.blocked||0"></span> 封鎖</span>
+          <span class="s-TIMEOUT">⏱ <span x-text="progress.stats?.timeout||0"></span> 超時</span>
+          <span class="s-WARNING">⚠ <span x-text="progress.stats?.warning||0"></span> 警告</span>
+          <span class="s-PARTIAL">≈ <span x-text="progress.stats?.partial||0"></span> 部分</span>
+          <span style="color:var(--muted);">? <span x-text="progress.stats?.api_error||0"></span> 錯誤</span>
+          <span style="margin-left:auto;color:var(--txt);" x-text="progress.total_domains>0 ? Math.round(progress.current_index/progress.total_domains*100)+'%' : ''"></span>
+        </div>
+      </div>
+
+      <!-- Idle state -->
+      <div x-show="!progress.running" style="padding:12px 0;">
+        <p class="mono" style="font-size:12px;color:var(--dim);">// 無正在進行的檢測任務</p>
+        <p style="font-size:12px;color:var(--dim);margin-top:6px;"
+           x-text="stats.last_check_time ? '上次檢測：' + formatDate(stats.last_check_time) : '尚未執行過檢測'"></p>
+        <div style="margin-top:14px;display:flex;gap:8px;">
+          <div style="background:var(--sur2);border:1px solid var(--border);border-radius:8px;padding:10px 14px;flex:1;text-align:center;">
+            <div class="mono" style="font-size:9px;color:var(--muted);margin-bottom:4px;">循環</div>
+            <div style="font-size:13px;font-weight:600;"
+                 :style="cycleInfo.cycle_type==='ABNORMAL_CHECK'?'color:var(--partial)':'color:var(--accent)'"
+                 x-text="cycleInfo.cycle_type==='ABNORMAL_CHECK'?'🌙 異常區':cycleInfo.cycle_type==='NORMAL_CHECK'?'☀️ 正常區':'待機'"></div>
+          </div>
+          <div style="background:var(--sur2);border:1px solid var(--border);border-radius:8px;padding:10px 14px;flex:1;text-align:center;">
+            <div class="mono" style="font-size:9px;color:var(--muted);margin-bottom:4px;">第 N 次</div>
+            <div style="font-size:13px;font-weight:600;color:var(--txt2);" x-text="(cycleInfo.iteration||0)+' / '+(cycleInfo.max_iterations||'∞')"></div>
+          </div>
+          <div style="background:var(--sur2);border:1px solid var(--border);border-radius:8px;padding:10px 14px;flex:1;text-align:center;">
+            <div class="mono" style="font-size:9px;color:var(--muted);margin-bottom:4px;">下次切換</div>
+            <div style="font-size:11px;color:var(--txt);" x-text="cycleInfo.next_switch ? cycleInfo.next_switch.substring(11,16) : '---'"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 節點池狀況卡 ── -->
+  <div class="card">
+    <div class="card-head">
+      <div style="display:flex;align-items:center;gap:8px;">
+        <span class="card-label" style="color:var(--partial);">節點池</span>
+        <span class="mono" style="font-size:10px;color:var(--muted);" x-text="nodePool ? nodePool.total_nodes+' 個節點' : ''"></span>
+      </div>
+      <button @click="refreshNodePool()" :disabled="refreshingPool" class="btn btn-purple btn-sm">
+        <span x-show="!refreshingPool">⟳ 刷新</span><span x-show="refreshingPool">刷新中...</span>
+      </button>
+    </div>
+    <!-- Node cards grid -->
+    <div style="padding:14px;display:grid;grid-template-columns:1fr 1fr;gap:8px;max-height:320px;overflow-y:auto;">
+      <template x-if="!nodePool || !nodePool.nodes || nodePool.nodes.length===0">
+        <div class="mono" style="grid-column:1/-1;text-align:center;padding:28px;color:var(--dim);font-size:11px;">// 節點池為空，點擊刷新初始化</div>
+      </template>
+      <template x-for="node in (nodePool ? nodePool.nodes.slice(0,12) : [])" :key="node.node_id">
+        <div style="background:var(--sur2);border:1px solid var(--border);border-radius:9px;padding:11px 13px;transition:border-color .2s;"
+             :style="node.is_top_isp ? 'border-color:rgba(91,33,182,.4)' : ''">
+          <!-- Row 1: rank badge + city -->
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:7px;">
+            <span class="top-badge" x-show="node.isp_rank <= 30" x-text="'TOP'+node.isp_rank"></span>
+            <span class="mono" style="font-size:9px;color:var(--muted);" x-show="node.isp_rank > 30">OTHER</span>
+            <span style="font-size:11px;color:var(--txt);" x-text="node.city"></span>
+          </div>
+          <!-- Row 2: ISP -->
+          <div style="font-size:11px;color:var(--txt2);font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:6px;" x-text="node.isp"></div>
+          <!-- Row 3: IP + ASN -->
+          <div style="display:flex;align-items:center;gap:6px;">
+            <span class="mono" style="font-size:10px;color:var(--muted);" x-text="node.node_ip || '—'"></span>
+            <span class="mono" style="font-size:9px;color:var(--dim);" x-text="node.asn ? 'AS'+node.asn : ''"></span>
+          </div>
+        </div>
+      </template>
+    </div>
+    <!-- Country summary -->
+    <div style="border-top:1px solid var(--border);padding:10px 14px;display:flex;gap:10px;flex-wrap:wrap;">
+      <template x-for="(cnt, country) in nodeCountByCountry" :key="country">
+        <div style="background:var(--sur2);border:1px solid var(--border);border-radius:6px;padding:4px 10px;display:flex;align-items:center;gap:6px;">
+          <span class="mono" style="font-size:10px;color:var(--accent);" x-text="country"></span>
+          <span class="mono" style="font-size:10px;color:var(--txt);" x-text="cnt+' nodes'"></span>
+        </div>
+      </template>
+    </div>
+  </div>
+</div>
+
+<!-- ══ ROW 2: 即時結果流 + 區域統計 ══ -->
+<div style="display:grid;grid-template-columns:2fr 1fr;gap:16px;align-items:start;">
+
+  <!-- Domain 即時測試結果 -->
+  <div class="card">
+    <div class="card-head">
+      <div style="display:flex;align-items:center;gap:8px;">
+        <span class="card-label">Domain 測試結果</span>
+        <span class="mono" x-show="progress.running"
+              style="font-size:10px;background:rgba(96,165,250,.1);border:1px solid rgba(96,165,250,.25);color:#60a5fa;padding:1px 7px;border-radius:4px;">即時</span>
+        <span class="mono" x-show="!progress.running && _recentFromDb"
+              style="font-size:10px;background:rgba(167,139,250,.1);border:1px solid rgba(167,139,250,.25);color:#a78bfa;padding:1px 7px;border-radius:4px;">歷史</span>
+        <span class="mono" x-show="!progress.running && _recentBatchDate"
+              style="font-size:10px;color:var(--muted);"
+              x-text="_recentBatchDate ? formatDate(_recentBatchDate) : ''"></span>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px;">
+        <span class="mono" style="font-size:10px;color:var(--muted);" x-text="(progress.recent_results?.length||0)+' 筆'"></span>
+        <!-- Pagination controls -->
+        <div x-show="(progress.recent_results?.length||0) > resultPageSize" style="display:flex;align-items:center;gap:4px;">
+          <button @click="resultPage = Math.max(0, resultPage - 1)"
+                  :disabled="resultPage === 0"
+                  class="btn btn-sm" style="color:var(--muted);border-color:var(--border);padding:2px 8px;">←</button>
+          <span class="mono" style="font-size:10px;color:var(--muted);"
+                x-text="(resultPage+1) + ' / ' + Math.ceil((progress.recent_results?.length||0)/resultPageSize)"></span>
+          <button @click="resultPage = Math.min(Math.ceil((progress.recent_results?.length||0)/resultPageSize)-1, resultPage + 1)"
+                  :disabled="resultPage >= Math.ceil((progress.recent_results?.length||0)/resultPageSize)-1"
+                  class="btn btn-sm" style="color:var(--muted);border-color:var(--border);padding:2px 8px;">→</button>
+        </div>
+      </div>
+    </div>
+    <!-- Table head -->
+    <div style="display:grid;grid-template-columns:64px 1fr 1fr 46px 64px 80px 48px;gap:6px;align-items:center;padding:6px 16px;border-bottom:1px solid var(--border2);">
+      <span class="mono" style="font-size:9px;color:var(--muted);letter-spacing:.08em;">狀態</span>
+      <span class="mono" style="font-size:9px;color:var(--muted);letter-spacing:.08em;">域名</span>
+      <span class="mono" style="font-size:9px;color:var(--muted);letter-spacing:.08em;">節點</span>
+      <span class="mono" style="font-size:9px;color:var(--muted);letter-spacing:.08em;">TYPE</span>
+      <span class="mono" style="font-size:9px;color:var(--muted);letter-spacing:.08em;">耗時</span>
+      <span class="mono" style="font-size:9px;color:var(--muted);letter-spacing:.08em;">時間</span>
+      <span class="mono" style="font-size:9px;color:var(--muted);letter-spacing:.08em;">詳情</span>
+    </div>
+    <div style="overflow-y:auto;max-height:380px;">
+      <template x-if="!progress.recent_results || progress.recent_results.length===0">
+        <div class="mono" style="text-align:center;padding:36px;color:var(--dim);font-size:11px;">// 等待檢測資料...</div>
+      </template>
+      <template x-for="(r, idx) in pagedResults" :key="idx">
+        <div style="display:grid;grid-template-columns:64px 1fr 1fr 46px 64px 80px 48px;gap:6px;align-items:center;padding:7px 16px;border-bottom:1px solid var(--border);transition:background .1s;min-height:36px;"
+             @mouseover="$el.style.background='rgba(255,255,255,.025)'"
+             @mouseleave="$el.style.background='transparent'">
+          <!-- 狀態 -->
+          <span class="mono" style="font-size:10px;font-weight:700;" :class="'s-'+r.status" x-text="r.status"></span>
+          <!-- 域名 -->
+          <span style="font-size:12px;color:var(--txt2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:500;" x-text="r.domain"></span>
+          <!-- 節點欄：每個節點一行（城市 + ISP + TOP） -->
+          <div style="display:flex;flex-direction:column;gap:2px;overflow:hidden;">
+            <span x-show="!r.nodes || r.nodes.length===0" style="font-size:10px;color:var(--dim);" x-text="r.isp||'---'"></span>
+            <template x-for="(n, ni) in (r.nodes||[])" :key="ni">
+              <div style="display:flex;align-items:center;gap:4px;min-width:0;">
+                <span style="width:5px;height:5px;border-radius:50%;flex-shrink:0;"
+                      :style="n.status==='CLEAN'?'background:var(--clean)':n.status==='BLOCKED'?'background:var(--blocked)':n.status==='TIMEOUT'?'background:var(--timeout)':n.status==='WARNING'?'background:var(--warning)':'background:var(--muted)'"></span>
+                <span x-show="n.top"
+                      style="display:inline-flex;align-items:center;background:linear-gradient(135deg,#1d4ed8,#6d28d9);color:#e0e7ff;font-family:'JetBrains Mono',monospace;font-size:8px;font-weight:700;padding:1px 4px;border-radius:3px;flex-shrink:0;"
+                      x-text="n.top"></span>
+                <span class="mono" style="font-size:9px;color:var(--txt2);font-weight:600;flex-shrink:0;" x-text="n.city||''"></span>
+                <span style="font-size:9px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;" x-text="n.isp||''"></span>
+              </div>
+            </template>
+          </div>
+          <!-- TYPE -->
+          <span class="mono" style="font-size:10px;font-weight:700;display:inline-block;padding:1px 5px;border-radius:4px;border:1px solid;white-space:nowrap;align-self:start;"
+                :style="r.type==='http'?'color:#a78bfa;background:rgba(167,139,250,.1);border-color:rgba(167,139,250,.3)':'color:#34d399;background:rgba(52,211,153,.1);border-color:rgba(52,211,153,.3)'"
+                x-text="(r.type||'dns').toUpperCase()"></span>
+          <!-- 耗時 -->
+          <span class="mono" style="font-size:10px;color:var(--muted);white-space:nowrap;align-self:start;" x-text="r.dur_ms?r.dur_ms+'ms':'—'"></span>
+          <!-- 時間 -->
+          <span class="mono" style="font-size:9px;color:var(--dim);white-space:nowrap;align-self:start;" x-text="r.time ? formatDate(r.time) : '—'"></span>
+          <!-- 詳情按鈕 -->
+          <button @click="showDomainDetail(r.domain)"
+                  style="align-self:start;background:rgba(96,165,250,.1);border:1px solid rgba(96,165,250,.3);color:#60a5fa;font-size:9px;font-family:'JetBrains Mono',monospace;padding:2px 6px;border-radius:4px;cursor:pointer;white-space:nowrap;transition:background .15s;"
+                  @mouseover="$el.style.background='rgba(96,165,250,.2)'"
+                  @mouseleave="$el.style.background='rgba(96,165,250,.1)'">詳情</button>
+        </div>
+      </template>
+      <!-- Bottom pagination (when many results) -->
+      <div x-show="(progress.recent_results?.length||0) > resultPageSize"
+           style="display:flex;justify-content:center;align-items:center;gap:8px;padding:10px;border-top:1px solid var(--border);">
+        <button @click="resultPage = Math.max(0, resultPage - 1)"
+                :disabled="resultPage === 0"
+                class="btn btn-sm" style="color:var(--muted);border-color:var(--border);">← 上一頁</button>
+        <span class="mono" style="font-size:11px;color:var(--muted);"
+              x-text="'第 ' + (resultPage+1) + ' 頁，共 ' + Math.ceil((progress.recent_results?.length||0)/resultPageSize) + ' 頁 (' + (progress.recent_results?.length||0) + ' 筆)'"></span>
+        <button @click="resultPage = Math.min(Math.ceil((progress.recent_results?.length||0)/resultPageSize)-1, resultPage + 1)"
+                :disabled="resultPage >= Math.ceil((progress.recent_results?.length||0)/resultPageSize)-1"
+                class="btn btn-sm" style="color:var(--muted);border-color:var(--border);">下一頁 →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 區域統計 -->
+  <div style="display:flex;flex-direction:column;gap:10px;">
+    <div class="zone-card zn" @click="currentTab='normal'; loadZoneDomains('NORMAL')">
+      <div style="font-size:11px;color:var(--muted);margin-bottom:6px;">正常區 NORMAL</div>
+      <div style="font-size:36px;font-weight:900;color:var(--clean);line-height:1;" x-text="stats.normal_count||0"></div>
+      <div class="mono" style="font-size:10px;color:var(--muted);margin-top:4px;">點擊查看域名清單</div>
+    </div>
+    <div class="zone-card za" @click="currentTab='abnormal'; loadZoneDomains('ABNORMAL')">
+      <div style="font-size:11px;color:var(--muted);margin-bottom:6px;">異常區 ABNORMAL</div>
+      <div style="font-size:36px;font-weight:900;color:var(--blocked);line-height:1;" x-text="stats.abnormal_count||0"></div>
+      <div class="mono" style="font-size:10px;color:var(--muted);margin-top:4px;">點擊查看域名清單</div>
+    </div>
+    <div class="zone-card zp" @click="currentTab='pending'; loadZoneDomains('PENDING')">
+      <div style="font-size:11px;color:var(--muted);margin-bottom:6px;">待分類 PENDING</div>
+      <div style="font-size:36px;font-weight:900;color:var(--warning);line-height:1;" x-text="stats.pending_count||0"></div>
+      <div class="mono" style="font-size:10px;color:var(--muted);margin-top:4px;">點擊查看域名清單</div>
+    </div>
+    <!-- Cycle info mini card -->
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px 18px;">
+      <div class="mono" style="font-size:9px;color:var(--muted);letter-spacing:.1em;margin-bottom:10px;">CYCLE STATUS</div>
+      <div style="display:flex;flex-direction:column;gap:6px;">
+        <div style="display:flex;justify-content:space-between;font-size:12px;">
+          <span style="color:var(--muted);">模式</span>
+          <span style="font-weight:600;" :style="cycleInfo.cycle_type==='ABNORMAL_CHECK'?'color:var(--partial)':'color:var(--accent)'" x-text="cycleInfo.cycle_type==='ABNORMAL_CHECK'?'🌙 異常區':cycleInfo.cycle_type==='NORMAL_CHECK'?'☀️ 正常區':'—'"></span>
+        </div>
+        <div style="display:flex;justify-content:space-between;font-size:12px;">
+          <span style="color:var(--muted);">進度</span>
+          <span class="mono" style="color:var(--txt2);" x-text="(cycleInfo.iteration||0)+' / '+(cycleInfo.max_iterations||'∞')"></span>
+        </div>
+        <div style="display:flex;justify-content:space-between;font-size:12px;">
+          <span style="color:var(--muted);">API 額度</span>
+          <span class="mono" :style="quota.warning?'color:var(--blocked)':'color:var(--clean)'" x-text="quota.remaining !== undefined ? quota.remaining : '—'"></span>
+        </div>
+        <div style="border-top:1px solid var(--border);padding-top:8px;margin-top:2px;">
+          <div class="mono" style="font-size:10px;color:var(--muted);" x-text="cycleInfo.next_switch || ''"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ TABS: 域名清單 ══ -->
+<div style="border-bottom:1px solid var(--border);display:flex;gap:0;">
+  <button class="tab-btn" :class="currentTab==='normal'?'tab-active-n':''"
+          @click="currentTab='normal';loadZoneDomains('NORMAL')">正常區</button>
+  <button class="tab-btn" :class="currentTab==='abnormal'?'tab-active-a':''"
+          @click="currentTab='abnormal';loadZoneDomains('ABNORMAL')">異常區</button>
+  <button class="tab-btn" :class="currentTab==='pending'?'tab-active-p':''"
+          @click="currentTab='pending';loadZoneDomains('PENDING')">待分類</button>
+  <button class="tab-btn" :class="currentTab==='nodes'?'tab-active-nd':''"
+          @click="currentTab='nodes';loadNodePool()">節點池</button>
+</div>
+
+<!-- zone tables -->
+<template x-for="zone in ['normal','abnormal','pending']" :key="zone">
+  <div x-show="currentTab===zone" x-cloak>
+    <div class="card">
+      <div class="card-head">
+        <span class="card-label"
+              :style="zone==='normal'?'color:var(--clean)':zone==='abnormal'?'color:var(--blocked)':'color:var(--warning)'"
+              x-text="(zone==='normal'?'正常區':zone==='abnormal'?'異常區':'待分類')+' · '+(zoneDomains.total||0)+' 個'"></span>
+        <div style="display:flex;gap:6px;align-items:center;">
+          <button @click="loadZoneDomains(zone.toUpperCase(), Math.max(0,zoneOffset-50))" :disabled="zoneOffset===0"
+                  class="btn btn-sm" style="color:var(--muted);border-color:var(--border);">←</button>
+          <span class="mono" style="font-size:11px;color:var(--muted);" x-text="Math.floor(zoneOffset/50)+1"></span>
+          <button @click="loadZoneDomains(zone.toUpperCase(), zoneOffset+50)" :disabled="zoneOffset+50>=zoneDomains.total"
+                  class="btn btn-sm" style="color:var(--muted);border-color:var(--border);">→</button>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 90px 72px 72px 150px 60px;gap:8px;padding:7px 16px;border-bottom:1px solid var(--border2);">
+        <span class="mono" style="font-size:9px;color:var(--muted);letter-spacing:.08em;">域名</span>
+        <span class="mono" style="font-size:9px;color:var(--muted);letter-spacing:.08em;">狀態</span>
+        <span class="mono" style="font-size:9px;color:var(--muted);letter-spacing:.08em;">連續正常</span>
+        <span class="mono" style="font-size:9px;color:var(--muted);letter-spacing:.08em;">連續異常</span>
+        <span class="mono" style="font-size:9px;color:var(--muted);letter-spacing:.08em;">最後檢測</span>
+        <span class="mono" style="font-size:9px;color:var(--muted);letter-spacing:.08em;">操作</span>
+      </div>
+      <div style="overflow-y:auto;max-height:36rem;">
+        <template x-for="d in zoneDomains.domains" :key="d.domain">
+          <div style="display:grid;grid-template-columns:1fr 90px 72px 72px 150px 60px;gap:8px;align-items:center;padding:9px 16px;border-bottom:1px solid var(--border);transition:background .1s;"
+               @mouseover="$el.style.background='rgba(255,255,255,.025)'"
+               @mouseleave="$el.style.background='transparent'">
+            <span class="mono" style="font-size:12px;color:var(--txt2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;" x-text="d.domain"></span>
+            <span class="mono" style="font-size:11px;" :class="'s-'+(d.current_status||'API_ERROR')" x-text="d.current_status||'未檢測'"></span>
+            <span class="mono" style="font-size:11px;color:var(--clean);" x-text="d.consecutive_normal"></span>
+            <span class="mono" style="font-size:11px;color:var(--blocked);" x-text="d.consecutive_abnormal"></span>
+            <span class="mono" style="font-size:10px;color:var(--muted);" x-text="d.last_check_time ? formatDate(d.last_check_time) : '—'"></span>
+            <button @click="showDomainDetail(d.domain)" class="btn btn-sm btn-blue">詳情</button>
+          </div>
+        </template>
+        <template x-if="!zoneDomains.domains || zoneDomains.domains.length===0">
+          <div class="mono" style="text-align:center;padding:32px;color:var(--dim);font-size:11px;">// 無資料</div>
+        </template>
+      </div>
+    </div>
+  </div>
+</template>
+
+<!-- nodes full table -->
+<div x-show="currentTab==='nodes'" x-cloak>
+  <div class="card">
+    <div class="card-head">
+      <span class="card-label" style="color:var(--partial);">節點池清單 · <span x-text="nodePool ? nodePool.total_nodes : 0"></span> 個</span>
+      <button @click="refreshNodePool()" :disabled="refreshingPool" class="btn btn-purple btn-sm">
+        <span x-show="!refreshingPool">⟳ 刷新</span><span x-show="refreshingPool">刷新中...</span>
+      </button>
+    </div>
+    <div style="display:grid;grid-template-columns:70px 110px 100px 1fr 80px 140px;gap:8px;padding:7px 16px;border-bottom:1px solid var(--border2);">
+      <span class="mono" style="font-size:9px;color:var(--muted);letter-spacing:.08em;">ISP排名</span>
+      <span class="mono" style="font-size:9px;color:var(--muted);letter-spacing:.08em;">節點 IP</span>
+      <span class="mono" style="font-size:9px;color:var(--muted);letter-spacing:.08em;">城市</span>
+      <span class="mono" style="font-size:9px;color:var(--muted);letter-spacing:.08em;">ISP</span>
+      <span class="mono" style="font-size:9px;color:var(--muted);letter-spacing:.08em;">ASN</span>
+      <span class="mono" style="font-size:9px;color:var(--muted);letter-spacing:.08em;">最後驗證</span>
+    </div>
+    <div style="overflow-y:auto;max-height:36rem;">
+      <template x-for="node in (nodePool ? nodePool.nodes : [])" :key="node.node_id">
+        <div style="display:grid;grid-template-columns:70px 110px 100px 1fr 80px 140px;gap:8px;align-items:center;padding:8px 16px;border-bottom:1px solid var(--border);transition:background .1s;"
+             @mouseover="$el.style.background='rgba(255,255,255,.025)'"
+             @mouseleave="$el.style.background='transparent'">
+          <div>
+            <span class="top-badge" x-show="node.isp_rank <= 30" x-text="'TOP'+node.isp_rank"></span>
+            <span class="mono" style="font-size:10px;color:var(--muted);" x-show="node.isp_rank > 30">其他</span>
+          </div>
+          <span class="mono" style="font-size:10px;color:var(--muted);" x-text="node.node_ip||'—'"></span>
+          <span style="font-size:12px;" x-text="node.city"></span>
+          <span style="font-size:12px;color:var(--txt2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;" x-text="node.isp"></span>
+          <span class="mono" style="font-size:10px;color:var(--muted);" x-text="node.asn ? 'AS'+node.asn : '—'"></span>
+          <span class="mono" style="font-size:10px;color:var(--muted);" x-text="node.last_verified ? formatDate(node.last_verified) : '—'"></span>
+        </div>
+      </template>
+      <template x-if="!nodePool || !nodePool.nodes || nodePool.nodes.length===0">
+        <div class="mono" style="text-align:center;padding:32px;color:var(--dim);font-size:11px;">// 節點池為空，點擊刷新</div>
+      </template>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<!-- ══ DOMAIN DETAIL MODAL ══ -->
+<div x-show="showDomainModal" x-cloak class="modal-bg" @click.self="showDomainModal=false">
+  <div class="modal">
+    <div style="position:sticky;top:0;background:var(--surface);border-bottom:1px solid var(--border);padding:14px 20px;display:flex;justify-content:space-between;align-items:center;">
+      <span class="mono" style="font-size:12px;color:var(--accent);" x-text="'🔍 ' + (domainDetail?.domain||'')"></span>
+      <button @click="showDomainModal=false" style="color:var(--muted);background:none;border:none;cursor:pointer;font-size:18px;line-height:1;">×</button>
+    </div>
+    <div style="padding:20px;">
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:20px;">
+        <div style="background:var(--sur2);border:1px solid var(--border);border-radius:8px;padding:12px;">
+          <p style="font-size:10px;color:var(--muted);margin-bottom:5px;">區域</p>
+          <p style="font-weight:700;font-size:13px;"
+             :style="domainDetail?.current_zone==='NORMAL'?'color:var(--clean)':domainDetail?.current_zone==='ABNORMAL'?'color:var(--blocked)':'color:var(--warning)'"
+             x-text="domainDetail?.current_zone"></p>
+        </div>
+        <div style="background:var(--sur2);border:1px solid var(--border);border-radius:8px;padding:12px;">
+          <p style="font-size:10px;color:var(--muted);margin-bottom:5px;">HTTP 狀態</p>
+          <p class="mono" style="font-weight:700;font-size:12px;" :class="'s-'+(domainDetail?.current_status||'API_ERROR')" x-text="domainDetail?.current_status||'未檢測'"></p>
+        </div>
+        <div style="background:var(--sur2);border:1px solid var(--border);border-radius:8px;padding:12px;">
+          <p style="font-size:10px;color:var(--muted);margin-bottom:5px;">連續正常</p>
+          <p style="font-weight:900;font-size:22px;color:var(--clean);line-height:1;" x-text="domainDetail?.consecutive_normal||0"></p>
+        </div>
+        <div style="background:var(--sur2);border:1px solid var(--border);border-radius:8px;padding:12px;">
+          <p style="font-size:10px;color:var(--muted);margin-bottom:5px;">連續異常</p>
+          <p style="font-weight:900;font-size:22px;color:var(--blocked);line-height:1;" x-text="domainDetail?.consecutive_abnormal||0"></p>
+        </div>
+      </div>
+      <h4 class="mono" style="font-size:10px;color:var(--muted);letter-spacing:.1em;margin-bottom:10px;">CHECK HISTORY</h4>
+      <div style="display:grid;grid-template-columns:48px 80px 1fr 70px;gap:8px;padding:5px 10px;border-bottom:1px solid var(--border2);margin-bottom:4px;">
+        <span class="mono" style="font-size:9px;color:var(--muted);">Batch</span>
+        <span class="mono" style="font-size:9px;color:var(--muted);">狀態</span>
+        <span class="mono" style="font-size:9px;color:var(--muted);">時間</span>
+        <span class="mono" style="font-size:9px;color:var(--muted);">耗時</span>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:6px;max-height:440px;overflow-y:auto;">
+        <template x-for="c in domainDetail?.check_history" :key="c.batch_id">
+          <div style="border-radius:6px;background:var(--sur2);overflow:hidden;">
+            <!-- History header row -->
+            <div style="display:grid;grid-template-columns:48px 80px 1fr 70px;gap:8px;align-items:center;padding:8px 10px;">
+              <span class="mono" style="font-size:10px;color:var(--muted);" x-text="'#'+c.batch_id"></span>
+              <span class="mono" style="font-size:11px;font-weight:700;" :class="'s-'+c.status" x-text="c.status"></span>
+              <span style="font-size:10px;color:var(--muted);" x-text="formatDate(c.test_date)"></span>
+              <span class="mono" style="font-size:10px;color:var(--muted);" x-text="c.duration_ms ? c.duration_ms+'ms' : '—'"></span>
+            </div>
+            <!-- Node details: 每個節點一行 -->
+            <div x-show="c.node_details && c.node_details.length > 0"
+                 style="border-top:1px solid var(--border);padding:6px 10px;display:flex;flex-direction:column;gap:4px;">
+              <template x-for="(nd, ni) in c.node_details" :key="ni">
+                <div style="display:flex;align-items:center;gap:8px;padding:4px 8px;border-radius:5px;background:var(--surface);"
+                     :style="nd.status==='BLOCKED'?'border-left:2px solid var(--blocked)':nd.status==='CLEAN'?'border-left:2px solid var(--clean)':nd.status==='TIMEOUT'?'border-left:2px solid var(--timeout)':'border-left:2px solid var(--border)'">
+                  <!-- 狀態色點 -->
+                  <span style="width:6px;height:6px;border-radius:50%;flex-shrink:0;"
+                        :style="nd.status==='CLEAN'?'background:var(--clean)':nd.status==='BLOCKED'?'background:var(--blocked)':nd.status==='TIMEOUT'?'background:var(--timeout)':nd.status==='WARNING'?'background:var(--warning)':'background:var(--muted)'"></span>
+                  <!-- TOP badge -->
+                  <span x-show="nd.isp_rank && nd.isp_rank <= 30"
+                        style="display:inline-flex;align-items:center;background:linear-gradient(135deg,#1d4ed8,#6d28d9);color:#e0e7ff;font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;padding:1px 5px;border-radius:3px;flex-shrink:0;"
+                        x-text="'TOP'+nd.isp_rank"></span>
+                  <!-- 國家 -->
+                  <span class="mono" style="font-size:10px;color:var(--accent);font-weight:700;flex-shrink:0;" x-text="nd.country||'?'"></span>
+                  <!-- 城市 -->
+                  <span style="font-size:11px;color:var(--txt2);font-weight:500;flex-shrink:0;min-width:80px;" x-text="nd.city||'—'"></span>
+                  <!-- ISP -->
+                  <span style="font-size:10px;color:var(--txt);flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;" x-text="nd.isp||'—'"></span>
+                  <!-- ASN -->
+                  <span class="mono" style="font-size:9px;color:var(--dim);flex-shrink:0;" x-show="nd.asn" x-text="'AS'+nd.asn"></span>
+                  <!-- 目標 IP -->
+                  <span class="mono" style="font-size:9px;color:var(--muted);flex-shrink:0;" x-show="nd.target_ip" x-text="nd.target_ip"></span>
+                  <!-- 回應時間 -->
+                  <span class="mono" style="font-size:9px;color:var(--dim);flex-shrink:0;" x-show="nd.response_time_ms" x-text="nd.response_time_ms+'ms'"></span>
+                </div>
+              </template>
+            </div>
+            <!-- 無節點資料時 -->
+            <div x-show="!c.node_details || c.node_details.length===0"
+                 style="border-top:1px solid var(--border);padding:6px 10px;">
+              <span class="mono" style="font-size:9px;color:var(--dim);">// 無節點資料（API Error 或舊資料）</span>
+            </div>
+          </div>
+        </template>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer style="border-top:1px solid var(--border);padding:10px 20px;">
+  <div class="wrap" style="display:flex;justify-content:space-between;">
+    <span class="mono" style="font-size:10px;color:var(--dim);">GlobalpingChecker V5 · Domain Monitor</span>
+    <span class="mono" style="font-size:10px;color:var(--dim);" x-text="'updated: '+lastUpdated"></span>
+  </div>
+</footer>
+
+<script>
+function dashboard() {
+  return {
+    stats:    {{ stats | tojson }},
+    cycleInfo: {{ cycle_info | tojson if cycle_info else '{}' }},
+    progress: {
+      running:false, current_domain:null, current_index:0, total_domains:0,
+      current_node_isp:null, current_node_top:null, current_node_city:null,
+      current_method:'HTTP',
+      stats:{clean:0,blocked:0,timeout:0,warning:0,partial:0,api_error:0},
+      recent_results:[]
+    },
+    quota: {},
+    currentTab: 'normal',
+    zoneDomains: {total:0, domains:[]},
+    zoneOffset: 0,
+    nodePool: null,
+    refreshingPool: false,
+    recheckingAbnormal: false,
+    showDomainModal: false,
+    domainDetail: null,
+    lastUpdated: '---',
+    resultPage: 0,
+    resultPageSize: 20,
+    _recentFromDb: false,
+    _recentBatchDate: null,
+    _wasRunning: false,
+
+    get pagedResults() {
+      const all = this.progress.recent_results || [];
+      const start = this.resultPage * this.resultPageSize;
+      return all.slice(start, start + this.resultPageSize);
+    },
+
+    get nodeCountByCountry() {
+      if (!this.nodePool?.nodes) return {};
+      return this.nodePool.nodes.reduce((acc, n) => {
+        acc[n.country] = (acc[n.country]||0) + 1;
+        return acc;
+      }, {});
+    },
+
+    async init() {
+      await Promise.all([this.loadProgress(), this.loadQuota(), this.loadNodePool()]);
+      this.loadZoneDomains('NORMAL');
+      if (!this.progress.running) await this.loadRecentResults();
+      setInterval(() => this.loadProgress(), 3000);
+      setInterval(() => this.refreshStats(),  15000);
+      setInterval(() => this.loadQuota(),     60000);
+      setInterval(() => { if (!this.progress.running) this.loadRecentResults(); }, 30000);
+    },
+
+    async loadRecentResults() {
+      try {
+        const r = await fetch('/api/recent-results?limit=200');
+        const d = await r.json();
+        if (d.results && d.results.length > 0) {
+          this.progress.recent_results = d.results;
+          this.progress.total_domains  = d.total;
+          this._recentFromDb = true;
+          this._recentBatchDate = d.batch_date;
+        }
+      } catch(e) {}
+    },
+
+    async loadProgress() {
+      try {
+        const r = await fetch('/api/progress');
+        const d = await r.json();
+        // 若是新一輪開始（total_domains 重設），重置分頁到第一頁
+        if (d.total_domains !== this.progress.total_domains) {
+          this.resultPage = 0;
+        }
+        // 檢測剛開始時，清除歷史資料旗標，改用即時資料
+        if (!this._wasRunning && d.running) {
+          this._recentFromDb = false;
+          this.resultPage = 0;
+        }
+        // 檢測剛結束時，自動載入歷史結果
+        if (this._wasRunning && !d.running) {
+          await this.loadRecentResults();
+        }
+        this._wasRunning = d.running;
+        // 若檢測中，recent_results 來自 progress（即時）；否則保留 DB 歷史資料
+        if (d.running || !this._recentFromDb) {
+          this.progress = d;
+        } else {
+          // 保留 DB 歷史資料，只更新 running 狀態等欄位
+          this.progress = {
+            ...d,
+            recent_results: this.progress.recent_results,
+            total_domains:  this.progress.total_domains,
+          };
+        }
+        this.lastUpdated = new Date().toLocaleTimeString('zh-TW');
+      } catch(e) {}
+    },
+
+    async refreshStats() {
+      try {
+        const r = await fetch('/api/stats');
+        const d = await r.json();
+        this.stats = d;
+        this.cycleInfo = d.cycle_info || {};
+      } catch(e) {}
+    },
+
+    async loadQuota() {
+      try {
+        const r = await fetch('/api/quota');
+        this.quota = await r.json();
+      } catch(e) {}
+    },
+
+    async loadZoneDomains(zone, offset) {
+      this.zoneOffset = Math.max(0, offset !== undefined ? offset : 0);
+      try {
+        const r = await fetch(`/api/zones/${zone}?limit=50&offset=${this.zoneOffset}`);
+        this.zoneDomains = await r.json();
+      } catch(e) {}
+    },
+
+    async showDomainDetail(domain) {
+      try {
+        const r = await fetch('/api/domains/' + encodeURIComponent(domain));
+        this.domainDetail = await r.json();
+        this.showDomainModal = true;
+      } catch(e) { alert('載入失敗: ' + e.message); }
+    },
+
+    async loadNodePool() {
+      try {
+        const r = await fetch('/api/nodes/pool');
+        this.nodePool = await r.json();
+      } catch(e) {}
+    },
+
+    async refreshNodePool() {
+      if (!confirm('確定要刷新節點池？這會重新驗證所有節點 IP。')) return;
+      this.refreshingPool = true;
+      try {
+        await fetch('/api/nodes/pool/refresh', {method:'POST'});
+        setTimeout(() => this.loadNodePool(), 8000);
+      } catch(e) { alert('刷新失敗: ' + e.message); }
+      finally { this.refreshingPool = false; }
+    },
+
+    async triggerCheck() {
+      if (!confirm('確定要立即觸發檢測？')) return;
+      try {
+        const r = await fetch('/api/check/trigger', {method:'POST'});
+        const d = await r.json();
+        alert(d.message || '已觸發');
+      } catch(e) { alert('觸發失敗: ' + e.message); }
+    },
+
+    async stopCheck() {
+      if (!confirm('確定要暫停當前檢測？（完成當前域名後停止）')) return;
+      try {
+        const r = await fetch('/api/check/stop', {method:'POST'});
+        const d = await r.json();
+        alert(d.message || '暫停指令已送出');
+      } catch(e) { alert('暫停失敗: ' + e.message); }
+    },
+
+    async recheckAbnormal() {
+      const msg = this.progress.running
+        ? '當前檢測進行中，確定要暫停並重新只檢測異常區？'
+        : '確定要重新檢測所有異常區域名？';
+      if (!confirm(msg)) return;
+      this.recheckingAbnormal = true;
+      try {
+        const r = await fetch('/api/check/recheck-abnormal', {method:'POST'});
+        const d = await r.json();
+        alert(d.message || '已啟動');
+        await this.refreshStats();
+      } catch(e) { alert('失敗: ' + e.message); }
+      finally { this.recheckingAbnormal = false; }
+    },
+
+    async resetDomains() {
+      if (!confirm('確定要把所有異常區域名重置為待分類？')) return;
+      try {
+        const r = await fetch('/api/domains/reset-to-pending', {method:'POST'});
+        const d = await r.json();
+        alert(d.message || '重置完成');
+        await this.refreshStats();
+      } catch(e) { alert('重置失敗: ' + e.message); }
+    },
+
+    formatDate(s) {
+      if (!s) return '—';
+      // 後端 datetime.utcnow().isoformat() 不帶 Z，需補上才能讓瀏覽器正確解析為 UTC
+      const iso = s.endsWith('Z') || s.includes('+') ? s : s + 'Z';
+      return new Date(iso).toLocaleString('zh-TW', {month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit'});
+    }
+  };
+}
+</script>
+</body>
+</html>

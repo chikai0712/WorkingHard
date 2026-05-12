@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GlobalpingChecker V4 - 域名監控系統</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+    <style>
+        [x-cloak] { display: none !important; }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen" x-data="dashboard()">
+    <!-- Header -->
+    <header class="bg-gradient-to-r from-blue-600 to-indigo-700 text-white shadow-lg">
+        <div class="container mx-auto px-4 py-6">
+            <div class="flex justify-between items-center">
+                <div>
+                    <h1 class="text-3xl font-bold">🌐 GlobalpingChecker V4</h1>
+                    <p class="text-blue-200 mt-1">印尼 ISP 域名監控系統</p>
+                </div>
+                <div class="text-right">
+                    <p class="text-sm text-blue-200">每 90 分鐘自動檢測</p>
+                    <p class="text-lg font-semibold" x-text="lastCheckText"></p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <!-- Stats Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+            <!-- Total Domains -->
+            <div class="bg-white rounded-xl shadow-md p-6">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-gray-500 text-sm">總域名數</p>
+                        <p class="text-3xl font-bold text-gray-800" x-text="stats.total_domains || 0"></p>
+                    </div>
+                    <div class="bg-blue-100 p-3 rounded-full">
+                        <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Normal -->
+            <div class="bg-white rounded-xl shadow-md p-6">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-gray-500 text-sm">正常連通</p>
+                        <p class="text-3xl font-bold text-green-600" x-text="stats.normal_count || 0"></p>
+                        <p class="text-sm text-green-500" x-text="stats.normal_percentage + '%'"></p>
+                    </div>
+                    <div class="bg-green-100 p-3 rounded-full">
+                        <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Abnormal -->
+            <div class="bg-white rounded-xl shadow-md p-6">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-gray-500 text-sm">異常狀態</p>
+                        <p class="text-3xl font-bold text-red-600" x-text="stats.abnormal_count || 0"></p>
+                        <p class="text-sm text-red-500" x-text="(100 - stats.normal_percentage).toFixed(1) + '%'"></p>
+                    </div>
+                    <div class="bg-red-100 p-3 rounded-full">
+                        <svg class="w-8 h-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Next Check -->
+            <div class="bg-white rounded-xl shadow-md p-6">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-gray-500 text-sm">下次檢測</p>
+                        <p class="text-xl font-bold text-indigo-600" x-text="nextCheckText"></p>
+                    </div>
+                    <div class="bg-indigo-100 p-3 rounded-full">
+                        <svg class="w-8 h-8 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                    </div>
+                </div>
+                <button @click="triggerCheck()" 
+                        class="mt-4 w-full bg-indigo-600 text-white py-2 px-4 rounded-lg hover:bg-indigo-700 transition">
+                    立即檢測
+                </button>
+            </div>
+        </div>
+
+        <!-- Classification Details -->
+        <div class="bg-white rounded-xl shadow-md p-6 mb-8">
+            <h2 class="text-xl font-bold text-gray-800 mb-4">📊 狀態分類詳情</h2>
+            <div class="overflow-x-auto">
+                <table class="w-full">
+                    <thead>
+                        <tr class="border-b">
+                            <th class="text-left py-3 px-4">狀態</th>
+                            <th class="text-right py-3 px-4">數量</th>
+                            <th class="text-right py-3 px-4">比例</th>
+                            <th class="text-left py-3 px-4">說明</th>
+                            <th class="text-center py-3 px-4">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <template x-for="c in stats.classifications" :key="c.status">
+                            <tr class="border-b hover:bg-gray-50">
+                                <td class="py-3 px-4 font-medium" x-text="c.status"></td>
+                                <td class="py-3 px-4 text-right font-bold" x-text="c.count"></td>
+                                <td class="py-3 px-4 text-right" x-text="c.percentage + '%'"></td>
+                                <td class="py-3 px-4 text-gray-600 text-sm" x-text="c.description"></td>
+                                <td class="py-3 px-4 text-center">
+                                    <button @click="showDomains(c)" 
+                                            class="text-blue-600 hover:text-blue-800 text-sm"
+                                            x-show="c.count > 0">
+                                        查看域名
+                                    </button>
+                                </td>
+                            </tr>
+                        </template>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Recent Batches -->
+        <div class="bg-white rounded-xl shadow-md p-6 mb-8">
+            <h2 class="text-xl font-bold text-gray-800 mb-4">📋 最近檢測記錄</h2>
+            <div class="overflow-x-auto">
+                <table class="w-full">
+                    <thead>
+                        <tr class="border-b">
+                            <th class="text-left py-3 px-4">批次 ID</th>
+                            <th class="text-left py-3 px-4">檢測時間</th>
+                            <th class="text-right py-3 px-4">總數</th>
+                            <th class="text-right py-3 px-4">正常</th>
+                            <th class="text-right py-3 px-4">封鎖</th>
+                            <th class="text-right py-3 px-4">超時</th>
+                            <th class="text-right py-3 px-4">警告</th>
+                            <th class="text-right py-3 px-4">部分</th>
+                            <th class="text-center py-3 px-4">類型</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <template x-for="b in batches" :key="b.batch_id">
+                            <tr class="border-b hover:bg-gray-50 cursor-pointer" @click="selectBatch(b.batch_id)">
+                                <td class="py-3 px-4 font-medium text-blue-600" x-text="b.batch_id"></td>
+                                <td class="py-3 px-4" x-text="formatDate(b.test_date)"></td>
+                                <td class="py-3 px-4 text-right" x-text="b.total_domains"></td>
+                                <td class="py-3 px-4 text-right text-green-600" x-text="b.clean_count"></td>
+                                <td class="py-3 px-4 text-right text-red-600" x-text="b.blocked_count"></td>
+                                <td class="py-3 px-4 text-right text-yellow-600" x-text="b.timeout_count"></td>
+                                <td class="py-3 px-4 text-right text-orange-600" x-text="b.warning_count"></td>
+                                <td class="py-3 px-4 text-right text-purple-600" x-text="b.partial_count"></td>
+                                <td class="py-3 px-4 text-center">
+                                    <span x-show="b.is_scheduled" class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">排程</span>
+                                    <span x-show="!b.is_scheduled" class="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded">手動</span>
+                                </td>
+                            </tr>
+                        </template>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Domain List Modal -->
+        <div x-show="showModal" x-cloak
+             class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+             @click.self="showModal = false">
+            <div class="bg-white rounded-xl shadow-xl max-w-2xl w-full mx-4 max-h-[80vh] overflow-hidden">
+                <div class="p-6 border-b">
+                    <div class="flex justify-between items-center">
+                        <h3 class="text-xl font-bold" x-text="modalTitle"></h3>
+                        <button @click="showModal = false" class="text-gray-500 hover:text-gray-700">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                <div class="p-6 overflow-y-auto max-h-[60vh]">
+                    <div class="space-y-2">
+                        <template x-for="(domain, index) in modalDomains" :key="index">
+                            <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg hover:bg-gray-100">
+                                <span x-text="domain" class="font-mono"></span>
+                                <button @click="viewDomainDetail(domain)" 
+                                        class="text-blue-600 hover:text-blue-800 text-sm">
+                                    詳情
+                                </button>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-6 mt-8">
+        <div class="container mx-auto px-4 text-center">
+            <p>GlobalpingChecker V4 - 域名監控系統</p>
+            <p class="text-gray-400 text-sm mt-2">Powered by Globalping API | PostgreSQL | FastAPI</p>
+        </div>
+    </footer>
+
+    <script>
+        function dashboard() {
+            return {
+                stats: {{ stats | tojson if stats else '{}' }},
+                batches: [],
+                showModal: false,
+                modalTitle: '',
+                modalDomains: [],
+                
+                async init() {
+                    await this.loadBatches();
+                    await this.loadStats();
+                    // 每 30 秒刷新一次
+                    setInterval(() => this.loadStats(), 30000);
+                },
+                
+                async loadStats() {
+                    try {
+                        const res = await fetch('/api/stats');
+                        this.stats = await res.json();
+                    } catch (e) {
+                        console.error('Failed to load stats:', e);
+                    }
+                },
+                
+                async loadBatches() {
+                    try {
+                        const res = await fetch('/api/batches?limit=10');
+                        this.batches = await res.json();
+                    } catch (e) {
+                        console.error('Failed to load batches:', e);
+                    }
+                },
+                
+                get lastCheckText() {
+                    if (!this.stats.last_check_time) return '尚未檢測';
+                    return this.formatDate(this.stats.last_check_time);
+                },
+                
+                get nextCheckText() {
+                    if (!this.stats.next_check_time) return '---';
+                    const next = new Date(this.stats.next_check_time);
+                    const now = new Date();
+                    const diff = Math.max(0, Math.floor((next - now) / 60000));
+                    return `${diff} 分鐘後`;
+                },
+                
+                formatDate(dateStr) {
+                    if (!dateStr) return '---';
+                    const d = new Date(dateStr);
+                    return d.toLocaleString('zh-TW', {
+                        month: '2-digit',
+                        day: '2-digit',
+                        hour: '2-digit',
+                        minute: '2-digit'
+                    });
+                },
+                
+                showDomains(classification) {
+                    this.modalTitle = classification.status + ' 域名列表';
+                    this.modalDomains = classification.domains;
+                    this.showModal = true;
+                },
+                
+                async selectBatch(batchId) {
+                    try {
+                        const res = await fetch(`/api/batches/${batchId}/classification`);
+                        const data = await res.json();
+                        this.stats.classifications = data;
+                    } catch (e) {
+                        console.error('Failed to load batch:', e);
+                    }
+                },
+                
+                async triggerCheck() {
+                    try {
+                        const res = await fetch('/api/check/trigger', { method: 'POST' });
+                        const data = await res.json();
+                        alert(data.message);
+                    } catch (e) {
+                        alert('觸發失敗: ' + e.message);
+                    }
+                },
+                
+                viewDomainDetail(domain) {
+                    window.open(`/api/domains/${domain}`, '_blank');
+                }
+            }
+        }
+    </script>
+</body>
+</html>

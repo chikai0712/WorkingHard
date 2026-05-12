@@ -1,0 +1,10 @@
+*.tfstate
+*.tfstate.*
+.terraform/
+.terraform.lock.hcl
+terraform.tfvars
+crash.log
+crash.*.log
+cloudsite-new-website-key
+cloudsite-new-website-key.pub
+*.pem

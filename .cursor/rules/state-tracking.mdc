@@ -5,16 +5,39 @@ alwaysApply: true
 
 # State Tracking 強制規則
 
-## 何時必須更新 `.planning/STATE.md`
+## 子專案 Planning 目錄位置
 
-以下任何動作完成後，**必須立即更新 STATE.md**：
+每個子專案有**獨立的 `.planning/` 目錄**，不要混用根目錄的 STATE.md：
 
-1. 完成 ROADMAP.md 中的任意一個步驟（打勾）
+| 子專案 | Planning 路徑 |
+|--------|---------------|
+| 工作區索引 | `.planning/STATE.md` + `.planning/ROADMAP.md` |
+| GlobalpingChecker | `GlobalpingChecker/.planning/STATE.md` + `ROADMAP.md` |
+| 台指期監控系統 | `03-Data-Analytics/Stock_Analize/.planning/STATE.md` + `ROADMAP.md` |
+| Cloudflare DNS data | `03-Data-Analytics/Cloudflare-DNS-data/.planning/STATE.md` + `ROADMAP.md` |
+| XE-Rate-Scraper | `03-Data-Analytics/XE-Rate-Scraper/.planning/STATE.md` + `ROADMAP.md` |
+
+> 新增子專案時，**必須先在子專案目錄下建立 `.planning/STATE.md` 和 `.planning/ROADMAP.md`**，
+> 再更新根目錄 `.planning/STATE.md` 的索引表格。
+
+## 何時必須同步更新 STATE.md 與 ROADMAP.md
+
+以下任何動作完成後，**必須立即同步更新當前子專案的 STATE.md 與 ROADMAP.md**：
+
+1. 完成 ROADMAP.md 中的任意一個步驟 → **在 ROADMAP.md 打勾，並在 STATE.md 記錄完成紀錄**
 2. 創建或刪除核心檔案
 3. 修改核心邏輯（非 typo/style 修正）
 4. 跑完測試並得到結果
 5. 遇到阻塞點（Blocker）
-6. 對話即將結束前
+6. **對話即將結束前（這是強制動作，缺少此步驟視為未完成）**
+7. **專案切換或暫停時** — 同時更新根目錄 `.planning/STATE.md` 的索引表格
+
+## ROADMAP.md 更新規則
+
+- 步驟完成後立即將 `[ ]` 改為 `[x]`
+- 若發現步驟拆解不足，補充子步驟（不得刪除已完成項目）
+- 新增的功能或子專案必須在 ROADMAP.md 新增對應 Phase / Plan
+- 更新 Progress 表格中的完成數量
 
 ## STATE.md 更新格式
 
@@ -34,15 +57,18 @@ alwaysApply: true
 每次新對話開始時，主動執行：
 
 ```
-1. 讀取 .planning/STATE.md
-2. 讀取 .planning/ROADMAP.md
-3. 告訴使用者：「目前進度：Phase X，上次停在 [描述]，下一步是 [描述]。」
-4. 詢問：「繼續這個步驟，還是有新任務？」
+1. 詢問使用者要處理哪個子專案
+2. 讀取該子專案的 .planning/STATE.md
+3. 讀取該子專案的 .planning/ROADMAP.md
+4. 告訴使用者：「目前進度：Phase X，上次停在 [描述]，下一步是 [描述]。」
+5. 詢問：「繼續這個步驟，還是有新任務？」
 ```
+
+若不確定要處理哪個專案，先讀根目錄 `.planning/STATE.md` 的索引表格。
 
 ## 超過 15 輪對話時
 
 主動提示：
 
 > 「對話已經很長了，建議開新視窗並貼上以下指令恢復進度：
-> **Read .planning/STATE.md and .planning/ROADMAP.md, then tell me current progress.**」
+> **Read [子專案路徑]/.planning/STATE.md and ROADMAP.md, then tell me current progress.**」

@@ -5,6 +5,10 @@
 
 set -e
 
+# 禁用代理（避免 AWS CLI 連線問題）
+unset http_proxy https_proxy HTTP_PROXY HTTPS_PROXY
+unset all_proxy ALL_PROXY no_proxy NO_PROXY
+
 REGION="ap-northeast-1"
 KEY_NAME="pokemon-game-key"
 SECURITY_GROUP_NAME="pokemon-game-sg"

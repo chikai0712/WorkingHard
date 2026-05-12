@@ -1,0 +1,24 @@
+# Terraform
+.terraform/
+.terraform.lock.hcl
+*.tfstate
+*.tfstate.*
+*.tfvars
+!terraform.tfvars.example
+crash.log
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# 臨時檔案
+/tmp/
+*.tmp
+*.log
+
+# macOS
+.DS_Store
+
+# 備份檔案
+*.bak
+*~

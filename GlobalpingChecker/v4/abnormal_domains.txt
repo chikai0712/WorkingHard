@@ -1,0 +1,11 @@
+# 異常域名列表 - 需要進一步檢測釐清錯誤類型
+# 來源: 批次 18 檢測結果
+
+# WARNING (服務異常) - 7 個
+1bez.com
+789wwin.fun
+789wwin.live
+789wwin.vip
+78wwin.club
+78wwin.com
+78wwin.fun

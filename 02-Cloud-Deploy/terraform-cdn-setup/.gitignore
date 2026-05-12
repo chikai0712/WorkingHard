@@ -1,0 +1,16 @@
+# Terraform 敏感檔案
+terraform.tfvars
+*.tfvars
+!*.tfvars.example
+
+# Terraform 狀態與快取
+.terraform/
+.terraform.lock.hcl
+terraform.tfstate
+terraform.tfstate.backup
+crash.log
+crash.*.log
+
+# GCP 服務帳號金鑰
+*.json
+!package.json

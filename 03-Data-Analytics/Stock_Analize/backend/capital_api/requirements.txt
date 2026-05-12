@@ -1,0 +1,17 @@
+# 群益 Capital API 所需套件
+# Windows 環境
+comtypes>=1.2.0
+
+# 環境變數
+python-dotenv>=1.0.0
+
+# 技術指標計算
+pandas>=2.0.0
+pandas-ta>=0.3.14b
+numpy>=1.24.0
+
+# 趨勢線圖表
+matplotlib>=3.7.0
+
+# Telegram 通知
+requests>=2.31.0
