@@ -1,0 +1,53 @@
+name: ci-cd-template
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  lint-test-build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup runtime
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: |
+          echo "Replace with npm ci / pip install -r requirements.txt / go mod download"
+
+      - name: Lint
+        run: |
+          echo "Replace with project lint command"
+
+      - name: Test
+        run: |
+          echo "Replace with project test command"
+
+      - name: Build artifact
+        run: |
+          mkdir -p dist
+          echo "sample build output" > dist/build.txt
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-output
+          path: dist/
+
+  deploy-gate:
+    needs: lint-test-build
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    environment: production
+    steps:
+      - name: Manual deployment gate
+        run: |
+          echo "Replace with deployment action or reusable workflow"

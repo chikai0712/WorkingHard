@@ -1,0 +1,14 @@
+policy_name: default-db-retention
+backup_classes:
+  full:
+    retain_days: 30
+    min_copies: 2
+  differential:
+    retain_days: 14
+    min_copies: 3
+  log:
+    retain_days: 7
+    min_copies: 5
+verification:
+  checksum_required: true
+  restore_drill_frequency: weekly

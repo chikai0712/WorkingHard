@@ -1,0 +1,6 @@
+device_role: internal_lb
+vendor: f5
+device_name: f5_internal_01
+mgmt_ip: 10.0.0.40
+lb_scope: internal
+virtual_server_name: INTERNAL_LB_VS

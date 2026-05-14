@@ -1,0 +1,7 @@
+provider: cloudflare
+zone: example.com
+record_name: www.example.com
+record_type: CNAME
+primary_target: primary-origin.example.net
+secondary_target: standby-origin.example.net
+proxy_enabled: true

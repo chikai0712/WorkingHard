@@ -1,0 +1,6 @@
+ansible_connection: httpapi
+ansible_network_os: fortinet.fortios.fortios
+ansible_httpapi_use_ssl: true
+ansible_httpapi_validate_certs: false
+ansible_user: YOUR_FORTI_USER
+ansible_password: YOUR_FORTI_PASSWORD

@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: db-monitoring
+  labels:
+    app.kubernetes.io/name: db-monitoring
+    app.kubernetes.io/part-of: db-automation

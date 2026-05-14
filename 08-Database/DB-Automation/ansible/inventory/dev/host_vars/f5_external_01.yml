@@ -1,0 +1,6 @@
+device_role: external_lb
+vendor: f5
+device_name: f5_external_01
+mgmt_ip: 10.0.0.50
+lb_scope: external
+virtual_server_name: EXTERNAL_LB_VS

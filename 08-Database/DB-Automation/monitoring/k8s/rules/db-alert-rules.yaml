@@ -1,0 +1,29 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: db-alert-rules
+  namespace: db-monitoring
+  labels:
+    release: kube-prometheus-stack
+spec:
+  groups:
+    - name: mysql.rules
+      rules:
+        - alert: MySQLExporterDown
+          expr: up{job="mysqld-exporter"} == 0
+          for: 5m
+          labels:
+            severity: critical
+          annotations:
+            summary: MySQL exporter is down
+            description: mysqld_exporter target is unavailable for 5 minutes.
+    - name: mssql.rules
+      rules:
+        - alert: MSSQLExporterDown
+          expr: up{job="mssql-exporter"} == 0
+          for: 5m
+          labels:
+            severity: critical
+          annotations:
+            summary: MSSQL exporter is down
+            description: mssql exporter target is unavailable for 5 minutes.

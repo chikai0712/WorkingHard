@@ -1,0 +1,10 @@
+---
+- name: FortiGate placeholder checks
+  ansible.builtin.debug:
+    msg:
+      check_type: fortigate
+      target: "{{ device_name }}"
+      mgmt_ip: "{{ mgmt_ip }}"
+      expected_inside_zone: "{{ inside_zone_name | default('UNSET') }}"
+      expected_outside_zone: "{{ outside_zone_name | default('UNSET') }}"
+      mode: check_only

@@ -1,0 +1,10 @@
+---
+- name: F5 placeholder checks
+  ansible.builtin.debug:
+    msg:
+      check_type: f5
+      target: "{{ device_name }}"
+      mgmt_ip: "{{ mgmt_ip }}"
+      lb_scope: "{{ lb_scope | default('UNSET') }}"
+      virtual_server_name: "{{ virtual_server_name | default('UNSET') }}"
+      mode: check_only

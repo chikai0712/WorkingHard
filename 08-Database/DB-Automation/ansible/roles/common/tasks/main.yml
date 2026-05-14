@@ -1,0 +1,9 @@
+---
+- name: Show normalized device variables
+  ansible.builtin.debug:
+    msg:
+      device_name: "{{ device_name | default(inventory_hostname) }}"
+      mgmt_ip: "{{ mgmt_ip | default(ansible_host | default('UNSET')) }}"
+      vendor: "{{ vendor | default('unknown') }}"
+      device_role: "{{ device_role | default('unknown') }}"
+      environment: "{{ network_environment | default('unknown') }}"

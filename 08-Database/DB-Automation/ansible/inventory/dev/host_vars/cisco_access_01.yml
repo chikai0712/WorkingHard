@@ -1,0 +1,5 @@
+device_role: l2l3_switch
+vendor: cisco
+device_name: cisco_access_01
+mgmt_ip: 10.0.0.30
+switch_layer: distribution

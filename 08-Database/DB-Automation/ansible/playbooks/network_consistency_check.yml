@@ -1,0 +1,24 @@
+---
+- name: Network device consistency checks
+  hosts: all
+  gather_facts: false
+  roles:
+    - role: common
+
+- name: FortiGate checks
+  hosts: fortigate_fw
+  gather_facts: false
+  roles:
+    - role: fortigate_check
+
+- name: Cisco checks
+  hosts: cisco_core_switch:cisco_l2l3_switch
+  gather_facts: false
+  roles:
+    - role: cisco_check
+
+- name: F5 checks
+  hosts: f5_internal_lb:f5_external_lb
+  gather_facts: false
+  roles:
+    - role: f5_check

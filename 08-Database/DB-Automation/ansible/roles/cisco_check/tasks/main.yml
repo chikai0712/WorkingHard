@@ -1,0 +1,9 @@
+---
+- name: Cisco placeholder checks
+  ansible.builtin.debug:
+    msg:
+      check_type: cisco
+      target: "{{ device_name }}"
+      mgmt_ip: "{{ mgmt_ip }}"
+      switch_layer: "{{ switch_layer | default('UNSET') }}"
+      mode: check_only

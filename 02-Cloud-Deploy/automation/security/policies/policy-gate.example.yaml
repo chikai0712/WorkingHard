@@ -1,0 +1,14 @@
+severity_thresholds:
+  block:
+    - critical
+  warn:
+    - high
+    - medium
+allow_overrides:
+  require_ticket: true
+  require_expiry: true
+scan_types:
+  - sast
+  - dependency
+  - secrets
+  - container

@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: db-monitoring-prod
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://example.com/your-gitops-repo.git
+    targetRevision: main
+    path: 08-Database/DB-Automation/monitoring/k8s/kustomize/overlays/prod
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: db-monitoring
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

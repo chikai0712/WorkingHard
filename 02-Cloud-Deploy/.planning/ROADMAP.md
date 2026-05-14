@@ -65,6 +65,45 @@
   - 驗證方式：確認 `clouddeployment168.site` DNS 管理位置與 A record 設定方式。
   - 相關路徑：待確認。
 
+### Phase 5：CI/CD + Release 實戰版 skeleton 🔄
+**Goal**: 讓 `automation/cicd/` 與 `automation/release/` 從 dry-run 提升到可套用模板層級。
+
+- [x] 建立 GitHub Actions / GitLab CI 範例 pipeline
+  - 驗證方式：存在 workflow / pipeline 樣板，包含 lint、test、build、artifact 與 deploy gate 階段。
+  - 相關路徑：`02-Cloud-Deploy/automation/cicd/`
+- [x] 建立 release metadata / environment config 範例
+  - 驗證方式：存在 `manifest`、`versions`、`environments` 類型樣板。
+  - 相關路徑：`02-Cloud-Deploy/automation/release/`
+- [x] 更新 shell skeleton 以支援新模板
+  - 驗證方式：`pipeline.sh` 與 `release.sh` 可輸出對應模板資訊，且 shell 語法檢查通過。
+  - 相關路徑：`02-Cloud-Deploy/automation/cicd/`、`release/`
+
+### Phase 6：Terraform / IaC 實戰版 skeleton 🔄
+**Goal**: 讓 `automation/iac/` 從單純 wrapper 提升到可套用 Terraform/OpenTofu 模板層級。
+
+- [x] 建立 backend / tfvars / module scaffold 範本
+  - 驗證方式：存在 backend、environment tfvars、module 最小範本與使用說明。
+  - 相關路徑：`02-Cloud-Deploy/automation/iac/`
+- [x] 更新 wrapper 以支援 init / plan / apply-dry-run 導引
+  - 驗證方式：`terraform_wrapper.sh` 可顯示 backend / tfvars / var-file / planfile 相關資訊，且 shell 語法檢查通過。
+  - 相關路徑：`02-Cloud-Deploy/automation/iac/terraform_wrapper.sh`
+- [x] 建立實務 README 與工作流說明
+  - 驗證方式：README 說明目錄用途、建議流程與 guardrails。
+  - 相關路徑：`02-Cloud-Deploy/automation/iac/README.md`
+
+### Phase 7：DNS/CDN + Network/Security 實戰版 skeleton 🔄
+**Goal**: 讓 `dns-cdn/`、`network/`、`security/` 從初版 skeleton 提升到可套用模板層級。
+
+- [x] 建立 DNS/CDN failover policy 與 provider record 範本
+  - 驗證方式：存在 failover policy、provider record 範本與更新後的 `failover_check.py`。
+  - 相關路徑：`02-Cloud-Deploy/automation/dns-cdn/`
+- [x] 建立 network desired-state 與 security policy/report schema 範本
+  - 驗證方式：存在 desired rules、policy gate、report schema 範本與更新後腳本。
+  - 相關路徑：`02-Cloud-Deploy/automation/network/`、`security/`
+- [x] 補 sequence flow 與實務 README 說明
+  - 驗證方式：README 補上 practical templates、sequence flow 與架構原理。
+  - 相關路徑：`02-Cloud-Deploy/automation/dns-cdn/`、`network/`、`security/`
+
 ## Progress
 
 | Phase | 完成 | 狀態 |
@@ -74,3 +113,6 @@
 | Phase 2 一鍵部署腳本 | 1/1 | ✅ Complete |
 | Phase 3 本地驗證 | 3/3 | ✅ Complete |
 | Phase 4 實機部署驗證 | 0/3 | 🔲 Pending |
+| Phase 5 CI/CD + Release 實戰版 skeleton | 3/3 | ✅ Complete |
+| Phase 6 Terraform / IaC 實戰版 skeleton | 3/3 | ✅ Complete |
+| Phase 7 DNS/CDN + Network/Security 實戰版 skeleton | 3/3 | ✅ Complete |

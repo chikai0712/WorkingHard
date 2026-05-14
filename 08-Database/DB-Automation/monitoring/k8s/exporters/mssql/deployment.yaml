@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mssql-exporter
+  namespace: db-monitoring
+  labels:
+    app: mssql-exporter
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mssql-exporter
+  template:
+    metadata:
+      labels:
+        app: mssql-exporter
+    spec:
+      containers:
+        - name: mssql-exporter
+          image: burningalchemist/sql_exporter:0.17.0
+          ports:
+            - containerPort: 9399
+              name: metrics
+          volumeMounts:
+            - name: config
+              mountPath: /etc/sql_exporter
+          env:
+            - name: SQL_EXPORTER_CONFIG_FILE
+              value: /etc/sql_exporter/sql_exporter.yml
+      volumes:
+        - name: config
+          configMap:
+            name: mssql-exporter-config
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mssql-exporter
+  namespace: db-monitoring
+  labels:
+    app: mssql-exporter
+spec:
+  selector:
+    app: mssql-exporter
+  ports:
+    - name: metrics
+      port: 9399
+      targetPort: metrics

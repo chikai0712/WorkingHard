@@ -8,6 +8,7 @@
 - `Website/terraform/`：S3 + CloudFront 靜態網站實驗配置。
 - `Website/`：EC2/Nginx 手動部署與 DNS 測試腳本。
 - `ec2-simple-website/`：新 AWS 帳號專用，從零建立 EC2 + Nginx 簡易網站。
+- `automation/`：本輪新增的雲部署 skeleton，涵蓋 CI/CD、Build/Deploy/Rollback、IaC、Configuration Management、DNS/CDN、Security 與 Network automation 樣板。
 
 ## 當前任務規格
 
@@ -23,6 +24,7 @@
 - AWS Region：`ap-northeast-1`。
 - 第一版只做 HTTP，HTTPS 與網域接回在第二階段處理。
 - 不要在 `terraform-cdn-setup/` 目錄使用新 AWS profile 執行 `terraform apply`，該目錄會讀舊 AWS/GCP state。
+- 本輪新增的 `automation/` 內容僅建立 skeleton，不直接對真實雲帳號、Cloudflare、GitHub、GitLab 或正式環境執行操作。
 
 ## Forbidden Zones
 

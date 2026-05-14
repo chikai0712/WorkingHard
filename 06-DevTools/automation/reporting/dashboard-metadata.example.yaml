@@ -1,0 +1,11 @@
+dashboard_name: example-sre-dashboard
+owner: platform-team
+source: grafana
+panels:
+  - availability
+  - latency
+  - error-rate
+  - saturation
+review:
+  cadence: weekly
+  incident_link_required: true

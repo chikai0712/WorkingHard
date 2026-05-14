@@ -1,0 +1,5 @@
+device_role: core_switch
+vendor: cisco
+device_name: cisco_core_01
+mgmt_ip: 10.0.0.20
+switch_layer: core

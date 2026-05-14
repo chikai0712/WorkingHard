@@ -1,0 +1,43 @@
+stages:
+  - lint
+  - test
+  - build
+  - package
+  - deploy
+
+variables:
+  APP_NAME: "example-service"
+  DEPLOY_ENV: "dev"
+
+lint:
+  stage: lint
+  script:
+    - echo "Replace with project lint command"
+
+test:
+  stage: test
+  script:
+    - echo "Replace with project test command"
+
+build:
+  stage: build
+  script:
+    - mkdir -p dist
+    - echo "sample build output" > dist/build.txt
+  artifacts:
+    paths:
+      - dist/
+
+package:
+  stage: package
+  script:
+    - echo "Replace with container build / package step"
+
+deploy:
+  stage: deploy
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "main"'
+  script:
+    - echo "Replace with deployment step or environment promotion"
+  environment:
+    name: production

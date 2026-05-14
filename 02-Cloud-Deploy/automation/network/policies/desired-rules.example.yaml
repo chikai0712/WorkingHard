@@ -1,0 +1,13 @@
+network_policies:
+  - name: allow-web-ingress
+    scope: public
+    action: allow
+    protocol: tcp
+    ports: [80, 443]
+    sources: ["0.0.0.0/0"]
+  - name: allow-ssh-from-admin
+    scope: admin
+    action: allow
+    protocol: tcp
+    ports: [22]
+    sources: ["203.0.113.10/32"]

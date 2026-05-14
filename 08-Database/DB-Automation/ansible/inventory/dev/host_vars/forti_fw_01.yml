@@ -1,0 +1,6 @@
+device_role: firewall
+vendor: fortinet
+device_name: forti_fw_01
+mgmt_ip: 10.0.0.10
+inside_zone_name: INSIDE
+outside_zone_name: OUTSIDE

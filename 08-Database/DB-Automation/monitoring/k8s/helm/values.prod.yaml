@@ -1,0 +1,10 @@
+kubePrometheusStack:
+  grafana:
+    adminPassword: CHANGE_ME_PROD
+  prometheus:
+    prometheusSpec:
+      retention: 30d
+      resources:
+        requests:
+          memory: 2Gi
+          cpu: 500m

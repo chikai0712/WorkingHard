@@ -1,0 +1,7 @@
+report_format: json
+include_sections:
+  - summary
+  - findings_by_severity
+  - findings_by_type
+  - remediation_hints
+  - policy_gate_result

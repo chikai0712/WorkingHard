@@ -1,0 +1,10 @@
+probe_window_seconds: 120
+minimum_success_ratio: 0.66
+minimum_healthy_probes: 2
+providers:
+  - cloudflare
+  - route53
+  - external-dns
+failover:
+  dry_run_default: true
+  manual_approval_required: true

@@ -1,0 +1,31 @@
+helm:
+  releaseName: kube-prometheus-stack
+  namespace: db-monitoring
+
+kubePrometheusStack:
+  grafana:
+    enabled: true
+    adminPassword: CHANGE_ME
+    defaultDashboardsEnabled: true
+    sidecar:
+      dashboards:
+        enabled: true
+        label: grafana_dashboard
+        searchNamespace: db-monitoring
+      datasources:
+        enabled: true
+    additionalDataSources:
+      - name: Prometheus
+        type: prometheus
+        access: proxy
+        url: http://kube-prometheus-stack-prometheus.db-monitoring.svc:9090
+        isDefault: true
+
+  prometheus:
+    prometheusSpec:
+      serviceMonitorSelectorNilUsesHelmValues: false
+      podMonitorSelectorNilUsesHelmValues: false
+      ruleSelectorNilUsesHelmValues: false
+      serviceMonitorNamespaceSelector: {}
+      podMonitorNamespaceSelector: {}
+      ruleNamespaceSelector: {}

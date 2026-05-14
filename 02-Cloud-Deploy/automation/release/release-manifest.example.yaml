@@ -1,0 +1,15 @@
+app_name: example-web
+service: website
+owner: platform-team
+release_channel: stable
+artifact:
+  type: container
+  image: ghcr.io/example/example-web
+  tag: latest
+source:
+  commit_sha: REPLACE_ME
+  branch: main
+deployment:
+  strategy: rolling
+  target_env: dev
+  rollback_to: previous-stable

@@ -1,0 +1,17 @@
+dev:
+  deploy_strategy: rolling
+  replicas: 1
+  smoke_test_required: false
+  approval_required: false
+
+staging:
+  deploy_strategy: rolling
+  replicas: 2
+  smoke_test_required: true
+  approval_required: true
+
+production:
+  deploy_strategy: blue-green
+  replicas: 3
+  smoke_test_required: true
+  approval_required: true

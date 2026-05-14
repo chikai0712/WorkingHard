@@ -1,0 +1,11 @@
+required_tags:
+  - Owner
+  - Environment
+  - CostCenter
+  - Service
+rules:
+  fail_on_missing_required_tags: true
+  warn_on_empty_values: true
+  exempt_resource_types:
+    - shared-network
+    - managed-backup

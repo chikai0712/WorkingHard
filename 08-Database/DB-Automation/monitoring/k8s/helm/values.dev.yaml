@@ -1,0 +1,6 @@
+kubePrometheusStack:
+  grafana:
+    adminPassword: CHANGE_ME_DEV
+  prometheus:
+    prometheusSpec:
+      retention: 7d

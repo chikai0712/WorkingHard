@@ -1,0 +1,10 @@
+apiVersion: 1
+providers:
+  - name: db-automation-dashboards
+    orgId: 1
+    folder: DB-Automation
+    type: file
+    disableDeletion: false
+    editable: true
+    options:
+      path: /var/lib/grafana/dashboards

@@ -1,0 +1,8 @@
+currency: USD
+thresholds:
+  warning_monthly: 5000
+  critical_monthly: 10000
+  anomaly_percent: 20
+review:
+  weekly_report_required: true
+  owner_ack_required: true
