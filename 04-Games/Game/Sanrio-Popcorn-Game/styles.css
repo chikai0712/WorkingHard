@@ -1,0 +1,882 @@
+/* ===================================
+   三麗鷗爆米花大遊行 - 樣式表
+   =================================== */
+
+/* 全局樣式 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', 'Microsoft YaHei', sans-serif;
+    background: linear-gradient(135deg, #FFB7D5 0%, #A8D8EA 50%, #FFF4A3 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+/* 遊戲容器 */
+#game-container {
+    width: 800px;
+    height: 600px;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    position: relative;
+}
+
+/* ===================================
+   頂部狀態欄
+   =================================== */
+#status-bar {
+    background: linear-gradient(90deg, #FFB7D5, #D4A5D4);
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    font-weight: bold;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.status-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.status-item .label {
+    font-size: 14px;
+    opacity: 0.9;
+}
+
+.status-item .value {
+    font-size: 20px;
+    background: rgba(255, 255, 255, 0.3);
+    padding: 5px 15px;
+    border-radius: 15px;
+}
+
+/* Fever 計量表 */
+#fever-meter {
+    width: 150px;
+    height: 20px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+}
+
+#fever-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #FFD700, #FFA500);
+    width: 0%;
+    transition: width 0.3s ease;
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}
+
+/* ===================================
+   遊戲畫面
+   =================================== */
+#game-screen {
+    height: 460px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* 階段容器 */
+.stage {
+    height: 100%;
+    display: none;
+    flex-direction: column;
+    background: linear-gradient(180deg, #FFF9F0 0%, #FFE4E1 100%);
+    position: relative;
+}
+
+.stage.active {
+    display: flex;
+}
+
+.stage-header {
+    padding: 15px 20px;
+    background: rgba(255, 255, 255, 0.8);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #FFB7D5;
+}
+
+.stage-header h2 {
+    font-size: 20px;
+    color: #FF69B4;
+}
+
+.stage-content {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+}
+
+/* ===================================
+   階段 1: 大耳狗 - 原料接取
+   =================================== */
+#stage1 {
+    background: linear-gradient(180deg, #A8D8EA 0%, #E0F7FF 100%);
+}
+
+.corn-counter {
+    font-size: 18px;
+    font-weight: bold;
+    color: #F9C74F;
+    background: white;
+    padding: 5px 15px;
+    border-radius: 15px;
+}
+
+#corn-drop-zone {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 300px;
+    pointer-events: none;
+}
+
+.corn {
+    position: absolute;
+    font-size: 30px;
+    animation: fall linear;
+    cursor: default;
+}
+
+.corn.good {
+    filter: drop-shadow(0 0 5px #FFD700);
+}
+
+.corn.golden {
+    filter: drop-shadow(0 0 10px #FFA500);
+    animation: fall linear, sparkle 0.5s infinite;
+}
+
+.corn.bad {
+    filter: drop-shadow(0 0 5px #8B0000);
+}
+
+@keyframes fall {
+    from {
+        top: -50px;
+    }
+    to {
+        top: 300px;
+    }
+}
+
+@keyframes sparkle {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+}
+
+#cinnamoroll {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    transition: left 0.1s ease;
+}
+
+.character-sprite {
+    font-size: 60px;
+    text-align: center;
+    animation: float 2s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+#basket {
+    font-size: 40px;
+    text-align: center;
+    margin-top: -20px;
+}
+
+/* ===================================
+   階段 2: 庫洛米 - 魔法加熱
+   =================================== */
+#stage2 {
+    background: linear-gradient(180deg, #D4A5D4 0%, #F0E6F0 100%);
+}
+
+.temperature-display {
+    font-size: 18px;
+    font-weight: bold;
+    color: #8B5A8E;
+    background: white;
+    padding: 5px 15px;
+    border-radius: 15px;
+}
+
+#thermometer {
+    position: absolute;
+    top: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 600px;
+}
+
+.temp-scale {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    position: relative;
+}
+
+.temp-marker {
+    font-size: 12px;
+    color: #666;
+    position: absolute;
+    transform: translateX(-50%);
+}
+
+.temp-marker.perfect-zone-start,
+.temp-marker.perfect-zone-end {
+    color: #FFD700;
+    font-weight: bold;
+}
+
+#temp-bar {
+    height: 40px;
+    background: linear-gradient(90deg, #4169E1, #FFD700, #FF4500);
+    border-radius: 20px;
+    position: relative;
+    overflow: hidden;
+    border: 3px solid white;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+#temp-fill {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 0%;
+    background: rgba(255, 255, 255, 0.5);
+    transition: width 0.1s linear;
+    border-right: 3px solid white;
+}
+
+#perfect-zone {
+    position: absolute;
+    left: 60%;
+    width: 20%;
+    height: 100%;
+    background: rgba(255, 215, 0, 0.3);
+    border-left: 2px dashed #FFD700;
+    border-right: 2px dashed #FFD700;
+}
+
+#kuromi {
+    position: absolute;
+    bottom: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.pot {
+    font-size: 80px;
+    text-align: center;
+    margin-top: -20px;
+    animation: shake 0.5s ease-in-out infinite;
+}
+
+@keyframes shake {
+    0%, 100% { transform: rotate(-2deg); }
+    50% { transform: rotate(2deg); }
+}
+
+.click-hint {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 18px;
+    color: #8B5A8E;
+    font-weight: bold;
+    animation: pulse 1s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; transform: translateX(-50%) scale(1); }
+    50% { opacity: 0.7; transform: translateX(-50%) scale(1.1); }
+}
+
+/* ===================================
+   階段 3: 布丁狗 - 精準包裝
+   =================================== */
+#stage3 {
+    background: linear-gradient(180deg, #F9C74F 0%, #FFF4D6 100%);
+}
+
+.combo-display {
+    font-size: 18px;
+    font-weight: bold;
+    color: #F9C74F;
+    background: white;
+    padding: 5px 15px;
+    border-radius: 15px;
+}
+
+#popcorn-flight-zone {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    pointer-events: none;
+}
+
+.flying-popcorn {
+    position: absolute;
+    font-size: 30px;
+    animation: fly-in 2s linear;
+}
+
+@keyframes fly-in {
+    from {
+        left: -50px;
+        top: 50px;
+    }
+    to {
+        left: 100%;
+        top: 50px;
+    }
+}
+
+#package-target {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100px;
+    height: 100px;
+    border: 3px dashed #F9C74F;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: target-pulse 1s ease-in-out infinite;
+}
+
+@keyframes target-pulse {
+    0%, 100% { transform: translate(-50%, -50%) scale(1); }
+    50% { transform: translate(-50%, -50%) scale(1.1); }
+}
+
+.target-indicator {
+    font-size: 50px;
+}
+
+#pompompurin {
+    position: absolute;
+    bottom: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+#timing-feedback {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 40px;
+    font-weight: bold;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+#timing-feedback.show {
+    opacity: 1;
+    animation: feedback-pop 0.5s ease;
+}
+
+@keyframes feedback-pop {
+    0% { transform: translate(-50%, -50%) scale(0.5); }
+    50% { transform: translate(-50%, -50%) scale(1.2); }
+    100% { transform: translate(-50%, -50%) scale(1); }
+}
+
+#timing-feedback.perfect { color: #FFD700; }
+#timing-feedback.great { color: #C0C0C0; }
+#timing-feedback.good { color: #CD7F32; }
+#timing-feedback.miss { color: #FF0000; }
+
+/* ===================================
+   階段 4: 美樂蒂 - 裝箱送餐
+   =================================== */
+#stage4 {
+    background: linear-gradient(180deg, #FFB7D5 0%, #FFE4E1 100%);
+}
+
+#popcorn-ready-zone {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.ready-popcorn {
+    font-size: 30px;
+    cursor: grab;
+    transition: transform 0.2s ease;
+}
+
+.ready-popcorn:hover {
+    transform: scale(1.2);
+}
+
+.ready-popcorn.dragging {
+    cursor: grabbing;
+    opacity: 0.5;
+}
+
+#box-zone {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.box {
+    font-size: 80px;
+    text-align: center;
+    position: relative;
+    border: 3px dashed #FFB7D5;
+    border-radius: 20px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.5);
+}
+
+.box-count {
+    position: absolute;
+    bottom: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 18px;
+    font-weight: bold;
+    color: #FF69B4;
+    background: white;
+    padding: 5px 15px;
+    border-radius: 15px;
+}
+
+#customer-queue {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    right: 20px;
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
+
+.customer {
+    text-align: center;
+    background: white;
+    padding: 10px;
+    border-radius: 15px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.customer-sprite {
+    font-size: 40px;
+}
+
+.customer-name {
+    font-size: 12px;
+    color: #666;
+    margin-top: 5px;
+}
+
+.patience-bar {
+    width: 80px;
+    height: 10px;
+    background: #ddd;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-top: 5px;
+}
+
+.patience-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #90EE90, #FFD700, #FF6B6B);
+    transition: width 0.1s linear;
+}
+
+.order-count {
+    font-size: 12px;
+    color: #FF69B4;
+    font-weight: bold;
+    margin-top: 5px;
+}
+
+#mymelody {
+    position: absolute;
+    bottom: 20px;
+    right: 50px;
+}
+
+/* ===================================
+   階段切換按鈕
+   =================================== */
+#stage-switcher {
+    height: 80px;
+    background: white;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px;
+    border-top: 2px solid #FFB7D5;
+}
+
+.stage-btn {
+    flex: 1;
+    height: 60px;
+    margin: 0 5px;
+    border: 2px solid #FFB7D5;
+    border-radius: 15px;
+    background: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}
+
+.stage-btn:hover {
+    background: #FFF0F5;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(255, 183, 213, 0.3);
+}
+
+.stage-btn.active {
+    background: linear-gradient(135deg, #FFB7D5, #D4A5D4);
+    color: white;
+    border-color: #FF69B4;
+    box-shadow: 0 5px 15px rgba(255, 105, 180, 0.4);
+}
+
+.stage-icon {
+    font-size: 24px;
+}
+
+.stage-name {
+    font-size: 12px;
+    font-weight: bold;
+}
+
+/* ===================================
+   Fever Time 特效
+   =================================== */
+#fever-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle, rgba(255, 215, 0, 0.3), rgba(255, 105, 180, 0.3));
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: none;
+    z-index: 1000;
+    animation: fever-pulse 1s ease-in-out infinite;
+}
+
+@keyframes fever-pulse {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 0.8; }
+}
+
+.fever-text {
+    font-size: 60px;
+    font-weight: bold;
+    color: #FFD700;
+    text-shadow: 0 0 20px #FF69B4, 0 0 40px #FFD700;
+    animation: fever-text-bounce 0.5s ease-in-out infinite;
+}
+
+@keyframes fever-text-bounce {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+}
+
+/* ===================================
+   遊戲訊息提示
+   =================================== */
+#game-message {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 20px 40px;
+    border-radius: 20px;
+    font-size: 24px;
+    font-weight: bold;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    z-index: 999;
+}
+
+#game-message.show {
+    opacity: 1;
+    animation: message-pop 0.5s ease;
+}
+
+/* ===================================
+   開始畫面
+   =================================== */
+#start-screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, #FFB7D5, #A8D8EA, #FFF4A3);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+    animation: gradient-shift 5s ease infinite;
+}
+
+@keyframes gradient-shift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+#start-screen h1 {
+    font-size: 48px;
+    color: white;
+    text-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    margin-bottom: 10px;
+    animation: title-bounce 2s ease-in-out infinite;
+}
+
+@keyframes title-bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.subtitle {
+    font-size: 24px;
+    color: white;
+    margin-bottom: 30px;
+}
+
+.game-intro {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 30px;
+    border-radius: 20px;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.game-intro p {
+    font-size: 18px;
+    margin: 10px 0;
+    color: #FF69B4;
+}
+
+.big-btn {
+    padding: 20px 60px;
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+    background: linear-gradient(135deg, #FF69B4, #FFB7D5);
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 10px 30px rgba(255, 105, 180, 0.4);
+    transition: all 0.3s ease;
+}
+
+.big-btn:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(255, 105, 180, 0.6);
+}
+
+.big-btn:active {
+    transform: translateY(-2px);
+}
+
+.controls-hint {
+    margin-top: 30px;
+    text-align: center;
+    color: white;
+    font-size: 14px;
+}
+
+.controls-hint p {
+    margin: 5px 0;
+}
+
+/* ===================================
+   遊戲結束畫面
+   =================================== */
+#game-over-screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, #FFB7D5, #D4A5D4);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+
+#game-over-screen h1 {
+    font-size: 48px;
+    color: white;
+    text-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    margin-bottom: 30px;
+}
+
+.final-score {
+    background: white;
+    padding: 30px 60px;
+    border-radius: 20px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.final-score p:first-child {
+    font-size: 18px;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+#final-score-value {
+    font-size: 60px;
+    font-weight: bold;
+    color: #FF69B4;
+}
+
+.stars {
+    font-size: 60px;
+    margin-bottom: 30px;
+}
+
+.star {
+    display: inline-block;
+    animation: star-twinkle 1s ease-in-out infinite;
+}
+
+.star:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.star:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+@keyframes star-twinkle {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.3); opacity: 0.7; }
+}
+
+/* ===================================
+   音效控制按鈕
+   =================================== */
+#audio-controls {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 1001;
+}
+
+.control-btn {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 2px solid #FFB7D5;
+    background: white;
+    font-size: 24px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+.control-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 15px rgba(255, 183, 213, 0.4);
+}
+
+.control-btn:active {
+    transform: scale(0.95);
+}
+
+.control-btn.muted {
+    background: #ddd;
+}
+
+/* ===================================
+   特效畫布
+   =================================== */
+#effects-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 999;
+}
+
+/* ===================================
+   工具類
+   =================================== */
+.hidden {
+    display: none !important;
+}
+
+/* ===================================
+   響應式設計
+   =================================== */
+@media (max-width: 850px) {
+    #game-container {
+        width: 100vw;
+        height: 100vh;
+        border-radius: 0;
+    }
+    
+    #start-screen h1 {
+        font-size: 36px;
+    }
+    
+    .game-intro {
+        padding: 20px;
+    }
+    
+    .game-intro p {
+        font-size: 16px;
+    }
+}
+

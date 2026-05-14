@@ -1,0 +1,40 @@
+server:
+  port: 8080
+  mode: release
+  read_timeout: 30
+  write_timeout: 30
+  max_conns: 10000
+
+database:
+  host: localhost
+  port: 5432
+  user: postgres
+  password: postgres
+  dbname: betting_db
+  max_open_conns: 100
+  max_idle_conns: 10
+  conn_max_lifetime: 3600
+
+redis:
+  host: localhost
+  port: 6379
+  password: ""
+  db: 0
+  pool_size: 100
+  min_idle_conns: 10
+
+kafka:
+  brokers:
+    - localhost:9092
+  topic: betting-orders
+  group_id: order-service
+  batch_size: 100
+  batch_timeout: 100
+
+log:
+  level: info
+  output_path: stdout
+  max_size: 100
+  max_backups: 5
+  max_age: 7
+

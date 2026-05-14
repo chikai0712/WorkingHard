@@ -1,0 +1,60 @@
+# GlobalpingChecker V4.1 - Docker Compose
+# 智能循環檢測系統
+
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: globalping_v41_postgres
+    environment:
+      POSTGRES_USER: globalping
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-globalping_secure_password}
+      POSTGRES_DB: globalping_db
+      TZ: Asia/Taipei
+      PGTZ: Asia/Taipei
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U globalping -d globalping_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  web:
+    build: .
+    container_name: globalping_v41_web
+    environment:
+      DATABASE_URL: postgresql://globalping:${POSTGRES_PASSWORD:-globalping_secure_password}@postgres:5432/globalping_db
+      GLOBALPING_TOKEN: ${GLOBALPING_TOKEN}
+      CHECK_INTERVAL_MINUTES: ${CHECK_INTERVAL_MINUTES:-90}
+      ABNORMAL_CHECK_HOUR: ${ABNORMAL_CHECK_HOUR:-1}
+      NORMAL_CHECK_HOUR: ${NORMAL_CHECK_HOUR:-9}
+      MAX_ITERATIONS: ${MAX_ITERATIONS:-10}
+      DOMAINS_FILE: /app/domains.txt
+      HOST: 0.0.0.0
+      PORT: 8000
+      TZ: Asia/Taipei
+    volumes:
+      - ./domains.txt:/app/domains.txt:ro
+      - ./templates:/app/templates:ro
+      - ./static:/app/static:ro
+    ports:
+      - "8000:8000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/api/stats"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+
+networks:
+  default:
+    name: globalping_v41_network

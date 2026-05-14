@@ -1,0 +1,28 @@
+#!/bin/bash
+
+# 要備份的資料庫名，多個資料庫用空格分開
+databases=(db1 db2 db3) 
+
+# 備份檔案要保存的目錄
+basepath='/data/mysql/'
+
+if [ ! -d "$basepath" ]; then
+  mkdir -p "$basepath"
+fi
+
+# 迴圈databases陣列
+for db in ${databases[*]}
+  do
+    # 備份資料庫生成SQL檔
+    /bin/nice -n 19 /usr/bin/mysqldump -uUSER -pPASSWORD --database $db > $basepath$db-$(date +%Y%m%d).sql
+    
+    # 將生成的SQL檔案壓縮
+    /bin/nice -n 19 tar zPcf $basepath$db-$(date +%Y%m%d).sql.tar.gz $basepath$db-$(date +%Y%m%d).sql
+    
+    # 刪除7天之前的備份資料
+    find $basepath -mtime +7 -name "*.sql.tar.gz" -exec rm -rf {} \;
+  done
+
+  # 刪除生成的SQL檔
+  rm -rf $basepath/*.sql
+

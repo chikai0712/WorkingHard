@@ -1,0 +1,26 @@
+//
+// Local DNS Zones Configuration
+// 在此添加您的自定義 DNS Zone
+//
+
+// 範例：為 example.com 設定 DNS Zone
+// 取消註釋並修改以下配置以使用
+
+/*
+zone "example.com" {
+    type master;
+    file "/var/lib/bind/zones/db.example.com";
+    allow-update { none; };
+    notify no;
+};
+*/
+
+// 範例：反向 DNS Zone（IPv4）
+/*
+zone "2.0.192.in-addr.arpa" {
+    type master;
+    file "/var/lib/bind/zones/db.192.0.2";
+    allow-update { none; };
+};
+*/
+

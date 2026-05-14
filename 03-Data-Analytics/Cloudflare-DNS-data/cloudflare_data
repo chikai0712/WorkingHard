@@ -1,0 +1,4090 @@
+qbq.humble@gmail.com
+
+Fetching analytics for 22 zones...
+  ✓ 17mybet.com: 342,740 DNS queries, 12,971 HTTP visits
+  ✓ 1steprich.com: 259,140 DNS queries, 200 HTTP visits
+  ✓ 253.60.103.in-addr.arpa: 48,890 DNS queries, 0 HTTP visits
+  ✓ 51688go.com: 8,790 DNS queries, 1 HTTP visits
+  ✓ 568life.club: 2,880 DNS queries, 0 HTTP visits
+  ✓ 568life.info: 3,380 DNS queries, 0 HTTP visits
+  ✓ 568win.com: 6,410,600 DNS queries, 317,499 HTTP visits
+  ✓ 568winex.com: 1,465,370 DNS queries, 1,387 HTTP visits
+  ✓ 580bet.com: 1,478,700 DNS queries, 461 HTTP visits
+  ✓ 580bet.net: 52,600 DNS queries, 0 HTTP visits
+  ✓ 688ory.com: 10,290 DNS queries, 4 HTTP visits
+  ✓ ali66888.com: 16,740 DNS queries, 245 HTTP visits
+  ✓ alibetbet.com: 26,910 DNS queries, 3 HTTP visits
+  ✓ bbcinfodelivery.com: 79,932,390 DNS queries, 222,610 HTTP visits
+  ✓ hunter88.com: 4,870 DNS queries, 0 HTTP visits
+  ✓ hunter88.net: 2,860 DNS queries, 0 HTTP visits
+  ✓ sbolive.net: 10,750 DNS queries, 0 HTTP visits
+  ✓ sbolv.com: 11,950 DNS queries, 0 HTTP visits
+  ✓ sbolv.net: 9,970 DNS queries, 0 HTTP visits
+  ✓ ucc51688.com: 28,890 DNS queries, 3 HTTP visits
+  ✓ wecname.com: 6,681,870 DNS queries, 7,027 HTTP visits
+  ✓ wow59188.com: 12,580 DNS queries, 0 HTTP visits
+
+==========================================================================================
+ALL ZONES ANALYTICS REPORT
+==========================================================================================
+
+Time Range: 2025-11-15T08:16:18+00:00 to 2025-12-15T08:16:18+00:00
+Period: last 30 days
+
+==========================================================================================
+SUMMARY
+==========================================================================================
+Total Zones: 22
+Total DNS Queries: 96,823,160
+Total HTTP Visits: 562,411
+Total Bandwidth: 63764.35 GB (68,466,449,495,585 bytes)
+Average Queries per Zone: 4,401,052.73
+Average Visits per Zone: 25,564.14
+
+==========================================================================================
+INDIVIDUAL ZONE STATISTICS
+==========================================================================================
+
+1. bbcinfodelivery.com (Status: active)
+   Zone ID: 4e58d35a62af59cd5a2785ad2a24f5a0
+   Plan: Enterprise Website
+   DNS Queries: 79,932,390
+   HTTP Visits: 222,610
+   Bandwidth: 62800.91 GB (67,431,962,394,500 bytes)
+
+2. wecname.com (Status: active)
+   Zone ID: 162549ebeadb9a778c6e7a1ed00f7834
+   Plan: Pro Website
+   DNS Queries: 6,681,870
+   HTTP Visits: 7,027
+   Bandwidth: 0.23 GB (248,581,640 bytes)
+
+3. 568win.com (Status: active)
+   Zone ID: ec271a6e71fa65359ad7370d7b9eccbf
+   Plan: Business Website
+   DNS Queries: 6,410,600
+   HTTP Visits: 317,499
+   Bandwidth: 847.35 GB (909,831,777,603 bytes)
+
+4. 580bet.com (Status: active)
+   Zone ID: af7d2af3641592d123e94f8f125a8bf6
+   Plan: Pro Website
+   DNS Queries: 1,478,700
+   HTTP Visits: 461
+   Bandwidth: 0.13 GB (144,624,758 bytes)
+
+5. 568winex.com (Status: active)
+   Zone ID: d53d1dcfb071697e44edc3ffec010fb2
+   Plan: Pro Website
+   DNS Queries: 1,465,370
+   HTTP Visits: 1,387
+   Bandwidth: 103.28 GB (110,892,049,458 bytes)
+
+6. 17mybet.com (Status: active)
+   Zone ID: d354563f2ae151f4958562a1dc49ea6e
+   Plan: Free Website
+   DNS Queries: 342,740
+   HTTP Visits: 12,971
+   Bandwidth: 0.28 GB (297,375,351 bytes)
+
+7. 1steprich.com (Status: active)
+   Zone ID: 32cfda6f5e69eef4567a04349fe2b036
+   Plan: Pro Website
+   DNS Queries: 259,140
+   HTTP Visits: 200
+   Bandwidth: 6.59 GB (7,078,044,431 bytes)
+
+8. 580bet.net (Status: active)
+   Zone ID: c572d309b6dc1c4083ac5c4dce9dc0b5
+   Plan: Pro Website
+   DNS Queries: 52,600
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (2,788 bytes)
+
+9. 253.60.103.in-addr.arpa (Status: active)
+   Zone ID: 26d67a7f3e65008b78d3807ea5ab9524
+   Plan: Free Website
+   DNS Queries: 48,890
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+10. ucc51688.com (Status: active)
+   Zone ID: 816ddc2ecfa96b636ab23b0b477ff980
+   Plan: Free Website
+   DNS Queries: 28,890
+   HTTP Visits: 3
+   Bandwidth: 0.00 GB (25,227 bytes)
+
+11. alibetbet.com (Status: active)
+   Zone ID: baf7f53105b8eb838317d1b57498e29e
+   Plan: Free Website
+   DNS Queries: 26,910
+   HTTP Visits: 3
+   Bandwidth: 5.56 GB (5,970,903,088 bytes)
+
+12. ali66888.com (Status: active)
+   Zone ID: 67ec40e00815668bc201883973e1d233
+   Plan: Free Website
+   DNS Queries: 16,740
+   HTTP Visits: 245
+   Bandwidth: 0.00 GB (3,833,797 bytes)
+
+13. wow59188.com (Status: active)
+   Zone ID: fbf2ecefac943e18f484be2029d31d7f
+   Plan: Free Website
+   DNS Queries: 12,580
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (297,030 bytes)
+
+14. sbolv.com (Status: active)
+   Zone ID: 7bf6e50cb262f9554b216a279d3bbd22
+   Plan: Free Website
+   DNS Queries: 11,950
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (790,041 bytes)
+
+15. sbolive.net (Status: active)
+   Zone ID: 717eba69853462646ff4d0d54fe67833
+   Plan: Free Website
+   DNS Queries: 10,750
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+16. 688ory.com (Status: active)
+   Zone ID: eee7f1daf497d7636a39361d6a9d2ade
+   Plan: Free Website
+   DNS Queries: 10,290
+   HTTP Visits: 4
+   Bandwidth: 0.00 GB (78,679 bytes)
+
+17. sbolv.net (Status: active)
+   Zone ID: ff20540eb72bcd2f805bffd0b464a83e
+   Plan: Free Website
+   DNS Queries: 9,970
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (332,863 bytes)
+
+18. 51688go.com (Status: active)
+   Zone ID: b3898c0898a6498ea1f2cd4f6eadf563
+   Plan: Free Website
+   DNS Queries: 8,790
+   HTTP Visits: 1
+   Bandwidth: 0.00 GB (29,923 bytes)
+
+19. hunter88.com (Status: active)
+   Zone ID: f634e266d46fe64b8af47a94a41c07ad
+   Plan: Free Website
+   DNS Queries: 4,870
+   HTTP Visits: 0
+   Bandwidth: 0.01 GB (10,647,900 bytes)
+
+20. 568life.info (Status: active)
+   Zone ID: 6ea2eae1f2393d64445cb604c96b8ad2
+   Plan: Free Website
+   DNS Queries: 3,380
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (774,189 bytes)
+
+21. 568life.club (Status: active)
+   Zone ID: f1a4c834c482ba50beb912f7cadc4de9
+   Plan: Free Website
+   DNS Queries: 2,880
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (854,856 bytes)
+
+22. hunter88.net (Status: active)
+   Zone ID: dd8402a813cf73a09b601fbd78800103
+   Plan: Free Website
+   DNS Queries: 2,860
+   HTTP Visits: 0
+   Bandwidth: 0.01 GB (6,077,463 bytes)
+
+==========================================================================================
+
+
+3rd@remotes.com.tw
+
+Fetching analytics for 208 zones...
+  ✓ 111onlines.com: 4,700 DNS queries, 69 HTTP visits
+  ✓ 1bez.com: 5,070 DNS queries, 0 HTTP visits
+  ✓ 5lionsbet.com: 13,600 DNS queries, 87 HTTP visits
+  ✓ 789wwin.cc: 2,140 DNS queries, 2 HTTP visits
+  ✓ 789wwin.fun: 3,270 DNS queries, 3 HTTP visits
+  ✓ 789wwin.live: 3,060 DNS queries, 10 HTTP visits
+  ✓ 789wwin.vip: 3,120 DNS queries, 3 HTTP visits
+  ✓ 78wwin.club: 2,410 DNS queries, 0 HTTP visits
+  ✓ 78wwin.com: 6,710 DNS queries, 23 HTTP visits
+  ✓ 78wwin.fun: 3,090 DNS queries, 2 HTTP visits
+  ✓ 78wwin.live: 3,250 DNS queries, 3 HTTP visits
+  ✓ 78wwin.vip: 3,050 DNS queries, 4 HTTP visits
+  ✓ 7plusmmk.com: 21,640 DNS queries, 150 HTTP visits
+  ✓ 8xbetppp.com: 2,790 DNS queries, 2 HTTP visits
+  ✓ 8xbetppp.xyz: 2,980 DNS queries, 3 HTTP visits
+No DNS analytics data found for zone 7ffed6ac7429b181ba15e449f5007576
+  ✓ acemm.com: 0 DNS queries, 0 HTTP visits
+  ✓ alem88.com: 3,030 DNS queries, 1 HTTP visits
+  ✓ ananda88.com: 14,460 DNS queries, 76 HTTP visits
+  ✓ asgcash.com: 4,000 DNS queries, 0 HTTP visits
+  ✓ asia999mm.com: 4,120 DNS queries, 8 HTTP visits
+  ✓ aztecash.win: 8,540 DNS queries, 0 HTTP visits
+  ✓ bajitop.com: 5,850 DNS queries, 13 HTTP visits
+  ✓ bet-brazil.com: 13,420 DNS queries, 39 HTTP visits
+  ✓ bettro88.com: 2,730 DNS queries, 0 HTTP visits
+  ✓ btop88.com: 3,590 DNS queries, 12 HTTP visits
+  ✓ carabaobet.xyz: 8,030 DNS queries, 8 HTTP visits
+  ✓ cpc686.com: 2,970 DNS queries, 2 HTTP visits
+  ✓ cric69.com: 3,760 DNS queries, 0 HTTP visits
+  ✓ crownff.com: 2,960 DNS queries, 0 HTTP visits
+  ✓ crownjem.com: 2,620 DNS queries, 1 HTTP visits
+  ✓ crownsss.com: 4,100 DNS queries, 1 HTTP visits
+  ✓ d9bet68.com: 6,430 DNS queries, 0 HTTP visits
+  ✓ d9bet99.com: 3,400 DNS queries, 0 HTTP visits
+  ✓ data88.bet: 8,720 DNS queries, 12 HTTP visits
+  ✓ digtal01.com: 4,000 DNS queries, 0 HTTP visits
+  ✓ dubaibet.club: 4,290 DNS queries, 2 HTTP visits
+  ✓ dubaibet.co: 9,690 DNS queries, 59 HTTP visits
+  ✓ fk88.com: 6,310 DNS queries, 0 HTTP visits
+  ✓ gbw777.com: 4,810 DNS queries, 42 HTTP visits
+  ✓ gdr66.net: 9,570 DNS queries, 2 HTTP visits
+  ✓ gdr99.com: 10,300 DNS queries, 15 HTTP visits
+  ✓ gh1152.com: 2,530 DNS queries, 0 HTTP visits
+  ✓ golden688.com: 9,380 DNS queries, 36 HTTP visits
+  ✓ goldnova.site: 4,780 DNS queries, 3 HTTP visits
+  ✓ goldstar88.com: 46,950 DNS queries, 0 HTTP visits
+  ✓ grd99.com: 9,970 DNS queries, 3 HTTP visits
+  ✓ greybet666.com: 3,080 DNS queries, 1 HTTP visits
+  ✓ hod77.com: 9,200 DNS queries, 8 HTTP visits
+  ✓ jdn77mm.com: 10,500 DNS queries, 97 HTTP visits
+  ✓ jp88.asia: 4,600 DNS queries, 2 HTTP visits
+  ✓ jp88.fun: 5,130 DNS queries, 0 HTTP visits
+  ✓ kd2288.com: 3,620 DNS queries, 88 HTTP visits
+  ✓ kd88.net: 5,250 DNS queries, 42 HTTP visits
+  ✓ kdiwyndhjfdksah.xyz: 8,150 DNS queries, 8 HTTP visits
+  ✓ koapp1.com: 3,250 DNS queries, 0 HTTP visits
+  ✓ koapp2.com: 2,640 DNS queries, 0 HTTP visits
+  ✓ koapp3.com: 3,550 DNS queries, 0 HTTP visits
+  ✓ koapp4.com: 2,800 DNS queries, 0 HTTP visits
+  ✓ koapp5.com: 2,740 DNS queries, 0 HTTP visits
+  ✓ koapp6.com: 2,170 DNS queries, 0 HTTP visits
+  ✓ koapp7.com: 3,350 DNS queries, 0 HTTP visits
+  ✓ koapp8.com: 2,930 DNS queries, 0 HTTP visits
+  ✓ koapp9.com: 3,120 DNS queries, 0 HTTP visits
+  ✓ liquidbet.com: 4,600 DNS queries, 0 HTTP visits
+  ✓ lucky24.xyz: 6,510 DNS queries, 8 HTTP visits
+  ✓ lucky7online.asia: 5,060 DNS queries, 3 HTTP visits
+  ✓ luckynine9.com: 9,360 DNS queries, 38 HTTP visits
+  ✓ luckynine9.org: 6,290 DNS queries, 5 HTTP visits
+  ✓ m57ag.space: 3,140 DNS queries, 4 HTTP visits
+  ✓ maxwin68.club: 10,720 DNS queries, 49 HTTP visits
+  ✓ megawinner88.com: 8,810 DNS queries, 85 HTTP visits
+No DNS analytics data found for zone 452b3c9834a12c262d85805fbb147c7f
+  ✓ mm777games.com: 0 DNS queries, 0 HTTP visits
+  ✓ mm777global.club: 30,600 DNS queries, 431 HTTP visits
+  ✓ mm777-global.com: 44,440 DNS queries, 0 HTTP visits
+  ✓ mm777global.com: 78,090 DNS queries, 276 HTTP visits
+  ✓ mm777global.online: 15,090 DNS queries, 140 HTTP visits
+  ✓ mmbet388.com: 10,560 DNS queries, 124 HTTP visits
+  ✓ mmbet388.xyz: 2,970 DNS queries, 9 HTTP visits
+  ✓ mmjdn77.com: 4,060 DNS queries, 69 HTTP visits
+  ✓ mmobet.vip: 840 DNS queries, 0 HTTP visits
+  ✓ mmoslots.com: 15,810 DNS queries, 8 HTTP visits
+  ✓ mnm777.org: 6,530 DNS queries, 11 HTTP visits
+  ✓ mnm777.site: 3,360 DNS queries, 4 HTTP visits
+  ✓ mw68.fun: 9,570 DNS queries, 73 HTTP visits
+  ✓ mycrowngem.com: 3,230 DNS queries, 1 HTTP visits
+  ✓ ngn99mm.com: 10,560 DNS queries, 96 HTTP visits
+  ✓ pp6688.xyz: 4,410 DNS queries, 0 HTTP visits
+  ✓ primebet977.com: 5,720 DNS queries, 41 HTTP visits
+  ✓ primebet.asia: 39,320 DNS queries, 428 HTTP visits
+  ✓ primebet.cash: 5,500 DNS queries, 60 HTTP visits
+  ✓ roman628.com: 3,830 DNS queries, 14 HTTP visits
+  ✓ saffaluck.co.za: 123,810 DNS queries, 832 HTTP visits
+  ✓ sart88.com: 41,220 DNS queries, 358 HTTP visits
+  ✓ sart99.com: 5,660 DNS queries, 1 HTTP visits
+  ✓ sartrupee.com: 5,450 DNS queries, 12 HTTP visits
+  ✓ sb777.online: 13,960 DNS queries, 94 HTTP visits
+  ✓ sb777special.asia: 8,970 DNS queries, 2 HTTP visits
+  ✓ sbcbet.com: 4,440 DNS queries, 0 HTTP visits
+  ✓ sbclive88.org: 3,510 DNS queries, 0 HTTP visits
+  ✓ sbclive.biz: 3,730 DNS queries, 0 HTTP visits
+  ✓ sbclive.co: 3,350 DNS queries, 0 HTTP visits
+  ✓ sbcsport.com: 5,140 DNS queries, 0 HTTP visits
+  ✓ sbo777.app: 11,870 DNS queries, 0 HTTP visits
+  ✓ sbo777.cc: 10,600 DNS queries, 0 HTTP visits
+  ✓ sbonation.live: 11,530 DNS queries, 0 HTTP visits
+  ✓ setswel.com: 8,590 DNS queries, 1 HTTP visits
+  ✓ shwemyinn.com: 23,420 DNS queries, 0 HTTP visits
+  ✓ silvawin.com: 2,730 DNS queries, 0 HTTP visits
+  ✓ silvawin.net: 4,700 DNS queries, 0 HTTP visits
+  ✓ silvawin.org: 7,140 DNS queries, 0 HTTP visits
+  ✓ silvawin.pro: 2,690 DNS queries, 0 HTTP visits
+  ✓ silvawin.site: 2,960 DNS queries, 0 HTTP visits
+  ✓ smt696official.com: 40 DNS queries, 0 HTTP visits
+No DNS analytics data found for zone dd27319e1da8458519986ce5e94d382d
+  ✓ sonitalatam.com: 0 DNS queries, 0 HTTP visits
+No DNS analytics data found for zone dd00e8ea6c963dfd7dc6b6ca6370f709
+  ✓ sonitasia.com: 0 DNS queries, 0 HTTP visits
+  ✓ special9.net: 8,160 DNS queries, 51 HTTP visits
+  ✓ special9.online: 7,830 DNS queries, 54 HTTP visits
+  ✓ sports8bet.net: 6,850 DNS queries, 0 HTTP visits
+  ✓ subuu.bet: 18,990 DNS queries, 161 HTTP visits
+  ✓ subuu.net: 9,510 DNS queries, 3 HTTP visits
+  ✓ subuuu.bet: 3,250 DNS queries, 4 HTTP visits
+  ✓ suna88.com: 4,120 DNS queries, 2 HTTP visits
+  ✓ sunabet.com: 12,640 DNS queries, 84 HTTP visits
+  ✓ sunarupee.com: 3,440 DNS queries, 5 HTTP visits
+  ✓ superman999.net: 4,330 DNS queries, 1 HTTP visits
+  ✓ tcg-hb.com: 15,070 DNS queries, 0 HTTP visits
+  ✓ test-wego88.com: 3,650 DNS queries, 3 HTTP visits
+  ✓ thameetaw.com: 10,970 DNS queries, 0 HTTP visits
+  ✓ tsm777.asia: 4,300 DNS queries, 7 HTTP visits
+  ✓ tsm777.net: 5,260 DNS queries, 7 HTTP visits
+  ✓ tsm777.xyz: 7,100 DNS queries, 1 HTTP visits
+  ✓ ufaasia6688.com: 2,910 DNS queries, 1 HTTP visits
+  ✓ venus368.com: 3,430 DNS queries, 0 HTTP visits
+  ✓ versusbet.app: 3,060 DNS queries, 0 HTTP visits
+  ✓ versusbet.club: 3,990 DNS queries, 0 HTTP visits
+  ✓ versusbet.fun: 2,650 DNS queries, 0 HTTP visits
+  ✓ versusbet.info: 2,980 DNS queries, 0 HTTP visits
+  ✓ versusbet.live: 2,460 DNS queries, 0 HTTP visits
+  ✓ versusbet.online: 2,440 DNS queries, 0 HTTP visits
+  ✓ versusbet.vip: 2,470 DNS queries, 0 HTTP visits
+  ✓ versusbet.win: 2,700 DNS queries, 0 HTTP visits
+  ✓ versusbrasil.com: 3,860 DNS queries, 0 HTTP visits
+  ✓ versus-brazil.com: 3,090 DNS queries, 0 HTTP visits
+  ✓ versusbrazil.com: 3,130 DNS queries, 0 HTTP visits
+  ✓ versus-casino.bet: 2,960 DNS queries, 0 HTTP visits
+  ✓ versus-casino.club: 2,170 DNS queries, 0 HTTP visits
+  ✓ versus-casino.me: 1,640 DNS queries, 0 HTTP visits
+  ✓ versus-casino.shop: 5,450 DNS queries, 0 HTTP visits
+  ✓ versus-casino.xyz: 2,450 DNS queries, 0 HTTP visits
+  ✓ versus.com.co: 3,530 DNS queries, 0 HTTP visits
+  ✓ versus.online: 3,000 DNS queries, 0 HTTP visits
+  ✓ victo88.com: 2,840 DNS queries, 2 HTTP visits
+  ✓ vila88.com: 7,790 DNS queries, 0 HTTP visits
+  ✓ vila88.net: 8,360 DNS queries, 0 HTTP visits
+  ✓ vsversus.bet: 2,930 DNS queries, 0 HTTP visits
+  ✓ vs-versus.club: 2,600 DNS queries, 0 HTTP visits
+  ✓ vs-versus.co: 2,060 DNS queries, 0 HTTP visits
+  ✓ vs-versus.live: 2,350 DNS queries, 0 HTTP visits
+  ✓ vs-versus.net: 4,010 DNS queries, 0 HTTP visits
+  ✓ vs-versus.online: 2,660 DNS queries, 0 HTTP visits
+  ✓ vs-versus.org: 3,470 DNS queries, 0 HTTP visits
+  ✓ vs-versus.world: 3,150 DNS queries, 0 HTTP visits
+  ✓ wego88.bet: 2,420 DNS queries, 1 HTTP visits
+  ✓ wego88bet.com: 5,510 DNS queries, 16 HTTP visits
+  ✓ wego88casino.com: 30,940 DNS queries, 704 HTTP visits
+  ✓ wego88club.com: 4,700 DNS queries, 12 HTTP visits
+  ✓ wego88kor.com: 11,400 DNS queries, 102 HTTP visits
+  ✓ wego88kr.com: 18,530 DNS queries, 146 HTTP visits
+  ✓ wego88slot.com: 5,620 DNS queries, 23 HTTP visits
+  ✓ wego88sport.com: 4,900 DNS queries, 13 HTTP visits
+  ✓ wego88th.com: 4,070 DNS queries, 7 HTTP visits
+  ✓ wego88.vip: 2,870 DNS queries, 3 HTTP visits
+  ✓ wg88epl.com: 3,070 DNS queries, 4 HTTP visits
+  ✓ wg88ufc.com: 3,210 DNS queries, 4 HTTP visits
+  ✓ wg88web.com: 8,320 DNS queries, 2 HTTP visits
+No DNS analytics data found for zone c50f90942b66d5fbe52a7f49f4c9c10f
+  ✓ win1918.com: 0 DNS queries, 0 HTTP visits
+  ✓ win1918.net: 3,260 DNS queries, 0 HTTP visits
+  ✓ winhigh.bet: 5,050 DNS queries, 1 HTTP visits
+  ✓ winhigh.casino: 68,830 DNS queries, 1,347 HTTP visits
+  ✓ winhigh.vip: 7,120 DNS queries, 5 HTTP visits
+  ✓ winplay.co.za: 4,470 DNS queries, 32 HTTP visits
+  ✓ wite.money: 26,640 DNS queries, 145 HTTP visits
+  ✓ wow.bingo: 32,420 DNS queries, 293 HTTP visits
+  ✓ wwin789.cc: 1,580 DNS queries, 0 HTTP visits
+  ✓ wwin789.club: 3,150 DNS queries, 2 HTTP visits
+  ✓ wwin789.com: 3,070 DNS queries, 5 HTTP visits
+  ✓ wwin789.fun: 2,740 DNS queries, 2 HTTP visits
+  ✓ wwin789.live: 3,070 DNS queries, 2 HTTP visits
+  ✓ wwin789.vip: 3,010 DNS queries, 4 HTTP visits
+  ✓ wwin78.club: 2,780 DNS queries, 0 HTTP visits
+  ✓ wwin78.com: 3,090 DNS queries, 3 HTTP visits
+  ✓ wwin78.fun: 2,820 DNS queries, 2 HTTP visits
+  ✓ wwin78.vip: 2,910 DNS queries, 2 HTTP visits
+  ✓ wwin78.win: 2,750 DNS queries, 2 HTTP visits
+  ✓ www-zkbet.com: 23,890 DNS queries, 322 HTTP visits
+  ✓ xbet568.net: 3,660 DNS queries, 0 HTTP visits
+  ✓ xbet68.co: 1,160 DNS queries, 0 HTTP visits
+  ✓ xgame568.net: 3,770 DNS queries, 0 HTTP visits
+  ✓ y2kslots.club: 7,660 DNS queries, 20 HTTP visits
+  ✓ y2kslots.online: 5,750 DNS queries, 12 HTTP visits
+  ✓ ygn689mmk.com: 2,570 DNS queries, 2 HTTP visits
+  ✓ ygn689mmk.online: 7,030 DNS queries, 53 HTTP visits
+  ✓ york.vip: 99,580 DNS queries, 805 HTTP visits
+  ✓ zkbet.casino: 3,260 DNS queries, 2 HTTP visits
+  ✓ zkbetkh.com: 6,150 DNS queries, 0 HTTP visits
+  ✓ zkbetkh.net: 3,340 DNS queries, 6 HTTP visits
+  ✓ zkbet.win: 15,560 DNS queries, 47 HTTP visits
+  ✓ zoot.win: 40,460 DNS queries, 389 HTTP visits
+
+==========================================================================================
+ALL ZONES ANALYTICS REPORT
+==========================================================================================
+
+Time Range: 2025-11-15T08:23:00+00:00 to 2025-12-15T08:23:00+00:00
+Period: last 30 days
+
+==========================================================================================
+SUMMARY
+==========================================================================================
+Total Zones: 208
+Total DNS Queries: 1,772,980
+Total HTTP Visits: 9,147
+Total Bandwidth: 7.64 GB (8,198,419,447 bytes)
+Average Queries per Zone: 8,523.94
+Average Visits per Zone: 43.98
+
+==========================================================================================
+INDIVIDUAL ZONE STATISTICS
+==========================================================================================
+
+1. saffaluck.co.za (Status: active)
+   Zone ID: 657684e7ed54d2358f5f9d5066e2e832
+   Plan: Free Website
+   DNS Queries: 123,810
+   HTTP Visits: 832
+   Bandwidth: 0.88 GB (949,399,206 bytes)
+
+2. york.vip (Status: active)
+   Zone ID: ce05479a85635ed6612ecb6167dc4289
+   Plan: Free Website
+   DNS Queries: 99,580
+   HTTP Visits: 805
+   Bandwidth: 0.77 GB (831,084,443 bytes)
+
+3. mm777global.com (Status: active)
+   Zone ID: 246ce37a6e5229fc305c0e0992d950ea
+   Plan: Free Website
+   DNS Queries: 78,090
+   HTTP Visits: 276
+   Bandwidth: 0.42 GB (446,664,267 bytes)
+
+4. winhigh.casino (Status: active)
+   Zone ID: 671ace1232d0b0475f6a3a06737fd22f
+   Plan: Free Website
+   DNS Queries: 68,830
+   HTTP Visits: 1,347
+   Bandwidth: 0.84 GB (901,725,839 bytes)
+
+5. goldstar88.com (Status: active)
+   Zone ID: 91a4e85bc462c9ddd9ea0c64b528fe9b
+   Plan: Free Website
+   DNS Queries: 46,950
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (780,578 bytes)
+
+6. mm777-global.com (Status: active)
+   Zone ID: a22f007a4589fa25b4809a722ecfcef0
+   Plan: Free Website
+   DNS Queries: 44,440
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (2,107,621 bytes)
+
+7. sart88.com (Status: active)
+   Zone ID: e60a583b33df1884201c168f96b5fc30
+   Plan: Free Website
+   DNS Queries: 41,220
+   HTTP Visits: 358
+   Bandwidth: 0.34 GB (364,176,404 bytes)
+
+8. zoot.win (Status: active)
+   Zone ID: c2567665d7e7ac58852cce8eb1e95ca5
+   Plan: Free Website
+   DNS Queries: 40,460
+   HTTP Visits: 389
+   Bandwidth: 0.35 GB (378,900,149 bytes)
+
+9. primebet.asia (Status: active)
+   Zone ID: ee1973e5aa52d44d275c3cf746e50c83
+   Plan: Free Website
+   DNS Queries: 39,320
+   HTTP Visits: 428
+   Bandwidth: 0.39 GB (421,504,000 bytes)
+
+10. wow.bingo (Status: active)
+   Zone ID: 7d6e5a18669dd10c49d46386e929c567
+   Plan: Free Website
+   DNS Queries: 32,420
+   HTTP Visits: 293
+   Bandwidth: 0.23 GB (241,702,105 bytes)
+
+11. wego88casino.com (Status: active)
+   Zone ID: 35fea8489287098edc667876cb7ad11c
+   Plan: Free Website
+   DNS Queries: 30,940
+   HTTP Visits: 704
+   Bandwidth: 0.24 GB (252,542,954 bytes)
+
+12. mm777global.club (Status: active)
+   Zone ID: 443941145b243f8a219b1b4d4fea4b2b
+   Plan: Free Website
+   DNS Queries: 30,600
+   HTTP Visits: 431
+   Bandwidth: 0.38 GB (410,745,586 bytes)
+
+13. wite.money (Status: active)
+   Zone ID: eb7f95c6480a77af30d586ee9e0c5927
+   Plan: Free Website
+   DNS Queries: 26,640
+   HTTP Visits: 145
+   Bandwidth: 0.14 GB (145,785,112 bytes)
+
+14. www-zkbet.com (Status: active)
+   Zone ID: 610143140f6e14439b5622e36ba83242
+   Plan: Free Website
+   DNS Queries: 23,890
+   HTTP Visits: 322
+   Bandwidth: 0.25 GB (263,474,082 bytes)
+
+15. shwemyinn.com (Status: active)
+   Zone ID: 5be587e66d0e627e18f740f0b186b2b3
+   Plan: Free Website
+   DNS Queries: 23,420
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+16. 7plusmmk.com (Status: active)
+   Zone ID: 6d17bdd35f63234355aa47537739e97d
+   Plan: Free Website
+   DNS Queries: 21,640
+   HTTP Visits: 150
+   Bandwidth: 0.15 GB (162,566,958 bytes)
+
+17. subuu.bet (Status: active)
+   Zone ID: 9b0fd7a8d3eac3041991f5d7895d6dd8
+   Plan: Free Website
+   DNS Queries: 18,990
+   HTTP Visits: 161
+   Bandwidth: 0.11 GB (116,800,604 bytes)
+
+18. wego88kr.com (Status: active)
+   Zone ID: 2bd841298d94240f7d24c81ec1d3b6d1
+   Plan: Free Website
+   DNS Queries: 18,530
+   HTTP Visits: 146
+   Bandwidth: 0.10 GB (109,105,377 bytes)
+
+19. mmoslots.com (Status: active)
+   Zone ID: 858e37a271e2a9a211762532bfbe19f6
+   Plan: Free Website
+   DNS Queries: 15,810
+   HTTP Visits: 8
+   Bandwidth: 0.04 GB (40,552,840 bytes)
+
+20. zkbet.win (Status: active)
+   Zone ID: 9b7a202e9853ed3af479b9b803e44107
+   Plan: Free Website
+   DNS Queries: 15,560
+   HTTP Visits: 47
+   Bandwidth: 0.03 GB (35,239,210 bytes)
+
+21. mm777global.online (Status: active)
+   Zone ID: 2cf3124bd17b12c1c575b2c1b9539b78
+   Plan: Free Website
+   DNS Queries: 15,090
+   HTTP Visits: 140
+   Bandwidth: 0.09 GB (101,751,070 bytes)
+
+22. tcg-hb.com (Status: active)
+   Zone ID: de9685eb73f4135b6b12ee4fad9a1fc1
+   Plan: Free Website
+   DNS Queries: 15,070
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+23. ananda88.com (Status: active)
+   Zone ID: dd3815756a80ae8b63f0569b1f0aea31
+   Plan: Free Website
+   DNS Queries: 14,460
+   HTTP Visits: 76
+   Bandwidth: 0.12 GB (128,706,376 bytes)
+
+24. sb777.online (Status: active)
+   Zone ID: 9922d78c4c970243324f60f50ce53f99
+   Plan: Free Website
+   DNS Queries: 13,960
+   HTTP Visits: 94
+   Bandwidth: 0.08 GB (87,457,707 bytes)
+
+25. 5lionsbet.com (Status: active)
+   Zone ID: f3d56caefd27e34dff264e4879591fe7
+   Plan: Free Website
+   DNS Queries: 13,600
+   HTTP Visits: 87
+   Bandwidth: 0.00 GB (2,277,117 bytes)
+
+26. bet-brazil.com (Status: active)
+   Zone ID: b0bb5723104dbcfa63b8f03ee69c3725
+   Plan: Free Website
+   DNS Queries: 13,420
+   HTTP Visits: 39
+   Bandwidth: 0.02 GB (22,686,225 bytes)
+
+27. sunabet.com (Status: active)
+   Zone ID: 860888511f3f667f333cc0b427ab4795
+   Plan: Free Website
+   DNS Queries: 12,640
+   HTTP Visits: 84
+   Bandwidth: 0.06 GB (67,138,583 bytes)
+
+28. sbo777.app (Status: active)
+   Zone ID: 0648871b5c510d48dcf6e4a64b6b8162
+   Plan: Free Website
+   DNS Queries: 11,870
+   HTTP Visits: 0
+   Bandwidth: 0.01 GB (6,859,099 bytes)
+
+29. sbonation.live (Status: active)
+   Zone ID: 2f326c0526d5be1a9e0376c66cc4599d
+   Plan: Free Website
+   DNS Queries: 11,530
+   HTTP Visits: 0
+   Bandwidth: 0.01 GB (7,021,491 bytes)
+
+30. wego88kor.com (Status: active)
+   Zone ID: 8c4271db7fc2c4cc1cc7c139f12cdfb9
+   Plan: Free Website
+   DNS Queries: 11,400
+   HTTP Visits: 102
+   Bandwidth: 0.08 GB (89,240,968 bytes)
+
+31. thameetaw.com (Status: active)
+   Zone ID: 59db95366869e8a7de13ce286f5af391
+   Plan: Free Website
+   DNS Queries: 10,970
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (4,330,161 bytes)
+
+32. maxwin68.club (Status: active)
+   Zone ID: 4ee1657e67ae043a0a5a03d5063b6c22
+   Plan: Free Website
+   DNS Queries: 10,720
+   HTTP Visits: 49
+   Bandwidth: 0.04 GB (40,211,491 bytes)
+
+33. sbo777.cc (Status: active)
+   Zone ID: 961128850727db700e72536b0b6dab45
+   Plan: Free Website
+   DNS Queries: 10,600
+   HTTP Visits: 0
+   Bandwidth: 0.01 GB (7,866,247 bytes)
+
+34. mmbet388.com (Status: active)
+   Zone ID: d6bcd260f6fff87cece298d34fe98c89
+   Plan: Free Website
+   DNS Queries: 10,560
+   HTTP Visits: 124
+   Bandwidth: 0.14 GB (153,138,915 bytes)
+
+35. ngn99mm.com (Status: active)
+   Zone ID: b1d94ec9d2a82f14e4eba95bcd797222
+   Plan: Free Website
+   DNS Queries: 10,560
+   HTTP Visits: 96
+   Bandwidth: 0.01 GB (13,281,912 bytes)
+
+36. jdn77mm.com (Status: active)
+   Zone ID: f8fb01dfb2c2223492af5d54e03863a5
+   Plan: Free Website
+   DNS Queries: 10,500
+   HTTP Visits: 97
+   Bandwidth: 0.00 GB (2,713,386 bytes)
+
+37. gdr99.com (Status: active)
+   Zone ID: a41dcf5d0085f92109cbbfaf67b74d56
+   Plan: Free Website
+   DNS Queries: 10,300
+   HTTP Visits: 15
+   Bandwidth: 0.02 GB (21,184,274 bytes)
+
+38. grd99.com (Status: active)
+   Zone ID: dd9fda766c4a3a18915977576ff65de8
+   Plan: Free Website
+   DNS Queries: 9,970
+   HTTP Visits: 3
+   Bandwidth: 0.00 GB (1,227,557 bytes)
+
+39. dubaibet.co (Status: active)
+   Zone ID: ec8c8dc16fd2f74b782329a79d47d990
+   Plan: Free Website
+   DNS Queries: 9,690
+   HTTP Visits: 59
+   Bandwidth: 0.06 GB (69,391,263 bytes)
+
+40. gdr66.net (Status: active)
+   Zone ID: 7d584da2c98907f061cbbb1e7155bd89
+   Plan: Free Website
+   DNS Queries: 9,570
+   HTTP Visits: 2
+   Bandwidth: 0.00 GB (2,079,542 bytes)
+
+41. mw68.fun (Status: active)
+   Zone ID: bdea3fbdf79ce2666aa73783f290c4b5
+   Plan: Free Website
+   DNS Queries: 9,570
+   HTTP Visits: 73
+   Bandwidth: 0.05 GB (51,584,532 bytes)
+
+42. subuu.net (Status: active)
+   Zone ID: 35debd126dd88266aa574e889aff9874
+   Plan: Free Website
+   DNS Queries: 9,510
+   HTTP Visits: 3
+   Bandwidth: 0.00 GB (2,899,518 bytes)
+
+43. golden688.com (Status: active)
+   Zone ID: 785d67a7dcd4d6f143688e58c793686d
+   Plan: Free Website
+   DNS Queries: 9,380
+   HTTP Visits: 36
+   Bandwidth: 0.03 GB (36,380,212 bytes)
+
+44. luckynine9.com (Status: active)
+   Zone ID: eed1ddc55c795aa6ef4398fc3d326fab
+   Plan: Free Website
+   DNS Queries: 9,360
+   HTTP Visits: 38
+   Bandwidth: 0.04 GB (44,908,224 bytes)
+
+45. hod77.com (Status: active)
+   Zone ID: b9748b486b238270e2690346ff068dbc
+   Plan: Free Website
+   DNS Queries: 9,200
+   HTTP Visits: 8
+   Bandwidth: 0.01 GB (5,884,934 bytes)
+
+46. sb777special.asia (Status: active)
+   Zone ID: 9e7c7efab93a6a0c2811c4d85901cf55
+   Plan: Free Website
+   DNS Queries: 8,970
+   HTTP Visits: 2
+   Bandwidth: 0.00 GB (2,904,201 bytes)
+
+47. megawinner88.com (Status: active)
+   Zone ID: fee1951282f00d797885fc323db06b89
+   Plan: Free Website
+   DNS Queries: 8,810
+   HTTP Visits: 85
+   Bandwidth: 0.13 GB (137,360,221 bytes)
+
+48. data88.bet (Status: active)
+   Zone ID: 1325da8c4fede624ea3fe85a6167b772
+   Plan: Free Website
+   DNS Queries: 8,720
+   HTTP Visits: 12
+   Bandwidth: 0.01 GB (13,014,454 bytes)
+
+49. setswel.com (Status: active)
+   Zone ID: 0418afe69ae7441e5195162ad580ede2
+   Plan: Free Website
+   DNS Queries: 8,590
+   HTTP Visits: 1
+   Bandwidth: 0.00 GB (471,497 bytes)
+
+50. aztecash.win (Status: active)
+   Zone ID: f616496982ef7454b6ac9c44d13c5abf
+   Plan: Free Website
+   DNS Queries: 8,540
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+51. vila88.net (Status: active)
+   Zone ID: 7d427fd01343033986f70ffca7089f76
+   Plan: Free Website
+   DNS Queries: 8,360
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+52. wg88web.com (Status: active)
+   Zone ID: aa1efcafee75b54ce91594cb974662b6
+   Plan: Free Website
+   DNS Queries: 8,320
+   HTTP Visits: 2
+   Bandwidth: 0.00 GB (5,280,506 bytes)
+
+53. special9.net (Status: active)
+   Zone ID: 565b0c96a4a8a39a6f47f6b212846008
+   Plan: Free Website
+   DNS Queries: 8,160
+   HTTP Visits: 51
+   Bandwidth: 0.09 GB (95,786,273 bytes)
+
+54. kdiwyndhjfdksah.xyz (Status: active)
+   Zone ID: 689d44ea82f49f28b095daa97de64958
+   Plan: Free Website
+   DNS Queries: 8,150
+   HTTP Visits: 8
+   Bandwidth: 0.00 GB (3,731,331 bytes)
+
+55. carabaobet.xyz (Status: active)
+   Zone ID: a4cbba0e1da28501c0577fb0b53cf683
+   Plan: Free Website
+   DNS Queries: 8,030
+   HTTP Visits: 8
+   Bandwidth: 0.02 GB (18,589,444 bytes)
+
+56. special9.online (Status: active)
+   Zone ID: 6774ccb0a6777130ca92e2d1e9787200
+   Plan: Free Website
+   DNS Queries: 7,830
+   HTTP Visits: 54
+   Bandwidth: 0.06 GB (69,703,910 bytes)
+
+57. vila88.com (Status: active)
+   Zone ID: 218db21a71565ff7d6f2fd551b3d1246
+   Plan: Free Website
+   DNS Queries: 7,790
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+58. y2kslots.club (Status: active)
+   Zone ID: d3db1fe677895c7505d03a0d8f9dd280
+   Plan: Free Website
+   DNS Queries: 7,660
+   HTTP Visits: 20
+   Bandwidth: 0.03 GB (32,500,630 bytes)
+
+59. silvawin.org (Status: active)
+   Zone ID: 9baf75f618966e55e004b5971d93a649
+   Plan: Free Website
+   DNS Queries: 7,140
+   HTTP Visits: 0
+   Bandwidth: 0.05 GB (48,998,911 bytes)
+
+60. winhigh.vip (Status: active)
+   Zone ID: 9a5235423f3d877625c79d6ec6e9998d
+   Plan: Free Website
+   DNS Queries: 7,120
+   HTTP Visits: 5
+   Bandwidth: 0.00 GB (4,424,289 bytes)
+
+61. tsm777.xyz (Status: active)
+   Zone ID: af8a53d5206d9d1b04dbe8e60a6c5798
+   Plan: Free Website
+   DNS Queries: 7,100
+   HTTP Visits: 1
+   Bandwidth: 0.00 GB (634,655 bytes)
+
+62. ygn689mmk.online (Status: active)
+   Zone ID: b6dd87579798794ee580d21887312fff
+   Plan: Free Website
+   DNS Queries: 7,030
+   HTTP Visits: 53
+   Bandwidth: 0.03 GB (33,355,162 bytes)
+
+63. sports8bet.net (Status: active)
+   Zone ID: 2c94629953487c0ef784f7b0d94d17f9
+   Plan: Free Website
+   DNS Queries: 6,850
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+64. 78wwin.com (Status: active)
+   Zone ID: 43a7211e135ff2bd4e521a35cfa29495
+   Plan: Free Website
+   DNS Queries: 6,710
+   HTTP Visits: 23
+   Bandwidth: 0.02 GB (25,273,520 bytes)
+
+65. mnm777.org (Status: active)
+   Zone ID: 18badcd56723915fe2283321a5603118
+   Plan: Free Website
+   DNS Queries: 6,530
+   HTTP Visits: 11
+   Bandwidth: 0.02 GB (17,653,119 bytes)
+
+66. lucky24.xyz (Status: active)
+   Zone ID: 1e8e04c5e4053f7f4bd1db79225ad172
+   Plan: Free Website
+   DNS Queries: 6,510
+   HTTP Visits: 8
+   Bandwidth: 0.01 GB (11,333,271 bytes)
+
+67. d9bet68.com (Status: active)
+   Zone ID: 9ee975277dcd3a694bb972a0e6a9b0db
+   Plan: Free Website
+   DNS Queries: 6,430
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (640,028 bytes)
+
+68. fk88.com (Status: active)
+   Zone ID: 5b39d3165bc03bd720fabf2753252626
+   Plan: Free Website
+   DNS Queries: 6,310
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (2,992,335 bytes)
+
+69. luckynine9.org (Status: active)
+   Zone ID: 1b25a33435e02c925987ad41d9111309
+   Plan: Free Website
+   DNS Queries: 6,290
+   HTTP Visits: 5
+   Bandwidth: 0.00 GB (1,230,548 bytes)
+
+70. zkbetkh.com (Status: active)
+   Zone ID: 8b180e2d941381973cd739ac50395fd0
+   Plan: Free Website
+   DNS Queries: 6,150
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (409,072 bytes)
+
+71. bajitop.com (Status: active)
+   Zone ID: 43a360e953dbd071a15dec57d09c0658
+   Plan: Free Website
+   DNS Queries: 5,850
+   HTTP Visits: 13
+   Bandwidth: 0.01 GB (14,102,331 bytes)
+
+72. y2kslots.online (Status: active)
+   Zone ID: cb7230a74af33bad871638d3d849fc07
+   Plan: Free Website
+   DNS Queries: 5,750
+   HTTP Visits: 12
+   Bandwidth: 0.02 GB (22,383,613 bytes)
+
+73. primebet977.com (Status: active)
+   Zone ID: a8af5b52490bb88fb00ac5ce1fb86c07
+   Plan: Free Website
+   DNS Queries: 5,720
+   HTTP Visits: 41
+   Bandwidth: 0.05 GB (49,028,394 bytes)
+
+74. sart99.com (Status: active)
+   Zone ID: 0c3ab897d29350b3a3bee3e8ef17aa9a
+   Plan: Free Website
+   DNS Queries: 5,660
+   HTTP Visits: 1
+   Bandwidth: 0.00 GB (727,178 bytes)
+
+75. wego88slot.com (Status: active)
+   Zone ID: 8664535ea506400da79ea02a40ab105b
+   Plan: Free Website
+   DNS Queries: 5,620
+   HTTP Visits: 23
+   Bandwidth: 0.01 GB (16,040,740 bytes)
+
+76. wego88bet.com (Status: active)
+   Zone ID: 8e3c72d896cd1883dc7ec4f244121e57
+   Plan: Free Website
+   DNS Queries: 5,510
+   HTTP Visits: 16
+   Bandwidth: 0.01 GB (12,050,081 bytes)
+
+77. primebet.cash (Status: active)
+   Zone ID: e65a9c6b4b6aec6cf72348b44bc3f533
+   Plan: Free Website
+   DNS Queries: 5,500
+   HTTP Visits: 60
+   Bandwidth: 0.04 GB (46,111,959 bytes)
+
+78. sartrupee.com (Status: active)
+   Zone ID: 8e207061a83f7cc7aa546e8ebfec2afe
+   Plan: Free Website
+   DNS Queries: 5,450
+   HTTP Visits: 12
+   Bandwidth: 0.02 GB (16,262,724 bytes)
+
+79. versus-casino.shop (Status: active)
+   Zone ID: 49cfed3cf0ba4f3c358e9124b2eb17d7
+   Plan: Free Website
+   DNS Queries: 5,450
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+80. tsm777.net (Status: active)
+   Zone ID: 7b9d274bd5071505b9a629ebef504c95
+   Plan: Free Website
+   DNS Queries: 5,260
+   HTTP Visits: 7
+   Bandwidth: 0.00 GB (4,166,131 bytes)
+
+81. kd88.net (Status: active)
+   Zone ID: 15da890ebb42934f3546a5b99042f032
+   Plan: Free Website
+   DNS Queries: 5,250
+   HTTP Visits: 42
+   Bandwidth: 0.00 GB (1,232,495 bytes)
+
+82. sbcsport.com (Status: active)
+   Zone ID: 8acadb6a6261caccfa207fefa83ff3b5
+   Plan: Free Website
+   DNS Queries: 5,140
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (799,059 bytes)
+
+83. jp88.fun (Status: active)
+   Zone ID: 57434dcd23bfb99fb5b5da7b07ec7f91
+   Plan: Free Website
+   DNS Queries: 5,130
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (1,541,861 bytes)
+
+84. 1bez.com (Status: active)
+   Zone ID: 3ff12f909331ef35453f7e4bacb1ed46
+   Plan: Free Website
+   DNS Queries: 5,070
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (2,003,077 bytes)
+
+85. lucky7online.asia (Status: active)
+   Zone ID: 992ef287a11cf96365ad73b56e537731
+   Plan: Free Website
+   DNS Queries: 5,060
+   HTTP Visits: 3
+   Bandwidth: 0.02 GB (21,791,726 bytes)
+
+86. winhigh.bet (Status: active)
+   Zone ID: 429afa4f99e1b7481306d2762ad382b5
+   Plan: Free Website
+   DNS Queries: 5,050
+   HTTP Visits: 1
+   Bandwidth: 0.00 GB (5,334,587 bytes)
+
+87. wego88sport.com (Status: active)
+   Zone ID: 0a3164895f14ab65ea5f9c459fd9bbcf
+   Plan: Free Website
+   DNS Queries: 4,900
+   HTTP Visits: 13
+   Bandwidth: 0.01 GB (8,836,841 bytes)
+
+88. gbw777.com (Status: active)
+   Zone ID: 2c880a2a4a38a8aa20699cf3397081a6
+   Plan: Free Website
+   DNS Queries: 4,810
+   HTTP Visits: 42
+   Bandwidth: 0.06 GB (69,059,988 bytes)
+
+89. goldnova.site (Status: active)
+   Zone ID: 5cc0726b1ab06b1aa5828d8add86a0bc
+   Plan: Free Website
+   DNS Queries: 4,780
+   HTTP Visits: 3
+   Bandwidth: 0.00 GB (5,361,389 bytes)
+
+90. 111onlines.com (Status: active)
+   Zone ID: 7c971864cebbbdbaa2c3d46abb0518e0
+   Plan: Free Website
+   DNS Queries: 4,700
+   HTTP Visits: 69
+   Bandwidth: 0.02 GB (22,402,395 bytes)
+
+91. silvawin.net (Status: active)
+   Zone ID: 220488b9be1397d8fb51b2aa6ae4a20e
+   Plan: Free Website
+   DNS Queries: 4,700
+   HTTP Visits: 0
+   Bandwidth: 0.01 GB (6,939,707 bytes)
+
+92. wego88club.com (Status: active)
+   Zone ID: 077dbdf73135e1d8fe90436418a45da4
+   Plan: Free Website
+   DNS Queries: 4,700
+   HTTP Visits: 12
+   Bandwidth: 0.01 GB (6,726,807 bytes)
+
+93. jp88.asia (Status: active)
+   Zone ID: a935c11edc22754e96f15f0e31ab62e5
+   Plan: Free Website
+   DNS Queries: 4,600
+   HTTP Visits: 2
+   Bandwidth: 0.00 GB (1,064,722 bytes)
+
+94. liquidbet.com (Status: active)
+   Zone ID: bff0a30013ae010318e764821ebdc0be
+   Plan: Free Website
+   DNS Queries: 4,600
+   HTTP Visits: 0
+   Bandwidth: 0.01 GB (8,708,008 bytes)
+
+95. winplay.co.za (Status: active)
+   Zone ID: ec7999da15c667935c17c9230094432f
+   Plan: Free Website
+   DNS Queries: 4,470
+   HTTP Visits: 32
+   Bandwidth: 0.02 GB (18,470,219 bytes)
+
+96. sbcbet.com (Status: active)
+   Zone ID: f2016fddb9d17b0e5e73231ef0452b3f
+   Plan: Free Website
+   DNS Queries: 4,440
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (1,367,540 bytes)
+
+97. pp6688.xyz (Status: active)
+   Zone ID: 984c550da18a8f8b2effa5b413260fc1
+   Plan: Free Website
+   DNS Queries: 4,410
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (2,866,903 bytes)
+
+98. superman999.net (Status: active)
+   Zone ID: f82bca314d1f1218d6de2a396ed14332
+   Plan: Free Website
+   DNS Queries: 4,330
+   HTTP Visits: 1
+   Bandwidth: 0.00 GB (3,499,973 bytes)
+
+99. tsm777.asia (Status: active)
+   Zone ID: 21556f4d5dce0886e13a4424dd9aab5a
+   Plan: Free Website
+   DNS Queries: 4,300
+   HTTP Visits: 7
+   Bandwidth: 0.00 GB (2,919,965 bytes)
+
+100. dubaibet.club (Status: active)
+   Zone ID: d4b942b99083ac193ed032500b908b0d
+   Plan: Free Website
+   DNS Queries: 4,290
+   HTTP Visits: 2
+   Bandwidth: 0.00 GB (3,842,216 bytes)
+
+101. asia999mm.com (Status: active)
+   Zone ID: 28e9bf85d87538226ca30085855346bd
+   Plan: Free Website
+   DNS Queries: 4,120
+   HTTP Visits: 8
+   Bandwidth: 0.00 GB (3,956,970 bytes)
+
+102. suna88.com (Status: active)
+   Zone ID: b31dda41456286fd6bfc442c0173d26b
+   Plan: Free Website
+   DNS Queries: 4,120
+   HTTP Visits: 2
+   Bandwidth: 0.00 GB (474,828 bytes)
+
+103. crownsss.com (Status: active)
+   Zone ID: 66809f7ba7e346f4647a60eb65246ab8
+   Plan: Free Website
+   DNS Queries: 4,100
+   HTTP Visits: 1
+   Bandwidth: 0.00 GB (438,154 bytes)
+
+104. wego88th.com (Status: active)
+   Zone ID: 8d9db4e3efba60d20c88b6d122d67850
+   Plan: Free Website
+   DNS Queries: 4,070
+   HTTP Visits: 7
+   Bandwidth: 0.00 GB (3,058,815 bytes)
+
+105. mmjdn77.com (Status: active)
+   Zone ID: e080ca9cb5f46de534f226bdd83129c7
+   Plan: Free Website
+   DNS Queries: 4,060
+   HTTP Visits: 69
+   Bandwidth: 0.00 GB (1,842,464 bytes)
+
+106. vs-versus.net (Status: active)
+   Zone ID: 302e4bc6470b4365618bd4903c4852c3
+   Plan: Free Website
+   DNS Queries: 4,010
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+107. asgcash.com (Status: active)
+   Zone ID: 36722a85532fc1c3bf84a7ea416eaaf3
+   Plan: Free Website
+   DNS Queries: 4,000
+   HTTP Visits: 0
+   Bandwidth: 0.03 GB (30,997,792 bytes)
+
+108. digtal01.com (Status: active)
+   Zone ID: cfc2655999c489aaf0b6eb24f98df84b
+   Plan: Free Website
+   DNS Queries: 4,000
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (386 bytes)
+
+109. versusbet.club (Status: active)
+   Zone ID: 7d205dcf971fa07fb622a3fb7f7c69bf
+   Plan: Free Website
+   DNS Queries: 3,990
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+110. versusbrasil.com (Status: active)
+   Zone ID: ee329b2731ad9bfa28467bfb250d6d80
+   Plan: Free Website
+   DNS Queries: 3,860
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (586,060 bytes)
+
+111. roman628.com (Status: active)
+   Zone ID: ad6974854be4273059108667631a186f
+   Plan: Free Website
+   DNS Queries: 3,830
+   HTTP Visits: 14
+   Bandwidth: 0.01 GB (13,570,363 bytes)
+
+112. xgame568.net (Status: active)
+   Zone ID: 420053e26160fb61e03b355d332663aa
+   Plan: Free Website
+   DNS Queries: 3,770
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (639,094 bytes)
+
+113. cric69.com (Status: active)
+   Zone ID: 74de4fdbd96e13b295a783597be0068f
+   Plan: Free Website
+   DNS Queries: 3,760
+   HTTP Visits: 0
+   Bandwidth: 0.01 GB (10,592,382 bytes)
+
+114. sbclive.biz (Status: active)
+   Zone ID: 9af86dd27972d7bf547eb007d47be2ed
+   Plan: Free Website
+   DNS Queries: 3,730
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (1,094,755 bytes)
+
+115. xbet568.net (Status: active)
+   Zone ID: 0d770c271421904677c4b7811d67a189
+   Plan: Free Website
+   DNS Queries: 3,660
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (790,100 bytes)
+
+116. test-wego88.com (Status: active)
+   Zone ID: af5e0ec68b4bbabe599cf48b1a73ad3c
+   Plan: Free Website
+   DNS Queries: 3,650
+   HTTP Visits: 3
+   Bandwidth: 0.00 GB (3,315,578 bytes)
+
+117. kd2288.com (Status: active)
+   Zone ID: a52dabf1a7eac92a7889d4dc0a2de100
+   Plan: Free Website
+   DNS Queries: 3,620
+   HTTP Visits: 88
+   Bandwidth: 0.00 GB (2,393,849 bytes)
+
+118. btop88.com (Status: active)
+   Zone ID: 3edafd6533999714cd0555ef2711a9d6
+   Plan: Free Website
+   DNS Queries: 3,590
+   HTTP Visits: 12
+   Bandwidth: 0.01 GB (15,649,945 bytes)
+
+119. koapp3.com (Status: active)
+   Zone ID: a535134e8e8f59cb1f2c85809d427563
+   Plan: Free Website
+   DNS Queries: 3,550
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (2,502 bytes)
+
+120. versus.com.co (Status: active)
+   Zone ID: 96210c298cf7647d420189cc53b1e20f
+   Plan: Free Website
+   DNS Queries: 3,530
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (2,833 bytes)
+
+121. sbclive88.org (Status: active)
+   Zone ID: 240198cb29ed8c1b963687f5af0f6215
+   Plan: Free Website
+   DNS Queries: 3,510
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (213,489 bytes)
+
+122. vs-versus.org (Status: active)
+   Zone ID: ff6a6ab8d4f7dff4b3642186d4bd0c90
+   Plan: Free Website
+   DNS Queries: 3,470
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+123. sunarupee.com (Status: active)
+   Zone ID: 7bd0d45c39843176933b9cd58d0ed965
+   Plan: Free Website
+   DNS Queries: 3,440
+   HTTP Visits: 5
+   Bandwidth: 0.00 GB (4,256,186 bytes)
+
+124. venus368.com (Status: active)
+   Zone ID: 1462eb116a7bf74a44b812c2af566351
+   Plan: Free Website
+   DNS Queries: 3,430
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+125. d9bet99.com (Status: active)
+   Zone ID: b961e8133def2450e3927af74b985af9
+   Plan: Free Website
+   DNS Queries: 3,400
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (1,220,595 bytes)
+
+126. mnm777.site (Status: active)
+   Zone ID: fca7bf8e8d5a2081745a561aa0c4e1dd
+   Plan: Free Website
+   DNS Queries: 3,360
+   HTTP Visits: 4
+   Bandwidth: 0.01 GB (5,439,540 bytes)
+
+127. koapp7.com (Status: active)
+   Zone ID: 0022c18011e5d7f093aac167b7af233d
+   Plan: Free Website
+   DNS Queries: 3,350
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (375 bytes)
+
+128. sbclive.co (Status: active)
+   Zone ID: 120ba00d9efb5b55306048ab16b1e8f5
+   Plan: Free Website
+   DNS Queries: 3,350
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (232,565 bytes)
+
+129. zkbetkh.net (Status: active)
+   Zone ID: 0b8ff79af068029fd2dc780ef1c1b540
+   Plan: Free Website
+   DNS Queries: 3,340
+   HTTP Visits: 6
+   Bandwidth: 0.01 GB (8,819,639 bytes)
+
+130. 789wwin.fun (Status: active)
+   Zone ID: c78ab8d20f880541c0fda0a47f3a4cec
+   Plan: Free Website
+   DNS Queries: 3,270
+   HTTP Visits: 3
+   Bandwidth: 0.00 GB (5,212,820 bytes)
+
+131. win1918.net (Status: active)
+   Zone ID: 9790e93ea3edd69c12684ced1e4c84de
+   Plan: Free Website
+   DNS Queries: 3,260
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (1,368,904 bytes)
+
+132. zkbet.casino (Status: active)
+   Zone ID: 61cdbfa0f71b6e081cb6fedd796f08c5
+   Plan: Free Website
+   DNS Queries: 3,260
+   HTTP Visits: 2
+   Bandwidth: 0.01 GB (6,092,102 bytes)
+
+133. 78wwin.live (Status: active)
+   Zone ID: 392958f5014f4f065e98dca639bba00e
+   Plan: Free Website
+   DNS Queries: 3,250
+   HTTP Visits: 3
+   Bandwidth: 0.00 GB (969,957 bytes)
+
+134. koapp1.com (Status: active)
+   Zone ID: 6534eef7d6db308fae44f44c80d8abf1
+   Plan: Free Website
+   DNS Queries: 3,250
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (2,607,750 bytes)
+
+135. subuuu.bet (Status: active)
+   Zone ID: 89670781549ce9151c5796dd24ec738e
+   Plan: Free Website
+   DNS Queries: 3,250
+   HTTP Visits: 4
+   Bandwidth: 0.00 GB (2,408,598 bytes)
+
+136. mycrowngem.com (Status: active)
+   Zone ID: 311666b6bc9326dab9fcc7dfa2ef8be4
+   Plan: Free Website
+   DNS Queries: 3,230
+   HTTP Visits: 1
+   Bandwidth: 0.00 GB (1,105,790 bytes)
+
+137. wg88ufc.com (Status: active)
+   Zone ID: 446f256640ac3ff7e5149dd8bd73dac8
+   Plan: Free Website
+   DNS Queries: 3,210
+   HTTP Visits: 4
+   Bandwidth: 0.00 GB (2,480,110 bytes)
+
+138. vs-versus.world (Status: active)
+   Zone ID: 116aea15f3447e7c64d6ffcf35bec6f4
+   Plan: Free Website
+   DNS Queries: 3,150
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+139. wwin789.club (Status: active)
+   Zone ID: 896c9c2908fd09e0491e5e31bc961f42
+   Plan: Free Website
+   DNS Queries: 3,150
+   HTTP Visits: 2
+   Bandwidth: 0.00 GB (3,975,470 bytes)
+
+140. m57ag.space (Status: active)
+   Zone ID: 102798ba00731f802123182b64c76eca
+   Plan: Free Website
+   DNS Queries: 3,140
+   HTTP Visits: 4
+   Bandwidth: 0.00 GB (4,430,369 bytes)
+
+141. versusbrazil.com (Status: active)
+   Zone ID: e3f11fd1b29ed700a42717722f16e4aa
+   Plan: Free Website
+   DNS Queries: 3,130
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (614,568 bytes)
+
+142. 789wwin.vip (Status: active)
+   Zone ID: d86f4d3a5864d1ca5b895789d0fa993b
+   Plan: Free Website
+   DNS Queries: 3,120
+   HTTP Visits: 3
+   Bandwidth: 0.00 GB (823,493 bytes)
+
+143. koapp9.com (Status: active)
+   Zone ID: 7264072907af9e48dcb78814ed1aee21
+   Plan: Free Website
+   DNS Queries: 3,120
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (579,955 bytes)
+
+144. 78wwin.fun (Status: active)
+   Zone ID: 8ea3bb1193a4cfe8f268ae79069937d8
+   Plan: Free Website
+   DNS Queries: 3,090
+   HTTP Visits: 2
+   Bandwidth: 0.00 GB (3,171,554 bytes)
+
+145. versus-brazil.com (Status: active)
+   Zone ID: 7dc6ee3134ccbacd58c0664dc4f8b5b0
+   Plan: Free Website
+   DNS Queries: 3,090
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (883,047 bytes)
+
+146. wwin78.com (Status: active)
+   Zone ID: 3f565e8f256e70b127f07c30e61ef7a4
+   Plan: Free Website
+   DNS Queries: 3,090
+   HTTP Visits: 3
+   Bandwidth: 0.01 GB (13,059,199 bytes)
+
+147. greybet666.com (Status: active)
+   Zone ID: 2068f86fd63a93637ce7cdfde1d8906d
+   Plan: Free Website
+   DNS Queries: 3,080
+   HTTP Visits: 1
+   Bandwidth: 0.00 GB (1,324,604 bytes)
+
+148. wg88epl.com (Status: active)
+   Zone ID: a61439fd2013b19aff7b5b284e40b6ef
+   Plan: Free Website
+   DNS Queries: 3,070
+   HTTP Visits: 4
+   Bandwidth: 0.00 GB (1,295,840 bytes)
+
+149. wwin789.com (Status: active)
+   Zone ID: dfd7d08468a32113843de01487fc46cd
+   Plan: Free Website
+   DNS Queries: 3,070
+   HTTP Visits: 5
+   Bandwidth: 0.00 GB (3,593,572 bytes)
+
+150. wwin789.live (Status: active)
+   Zone ID: c9c5bd8c00964a754c6dccd86bc33eb5
+   Plan: Free Website
+   DNS Queries: 3,070
+   HTTP Visits: 2
+   Bandwidth: 0.00 GB (2,452,671 bytes)
+
+151. 789wwin.live (Status: active)
+   Zone ID: 02f42e40b2f8bcf4bc46875873063593
+   Plan: Free Website
+   DNS Queries: 3,060
+   HTTP Visits: 10
+   Bandwidth: 0.00 GB (3,713,519 bytes)
+
+152. versusbet.app (Status: active)
+   Zone ID: 564d72c606c13a33b2b13aa33dd01171
+   Plan: Free Website
+   DNS Queries: 3,060
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+153. 78wwin.vip (Status: active)
+   Zone ID: 350ac902b2ce24e0cbb82f9fb42a9d2f
+   Plan: Free Website
+   DNS Queries: 3,050
+   HTTP Visits: 4
+   Bandwidth: 0.01 GB (10,474,603 bytes)
+
+154. alem88.com (Status: active)
+   Zone ID: ac230e79182dde9b2cedc5ad2b9ee6db
+   Plan: Free Website
+   DNS Queries: 3,030
+   HTTP Visits: 1
+   Bandwidth: 0.00 GB (4,637,930 bytes)
+
+155. wwin789.vip (Status: active)
+   Zone ID: bf1bc768cc620d6ac0638fabb8554dbd
+   Plan: Free Website
+   DNS Queries: 3,010
+   HTTP Visits: 4
+   Bandwidth: 0.01 GB (6,192,771 bytes)
+
+156. versus.online (Status: active)
+   Zone ID: 31b345abbe02ed416ae159a8939ff035
+   Plan: Free Website
+   DNS Queries: 3,000
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+157. 8xbetppp.xyz (Status: active)
+   Zone ID: 0cee44c8c8d75bc49ed22142f40b26f2
+   Plan: Free Website
+   DNS Queries: 2,980
+   HTTP Visits: 3
+   Bandwidth: 0.00 GB (2,701,188 bytes)
+
+158. versusbet.info (Status: active)
+   Zone ID: 1fa51de56a1b40714603bed17d2e98ee
+   Plan: Free Website
+   DNS Queries: 2,980
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+159. cpc686.com (Status: active)
+   Zone ID: 2271e5d5fb3f1204d3606e76cda92d5f
+   Plan: Free Website
+   DNS Queries: 2,970
+   HTTP Visits: 2
+   Bandwidth: 0.00 GB (4,047,664 bytes)
+
+160. mmbet388.xyz (Status: active)
+   Zone ID: f3ed1c9fb1ac450ee029994d2c7fd814
+   Plan: Free Website
+   DNS Queries: 2,970
+   HTTP Visits: 9
+   Bandwidth: 0.00 GB (5,202,333 bytes)
+
+161. crownff.com (Status: active)
+   Zone ID: d78f2e1c8b521d41adb470be89e7508a
+   Plan: Free Website
+   DNS Queries: 2,960
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (296,077 bytes)
+
+162. silvawin.site (Status: active)
+   Zone ID: 6af02642e79bd505e4c610d6d903bc2c
+   Plan: Free Website
+   DNS Queries: 2,960
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (3,498,666 bytes)
+
+163. versus-casino.bet (Status: active)
+   Zone ID: 278177b07852792988958ac94617bbb5
+   Plan: Free Website
+   DNS Queries: 2,960
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+164. koapp8.com (Status: active)
+   Zone ID: 74032ff6899f5e90935139eebb2190e1
+   Plan: Free Website
+   DNS Queries: 2,930
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (408 bytes)
+
+165. vsversus.bet (Status: active)
+   Zone ID: 915c832c021e2117510738d09c0a95d1
+   Plan: Free Website
+   DNS Queries: 2,930
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+166. ufaasia6688.com (Status: active)
+   Zone ID: 88aeb5e0aaf77895fed29fdab255d20d
+   Plan: Free Website
+   DNS Queries: 2,910
+   HTTP Visits: 1
+   Bandwidth: 0.00 GB (884,812 bytes)
+
+167. wwin78.vip (Status: active)
+   Zone ID: acb5981ae4828516e12acdf544820b79
+   Plan: Free Website
+   DNS Queries: 2,910
+   HTTP Visits: 2
+   Bandwidth: 0.00 GB (538,184 bytes)
+
+168. wego88.vip (Status: active)
+   Zone ID: 54aa4990c1efc6c44ec96377760b1064
+   Plan: Free Website
+   DNS Queries: 2,870
+   HTTP Visits: 3
+   Bandwidth: 0.00 GB (2,639,547 bytes)
+
+169. victo88.com (Status: active)
+   Zone ID: bd78f339d115d597bf19c5776fac2764
+   Plan: Free Website
+   DNS Queries: 2,840
+   HTTP Visits: 2
+   Bandwidth: 0.01 GB (5,864,007 bytes)
+
+170. wwin78.fun (Status: active)
+   Zone ID: be300257e446c2ca17d8f9820a214dfa
+   Plan: Free Website
+   DNS Queries: 2,820
+   HTTP Visits: 2
+   Bandwidth: 0.00 GB (1,018,368 bytes)
+
+171. koapp4.com (Status: active)
+   Zone ID: ed206d48186785fb6dd42b523674ef62
+   Plan: Free Website
+   DNS Queries: 2,800
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+172. 8xbetppp.com (Status: active)
+   Zone ID: 456bc3dce0b03bb0e7a9d94a5514f946
+   Plan: Free Website
+   DNS Queries: 2,790
+   HTTP Visits: 2
+   Bandwidth: 0.00 GB (1,571,467 bytes)
+
+173. wwin78.club (Status: active)
+   Zone ID: 2b49ba82c9441233924b97bf694b7594
+   Plan: Free Website
+   DNS Queries: 2,780
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (576,443 bytes)
+
+174. wwin78.win (Status: active)
+   Zone ID: 47b42d67637e24b4866c34dfe86ef49a
+   Plan: Free Website
+   DNS Queries: 2,750
+   HTTP Visits: 2
+   Bandwidth: 0.00 GB (583,994 bytes)
+
+175. koapp5.com (Status: active)
+   Zone ID: c83c78bd00e5f91a6a36264b920fda57
+   Plan: Free Website
+   DNS Queries: 2,740
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+176. wwin789.fun (Status: active)
+   Zone ID: b4eda5ede1dc3f5d9a01e1c2fcfb063a
+   Plan: Free Website
+   DNS Queries: 2,740
+   HTTP Visits: 2
+   Bandwidth: 0.00 GB (787,954 bytes)
+
+177. bettro88.com (Status: active)
+   Zone ID: 3953528ab1259b4914ab1d53d45158a3
+   Plan: Free Website
+   DNS Queries: 2,730
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (885,320 bytes)
+
+178. silvawin.com (Status: active)
+   Zone ID: 8096e8648e89fb46952161d2d84928ac
+   Plan: Free Website
+   DNS Queries: 2,730
+   HTTP Visits: 0
+   Bandwidth: 0.01 GB (7,121,206 bytes)
+
+179. versusbet.win (Status: active)
+   Zone ID: 56d4f2a7020c21d5231180c89447e451
+   Plan: Free Website
+   DNS Queries: 2,700
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+180. silvawin.pro (Status: active)
+   Zone ID: b40d9272446f29b437bcad0a1be2e65c
+   Plan: Free Website
+   DNS Queries: 2,690
+   HTTP Visits: 0
+   Bandwidth: 0.01 GB (11,061,921 bytes)
+
+181. vs-versus.online (Status: active)
+   Zone ID: 751176e6ad8ef5dcc8006c1d8e162b90
+   Plan: Free Website
+   DNS Queries: 2,660
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+182. versusbet.fun (Status: active)
+   Zone ID: 419f66535b8c0f9f345a53b39e3dcac7
+   Plan: Free Website
+   DNS Queries: 2,650
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+183. koapp2.com (Status: active)
+   Zone ID: 485b6af09b2088d98c8cd9e0a7051319
+   Plan: Free Website
+   DNS Queries: 2,640
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (408 bytes)
+
+184. crownjem.com (Status: active)
+   Zone ID: 5cef7fab6e5e9cf582b727f617be80b2
+   Plan: Free Website
+   DNS Queries: 2,620
+   HTTP Visits: 1
+   Bandwidth: 0.00 GB (957,088 bytes)
+
+185. vs-versus.club (Status: active)
+   Zone ID: 59d47bb7d44d8b126c6e74e59f7b426a
+   Plan: Free Website
+   DNS Queries: 2,600
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+186. ygn689mmk.com (Status: active)
+   Zone ID: 8cca431ff4578e4c77ff0621617cde89
+   Plan: Free Website
+   DNS Queries: 2,570
+   HTTP Visits: 2
+   Bandwidth: 0.00 GB (3,959,629 bytes)
+
+187. gh1152.com (Status: active)
+   Zone ID: 233278b345a221f190f1db6168481e48
+   Plan: Free Website
+   DNS Queries: 2,530
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (443,096 bytes)
+
+188. versusbet.vip (Status: active)
+   Zone ID: 620d1a1b351aa44c23b28ae3d4afb3b0
+   Plan: Free Website
+   DNS Queries: 2,470
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+189. versusbet.live (Status: active)
+   Zone ID: 5fc78eb8c17a8e153f517d2140db4e28
+   Plan: Free Website
+   DNS Queries: 2,460
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+190. versus-casino.xyz (Status: active)
+   Zone ID: 1a5bf94eea5b6b84eb73a195db6ff5ea
+   Plan: Free Website
+   DNS Queries: 2,450
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+191. versusbet.online (Status: active)
+   Zone ID: db6459e8d47b6a87148795955273b231
+   Plan: Free Website
+   DNS Queries: 2,440
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+192. wego88.bet (Status: active)
+   Zone ID: 9bb7f0da3a827d9402b236d85b01eb54
+   Plan: Free Website
+   DNS Queries: 2,420
+   HTTP Visits: 1
+   Bandwidth: 0.00 GB (725,130 bytes)
+
+193. 78wwin.club (Status: active)
+   Zone ID: c6e56479def370e63c587957265f16c3
+   Plan: Free Website
+   DNS Queries: 2,410
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (582,849 bytes)
+
+194. vs-versus.live (Status: active)
+   Zone ID: 532b66e9c23939be61cc2fde1eb5d043
+   Plan: Free Website
+   DNS Queries: 2,350
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+195. koapp6.com (Status: active)
+   Zone ID: 61acca4c8fd71d378b82625e95f3f566
+   Plan: Free Website
+   DNS Queries: 2,170
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (5,023 bytes)
+
+196. versus-casino.club (Status: active)
+   Zone ID: bf681b7b3de6c4d24b934919e481dfe8
+   Plan: Free Website
+   DNS Queries: 2,170
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+197. 789wwin.cc (Status: active)
+   Zone ID: eb827eaa4c1d9cedb4c2ed277f0b8eee
+   Plan: Free Website
+   DNS Queries: 2,140
+   HTTP Visits: 2
+   Bandwidth: 0.00 GB (1,726,232 bytes)
+
+198. vs-versus.co (Status: active)
+   Zone ID: ccf1106ec52c1622fd65d8e0bd9ed00a
+   Plan: Free Website
+   DNS Queries: 2,060
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+199. versus-casino.me (Status: active)
+   Zone ID: 062359337f87745d5d2ba599c5ad0b2e
+   Plan: Free Website
+   DNS Queries: 1,640
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+200. wwin789.cc (Status: active)
+   Zone ID: ab5306b32a7167ef7d5d75fa5564ae67
+   Plan: Free Website
+   DNS Queries: 1,580
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (661,292 bytes)
+
+201. xbet68.co (Status: active)
+   Zone ID: 57e0d9cd04b91909dbcea823cd1a7d73
+   Plan: Free Website
+   DNS Queries: 1,160
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (814 bytes)
+
+202. mmobet.vip (Status: moved)
+   Zone ID: 3b96bc96a2fbc38005f7aee76666ddd5
+   Plan: Free Website
+   DNS Queries: 840
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+203. smt696official.com (Status: active)
+   Zone ID: 92016cb53f3f1c6e01ca8cb0ed4e6170
+   Plan: Free Website
+   DNS Queries: 40
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+204. acemm.com (Status: pending)
+   Zone ID: 7ffed6ac7429b181ba15e449f5007576
+   Plan: Free Website
+   DNS Queries: 0
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+205. mm777games.com (Status: moved)
+   Zone ID: 452b3c9834a12c262d85805fbb147c7f
+   Plan: Free Website
+   DNS Queries: 0
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (10,973 bytes)
+
+206. sonitalatam.com (Status: pending)
+   Zone ID: dd27319e1da8458519986ce5e94d382d
+   Plan: Free Website
+   DNS Queries: 0
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+207. sonitasia.com (Status: pending)
+   Zone ID: dd00e8ea6c963dfd7dc6b6ca6370f709
+   Plan: Free Website
+   DNS Queries: 0
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+208. win1918.com (Status: moved)
+   Zone ID: c50f90942b66d5fbe52a7f49f4c9c10f
+   Plan: Free Website
+   DNS Queries: 0
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (754 bytes)
+
+==========================================================================================
+
+ron.chang@568win.com
+
+
+Fetching analytics for 57 zones...
+  ✓ 568win.best: 144,910 DNS queries, 61 HTTP visits
+  ✓ 568win.world: 148,250 DNS queries, 170 HTTP visits
+  ✓ amgbet777.com: 3,540 DNS queries, 0 HTTP visits
+  ✓ amgbet777.net: 4,330 DNS queries, 0 HTTP visits
+  ✓ amgbet.net: 3,820 DNS queries, 0 HTTP visits
+  ✓ bangcol.org: 12,450 DNS queries, 0 HTTP visits
+  ✓ bbssgg.com: 30,030 DNS queries, 1 HTTP visits
+  ✓ cdn568.net: 39,939,900 DNS queries, 280,819 HTTP visits
+  ✓ cdn568.xyz: 9,170 DNS queries, 0 HTTP visits
+  ✓ csmc-api.com: 5,162,470 DNS queries, 150 HTTP visits
+  ✓ csmcex.com: 9,100 DNS queries, 25 HTTP visits
+  ✓ dufan888.com: 2,830 DNS queries, 0 HTTP visits
+  ✓ dyz946.com: 6,820 DNS queries, 0 HTTP visits
+  ✓ fdcwecname.com: 2,210 DNS queries, 0 HTTP visits
+  ✓ fomhub.com: 147,590 DNS queries, 0 HTTP visits
+  ✓ ggffjjnngg.com: 16,290 DNS queries, 2 HTTP visits
+  ✓ hhjjdd.com: 13,760 DNS queries, 0 HTTP visits
+  ✓ hhllgg.com: 17,020 DNS queries, 0 HTTP visits
+  ✓ hhllpptt.com: 11,100 DNS queries, 1 HTTP visits
+  ✓ hhmmgg.com: 7,120 DNS queries, 0 HTTP visits
+  ✓ iirrmm.com: 30,720 DNS queries, 53 HTTP visits
+  ✓ jjddgg.com: 161,030 DNS queries, 556 HTTP visits
+  ✓ jjnngg.com: 8,250 DNS queries, 0 HTTP visits
+  ✓ jjrrff.com: 8,643,600 DNS queries, 33,596 HTTP visits
+  ✓ jpz946.com: 128,340 DNS queries, 15 HTTP visits
+  ✓ kkbbss.com: 7,850 DNS queries, 0 HTTP visits
+  ✓ kkddjjhc.com: 7,450 DNS queries, 0 HTTP visits
+  ✓ knock2art.com: 15,830 DNS queries, 0 HTTP visits
+  ✓ llcc946.com: 7,930 DNS queries, 0 HTTP visits
+  ✓ mmddzz.com: 8,150 DNS queries, 0 HTTP visits
+  ✓ ngn99.com: 36,430 DNS queries, 172 HTTP visits
+  ✓ nnbbllhc.com: 9,630 DNS queries, 1 HTTP visits
+  ✓ pleasecname.com: 13,510 DNS queries, 0 HTTP visits
+  ✓ ppdd555.com: 7,570 DNS queries, 0 HTTP visits
+  ✓ ppllddhc.com: 1,949,510 DNS queries, 0 HTTP visits
+  ✓ remotes.com.tw: 29,830 DNS queries, 0 HTTP visits
+  ✓ remotestw.com: 9,560 DNS queries, 0 HTTP visits
+  ✓ rrllff.com: 14,080 DNS queries, 3 HTTP visits
+  ✓ ssmmbbbb.com: 25,490 DNS queries, 9 HTTP visits
+  ✓ ssqqbbbb.com: 16,640 DNS queries, 8 HTTP visits
+  ✓ sswwkk.com: 1,506,820 DNS queries, 1,241,814 HTTP visits
+  ✓ techbodia.com: 33,130 DNS queries, 94 HTTP visits
+  ✓ ttbbyyllyy.com: 9,506,078 DNS queries, 53,930 HTTP visits
+  ✓ tw946.com: 5,010,370 DNS queries, 2,292 HTTP visits
+  ✓ udana365.com: 2,480 DNS queries, 2 HTTP visits
+  ✓ wewa365.com: 5,670 DNS queries, 52 HTTP visits
+  ✓ wewa88.com: 3,670 DNS queries, 2 HTTP visits
+  ✓ wl-support.com: 11,660 DNS queries, 0 HTTP visits
+  ✓ wsl946.com: 8,190 DNS queries, 74 HTTP visits
+  ✓ ww365asia.com: 2,560 DNS queries, 1 HTTP visits
+  ✓ xbk946.com: 329,932 DNS queries, 2,853 HTTP visits
+  ✓ xjp946.com: 12,290 DNS queries, 0 HTTP visits
+  ✓ xxggssyy.com: 9,090 DNS queries, 0 HTTP visits
+  ✓ xxttgg.com: 10,454,530 DNS queries, 520 HTTP visits
+  ✓ yi-space.com.tw: 7,360 DNS queries, 0 HTTP visits
+  ✓ yi-spaces.com: 24,750 DNS queries, 0 HTTP visits
+  ✓ yyrrll.com: 25,850 DNS queries, 0 HTTP visits
+
+==========================================================================================
+ALL ZONES ANALYTICS REPORT
+==========================================================================================
+
+Time Range: 2025-11-15T08:55:24+00:00 to 2025-12-15T08:55:24+00:00
+Period: last 30 days
+
+==========================================================================================
+SUMMARY
+==========================================================================================
+Total Zones: 57
+Total DNS Queries: 83,778,540
+Total HTTP Visits: 1,617,276
+Total Bandwidth: 10356.24 GB (11,119,922,799,672 bytes)
+Average Queries per Zone: 1,469,798.95
+Average Visits per Zone: 28,373.26
+
+==========================================================================================
+INDIVIDUAL ZONE STATISTICS
+==========================================================================================
+
+1. cdn568.net (Status: active)
+   Zone ID: bbf2dfc03be76d37ce3ff6e72ef706fe
+   Plan: Pro Website
+   DNS Queries: 39,939,900
+   HTTP Visits: 280,819
+   Bandwidth: 7021.12 GB (7,538,865,080,328 bytes)
+
+2. xxttgg.com (Status: active)
+   Zone ID: 31c9593fc34817d3b25a6107ab1bb4b6
+   Plan: Business Website
+   DNS Queries: 10,454,530
+   HTTP Visits: 520
+   Bandwidth: 686.46 GB (737,077,048,270 bytes)
+
+3. ttbbyyllyy.com (Status: active)
+   Zone ID: 4e023cda616d5f595b5e463b4c35e5a8
+   Plan: Enterprise Website
+   DNS Queries: 9,506,078
+   HTTP Visits: 53,930
+   Bandwidth: 1814.02 GB (1,947,785,644,800 bytes)
+
+4. jjrrff.com (Status: active)
+   Zone ID: 83b8a47d3a197fb8198a852833e8e546
+   Plan: Pro Website
+   DNS Queries: 8,643,600
+   HTTP Visits: 33,596
+   Bandwidth: 2.97 GB (3,183,851,073 bytes)
+
+5. csmc-api.com (Status: active)
+   Zone ID: da0e91bb8be1449cf724c39c4dce66f4
+   Plan: Enterprise Website
+   DNS Queries: 5,162,470
+   HTTP Visits: 150
+   Bandwidth: 362.47 GB (389,204,133,560 bytes)
+
+6. tw946.com (Status: active)
+   Zone ID: cf10addd6702b0b97d5026e7ac417059
+   Plan: Pro Website
+   DNS Queries: 5,010,370
+   HTTP Visits: 2,292
+   Bandwidth: 96.16 GB (103,250,240,811 bytes)
+
+7. ppllddhc.com (Status: active)
+   Zone ID: ac640428dbca2e842fe7ad61f3582157
+   Plan: Free Website
+   DNS Queries: 1,949,510
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+8. sswwkk.com (Status: active)
+   Zone ID: 8182d2e35d5b33561edbaad38aaf0a4c
+   Plan: Business Website
+   DNS Queries: 1,506,820
+   HTTP Visits: 1,241,814
+   Bandwidth: 178.53 GB (191,692,282,446 bytes)
+
+9. xbk946.com (Status: active)
+   Zone ID: 23e399bfc041ae83839e2259d76281ef
+   Plan: Pro Website
+   DNS Queries: 329,932
+   HTTP Visits: 2,853
+   Bandwidth: 182.16 GB (195,589,719,600 bytes)
+
+10. jjddgg.com (Status: active)
+   Zone ID: 7bc8351fcfa7b53b5d38852b6df6278e
+   Plan: Free Website
+   DNS Queries: 161,030
+   HTTP Visits: 556
+   Bandwidth: 11.68 GB (12,542,115,369 bytes)
+
+11. 568win.world (Status: active)
+   Zone ID: 06fd6e6c5e53bd9accf2b6ce5ef88b90
+   Plan: Free Website
+   DNS Queries: 148,250
+   HTTP Visits: 170
+   Bandwidth: 0.11 GB (114,356,914 bytes)
+
+12. fomhub.com (Status: active)
+   Zone ID: b0e186b97a7e15cd5ca12e77564c59c8
+   Plan: Free Website
+   DNS Queries: 147,590
+   HTTP Visits: 0
+   Bandwidth: 0.06 GB (61,964,398 bytes)
+
+13. 568win.best (Status: active)
+   Zone ID: a292dcec8a1cbe9fffd37bc4cc7a7b5f
+   Plan: Free Website
+   DNS Queries: 144,910
+   HTTP Visits: 61
+   Bandwidth: 0.09 GB (101,854,611 bytes)
+
+14. jpz946.com (Status: active)
+   Zone ID: b5417a7d53ac5aa262b19b11d6dccdbc
+   Plan: Pro Website
+   DNS Queries: 128,340
+   HTTP Visits: 15
+   Bandwidth: 0.00 GB (278,614 bytes)
+
+15. ngn99.com (Status: active)
+   Zone ID: 05ac0aa8cff21368d48cd4f361b4f8fa
+   Plan: Free Website
+   DNS Queries: 36,430
+   HTTP Visits: 172
+   Bandwidth: 0.22 GB (238,331,846 bytes)
+
+16. techbodia.com (Status: active)
+   Zone ID: 421f4854ddd353c13d0ab9681fbcaf44
+   Plan: Free Website
+   DNS Queries: 33,130
+   HTTP Visits: 94
+   Bandwidth: 0.10 GB (104,622,885 bytes)
+
+17. iirrmm.com (Status: active)
+   Zone ID: 9f90535f8a192ef976af90eed0181e0c
+   Plan: Free Website
+   DNS Queries: 30,720
+   HTTP Visits: 53
+   Bandwidth: 0.04 GB (40,507,718 bytes)
+
+18. bbssgg.com (Status: active)
+   Zone ID: 38c4271c9fd85eb4b52b9d08c2590133
+   Plan: Free Website
+   DNS Queries: 30,030
+   HTTP Visits: 1
+   Bandwidth: 0.00 GB (1,755,586 bytes)
+
+19. remotes.com.tw (Status: active)
+   Zone ID: 4d13b56cda210352ef9933670c20aa2c
+   Plan: Free Website
+   DNS Queries: 29,830
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+20. yyrrll.com (Status: active)
+   Zone ID: a15cc8161a9eb2642827ea07869357ea
+   Plan: Free Website
+   DNS Queries: 25,850
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (8,533 bytes)
+
+21. ssmmbbbb.com (Status: active)
+   Zone ID: 96ef0f2f2b118dbf5da36845c4088e68
+   Plan: Free Website
+   DNS Queries: 25,490
+   HTTP Visits: 9
+   Bandwidth: 0.01 GB (6,796,390 bytes)
+
+22. yi-spaces.com (Status: active)
+   Zone ID: 92ad8027a13a7aac6ea9b46e15952655
+   Plan: Free Website
+   DNS Queries: 24,750
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (61,475 bytes)
+
+23. hhllgg.com (Status: active)
+   Zone ID: 73a8ddff7e8249dcfebd9ac94dd28d8b
+   Plan: Free Website
+   DNS Queries: 17,020
+   HTTP Visits: 0
+   Bandwidth: 0.01 GB (9,141,961 bytes)
+
+24. ssqqbbbb.com (Status: active)
+   Zone ID: 577ce608919a2e95ca8622a7c7d4008c
+   Plan: Free Website
+   DNS Queries: 16,640
+   HTTP Visits: 8
+   Bandwidth: 0.00 GB (251,628 bytes)
+
+25. ggffjjnngg.com (Status: active)
+   Zone ID: c1980a69062adbdb77125c5e33bdb5d0
+   Plan: Free Website
+   DNS Queries: 16,290
+   HTTP Visits: 2
+   Bandwidth: 0.00 GB (28,337 bytes)
+
+26. knock2art.com (Status: active)
+   Zone ID: 64f528c055e1faed3d103e78b63c33e8
+   Plan: Free Website
+   DNS Queries: 15,830
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (468,783 bytes)
+
+27. rrllff.com (Status: active)
+   Zone ID: d9f073ce20293c0fce3e1c7f2c730d03
+   Plan: Free Website
+   DNS Queries: 14,080
+   HTTP Visits: 3
+   Bandwidth: 0.00 GB (52,189 bytes)
+
+28. hhjjdd.com (Status: active)
+   Zone ID: e98104157074f1f0f0621365c51dd3aa
+   Plan: Free Website
+   DNS Queries: 13,760
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (2,679 bytes)
+
+29. pleasecname.com (Status: active)
+   Zone ID: 25739c150ac1a807ce6881720a80ff6f
+   Plan: Free Website
+   DNS Queries: 13,510
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+30. bangcol.org (Status: active)
+   Zone ID: 4c173ebf7b38b738e91b7e1aba00ccde
+   Plan: Free Website
+   DNS Queries: 12,450
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+31. xjp946.com (Status: active)
+   Zone ID: 89e655f05886f09708c966e257386bd8
+   Plan: Free Website
+   DNS Queries: 12,290
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (503,911 bytes)
+
+32. wl-support.com (Status: active)
+   Zone ID: 16e6b73e6db6e37c53976d39d0daa469
+   Plan: Free Website
+   DNS Queries: 11,660
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (13,909 bytes)
+
+33. hhllpptt.com (Status: active)
+   Zone ID: 24ccb6e737ebc08f5c833312cdece9e8
+   Plan: Free Website
+   DNS Queries: 11,100
+   HTTP Visits: 1
+   Bandwidth: 0.00 GB (170,275 bytes)
+
+34. nnbbllhc.com (Status: active)
+   Zone ID: 5613fae1496fe14d55eca682eaf9f6dc
+   Plan: Free Website
+   DNS Queries: 9,630
+   HTTP Visits: 1
+   Bandwidth: 0.00 GB (38,475 bytes)
+
+35. remotestw.com (Status: active)
+   Zone ID: b06a8724126dea669ea35555a3cdd547
+   Plan: Free Website
+   DNS Queries: 9,560
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+36. cdn568.xyz (Status: active)
+   Zone ID: 86bed9393353ebc75b7ca7de18df2bb0
+   Plan: Free Website
+   DNS Queries: 9,170
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+37. csmcex.com (Status: active)
+   Zone ID: 7d2c6cfc901e6adbf8d70d507aa927c0
+   Plan: Free Website
+   DNS Queries: 9,100
+   HTTP Visits: 25
+   Bandwidth: 0.00 GB (701,246 bytes)
+
+38. xxggssyy.com (Status: active)
+   Zone ID: 4ddce9394f4a6127a9c1a59df587629e
+   Plan: Free Website
+   DNS Queries: 9,090
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+39. jjnngg.com (Status: active)
+   Zone ID: 64541ea7a40591dd0649d714c012a122
+   Plan: Free Website
+   DNS Queries: 8,250
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+40. wsl946.com (Status: active)
+   Zone ID: 7521c48bd1a7389a9cbfeaff08e0d3d8
+   Plan: Free Website
+   DNS Queries: 8,190
+   HTTP Visits: 74
+   Bandwidth: 0.00 GB (584,576 bytes)
+
+41. mmddzz.com (Status: active)
+   Zone ID: f40f4ebeb80053a05f0dc10620f124af
+   Plan: Free Website
+   DNS Queries: 8,150
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+42. llcc946.com (Status: active)
+   Zone ID: 9483b67e35ff6e108149836af64b80a5
+   Plan: Free Website
+   DNS Queries: 7,930
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+43. kkbbss.com (Status: active)
+   Zone ID: 3d98170401df957ab64be34766d25d43
+   Plan: Free Website
+   DNS Queries: 7,850
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+44. ppdd555.com (Status: active)
+   Zone ID: 711d40b1790740c7eca2d539c6d63e2d
+   Plan: Free Website
+   DNS Queries: 7,570
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+45. kkddjjhc.com (Status: active)
+   Zone ID: 16ebc1abe521350e1fb3a36499746fdd
+   Plan: Free Website
+   DNS Queries: 7,450
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (26,651 bytes)
+
+46. yi-space.com.tw (Status: active)
+   Zone ID: 4b36dd83acf08e14f5c70d7f7ad46549
+   Plan: Free Website
+   DNS Queries: 7,360
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+47. hhmmgg.com (Status: active)
+   Zone ID: 148653e7895d1e75bc10104860a05609
+   Plan: Free Website
+   DNS Queries: 7,120
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+48. dyz946.com (Status: active)
+   Zone ID: 53a58ebff459b873a4bfc9e4aad1a2b4
+   Plan: Free Website
+   DNS Queries: 6,820
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+49. wewa365.com (Status: active)
+   Zone ID: 9d353553a4f93f54483b6753d39e9342
+   Plan: Free Website
+   DNS Queries: 5,670
+   HTTP Visits: 52
+   Bandwidth: 0.04 GB (41,320,539 bytes)
+
+50. amgbet777.net (Status: active)
+   Zone ID: ae5f877c813d4b1750b3c40f1cec86ca
+   Plan: Free Website
+   DNS Queries: 4,330
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (455,666 bytes)
+
+51. amgbet.net (Status: active)
+   Zone ID: 21af62357d70335823871187fe2c54de
+   Plan: Free Website
+   DNS Queries: 3,820
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (71,173 bytes)
+
+52. wewa88.com (Status: active)
+   Zone ID: f392d27adef393003a95a99833c9ac51
+   Plan: Free Website
+   DNS Queries: 3,670
+   HTTP Visits: 2
+   Bandwidth: 0.00 GB (4,476,314 bytes)
+
+53. amgbet777.com (Status: active)
+   Zone ID: d576b729990f7293b96ffc414004deeb
+   Plan: Free Website
+   DNS Queries: 3,540
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (460,692 bytes)
+
+54. dufan888.com (Status: active)
+   Zone ID: 4433e49e1270ea83d6452747a3954afd
+   Plan: Free Website
+   DNS Queries: 2,830
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (468,003 bytes)
+
+55. ww365asia.com (Status: active)
+   Zone ID: ad64fdaa7d65a04b59a569b701e1178d
+   Plan: Free Website
+   DNS Queries: 2,560
+   HTTP Visits: 1
+   Bandwidth: 0.00 GB (950,223 bytes)
+
+56. udana365.com (Status: active)
+   Zone ID: e8aa3b2765984ccd6eddc40249d4c4b3
+   Plan: Free Website
+   DNS Queries: 2,480
+   HTTP Visits: 2
+   Bandwidth: 0.00 GB (1,957,215 bytes)
+
+57. fdcwecname.com (Status: active)
+   Zone ID: 0542e5a1f1cd056815d15d61d964bcf3
+   Plan: Free Website
+   DNS Queries: 2,210
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+==========================================================================================
+
+noc@568win.com
+
+Fetching analytics for 210 zones...
+  ✓ 1681686666.com: 46,290 DNS queries, 364 HTTP visits
+  ✓ 1steprichbkp.com: 10,530 DNS queries, 55 HTTP visits
+  ✓ 568.fun: 10,530 DNS queries, 0 HTTP visits
+  ✓ 568monitor.com: 42,130 DNS queries, 0 HTTP visits
+  ✓ 568win.app: 8,620 DNS queries, 0 HTTP visits
+  ✓ 568win.bet: 326,500 DNS queries, 17,494 HTTP visits
+  ✓ 568win.biz: 7,530 DNS queries, 0 HTTP visits
+  ✓ 568win.club: 7,570 DNS queries, 0 HTTP visits
+  ✓ 568win.co: 8,600 DNS queries, 0 HTTP visits
+  ✓ 568win.global: 9,920 DNS queries, 0 HTTP visits
+  ✓ 568win.me: 6,400 DNS queries, 0 HTTP visits
+  ✓ 568win.pro: 7,110 DNS queries, 0 HTTP visits
+  ✓ 568win.xyz: 8,580 DNS queries, 0 HTTP visits
+  ✓ aaddqqyy55.com: 10,860 DNS queries, 0 HTTP visits
+  ✓ aamvvvuu33.com: 12,280 DNS queries, 2 HTTP visits
+  ✓ almondmilktea.store: 3,920 DNS queries, 1 HTTP visits
+  ✓ ap666cdn.com: 10,230 DNS queries, 0 HTTP visits
+  ✓ apollobkp.com: 3,360 DNS queries, 0 HTTP visits
+  ✓ balidaon.com: 6,444,048 DNS queries, 26,546 HTTP visits
+  ✓ bananamilk.online: 2,180 DNS queries, 0 HTTP visits
+  ✓ bbggrrhh55.com: 10,640 DNS queries, 0 HTTP visits
+  ✓ bbllww.com: 14,000 DNS queries, 28 HTTP visits
+  ✓ bbnnffxx.com: 2,730 DNS queries, 0 HTTP visits
+  ✓ bbqqnnww44.com: 10,910 DNS queries, 0 HTTP visits
+  ✓ beigangbalur.com: 8,540 DNS queries, 0 HTTP visits
+  ✓ biliandadagipie.com: 14,080 DNS queries, 0 HTTP visits
+  ✓ blacktea111.online: 1,900 DNS queries, 0 HTTP visits
+  ✓ bolotuke.com: 14,160 DNS queries, 0 HTTP visits
+  ✓ bubbletea111.online: 2,130 DNS queries, 0 HTTP visits
+  ✓ buyaofengsuowo.com: 14,650 DNS queries, 0 HTTP visits
+  ✓ callmeares.com: 6,020 DNS queries, 0 HTTP visits
+  ✓ ccjjssyyrr.com: 9,080 DNS queries, 0 HTTP visits
+  ✓ cdnval789.com: 7,330 DNS queries, 0 HTTP visits
+  ✓ chaomifen.online: 2,250 DNS queries, 29 HTTP visits
+  ✓ chaomifen.store: 2,180 DNS queries, 0 HTTP visits
+  ✓ choudoufu.online: 2,770 DNS queries, 12 HTTP visits
+  ✓ cocomilketea.store: 2,830 DNS queries, 0 HTTP visits
+  ✓ ddbbeeff11.com: 11,240 DNS queries, 0 HTTP visits
+  ✓ ddffmm.com: 10,570 DNS queries, 0 HTTP visits
+  ✓ ddjjddllmapi.com: 9,150 DNS queries, 0 HTTP visits
+  ✓ ddllmm.com: 10,580 DNS queries, 11 HTTP visits
+  ✓ diguayeh.com: 12,170 DNS queries, 0 HTTP visits
+  ✓ dryy0.com: 2,840 DNS queries, 0 HTTP visits
+  ✓ dryy1.online: 9,220 DNS queries, 0 HTTP visits
+  ✓ dryy2.online: 7,400 DNS queries, 0 HTTP visits
+  ✓ dryy3.online: 9,780 DNS queries, 0 HTTP visits
+  ✓ dryy4.online: 6,640 DNS queries, 0 HTTP visits
+  ✓ dryy5.online: 8,790 DNS queries, 0 HTTP visits
+  ✓ fengjiayeshi.com: 13,990 DNS queries, 0 HTTP visits
+  ✓ ffjjcc.com: 30,880 DNS queries, 7,748 HTTP visits
+  ✓ ffllll.com: 7,760 DNS queries, 3 HTTP visits
+  ✓ ffllzztt.online: 7,100 DNS queries, 0 HTTP visits
+  ✓ ffmmll77.com: 2,530 DNS queries, 0 HTTP visits
+  ✓ filax-777.com: 3,920 DNS queries, 0 HTTP visits
+  ✓ fire686.com: 2,800 DNS queries, 8 HTTP visits
+  ✓ gaolitsai.com: 31,130 DNS queries, 170 HTTP visits
+  ✓ ggppqqgg.com: 67,620 DNS queries, 196 HTTP visits
+  ✓ ggrrff77.com: 2,610 DNS queries, 0 HTTP visits
+  ✓ ggwwttss33.com: 11,260 DNS queries, 0 HTTP visits
+  ✓ ggxxffccmapi.com: 8,390 DNS queries, 0 HTTP visits
+  ✓ ggynnnxx44.com: 15,710 DNS queries, 4 HTTP visits
+  ✓ gidandofu.store: 3,190 DNS queries, 0 HTTP visits
+  ✓ guandonzu.store: 8,600 DNS queries, 0 HTTP visits
+  ✓ guavajuice.online: 2,500 DNS queries, 0 HTTP visits
+  ✓ hhjjppaa.online: 6,950 DNS queries, 0 HTTP visits
+  ✓ hhkkffgg.online: 8,000 DNS queries, 0 HTTP visits
+  ✓ hhttddjj.online: 32,940 DNS queries, 0 HTTP visits
+  ✓ iindonesiaboleh.com: 12,930 DNS queries, 1 HTTP visits
+  ✓ iippzzjj44.com: 7,833,649 DNS queries, 1,235,701 HTTP visits
+  ✓ iloveindonesiaforever.com: 13,950 DNS queries, 0 HTTP visits
+  ✓ iloveindonesiamuch.com: 13,530 DNS queries, 0 HTTP visits
+  ✓ iloveindonesiasomuch.com: 13,060 DNS queries, 0 HTTP visits
+  ✓ ilovetogoindonesia.com: 13,710 DNS queries, 0 HTTP visits
+  ✓ indonesiaawesome.com: 12,940 DNS queries, 0 HTTP visits
+  ✓ indonesiadontblockme.com: 13,040 DNS queries, 0 HTTP visits
+  ✓ indonesiagreat.com: 12,190 DNS queries, 0 HTTP visits
+  ✓ indonesiaisgreat.com: 14,430 DNS queries, 2 HTTP visits
+  ✓ indonesialeading.com: 2,740 DNS queries, 0 HTTP visits
+  ✓ indonesianumberone.com: 13,810 DNS queries, 0 HTTP visits
+  ✓ indonesiapleasedontblock.com: 13,760 DNS queries, 0 HTTP visits
+  ✓ indonesiasuper.com: 2,910 DNS queries, 0 HTTP visits
+  ✓ indonesiathebest.com: 13,870 DNS queries, 0 HTTP visits
+  ✓ indonesiatop1.com: 14,020 DNS queries, 0 HTTP visits
+  ✓ indonesiatopintheworld.com: 7,690 DNS queries, 0 HTTP visits
+  ✓ indonesiatoptop.com: 12,450 DNS queries, 0 HTTP visits
+  ✓ indonesiawinner.com: 8,160 DNS queries, 0 HTTP visits
+  ✓ indonesiaworldno1.com: 8,630 DNS queries, 0 HTTP visits
+  ✓ isb568win.com: 4,970 DNS queries, 7 HTTP visits
+  ✓ isukaindonesia.com: 12,600 DNS queries, 0 HTTP visits
+  ✓ jituifan.online: 3,040 DNS queries, 0 HTTP visits
+  ✓ jituifan.store: 2,000 DNS queries, 0 HTTP visits
+  ✓ jjcdn.net: 9,440 DNS queries, 0 HTTP visits
+  ✓ jjiikkll11.com: 21,341,700 DNS queries, 2,284,542 HTTP visits
+  ✓ jjppmm.com: 10,460 DNS queries, 0 HTTP visits
+  ✓ jjppxxzz33.com: 10,330 DNS queries, 0 HTTP visits
+  ✓ jjppzz.com: 33,260 DNS queries, 0 HTTP visits
+  ✓ jjqqvvkk55.com: 11,330 DNS queries, 0 HTTP visits
+  ✓ jjsskktt.com: 31,310 DNS queries, 6 HTTP visits
+  ✓ jjssrryy.online: 7,330 DNS queries, 4 HTTP visits
+  ✓ jjwwdd.com: 9,310 DNS queries, 10 HTTP visits
+  ✓ kaiyuanshejipai.com: 13,680 DNS queries, 0 HTTP visits
+  ✓ kezaijian.online: 1,880 DNS queries, 37 HTTP visits
+  ✓ kezaijian.store: 1,860 DNS queries, 0 HTTP visits
+  ✓ kkffnnll55.com: 10,990 DNS queries, 0 HTTP visits
+  ✓ kkkyyyccc.com: 3,070 DNS queries, 50 HTTP visits
+  ✓ kkssttggdd.com: 7,880 DNS queries, 0 HTTP visits
+  ✓ kkttjjss.com: 8,290 DNS queries, 0 HTTP visits
+  ✓ kkxxtt.com: 990,720 DNS queries, 48,928 HTTP visits
+  ✓ kqqqxxss22.com: 3,905,560 DNS queries, 5,813,443 HTTP visits
+  ✓ lemontea111.online: 2,060 DNS queries, 0 HTTP visits
+  ✓ lljjkkjj.com: 8,540 DNS queries, 0 HTTP visits
+  ✓ llkkbbzz22.com: 11,400 DNS queries, 0 HTTP visits
+  ✓ llqqiitt33.com: 11,940 DNS queries, 0 HTTP visits
+  ✓ longislandicedtea.me: 10 DNS queries, 0 HTTP visits
+  ✓ longtimenose.store: 610 DNS queries, 0 HTTP visits
+  ✓ lucdnsssre.com: 8,090 DNS queries, 0 HTTP visits
+  ✓ marlaurmoogipie.com: 13,730 DNS queries, 1 HTTP visits
+  ✓ mianlany.com: 13,480 DNS queries, 0 HTTP visits
+  ✓ milkshake111.online: 5,560 DNS queries, 0 HTTP visits
+  ✓ milo111.online: 2,020 DNS queries, 0 HTTP visits
+  ✓ mingdanx.com: 12,980 DNS queries, 0 HTTP visits
+  ✓ mmeell.com: 10,890 DNS queries, 3 HTTP visits
+  ✓ mmrrjjuu55.com: 10,670 DNS queries, 0 HTTP visits
+  ✓ nanjichangyeshi.com: 13,010 DNS queries, 0 HTTP visits
+  ✓ nexa-edge.com: 36,460 DNS queries, 2 HTTP visits
+  ✓ nnooqqrr22.com: 10,840 DNS queries, 0 HTTP visits
+  ✓ nnppffccddggdd.com: 555,570 DNS queries, 6,484 HTTP visits
+  ✓ oonnsscc44.com: 10,190 DNS queries, 0 HTTP visits
+  ✓ ooxxuuww55.com: 11,625,485 DNS queries, 926,052 HTTP visits
+  ✓ oreolatte.online: 2,270 DNS queries, 4 HTTP visits
+  ✓ ovomaltine.online: 2,470 DNS queries, 0 HTTP visits
+  ✓ paikeijipai.com: 13,360 DNS queries, 0 HTTP visits
+  ✓ panglaodiezhaji.com: 12,920 DNS queries, 0 HTTP visits
+  ✓ pikachu996.com: 8,190 DNS queries, 0 HTTP visits
+  ✓ pmmhhxxx33.com: 16,640 DNS queries, 3 HTTP visits
+  ✓ ppkkyyyypp.com: 590,060 DNS queries, 46,803 HTTP visits
+  ✓ pprrmmss.com: 5,630 DNS queries, 0 HTTP visits
+  ✓ ppttqqzz11.com: 10,460 DNS queries, 0 HTTP visits
+  ✓ qqxxss.com: 11,850 DNS queries, 0 HTTP visits
+  ✓ raoheyeshi.com: 13,720 DNS queries, 0 HTTP visits
+  ✓ reapple.online: 47,570 DNS queries, 0 HTTP visits
+  ✓ reblueberry.online: 13,230 DNS queries, 0 HTTP visits
+  ✓ relemon.online: 13,570 DNS queries, 0 HTTP visits
+  ✓ remotestry.com: 11,630 DNS queries, 701 HTTP visits
+  ✓ repineapple.online: 7,280 DNS queries, 0 HTTP visits
+  ✓ rewatermeloon.online: 8,160 DNS queries, 0 HTTP visits
+  ✓ rirequ.com: 13,600 DNS queries, 0 HTTP visits
+  ✓ rouyuan.store: 1,950 DNS queries, 0 HTTP visits
+  ✓ ruifengyeshi.com: 14,450 DNS queries, 0 HTTP visits
+  ✓ sanbaolongk.com: 8,820 DNS queries, 0 HTTP visits
+  ✓ sanbaoyi.com: 14,300 DNS queries, 0 HTTP visits
+  ✓ shilinhowdadagipie.com: 13,500 DNS queries, 0 HTTP visits
+  ✓ shilinyeshi.com: 14,370 DNS queries, 0 HTTP visits
+  ✓ siciliancoffee.online: 17,530 DNS queries, 3 HTTP visits
+  ✓ sishentang.com: 19,090 DNS queries, 0 HTTP visits
+  ✓ sishentang.store: 1,980 DNS queries, 0 HTTP visits
+  ✓ ssmmtt.com: 616,930 DNS queries, 46,410 HTTP visits
+  ✓ ssxxbb.com: 13,160 DNS queries, 145 HTTP visits
+  ✓ suzugin.com: 8,690 DNS queries, 0 HTTP visits
+  ✓ suzugin.store: 8,880 DNS queries, 0 HTTP visits
+  ✓ talentradar168.com: 1,870 DNS queries, 2 HTTP visits
+  ✓ taroshake.online: 65,070 DNS queries, 0 HTTP visits
+  ✓ techbodia.xyz: 6,470 DNS queries, 0 HTTP visits
+  ✓ threeqtrapigipie.com: 9,340 DNS queries, 0 HTTP visits
+  ✓ tianshihungshot.store: 2,340 DNS queries, 0 HTTP visits
+  ✓ tilamisuu.com: 2,590 DNS queries, 0 HTTP visits
+  ✓ tilamisuu.store: 8,590 DNS queries, 0 HTTP visits
+  ✓ tonghuajieyeshi.com: 13,720 DNS queries, 0 HTTP visits
+  ✓ tongzaimigao.com: 8,740 DNS queries, 0 HTTP visits
+  ✓ trapigidankuo.com: 14,170 DNS queries, 0 HTTP visits
+  ✓ ttggzzpp44.com: 11,510 DNS queries, 0 HTTP visits
+  ✓ ttiisspp55.com: 16,420 DNS queries, 2 HTTP visits
+  ✓ ttuucczz44.com: 11,680 DNS queries, 0 HTTP visits
+  ✓ ttyyggjj.online: 8,720 DNS queries, 0 HTTP visits
+  ✓ uukkgg77.com: 15,800 DNS queries, 6 HTTP visits
+  ✓ uuuwwwyv44.com: 11,320 DNS queries, 0 HTTP visits
+  ✓ uuzzwwkk11.com: 12,250 DNS queries, 0 HTTP visits
+  ✓ vvcdnniub.net: 7,500 DNS queries, 0 HTTP visits
+  ✓ vvffkkpp33.com: 10,820 DNS queries, 0 HTTP visits
+  ✓ vvffuuww22.com: 40,690 DNS queries, 50 HTTP visits
+  ✓ vvssccdd22.com: 330,780 DNS queries, 56,172 HTTP visits
+  ✓ wangjiaxix.com: 12,940 DNS queries, 0 HTTP visits
+  ✓ wanlongji.com: 13,260 DNS queries, 0 HTTP visits
+  ✓ wanyalaoq.com: 14,850 DNS queries, 0 HTTP visits
+  ✓ watermelonjuice.online: 1,910 DNS queries, 0 HTTP visits
+  ✓ wwddzzff44.com: 11,940 DNS queries, 0 HTTP visits
+  ✓ wwffllmm.online: 9,630 DNS queries, 0 HTTP visits
+  ✓ wwssqq.com: 28,670 DNS queries, 583 HTTP visits
+  ✓ wwssrryymapi.com: 7,790 DNS queries, 0 HTTP visits
+  ✓ wwttww.com: 672,390 DNS queries, 5,961 HTTP visits
+  ✓ wwxxggxx.online: 8,550 DNS queries, 0 HTTP visits
+  ✓ wwyyuuvv22.com: 26,745,724 DNS queries, 3,753,362 HTTP visits
+  ✓ xiaolongbao.online: 2,370 DNS queries, 25 HTTP visits
+  ✓ xiaoxiongruantang.com: 14,040 DNS queries, 0 HTTP visits
+  ✓ xijiangx.com: 13,980 DNS queries, 2 HTTP visits
+  ✓ xxffccff.com: 8,130 DNS queries, 3 HTTP visits
+  ✓ xxkkooyy55.com: 11,340 DNS queries, 0 HTTP visits
+  ✓ xxzzppaa22.com: 474,109 DNS queries, 170,137 HTTP visits
+  ✓ yansuji.online: 2,560 DNS queries, 23 HTTP visits
+  ✓ yansuji.store: 1,880 DNS queries, 0 HTTP visits
+  ✓ yyccxx.com: 12,820 DNS queries, 0 HTTP visits
+  ✓ yyddbbxx.com: 8,820 DNS queries, 1 HTTP visits
+  ✓ yyffqqss44.com: 11,010 DNS queries, 0 HTTP visits
+  ✓ yyhhjjkk.com: 12,080 DNS queries, 21 HTTP visits
+  ✓ yymmttcc.online: 8,330 DNS queries, 0 HTTP visits
+  ✓ yyyyllmm.online: 8,450 DNS queries, 0 HTTP visits
+  ✓ zrrttyyy11.com: 16,060 DNS queries, 196 HTTP visits
+  ✓ zzddqq.com: 13,180 DNS queries, 5 HTTP visits
+  ✓ zzllrrcc33.com: 180,620 DNS queries, 2,783 HTTP visits
+  ✓ zzzznncc.com: 7,860 DNS queries, 0 HTTP visits
+
+==========================================================================================
+ALL ZONES ANALYTICS REPORT
+==========================================================================================
+
+Time Range: 2025-11-15T09:04:47+00:00 to 2025-12-15T09:04:47+00:00
+Period: last 30 days
+
+==========================================================================================
+SUMMARY
+==========================================================================================
+Total Zones: 210
+Total DNS Queries: 84,827,605
+Total HTTP Visits: 14,451,347
+Total Bandwidth: 691.13 GB (742,090,888,943 bytes)
+Average Queries per Zone: 403,940.98
+Average Visits per Zone: 68,815.94
+
+==========================================================================================
+INDIVIDUAL ZONE STATISTICS
+==========================================================================================
+
+1. wwyyuuvv22.com (Status: active)
+   Zone ID: 25fe95b41eacc2fb4483a0e4db3f2671
+   Plan: Free Website
+   DNS Queries: 26,745,724
+   HTTP Visits: 3,753,362
+   Bandwidth: 167.96 GB (180,344,770,205 bytes)
+
+2. jjiikkll11.com (Status: active)
+   Zone ID: 15a9c49c513c6a0d391ef616ba76ef63
+   Plan: Free Website
+   DNS Queries: 21,341,700
+   HTTP Visits: 2,284,542
+   Bandwidth: 122.27 GB (131,282,667,351 bytes)
+
+3. ooxxuuww55.com (Status: active)
+   Zone ID: 3ecf160ee320986f67dffbe3c76902b6
+   Plan: Free Website
+   DNS Queries: 11,625,485
+   HTTP Visits: 926,052
+   Bandwidth: 95.30 GB (102,328,688,716 bytes)
+
+4. iippzzjj44.com (Status: active)
+   Zone ID: 099cc16b8bfa4ae3c3819ea03885a861
+   Plan: Free Website
+   DNS Queries: 7,833,649
+   HTTP Visits: 1,235,701
+   Bandwidth: 52.14 GB (55,987,211,575 bytes)
+
+5. balidaon.com (Status: active)
+   Zone ID: 9930859da78bde851b77f9019cedcccd
+   Plan: Free Website
+   DNS Queries: 6,444,048
+   HTTP Visits: 26,546
+   Bandwidth: 2.46 GB (2,645,601,342 bytes)
+
+6. kqqqxxss22.com (Status: active)
+   Zone ID: e852a70c6f878c6679561cb70bf992da
+   Plan: Enterprise Website
+   DNS Queries: 3,905,560
+   HTTP Visits: 5,813,443
+   Bandwidth: 227.27 GB (244,028,244,901 bytes)
+
+7. kkxxtt.com (Status: active)
+   Zone ID: 500cd8076a6566ef7f29de9c2baec333
+   Plan: Free Website
+   DNS Queries: 990,720
+   HTTP Visits: 48,928
+   Bandwidth: 2.23 GB (2,396,673,992 bytes)
+
+8. wwttww.com (Status: active)
+   Zone ID: 668e3c574bb4eb016cf8d6b19d67e8ab
+   Plan: Free Website
+   DNS Queries: 672,390
+   HTTP Visits: 5,961
+   Bandwidth: 7.30 GB (7,842,125,854 bytes)
+
+9. ssmmtt.com (Status: active)
+   Zone ID: 00e3d64beb7a44cdac4d7d1cb94ae43a
+   Plan: Free Website
+   DNS Queries: 616,930
+   HTTP Visits: 46,410
+   Bandwidth: 0.71 GB (766,473,544 bytes)
+
+10. ppkkyyyypp.com (Status: active)
+   Zone ID: ed2ad1414e58d91aae0f523c4932f484
+   Plan: Free Website
+   DNS Queries: 590,060
+   HTTP Visits: 46,803
+   Bandwidth: 0.37 GB (396,879,447 bytes)
+
+11. nnppffccddggdd.com (Status: active)
+   Zone ID: 10a4d03a240d25a03adf8cf2eec99a43
+   Plan: Free Website
+   DNS Queries: 555,570
+   HTTP Visits: 6,484
+   Bandwidth: 1.24 GB (1,332,201,103 bytes)
+
+12. xxzzppaa22.com (Status: active)
+   Zone ID: 9768434b07cabf87f68342c6b7c03bee
+   Plan: Free Website
+   DNS Queries: 474,109
+   HTTP Visits: 170,137
+   Bandwidth: 1.56 GB (1,674,062,864 bytes)
+
+13. vvssccdd22.com (Status: active)
+   Zone ID: 297bbe4cda3d41e1c1ca6d51c040a25a
+   Plan: Free Website
+   DNS Queries: 330,780
+   HTTP Visits: 56,172
+   Bandwidth: 5.19 GB (5,572,924,397 bytes)
+
+14. 568win.bet (Status: active)
+   Zone ID: 8c6f82e922f2ee628a4a5fcd0a1348c6
+   Plan: Pro Website
+   DNS Queries: 326,500
+   HTTP Visits: 17,494
+   Bandwidth: 2.78 GB (2,983,954,835 bytes)
+
+15. zzllrrcc33.com (Status: active)
+   Zone ID: 8531518e5dce074e8b38dd620e663159
+   Plan: Free Website
+   DNS Queries: 180,620
+   HTTP Visits: 2,783
+   Bandwidth: 0.83 GB (890,941,874 bytes)
+
+16. ggppqqgg.com (Status: active)
+   Zone ID: 1e8e3ec2babce3a895a407c5de59e860
+   Plan: Free Website
+   DNS Queries: 67,620
+   HTTP Visits: 196
+   Bandwidth: 0.26 GB (281,813,086 bytes)
+
+17. taroshake.online (Status: active)
+   Zone ID: ec68a2e5c63b212eb181afef66bdc072
+   Plan: Free Website
+   DNS Queries: 65,070
+   HTTP Visits: 0
+   Bandwidth: 0.24 GB (256,850,185 bytes)
+
+18. reapple.online (Status: active)
+   Zone ID: d7f6738d20a5e6b6699dd4f66482786f
+   Plan: Free Website
+   DNS Queries: 47,570
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+19. 1681686666.com (Status: active)
+   Zone ID: 0f841f99a509f6a2bcceb3ba9ab979df
+   Plan: Free Website
+   DNS Queries: 46,290
+   HTTP Visits: 364
+   Bandwidth: 0.02 GB (22,152,189 bytes)
+
+20. 568monitor.com (Status: active)
+   Zone ID: 2db9edfb915c58d00ff0f732916fe62b
+   Plan: Pro Website
+   DNS Queries: 42,130
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (2,796 bytes)
+
+21. vvffuuww22.com (Status: active)
+   Zone ID: 9f5fc1a47fb2aad2141ee006ffdd3cd1
+   Plan: Free Website
+   DNS Queries: 40,690
+   HTTP Visits: 50
+   Bandwidth: 0.00 GB (4,650,853 bytes)
+
+22. nexa-edge.com (Status: active)
+   Zone ID: 01a7a2ee0cbbc8ef1a33c02c164e69f5
+   Plan: Free Website
+   DNS Queries: 36,460
+   HTTP Visits: 2
+   Bandwidth: 0.00 GB (854,883 bytes)
+
+23. jjppzz.com (Status: active)
+   Zone ID: fda74c9809705da7af6de8e38d0231e9
+   Plan: Free Website
+   DNS Queries: 33,260
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+24. hhttddjj.online (Status: active)
+   Zone ID: 258904c6f11a8883a445787afa542a19
+   Plan: Free Website
+   DNS Queries: 32,940
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+25. jjsskktt.com (Status: active)
+   Zone ID: 32bcde463ece7cafdeb3ed341392e196
+   Plan: Free Website
+   DNS Queries: 31,310
+   HTTP Visits: 6
+   Bandwidth: 0.00 GB (2,386,515 bytes)
+
+26. gaolitsai.com (Status: active)
+   Zone ID: 1fdec107bdf0ae0dba7f6b17d4e5d754
+   Plan: Free Website
+   DNS Queries: 31,130
+   HTTP Visits: 170
+   Bandwidth: 0.03 GB (29,796,170 bytes)
+
+27. ffjjcc.com (Status: active)
+   Zone ID: 2c10cac701fabd8dce56cae7249184f7
+   Plan: Free Website
+   DNS Queries: 30,880
+   HTTP Visits: 7,748
+   Bandwidth: 0.08 GB (90,550,184 bytes)
+
+28. wwssqq.com (Status: active)
+   Zone ID: 1324c5d240f09348f0ad5b5d99af32e1
+   Plan: Free Website
+   DNS Queries: 28,670
+   HTTP Visits: 583
+   Bandwidth: 0.00 GB (4,000,313 bytes)
+
+29. sishentang.com (Status: active)
+   Zone ID: 2d0364f7bf08284d37ef101f2e84986b
+   Plan: Free Website
+   DNS Queries: 19,090
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (8,528 bytes)
+
+30. siciliancoffee.online (Status: active)
+   Zone ID: 5f70a376cc21165c6768107c501df505
+   Plan: Free Website
+   DNS Queries: 17,530
+   HTTP Visits: 3
+   Bandwidth: 0.00 GB (235,416 bytes)
+
+31. pmmhhxxx33.com (Status: active)
+   Zone ID: 342ef8ccc6614ca6dc88ddd8ab2e2f2d
+   Plan: Free Website
+   DNS Queries: 16,640
+   HTTP Visits: 3
+   Bandwidth: 0.00 GB (507,258 bytes)
+
+32. ttiisspp55.com (Status: active)
+   Zone ID: 251ebac2d7c359504e7442b377ca4795
+   Plan: Free Website
+   DNS Queries: 16,420
+   HTTP Visits: 2
+   Bandwidth: 0.00 GB (74,972 bytes)
+
+33. zrrttyyy11.com (Status: active)
+   Zone ID: de8927772c2c5cce37ced111001d93da
+   Plan: Free Website
+   DNS Queries: 16,060
+   HTTP Visits: 196
+   Bandwidth: 0.00 GB (1,356,291 bytes)
+
+34. uukkgg77.com (Status: active)
+   Zone ID: 264b6ab97f1302751184d3022d069858
+   Plan: Free Website
+   DNS Queries: 15,800
+   HTTP Visits: 6
+   Bandwidth: 0.01 GB (7,839,518 bytes)
+
+35. ggynnnxx44.com (Status: active)
+   Zone ID: 4ac5e7c4c2373c5eff0f330d458595e2
+   Plan: Free Website
+   DNS Queries: 15,710
+   HTTP Visits: 4
+   Bandwidth: 0.00 GB (146,812 bytes)
+
+36. wanyalaoq.com (Status: active)
+   Zone ID: 1712aacde1e8ccbc1557b454fb16c85b
+   Plan: Free Website
+   DNS Queries: 14,850
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+37. buyaofengsuowo.com (Status: active)
+   Zone ID: f39798d24847dad87cbcf3b3bc5396bd
+   Plan: Free Website
+   DNS Queries: 14,650
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (10,142 bytes)
+
+38. ruifengyeshi.com (Status: active)
+   Zone ID: e3fdbc802877167fb246d9c3e101bf95
+   Plan: Free Website
+   DNS Queries: 14,450
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+39. indonesiaisgreat.com (Status: active)
+   Zone ID: 12be223ff9d03b7043e309822b5894fe
+   Plan: Free Website
+   DNS Queries: 14,430
+   HTTP Visits: 2
+   Bandwidth: 0.00 GB (6,115 bytes)
+
+40. shilinyeshi.com (Status: active)
+   Zone ID: 0755e6d58f4a758b092c49304b9932ff
+   Plan: Free Website
+   DNS Queries: 14,370
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+41. sanbaoyi.com (Status: active)
+   Zone ID: bfa09985c9c8f10fc29196eacf5f0b31
+   Plan: Free Website
+   DNS Queries: 14,300
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+42. trapigidankuo.com (Status: active)
+   Zone ID: 5e26ddc27e93be447221cc1ba2047fce
+   Plan: Free Website
+   DNS Queries: 14,170
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (5,800 bytes)
+
+43. bolotuke.com (Status: active)
+   Zone ID: 3c69a51742d33c72710477e8d01602a1
+   Plan: Free Website
+   DNS Queries: 14,160
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+44. biliandadagipie.com (Status: active)
+   Zone ID: 2881ecb593faeba772b1bfa09f89990b
+   Plan: Free Website
+   DNS Queries: 14,080
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+45. xiaoxiongruantang.com (Status: active)
+   Zone ID: 93366f73d08b2f0dcbdc33af947b2291
+   Plan: Free Website
+   DNS Queries: 14,040
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+46. indonesiatop1.com (Status: active)
+   Zone ID: aed4cfc47f0e8c7620ddbc4fc4bc1ca7
+   Plan: Free Website
+   DNS Queries: 14,020
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (30,649 bytes)
+
+47. bbllww.com (Status: active)
+   Zone ID: efdda7cabaeb43746c2ce2c6cc87ac99
+   Plan: Free Website
+   DNS Queries: 14,000
+   HTTP Visits: 28
+   Bandwidth: 0.36 GB (386,414,080 bytes)
+
+48. fengjiayeshi.com (Status: active)
+   Zone ID: d212905ab2106453eeda7ed4d2f989fe
+   Plan: Free Website
+   DNS Queries: 13,990
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+49. xijiangx.com (Status: active)
+   Zone ID: 104d8a92748f808a9c50cec117333c32
+   Plan: Free Website
+   DNS Queries: 13,980
+   HTTP Visits: 2
+   Bandwidth: 0.00 GB (155,487 bytes)
+
+50. iloveindonesiaforever.com (Status: active)
+   Zone ID: b12e964b543a5177f3ac7a48c786d0bf
+   Plan: Free Website
+   DNS Queries: 13,950
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+51. indonesiathebest.com (Status: active)
+   Zone ID: f00dc6b9c968c23fc3fd193873cce514
+   Plan: Free Website
+   DNS Queries: 13,870
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+52. indonesianumberone.com (Status: active)
+   Zone ID: ba0c3880b3ecdc9531f726c854f9994e
+   Plan: Free Website
+   DNS Queries: 13,810
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+53. indonesiapleasedontblock.com (Status: active)
+   Zone ID: 1bda1165d90f08d7bc4cbe8395b942e2
+   Plan: Free Website
+   DNS Queries: 13,760
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+54. marlaurmoogipie.com (Status: active)
+   Zone ID: 8ed6e86451de73fa9c7d4ee2ab12fc9a
+   Plan: Free Website
+   DNS Queries: 13,730
+   HTTP Visits: 1
+   Bandwidth: 0.00 GB (3,254 bytes)
+
+55. raoheyeshi.com (Status: active)
+   Zone ID: 7abaa578c4ff8585b1d7791c769198be
+   Plan: Free Website
+   DNS Queries: 13,720
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+56. tonghuajieyeshi.com (Status: active)
+   Zone ID: 2084bf8194c459cc19f40888882991c7
+   Plan: Free Website
+   DNS Queries: 13,720
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+57. ilovetogoindonesia.com (Status: active)
+   Zone ID: c5e3e8c6e66dff3bb42c8501d55b42b7
+   Plan: Free Website
+   DNS Queries: 13,710
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+58. kaiyuanshejipai.com (Status: active)
+   Zone ID: d93fa15d2492bcc31481667f81760b05
+   Plan: Free Website
+   DNS Queries: 13,680
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (2,911 bytes)
+
+59. rirequ.com (Status: active)
+   Zone ID: 28c8afec9cb30a949416fa5134fe3b59
+   Plan: Free Website
+   DNS Queries: 13,600
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+60. relemon.online (Status: active)
+   Zone ID: ee064d4451747f4c3b3a26b9e82f2659
+   Plan: Free Website
+   DNS Queries: 13,570
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+61. iloveindonesiamuch.com (Status: active)
+   Zone ID: b530ff92455279b087194c0f9599f5a5
+   Plan: Free Website
+   DNS Queries: 13,530
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+62. shilinhowdadagipie.com (Status: active)
+   Zone ID: 2846c3d55a5a9e946c2eade98a37e5b1
+   Plan: Free Website
+   DNS Queries: 13,500
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+63. mianlany.com (Status: active)
+   Zone ID: b65192091108301fdfc4fa284d1cd850
+   Plan: Free Website
+   DNS Queries: 13,480
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+64. paikeijipai.com (Status: active)
+   Zone ID: 923d48387162b62280003bb91431e4bc
+   Plan: Free Website
+   DNS Queries: 13,360
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+65. wanlongji.com (Status: active)
+   Zone ID: c795d120dd35313d5cc128d5a61ea4ba
+   Plan: Free Website
+   DNS Queries: 13,260
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (8,032 bytes)
+
+66. reblueberry.online (Status: active)
+   Zone ID: e9d2f81c97cefe48ac014dcda4644490
+   Plan: Free Website
+   DNS Queries: 13,230
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+67. zzddqq.com (Status: active)
+   Zone ID: 61388c5f9a716731b9e76edffa8bb4ce
+   Plan: Free Website
+   DNS Queries: 13,180
+   HTTP Visits: 5
+   Bandwidth: 0.00 GB (1,008,080 bytes)
+
+68. ssxxbb.com (Status: active)
+   Zone ID: 49ba113c8990f95f54605899c28d1827
+   Plan: Free Website
+   DNS Queries: 13,160
+   HTTP Visits: 145
+   Bandwidth: 0.14 GB (149,604,536 bytes)
+
+69. iloveindonesiasomuch.com (Status: active)
+   Zone ID: 785a2a407a18a0f824f73d2747720bf1
+   Plan: Free Website
+   DNS Queries: 13,060
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+70. indonesiadontblockme.com (Status: active)
+   Zone ID: 5209a11b40291212dc2e29b15e7baf13
+   Plan: Free Website
+   DNS Queries: 13,040
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (2,963 bytes)
+
+71. nanjichangyeshi.com (Status: active)
+   Zone ID: 3a5855a24abf18d2cc00434a380b2e90
+   Plan: Free Website
+   DNS Queries: 13,010
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+72. mingdanx.com (Status: active)
+   Zone ID: 9cc4a253ba49941bcdb91fc364ce3c46
+   Plan: Free Website
+   DNS Queries: 12,980
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+73. indonesiaawesome.com (Status: active)
+   Zone ID: d236399c78907340052418d94e0844df
+   Plan: Free Website
+   DNS Queries: 12,940
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+74. wangjiaxix.com (Status: active)
+   Zone ID: c531e6cee900f2d09de42070f63642e1
+   Plan: Free Website
+   DNS Queries: 12,940
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+75. iindonesiaboleh.com (Status: active)
+   Zone ID: 13d97c5a3d34f0ea237469780194c02c
+   Plan: Free Website
+   DNS Queries: 12,930
+   HTTP Visits: 1
+   Bandwidth: 0.00 GB (2,395 bytes)
+
+76. panglaodiezhaji.com (Status: active)
+   Zone ID: aac19eac2ae9d0b848f9e4d259db7322
+   Plan: Free Website
+   DNS Queries: 12,920
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (47,250 bytes)
+
+77. yyccxx.com (Status: active)
+   Zone ID: bba37888ea2b4b941442d8d80c3fbc8c
+   Plan: Free Website
+   DNS Queries: 12,820
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+78. isukaindonesia.com (Status: active)
+   Zone ID: bd1fcc57641d59b061dc0897f03229aa
+   Plan: Free Website
+   DNS Queries: 12,600
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+79. indonesiatoptop.com (Status: active)
+   Zone ID: 2e6ac10d487b99629ca6e17df9f96fc7
+   Plan: Free Website
+   DNS Queries: 12,450
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+80. aamvvvuu33.com (Status: active)
+   Zone ID: c86bd5560f07a7576f08abcb482710fa
+   Plan: Free Website
+   DNS Queries: 12,280
+   HTTP Visits: 2
+   Bandwidth: 0.00 GB (28,302 bytes)
+
+81. uuzzwwkk11.com (Status: active)
+   Zone ID: 9c6fc9ea4d7ad0463eb938813cce22d8
+   Plan: Free Website
+   DNS Queries: 12,250
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+82. indonesiagreat.com (Status: active)
+   Zone ID: e81c82fb111d2c0719dc51f2b87dc79f
+   Plan: Free Website
+   DNS Queries: 12,190
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+83. diguayeh.com (Status: active)
+   Zone ID: a6ed66606136323885498ec17348099b
+   Plan: Free Website
+   DNS Queries: 12,170
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+84. yyhhjjkk.com (Status: active)
+   Zone ID: 69ec60d2acbad649b6d297078cf287b4
+   Plan: Free Website
+   DNS Queries: 12,080
+   HTTP Visits: 21
+   Bandwidth: 0.02 GB (23,895,137 bytes)
+
+85. llqqiitt33.com (Status: active)
+   Zone ID: ecbd024db8d36a36816bf709d437f3ef
+   Plan: Free Website
+   DNS Queries: 11,940
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+86. wwddzzff44.com (Status: active)
+   Zone ID: 0228078e83e8e1fe1584176462b423de
+   Plan: Free Website
+   DNS Queries: 11,940
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+87. qqxxss.com (Status: active)
+   Zone ID: e71031cfc0d34727f33afdc05d2d0a16
+   Plan: Free Website
+   DNS Queries: 11,850
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+88. ttuucczz44.com (Status: active)
+   Zone ID: d27667ec9f545f0cd9efc444bb01142e
+   Plan: Free Website
+   DNS Queries: 11,680
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+89. remotestry.com (Status: active)
+   Zone ID: 529e482d26c5f8eed4a4258c264c7aa7
+   Plan: Free Website
+   DNS Queries: 11,630
+   HTTP Visits: 701
+   Bandwidth: 0.26 GB (282,555,589 bytes)
+
+90. ttggzzpp44.com (Status: active)
+   Zone ID: d08b9eb21851225461c520e26ff1bd49
+   Plan: Free Website
+   DNS Queries: 11,510
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+91. llkkbbzz22.com (Status: active)
+   Zone ID: ff8efe6f6a812aea069c297ee7e2c04d
+   Plan: Free Website
+   DNS Queries: 11,400
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+92. xxkkooyy55.com (Status: active)
+   Zone ID: 78ee19514c8f90129f54f7cfb6117e11
+   Plan: Free Website
+   DNS Queries: 11,340
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+93. jjqqvvkk55.com (Status: active)
+   Zone ID: c3e7030a0caf7b96af6409c3092511ae
+   Plan: Free Website
+   DNS Queries: 11,330
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+94. uuuwwwyv44.com (Status: active)
+   Zone ID: b439842d058a445bff3bdd092d116a91
+   Plan: Free Website
+   DNS Queries: 11,320
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+95. ggwwttss33.com (Status: active)
+   Zone ID: 6e755ee10dbfeb0ebe2d6c7051e00185
+   Plan: Free Website
+   DNS Queries: 11,260
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+96. ddbbeeff11.com (Status: active)
+   Zone ID: 9ee47334e5de84da3668611fcc48d1af
+   Plan: Free Website
+   DNS Queries: 11,240
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+97. yyffqqss44.com (Status: active)
+   Zone ID: d124693e0f91ea77ba6ac6c3720c4c6e
+   Plan: Free Website
+   DNS Queries: 11,010
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+98. kkffnnll55.com (Status: active)
+   Zone ID: 2881485a3040ef1c907ba190430899af
+   Plan: Free Website
+   DNS Queries: 10,990
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+99. bbqqnnww44.com (Status: active)
+   Zone ID: a439c20f9ad85ddcbfb299315394ebf5
+   Plan: Free Website
+   DNS Queries: 10,910
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+100. mmeell.com (Status: active)
+   Zone ID: 75297edc174c4864e25c8c75c28538d3
+   Plan: Free Website
+   DNS Queries: 10,890
+   HTTP Visits: 3
+   Bandwidth: 0.00 GB (59,207 bytes)
+
+101. aaddqqyy55.com (Status: active)
+   Zone ID: 7facc970340c8399dcad8a723ccaf26e
+   Plan: Free Website
+   DNS Queries: 10,860
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+102. nnooqqrr22.com (Status: active)
+   Zone ID: c6dfef058dd4e847087997d396c0f9cf
+   Plan: Free Website
+   DNS Queries: 10,840
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+103. vvffkkpp33.com (Status: active)
+   Zone ID: 536be4763381cdaa020054862155b031
+   Plan: Free Website
+   DNS Queries: 10,820
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+104. mmrrjjuu55.com (Status: active)
+   Zone ID: 4f8526e9b3f31d8543939bbcc8fece55
+   Plan: Free Website
+   DNS Queries: 10,670
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+105. bbggrrhh55.com (Status: active)
+   Zone ID: 3a48bc59abdb764b762c4ef2b717637a
+   Plan: Free Website
+   DNS Queries: 10,640
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+106. ddllmm.com (Status: active)
+   Zone ID: bfb1c0edd17b25204c83eab20d7d932b
+   Plan: Free Website
+   DNS Queries: 10,580
+   HTTP Visits: 11
+   Bandwidth: 0.01 GB (13,328,563 bytes)
+
+107. ddffmm.com (Status: active)
+   Zone ID: 990457bb7ee83c783bd3182f95c6a343
+   Plan: Free Website
+   DNS Queries: 10,570
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+108. 1steprichbkp.com (Status: active)
+   Zone ID: cafe24da1928829572880574694581af
+   Plan: Free Website
+   DNS Queries: 10,530
+   HTTP Visits: 55
+   Bandwidth: 0.03 GB (32,449,320 bytes)
+
+109. 568.fun (Status: active)
+   Zone ID: d2be615363f62dffb5abff6ffd50a7e4
+   Plan: Free Website
+   DNS Queries: 10,530
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (48,426 bytes)
+
+110. jjppmm.com (Status: active)
+   Zone ID: 4ab38dfca7a139878f36d29cf328e264
+   Plan: Free Website
+   DNS Queries: 10,460
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (116,528 bytes)
+
+111. ppttqqzz11.com (Status: active)
+   Zone ID: ff25f490b537a95d5e31bcaae48f8310
+   Plan: Free Website
+   DNS Queries: 10,460
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+112. jjppxxzz33.com (Status: active)
+   Zone ID: 83cefa495d44a9f377bc83382cebb1e5
+   Plan: Free Website
+   DNS Queries: 10,330
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+113. ap666cdn.com (Status: active)
+   Zone ID: b035dff55f7e1ae5839c2fb37e6d3b0e
+   Plan: Free Website
+   DNS Queries: 10,230
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+114. oonnsscc44.com (Status: active)
+   Zone ID: 146b370345694c61004af97123f6a3c6
+   Plan: Free Website
+   DNS Queries: 10,190
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+115. 568win.global (Status: active)
+   Zone ID: 7c77245e4c591608abc48fac08b8a226
+   Plan: Free Website
+   DNS Queries: 9,920
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+116. dryy3.online (Status: active)
+   Zone ID: 9c748150066b137ae6596d369a67d0a8
+   Plan: Free Website
+   DNS Queries: 9,780
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+117. wwffllmm.online (Status: active)
+   Zone ID: 822997f8be7ef8ad6eca5c06559580c8
+   Plan: Free Website
+   DNS Queries: 9,630
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+118. jjcdn.net (Status: active)
+   Zone ID: 263f34127a900bb37742134d66f8f5eb
+   Plan: Free Website
+   DNS Queries: 9,440
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+119. threeqtrapigipie.com (Status: active)
+   Zone ID: ea7ac94bda4d9d904545ab09b28813de
+   Plan: Free Website
+   DNS Queries: 9,340
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (29,473 bytes)
+
+120. jjwwdd.com (Status: active)
+   Zone ID: d07c4a7c761772c702b28b2254a460fb
+   Plan: Free Website
+   DNS Queries: 9,310
+   HTTP Visits: 10
+   Bandwidth: 0.00 GB (86,037 bytes)
+
+121. dryy1.online (Status: active)
+   Zone ID: e4b0bcfd2c77634bf333e75e85ff3caa
+   Plan: Free Website
+   DNS Queries: 9,220
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (66,105 bytes)
+
+122. ddjjddllmapi.com (Status: active)
+   Zone ID: e2eff649827aeed16d6e1666ce12584c
+   Plan: Free Website
+   DNS Queries: 9,150
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+123. ccjjssyyrr.com (Status: active)
+   Zone ID: 96025afec251a524e09497e2ef66162a
+   Plan: Free Website
+   DNS Queries: 9,080
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+124. suzugin.store (Status: active)
+   Zone ID: fcdc1ef8d9c14583c039bb552da3c0b4
+   Plan: Free Website
+   DNS Queries: 8,880
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+125. sanbaolongk.com (Status: active)
+   Zone ID: dcf904e2381b492f6e89e2b1d2b933fa
+   Plan: Free Website
+   DNS Queries: 8,820
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+126. yyddbbxx.com (Status: active)
+   Zone ID: fe77b854bf036ef2c112492b93d48a66
+   Plan: Free Website
+   DNS Queries: 8,820
+   HTTP Visits: 1
+   Bandwidth: 0.00 GB (2,931 bytes)
+
+127. dryy5.online (Status: active)
+   Zone ID: c5b8f5161f6ee168f4617615c6e823c9
+   Plan: Free Website
+   DNS Queries: 8,790
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+128. tongzaimigao.com (Status: active)
+   Zone ID: 18de47d858078be91199d6bc4f62a7fe
+   Plan: Free Website
+   DNS Queries: 8,740
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (2,932 bytes)
+
+129. ttyyggjj.online (Status: active)
+   Zone ID: 08db97d7c02cbcc036ac357623aa362e
+   Plan: Free Website
+   DNS Queries: 8,720
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+130. suzugin.com (Status: active)
+   Zone ID: ac386bbf0524eee9345f8eb3a4df1d6a
+   Plan: Free Website
+   DNS Queries: 8,690
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (2,930 bytes)
+
+131. indonesiaworldno1.com (Status: active)
+   Zone ID: 9110a3157ede459740aad541378c72ff
+   Plan: Free Website
+   DNS Queries: 8,630
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+132. 568win.app (Status: active)
+   Zone ID: ac672b7f82583cbd53c043d4fbda395a
+   Plan: Free Website
+   DNS Queries: 8,620
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+133. 568win.co (Status: active)
+   Zone ID: c5a08b2fba204134f61605564c69e297
+   Plan: Free Website
+   DNS Queries: 8,600
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+134. guandonzu.store (Status: active)
+   Zone ID: 671de421d36aa07e42c3dae6b701f4b3
+   Plan: Free Website
+   DNS Queries: 8,600
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (2,935 bytes)
+
+135. tilamisuu.store (Status: active)
+   Zone ID: d86ebc3a25ca39762c90a0ae6d6539fd
+   Plan: Free Website
+   DNS Queries: 8,590
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+136. 568win.xyz (Status: active)
+   Zone ID: feb1cc00630bc4842c3db4acd89c406b
+   Plan: Free Website
+   DNS Queries: 8,580
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+137. wwxxggxx.online (Status: active)
+   Zone ID: f299d27114e24a5aa2631164c680486c
+   Plan: Free Website
+   DNS Queries: 8,550
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+138. beigangbalur.com (Status: active)
+   Zone ID: 24bd73cb2bf03982d6b2438a6c3523cd
+   Plan: Free Website
+   DNS Queries: 8,540
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+139. lljjkkjj.com (Status: active)
+   Zone ID: b588cb2071d6528057bfb4d7c0f85c14
+   Plan: Free Website
+   DNS Queries: 8,540
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+140. yyyyllmm.online (Status: active)
+   Zone ID: fb7ae12bac0311a1846f2e8ed4c0f45b
+   Plan: Free Website
+   DNS Queries: 8,450
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+141. ggxxffccmapi.com (Status: active)
+   Zone ID: 493d1d8ee751af5475bc63c3d4fbc179
+   Plan: Free Website
+   DNS Queries: 8,390
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (29,316 bytes)
+
+142. yymmttcc.online (Status: active)
+   Zone ID: be58646624a1c99f33b6abedb5b6e80c
+   Plan: Free Website
+   DNS Queries: 8,330
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+143. kkttjjss.com (Status: active)
+   Zone ID: c17593e14f4a299614f646091c09b1f2
+   Plan: Free Website
+   DNS Queries: 8,290
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+144. pikachu996.com (Status: active)
+   Zone ID: 5bb61ef780875312a963d483f52a7ada
+   Plan: Free Website
+   DNS Queries: 8,190
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+145. indonesiawinner.com (Status: active)
+   Zone ID: bfa28fb0332704652b4c43cd1a231323
+   Plan: Free Website
+   DNS Queries: 8,160
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+146. rewatermeloon.online (Status: active)
+   Zone ID: d79848a3eb26cb538242ee16045f5166
+   Plan: Free Website
+   DNS Queries: 8,160
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+147. xxffccff.com (Status: active)
+   Zone ID: d7879b5dcff43c56bb6ac27bfa189426
+   Plan: Free Website
+   DNS Queries: 8,130
+   HTTP Visits: 3
+   Bandwidth: 0.00 GB (2,126,682 bytes)
+
+148. lucdnsssre.com (Status: active)
+   Zone ID: 5426ba6e96af4b6ce55a0dd71bd20ac9
+   Plan: Free Website
+   DNS Queries: 8,090
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+149. hhkkffgg.online (Status: active)
+   Zone ID: 1b61cb8c5ac230492d7065980db5a17e
+   Plan: Free Website
+   DNS Queries: 8,000
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+150. kkssttggdd.com (Status: active)
+   Zone ID: 5332bc00e4cf8b892769ea771e6220a2
+   Plan: Free Website
+   DNS Queries: 7,880
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+151. zzzznncc.com (Status: active)
+   Zone ID: a513c85c135da674f142942cc19ed8dd
+   Plan: Free Website
+   DNS Queries: 7,860
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+152. wwssrryymapi.com (Status: active)
+   Zone ID: 774a10c0e8b751c2c8c13c22e7fb8441
+   Plan: Free Website
+   DNS Queries: 7,790
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (3,137 bytes)
+
+153. ffllll.com (Status: active)
+   Zone ID: a6ac7346df710913f2c3737f9bf41123
+   Plan: Free Website
+   DNS Queries: 7,760
+   HTTP Visits: 3
+   Bandwidth: 0.00 GB (190,764 bytes)
+
+154. indonesiatopintheworld.com (Status: active)
+   Zone ID: a9e778c6616c38262c1396e15a329760
+   Plan: Free Website
+   DNS Queries: 7,690
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+155. 568win.club (Status: active)
+   Zone ID: 9a067645b91d26ac917065d336fb68d5
+   Plan: Free Website
+   DNS Queries: 7,570
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+156. 568win.biz (Status: active)
+   Zone ID: 5dc52d1a0370964c1a88a1f02a1b26f7
+   Plan: Free Website
+   DNS Queries: 7,530
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+157. vvcdnniub.net (Status: active)
+   Zone ID: 3ab9a0f28c4528a1e3b8459dbe7a154a
+   Plan: Free Website
+   DNS Queries: 7,500
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+158. dryy2.online (Status: active)
+   Zone ID: 8b56863fb19cfb9c8c82326d4526be29
+   Plan: Free Website
+   DNS Queries: 7,400
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+159. cdnval789.com (Status: active)
+   Zone ID: ac2116355d852677efca6040898f3a29
+   Plan: Free Website
+   DNS Queries: 7,330
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+160. jjssrryy.online (Status: active)
+   Zone ID: 32d15fec799f04a352151125e2fe3124
+   Plan: Free Website
+   DNS Queries: 7,330
+   HTTP Visits: 4
+   Bandwidth: 0.00 GB (12,459 bytes)
+
+161. repineapple.online (Status: active)
+   Zone ID: 05df3cba94e83f15e6c92269483ffc55
+   Plan: Free Website
+   DNS Queries: 7,280
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+162. 568win.pro (Status: active)
+   Zone ID: 325dee76a3c908333f5e0a814549615b
+   Plan: Free Website
+   DNS Queries: 7,110
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+163. ffllzztt.online (Status: active)
+   Zone ID: 9d293dada9be0006fe9ffd6f13789365
+   Plan: Free Website
+   DNS Queries: 7,100
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (62,188 bytes)
+
+164. hhjjppaa.online (Status: active)
+   Zone ID: d383987be6966ed9af20a7178ab5c373
+   Plan: Free Website
+   DNS Queries: 6,950
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+165. dryy4.online (Status: active)
+   Zone ID: d68284c668330369f5d14d4a5e9f00a3
+   Plan: Free Website
+   DNS Queries: 6,640
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+166. techbodia.xyz (Status: active)
+   Zone ID: bcf58a3eefdb9e3896643eed8572758b
+   Plan: Free Website
+   DNS Queries: 6,470
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+167. 568win.me (Status: active)
+   Zone ID: 32ca7c59c8abdc7eaff737f10c3ba870
+   Plan: Free Website
+   DNS Queries: 6,400
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+168. callmeares.com (Status: active)
+   Zone ID: b899a40c5b725c3d4c775b2fd704cc10
+   Plan: Free Website
+   DNS Queries: 6,020
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (1,928 bytes)
+
+169. pprrmmss.com (Status: active)
+   Zone ID: 1eccb9ce8a5275f6a534a6c0c9162096
+   Plan: Free Website
+   DNS Queries: 5,630
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+170. milkshake111.online (Status: active)
+   Zone ID: 4b34e44449947e3da09811ee21d0fbc4
+   Plan: Free Website
+   DNS Queries: 5,560
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (152,867 bytes)
+
+171. isb568win.com (Status: active)
+   Zone ID: 8ecf09bab5decf842488501837c29cb7
+   Plan: Free Website
+   DNS Queries: 4,970
+   HTTP Visits: 7
+   Bandwidth: 0.00 GB (835,008 bytes)
+
+172. almondmilktea.store (Status: active)
+   Zone ID: f419c375d37c5b9de891c5799dd9066f
+   Plan: Free Website
+   DNS Queries: 3,920
+   HTTP Visits: 1
+   Bandwidth: 0.00 GB (17,417 bytes)
+
+173. filax-777.com (Status: active)
+   Zone ID: 4a60820ac8c5bfa4d3a57da3355e947e
+   Plan: Free Website
+   DNS Queries: 3,920
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (217,260 bytes)
+
+174. apollobkp.com (Status: active)
+   Zone ID: 462bae35f11718624fed4b0ddd5bbfd4
+   Plan: Free Website
+   DNS Queries: 3,360
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+175. gidandofu.store (Status: active)
+   Zone ID: 4a59fed625188a72001736699132e3d0
+   Plan: Free Website
+   DNS Queries: 3,190
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (5,963 bytes)
+
+176. kkkyyyccc.com (Status: active)
+   Zone ID: e9e05b42c6cfd2e59ee2cc940de5b7d2
+   Plan: Free Website
+   DNS Queries: 3,070
+   HTTP Visits: 50
+   Bandwidth: 0.00 GB (1,638,106 bytes)
+
+177. jituifan.online (Status: active)
+   Zone ID: 11f15d269b8fcd89f393e46af29d1cf7
+   Plan: Free Website
+   DNS Queries: 3,040
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+178. indonesiasuper.com (Status: active)
+   Zone ID: c9f1236d9de5b1276704fca855931d0d
+   Plan: Free Website
+   DNS Queries: 2,910
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+179. dryy0.com (Status: active)
+   Zone ID: e0fea50549eb1bd35e15f8c9d6077c1b
+   Plan: Free Website
+   DNS Queries: 2,840
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+180. cocomilketea.store (Status: active)
+   Zone ID: 63852d2a35ce1feed434b5aff6d113f7
+   Plan: Free Website
+   DNS Queries: 2,830
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+181. fire686.com (Status: active)
+   Zone ID: 32f07be124267f75cefdd3da901013cf
+   Plan: Free Website
+   DNS Queries: 2,800
+   HTTP Visits: 8
+   Bandwidth: 0.01 GB (12,168,211 bytes)
+
+182. choudoufu.online (Status: active)
+   Zone ID: c595eec2a319a6cf123dcb6988de03bb
+   Plan: Free Website
+   DNS Queries: 2,770
+   HTTP Visits: 12
+   Bandwidth: 0.00 GB (426,000 bytes)
+
+183. indonesialeading.com (Status: active)
+   Zone ID: 242feea51e3e0414f05e91b739264f1f
+   Plan: Free Website
+   DNS Queries: 2,740
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+184. bbnnffxx.com (Status: active)
+   Zone ID: c805ed864e0ff265a832823e6c17224f
+   Plan: Free Website
+   DNS Queries: 2,730
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (38,278 bytes)
+
+185. ggrrff77.com (Status: active)
+   Zone ID: 7609cdeaeecd4aed9ba6b518f8579c88
+   Plan: Free Website
+   DNS Queries: 2,610
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+186. tilamisuu.com (Status: active)
+   Zone ID: 58ba8c75c7bde273ece30d0f6242631a
+   Plan: Free Website
+   DNS Queries: 2,590
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+187. yansuji.online (Status: active)
+   Zone ID: 592b06a7bd06549acb017446633cd924
+   Plan: Free Website
+   DNS Queries: 2,560
+   HTTP Visits: 23
+   Bandwidth: 0.00 GB (511,182 bytes)
+
+188. ffmmll77.com (Status: active)
+   Zone ID: 61f989d441f391c4dc62defe5b67dd06
+   Plan: Free Website
+   DNS Queries: 2,530
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+189. guavajuice.online (Status: active)
+   Zone ID: 9eb56207788f8fec82a9024767494f1f
+   Plan: Free Website
+   DNS Queries: 2,500
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+190. ovomaltine.online (Status: active)
+   Zone ID: 2914e6f4aa988755abd87fc716120fea
+   Plan: Free Website
+   DNS Queries: 2,470
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+191. xiaolongbao.online (Status: active)
+   Zone ID: b9c6bf9a42d38f9ba986110bc0f039a5
+   Plan: Free Website
+   DNS Queries: 2,370
+   HTTP Visits: 25
+   Bandwidth: 0.00 GB (837,764 bytes)
+
+192. tianshihungshot.store (Status: active)
+   Zone ID: f7ce5f3652a5bedc2496272268163a87
+   Plan: Free Website
+   DNS Queries: 2,340
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+193. oreolatte.online (Status: active)
+   Zone ID: 3128854f69efdd3484efc0b1c33e7814
+   Plan: Free Website
+   DNS Queries: 2,270
+   HTTP Visits: 4
+   Bandwidth: 0.00 GB (2,301,969 bytes)
+
+194. chaomifen.online (Status: active)
+   Zone ID: cf978d91c36ca3d45baea5e1104a1940
+   Plan: Free Website
+   DNS Queries: 2,250
+   HTTP Visits: 29
+   Bandwidth: 0.00 GB (479,060 bytes)
+
+195. bananamilk.online (Status: active)
+   Zone ID: 407717927745c2508ade16406601e116
+   Plan: Free Website
+   DNS Queries: 2,180
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (29,415 bytes)
+
+196. chaomifen.store (Status: active)
+   Zone ID: ef578838504ee1b802808cfcdba00190
+   Plan: Free Website
+   DNS Queries: 2,180
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+197. bubbletea111.online (Status: active)
+   Zone ID: 462086cc6c56ee83419ddb489eb3a60d
+   Plan: Free Website
+   DNS Queries: 2,130
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+198. lemontea111.online (Status: active)
+   Zone ID: 9f261dcad251b0ce805a92a2785e92c1
+   Plan: Free Website
+   DNS Queries: 2,060
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+199. milo111.online (Status: active)
+   Zone ID: fefef3062c690a218a4c224b39b96344
+   Plan: Free Website
+   DNS Queries: 2,020
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+200. jituifan.store (Status: active)
+   Zone ID: 44bc133387206be6b6685e83b759ab98
+   Plan: Free Website
+   DNS Queries: 2,000
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+201. sishentang.store (Status: active)
+   Zone ID: 3d641b87f4887a277632025e436e3714
+   Plan: Free Website
+   DNS Queries: 1,980
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+202. rouyuan.store (Status: active)
+   Zone ID: 950749f25c525189fd62d838458c4d1c
+   Plan: Free Website
+   DNS Queries: 1,950
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+203. watermelonjuice.online (Status: active)
+   Zone ID: 0d3492ed7a54d7a033eb733c8e9b9463
+   Plan: Free Website
+   DNS Queries: 1,910
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+204. blacktea111.online (Status: active)
+   Zone ID: c82631d0502b51410f181eeaf7a4c106
+   Plan: Free Website
+   DNS Queries: 1,900
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+205. kezaijian.online (Status: active)
+   Zone ID: b3830cf0600e7bed807bffeb63c82e9b
+   Plan: Free Website
+   DNS Queries: 1,880
+   HTTP Visits: 37
+   Bandwidth: 0.00 GB (954,242 bytes)
+
+206. yansuji.store (Status: active)
+   Zone ID: ab1a43ae3fcb63d224d89518af6af280
+   Plan: Free Website
+   DNS Queries: 1,880
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+207. talentradar168.com (Status: active)
+   Zone ID: 50f4628f5caf05e7c35e7cf92118d446
+   Plan: Free Website
+   DNS Queries: 1,870
+   HTTP Visits: 2
+   Bandwidth: 0.00 GB (1,225,649 bytes)
+
+208. kezaijian.store (Status: active)
+   Zone ID: 3e39dea708667cdd7a402d32b06bb539
+   Plan: Free Website
+   DNS Queries: 1,860
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+209. longtimenose.store (Status: moved)
+   Zone ID: 873571138e9998dec8521f8b2ac0c3a9
+   Plan: Free Website
+   DNS Queries: 610
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+210. longislandicedtea.me (Status: moved)
+   Zone ID: 024e6982da20a814def39b9a6608c1d1
+   Plan: Free Website
+   DNS Queries: 10
+   HTTP Visits: 0
+   Bandwidth: 0.00 GB (0 bytes)
+
+==========================================================================================

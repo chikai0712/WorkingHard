@@ -1,0 +1,29 @@
+# 下載的圖片
+downloaded_images/
+*.png
+*.jpg
+*.jpeg
+*.gif
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# 虛擬環境
+venv/
+env/
+ENV/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# 系統文件
+.DS_Store
+Thumbs.db
+

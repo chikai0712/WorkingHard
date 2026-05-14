@@ -1,0 +1,30 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+
+# 配置檔案（包含敏感資訊）
+config.json
+
+# 日誌檔案
+*.log
+cert_manager.log
+
+# 警報發送記錄
+.alert_sent_*
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+

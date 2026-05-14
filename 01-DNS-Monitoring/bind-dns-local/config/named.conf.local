@@ -1,0 +1,11 @@
+//
+// 自訂 Zone - 本機 BIND DNS 專案
+// Zone 檔放在 /etc/bind/zones/（對應專案 zones/）
+//
+
+zone "example.com" {
+    type master;
+    file "/etc/bind/zones/db.example.com";
+    allow-update { none; };
+    notify no;
+};

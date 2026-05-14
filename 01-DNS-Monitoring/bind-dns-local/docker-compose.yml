@@ -1,0 +1,21 @@
+# 本機 BIND DNS - Docker Compose
+# 啟動：docker compose up -d
+# 停止：docker compose down
+
+services:
+  bind:
+    build: .
+    container_name: bind-dns-local
+    restart: unless-stopped
+    ports:
+      - "0.0.0.0:53:53/udp"  # 對外開放標準 DNS 埠（UDP）
+      - "0.0.0.0:53:53/tcp"  # 對外開放標準 DNS 埠（TCP）
+    # 只掛載 config（內含 config/zones/），避免映像唯讀導致掛載失敗
+    volumes:
+      - ./config:/etc/bind:ro
+      - ./cache:/var/cache/bind
+      - ./logs:/var/log/bind
+    environment:
+      - TZ=UTC
+    cap_add:
+      - NET_BIND_SERVICE

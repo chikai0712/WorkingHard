@@ -1,0 +1,240 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dns-resolver
+  namespace: dns
+  labels:
+    app: dns-resolver
+    component: resolver
+spec:
+  replicas: 3
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  selector:
+    matchLabels:
+      app: dns-resolver
+  template:
+    metadata:
+      labels:
+        app: dns-resolver
+        component: resolver
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "8083"
+        prometheus.io/path: "/metrics"
+    spec:
+      # Pod Anti-Affinity for multi-AZ distribution
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 100
+            podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                - key: app
+                  operator: In
+                  values:
+                  - dns-resolver
+              topologyKey: topology.kubernetes.io/zone
+        nodeAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 100
+            preference:
+              matchExpressions:
+              - key: node.kubernetes.io/instance-type
+                operator: In
+                values:
+                - c5.xlarge
+                - c5.2xlarge
+                - c6i.xlarge
+                - c6i.2xlarge
+      
+      # Security Context
+      securityContext:
+        fsGroup: 999
+        runAsNonRoot: true
+        runAsUser: 999
+      
+      # Init Container: Download root hints and root key
+      initContainers:
+      - name: init-unbound
+        image: busybox:latest
+        command:
+        - sh
+        - -c
+        - |
+          # Download root hints
+          wget -O /etc/unbound/root.hints https://www.internic.net/domain/named.cache
+          
+          # Download root key for DNSSEC
+          wget -O /etc/unbound/root.key https://data.iana.org/root-anchors/root-anchors.xml
+          
+          # Set permissions
+          chown -R 999:999 /etc/unbound
+        volumeMounts:
+        - name: unbound-config
+          mountPath: /etc/unbound
+        - name: unbound-data
+          mountPath: /var/lib/unbound
+      
+      # Main Containers
+      containers:
+      # ============================================
+      # Container 1: dnsdist (Edge Load Balancer)
+      # ============================================
+      - name: dnsdist
+        image: powerdns/dnsdist:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+        - name: dns-udp
+          containerPort: 53
+          protocol: UDP
+        - name: dns-tcp
+          containerPort: 53
+          protocol: TCP
+        - name: metrics
+          containerPort: 8083
+          protocol: TCP
+        env:
+        - name: DNSDIST_UID
+          value: "999"
+        - name: DNSDIST_GID
+          value: "999"
+        resources:
+          requests:
+            cpu: "500m"
+            memory: "512Mi"
+          limits:
+            cpu: "4000m"
+            memory: "4Gi"
+        volumeMounts:
+        - name: dnsdist-config
+          mountPath: /etc/dnsdist
+          readOnly: true
+        - name: dnstap-socket
+          mountPath: /var/run/dnstap
+        livenessProbe:
+          httpGet:
+            path: /jsonstat
+            port: 8083
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 5
+          failureThreshold: 3
+        readinessProbe:
+          httpGet:
+            path: /jsonstat
+            port: 8083
+          initialDelaySeconds: 10
+          periodSeconds: 5
+          timeoutSeconds: 3
+          failureThreshold: 3
+        command:
+        - /usr/bin/dnsdist
+        - --uid=dnsdist
+        - --gid=dnsdist
+        - --config=/etc/dnsdist/dnsdist.conf
+        - --supervised
+      
+      # ============================================
+      # Container 2: Unbound (Recursive Resolver)
+      # ============================================
+      - name: unbound
+        image: mvance/unbound:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+        - name: unbound-udp
+          containerPort: 5353
+          protocol: UDP
+        - name: unbound-tcp
+          containerPort: 5353
+          protocol: TCP
+        - name: unbound-control
+          containerPort: 8953
+          protocol: TCP
+        env:
+        - name: TZ
+          value: "UTC"
+        resources:
+          requests:
+            cpu: "500m"
+            memory: "1Gi"
+          limits:
+            cpu: "2000m"
+            memory: "4Gi"
+        volumeMounts:
+        - name: unbound-config
+          mountPath: /etc/unbound
+          readOnly: true
+        - name: unbound-data
+          mountPath: /var/lib/unbound
+        - name: dnstap-socket
+          mountPath: /var/run/dnstap
+        livenessProbe:
+          exec:
+            command:
+            - /bin/sh
+            - -c
+            - unbound-control -c /etc/unbound/unbound.conf status
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 5
+          failureThreshold: 3
+        readinessProbe:
+          exec:
+            command:
+            - /bin/sh
+            - -c
+            - unbound-control -c /etc/unbound/unbound.conf status
+          initialDelaySeconds: 10
+          periodSeconds: 5
+          timeoutSeconds: 3
+          failureThreshold: 3
+      
+      # ============================================
+      # Container 3: DNSTAP Sidecar (Observability)
+      # ============================================
+      - name: dnstap-sidecar
+        image: vectorized/vector:latest
+        imagePullPolicy: IfNotPresent
+        env:
+        - name: VECTOR_LOG
+          value: "info"
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "128Mi"
+          limits:
+            cpu: "500m"
+            memory: "512Mi"
+        volumeMounts:
+        - name: dnstap-socket
+          mountPath: /var/run/dnstap
+        - name: vector-config
+          mountPath: /etc/vector
+          readOnly: true
+        command:
+        - vector
+        - --config-dir
+        - /etc/vector
+      
+      # Volumes
+      volumes:
+      - name: dnsdist-config
+        configMap:
+          name: dnsdist-config
+      - name: unbound-config
+        configMap:
+          name: unbound-config
+      - name: unbound-data
+        emptyDir:
+          sizeLimit: 2Gi
+      - name: dnstap-socket
+        emptyDir: {}
+      - name: vector-config
+        configMap:
+          name: vector-dnstap-config
+

@@ -1,0 +1,40 @@
+#/bin/bash
+echo "####start shutdown selinux########"
+sed -i 's/SELINK=enforcing/SELINK=disabled/' /etc/selinux/config
+setenforce 0
+value_selinux=`getenforce`
+if [ value_selinux="Permissive" ];then
+        echo -e "\033[32m selinux has successsfully shutdown！\033[0m"
+else
+        echo -e "\033[31m selinux has no shutdown \033[0m"
+fi
+
+echo ""
+echo "###########start crontab set##########"
+echo "0 0 * * * /usr/sbin/ntpdate pool.ntp.org > /dev/null 2>&1" >>/var/spool/cron/root
+echo -e "\033[32m crontab has been added successfully \033[0m"
+echo ""
+
+echo ""
+echo "############Add service to system boot#########"
+echo "ulimit -SH 65535" >>/etc/rc.local
+echo "1. change ulimit to 65535 success"
+echo "route add -net 10.10.0.0/24 gw 10.0.0.30" >/etc/sysconfig/static-routes
+echo -e "\033[32m add vpn route successfully \033[0m"
+echo ""
+echo "##########open file handel to 65535#######"
+echo "* soft nproc 65535" >>/etc/security/limits.conf 
+echo "* hard nproc 65535" >>/etc/security/limits.conf
+echo "* soft nofile 65535" >>/etc/security/limits.conf
+echo "* hard nofile 65535" >>/etc/security/limits.conf
+echo -e "\033[32m file handel has been successfully changed \033[0m"
+
+echo ""
+echo "##########iptables optimization#####"
+echo "net.nf_conntrack_max=2097152" >>/etc/sysctl.conf
+sysctl -p
+echo -e "\033[32m iptables optimization successful \033[0m"
+
+
+echo "###### install software"
+yum install dos2unix telnet lrzsz -y

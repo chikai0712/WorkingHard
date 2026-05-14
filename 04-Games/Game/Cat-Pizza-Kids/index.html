@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>貓咪披薩店 🐱🍕</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="game-container">
+        <!-- 頂部資訊欄 -->
+        <div id="top-bar">
+            <div class="level-display">
+                <span class="level-icon">⭐</span>
+                <span id="level-text">第 1 關</span>
+            </div>
+            <div class="progress-container">
+                <div class="progress-label">進度</div>
+                <div class="progress-bar-bg">
+                    <div class="progress-bar-fill" id="progress-fill"></div>
+                    <span class="progress-text" id="progress-text">0/3</span>
+                </div>
+            </div>
+            <div class="money-display">
+                <span class="money-icon">💰</span>
+                <span id="money-text">0</span>
+            </div>
+        </div>
+
+        <!-- 遊戲畫面 -->
+        <div id="game-area">
+            <!-- 出餐檯 -->
+            <div class="counter" id="counter">
+                <div class="counter-label">🍕 出餐檯</div>
+                <div class="pizza-ready" id="pizza-ready">🍕</div>
+            </div>
+
+            <!-- 餐桌區 -->
+            <div class="tables-area" id="tables-area"></div>
+
+            <!-- 小貓角色 -->
+            <div class="cat-player" id="cat-player">
+                <div class="cat-body">🐱</div>
+                <div class="cat-item" id="cat-item"></div>
+            </div>
+
+            <!-- 金幣容器 -->
+            <div id="coins-container"></div>
+        </div>
+
+        <!-- 開始畫面 -->
+        <div id="start-screen" class="overlay-screen">
+            <div class="screen-content">
+                <h1 class="game-title">🐱 貓咪披薩店 🍕</h1>
+                <p class="game-subtitle">幫助小貓送披薩給客人！</p>
+                <button class="big-button" id="start-button">開始遊戲</button>
+            </div>
+        </div>
+
+        <!-- 過關畫面 -->
+        <div id="win-screen" class="overlay-screen hidden">
+            <div class="screen-content">
+                <h1 class="win-title">🌟 太棒了！🌟</h1>
+                <p class="win-message" id="win-message">你完成了第 1 關！</p>
+                <div class="stars">⭐⭐⭐</div>
+                <button class="big-button" id="next-button">下一關</button>
+            </div>
+        </div>
+
+        <!-- 完成所有關卡 -->
+        <div id="complete-screen" class="overlay-screen hidden">
+            <div class="screen-content">
+                <h1 class="complete-title">🎉 恭喜通關！🎉</h1>
+                <p class="complete-message">你是最棒的披薩店店長！</p>
+                <button class="big-button" id="restart-button">再玩一次</button>
+            </div>
+        </div>
+
+        <!-- 教學提示 -->
+        <div id="tutorial" class="tutorial hidden">
+            <div class="tutorial-arrow">👆</div>
+            <div class="tutorial-text" id="tutorial-text">點擊出餐檯拿披薩！</div>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>

@@ -1,0 +1,5 @@
+domain,expected_ips,expected_ns,keyword,check_interval
+example.com,93.184.216.34,"a.iana-servers.net,b.iana-servers.net",Example Domain,300
+google.com,142.250.185.46,"ns1.google.com,ns2.google.com",Google,300
+github.com,140.82.121.4,"ns-1707.awsdns-21.co.uk,ns-421.awsdns-52.com",GitHub,300
+

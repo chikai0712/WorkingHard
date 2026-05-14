@@ -1,0 +1,8 @@
+# 測試域名列表 - 最小集合（5 個）
+# 用於快速測試和驗證功能
+
+google.com
+facebook.com
+twitter.com
+github.com
+stackoverflow.com

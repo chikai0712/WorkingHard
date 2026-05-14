@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>三麗鷗爆米花大遊行 🎀</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- 遊戲容器 -->
+    <div id="game-container">
+        
+        <!-- 頂部狀態欄 -->
+        <div id="status-bar">
+            <div class="status-item">
+                <span class="label">分數</span>
+                <span id="score" class="value">0</span>
+            </div>
+            <div class="status-item">
+                <span class="label">關卡</span>
+                <span id="level" class="value">1</span>
+            </div>
+            <div class="status-item">
+                <span class="label">Fever</span>
+                <div id="fever-meter">
+                    <div id="fever-fill"></div>
+                </div>
+                <span id="fever-percent" class="value">0%</span>
+            </div>
+        </div>
+
+        <!-- 遊戲畫面 -->
+        <div id="game-screen">
+            
+            <!-- 階段 1: 大耳狗 - 原料接取 -->
+            <div id="stage1" class="stage active">
+                <div class="stage-header">
+                    <h2>🐶 大耳狗 - 原料接取</h2>
+                    <div class="corn-counter">
+                        玉米: <span id="corn-count">0</span> / 3
+                    </div>
+                </div>
+                <div class="stage-content">
+                    <!-- 玉米掉落區域 -->
+                    <div id="corn-drop-zone"></div>
+                    
+                    <!-- 大耳狗和籃子 -->
+                    <div id="cinnamoroll" class="character">
+                        <div class="character-sprite">🐶</div>
+                        <div id="basket" class="basket">🧺</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 階段 2: 庫洛米 - 魔法加熱 -->
+            <div id="stage2" class="stage">
+                <div class="stage-header">
+                    <h2>😈 庫洛米 - 魔法加熱</h2>
+                    <div class="temperature-display">
+                        溫度: <span id="temp-value">0</span>°C
+                    </div>
+                </div>
+                <div class="stage-content">
+                    <!-- 溫度計 -->
+                    <div id="thermometer">
+                        <div class="temp-scale">
+                            <div class="temp-marker" style="left: 0%">0</div>
+                            <div class="temp-marker" style="left: 50%">50</div>
+                            <div class="temp-marker perfect-zone-start" style="left: 60%">60</div>
+                            <div class="temp-marker perfect-zone-end" style="left: 80%">80</div>
+                            <div class="temp-marker" style="left: 100%">100</div>
+                        </div>
+                        <div id="temp-bar">
+                            <div id="temp-fill"></div>
+                            <div id="perfect-zone"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- 庫洛米和大鍋 -->
+                    <div id="kuromi" class="character">
+                        <div class="character-sprite">😈</div>
+                        <div class="pot">🍲</div>
+                    </div>
+                    
+                    <!-- 點擊提示 -->
+                    <div class="click-hint">快速點擊加熱！</div>
+                </div>
+            </div>
+
+            <!-- 階段 3: 布丁狗 - 精準包裝 -->
+            <div id="stage3" class="stage">
+                <div class="stage-header">
+                    <h2>🐶 布丁狗 - 精準包裝</h2>
+                    <div class="combo-display">
+                        連擊: <span id="combo-count">0</span>
+                    </div>
+                </div>
+                <div class="stage-content">
+                    <!-- 爆米花飛行區域 -->
+                    <div id="popcorn-flight-zone"></div>
+                    
+                    <!-- 包裝目標區 -->
+                    <div id="package-target">
+                        <div class="target-indicator">📦</div>
+                    </div>
+                    
+                    <!-- 布丁狗 -->
+                    <div id="pompompurin" class="character">
+                        <div class="character-sprite">🐶</div>
+                    </div>
+                    
+                    <!-- 判定提示 -->
+                    <div id="timing-feedback"></div>
+                </div>
+            </div>
+
+            <!-- 階段 4: 美樂蒂 - 裝箱送餐 -->
+            <div id="stage4" class="stage">
+                <div class="stage-header">
+                    <h2>🐰 美樂蒂 - 裝箱送餐</h2>
+                </div>
+                <div class="stage-content">
+                    <!-- 爆米花待裝區 -->
+                    <div id="popcorn-ready-zone"></div>
+                    
+                    <!-- 紙箱 -->
+                    <div id="box-zone">
+                        <div class="box">
+                            📦
+                            <div class="box-count">0/6</div>
+                        </div>
+                    </div>
+                    
+                    <!-- 客人排隊區 -->
+                    <div id="customer-queue">
+                        <!-- 客人會動態生成 -->
+                    </div>
+                    
+                    <!-- 美樂蒂 -->
+                    <div id="mymelody" class="character">
+                        <div class="character-sprite">🐰</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- 階段切換按鈕 -->
+        <div id="stage-switcher">
+            <button class="stage-btn active" data-stage="1">
+                <span class="stage-icon">🐶</span>
+                <span class="stage-name">大耳狗</span>
+            </button>
+            <button class="stage-btn" data-stage="2">
+                <span class="stage-icon">😈</span>
+                <span class="stage-name">庫洛米</span>
+            </button>
+            <button class="stage-btn" data-stage="3">
+                <span class="stage-icon">🐶</span>
+                <span class="stage-name">布丁狗</span>
+            </button>
+            <button class="stage-btn" data-stage="4">
+                <span class="stage-icon">🐰</span>
+                <span class="stage-name">美樂蒂</span>
+            </button>
+        </div>
+
+        <!-- Fever Time 特效 -->
+        <div id="fever-overlay" class="hidden">
+            <div class="fever-text">🌟 FEVER TIME! 🌟</div>
+        </div>
+
+        <!-- 遊戲訊息提示 -->
+        <div id="game-message"></div>
+
+    </div>
+
+    <!-- 開始畫面 -->
+    <div id="start-screen">
+        <h1>🎀 三麗鷗爆米花大遊行 🎀</h1>
+        <p class="subtitle">動感接力大挑戰</p>
+        <div class="game-intro">
+            <p>🐶 大耳狗接玉米</p>
+            <p>😈 庫洛米魔法加熱</p>
+            <p>🐶 布丁狗精準包裝</p>
+            <p>🐰 美樂蒂裝箱送餐</p>
+        </div>
+        <button id="start-btn" class="big-btn">開始遊戲</button>
+        <div class="controls-hint">
+            <p>🖱️ 滑鼠操作 | ⌨️ 鍵盤快捷鍵</p>
+            <p>← → 移動 | 空白鍵 操作 | 1-4 切換階段</p>
+        </div>
+    </div>
+
+    <!-- 遊戲結束畫面 -->
+    <div id="game-over-screen" class="hidden">
+        <h1>🎉 遊戲結束 🎉</h1>
+        <div class="final-score">
+            <p>最終分數</p>
+            <p id="final-score-value">0</p>
+        </div>
+        <div class="stars">
+            <span class="star">⭐</span>
+            <span class="star">⭐</span>
+            <span class="star">⭐</span>
+        </div>
+        <button id="restart-btn" class="big-btn">再玩一次</button>
+    </div>
+
+    <!-- 音效控制按鈕 -->
+    <div id="audio-controls">
+        <button id="mute-btn" class="control-btn" title="靜音/取消靜音">
+            🔊
+        </button>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="audio.js"></script>
+    <script src="effects.js"></script>
+    <script src="game.js"></script>
+</body>
+</html>
+

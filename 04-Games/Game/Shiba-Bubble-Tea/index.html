@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>柴犬珍奶店 🐕🧋</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="game-container">
+        <!-- 頂部狀態欄 -->
+        <div id="top-bar">
+            <div class="level-info">
+                <span class="level-badge">關卡 <span id="current-level">1</span></span>
+            </div>
+            <div class="score-display">
+                <span class="coin-icon">💰</span>
+                <span id="total-coins">0</span>
+            </div>
+        </div>
+
+        <!-- 遊戲主畫面 -->
+        <div id="game-area">
+            <!-- 顧客區 -->
+            <div id="customer-area">
+                <div id="customer" class="customer hidden">
+                    <div class="customer-avatar">🐶</div>
+                    <div class="speech-bubble">
+                        <div class="order-display" id="order-display"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 製作區 -->
+            <div id="making-area">
+                <!-- 步驟指示 -->
+                <div id="step-indicator" class="step-indicator">
+                    <div class="step-text" id="step-text">點擊開始製作</div>
+                    <div class="step-progress">
+                        <div class="progress-bar" id="progress-bar"></div>
+                    </div>
+                </div>
+
+                <!-- 互動區域 -->
+                <div id="interaction-area">
+                    <!-- 搖茶階段 -->
+                    <div id="shake-stage" class="stage hidden">
+                        <div class="shaker" id="shaker">
+                            <div class="shaker-body">🥤</div>
+                            <div class="shake-instruction">左右拖曳搖茶！</div>
+                            <div class="shake-counter">搖動次數: <span id="shake-count">0</span>/10</div>
+                        </div>
+                    </div>
+
+                    <!-- 倒茶階段 -->
+                    <div id="pour-stage" class="stage hidden">
+                        <div class="cup-container">
+                            <div class="cup" id="cup">
+                                <div class="cup-liquid" id="cup-liquid"></div>
+                                <div class="cup-glass"></div>
+                            </div>
+                            <div class="pour-instruction">長按倒茶，放開停止！</div>
+                            <div class="target-line"></div>
+                        </div>
+                    </div>
+
+                    <!-- 加珍珠階段 -->
+                    <div id="boba-stage" class="stage hidden">
+                        <div class="boba-container">
+                            <div class="cup-with-tea" id="cup-with-tea">
+                                <div class="tea-base"></div>
+                                <div class="boba-area" id="boba-area"></div>
+                            </div>
+                            <div class="boba-instruction">點擊加入珍珠！</div>
+                            <div class="boba-counter">珍珠: <span id="boba-count">0</span>/8</div>
+                        </div>
+                    </div>
+
+                    <!-- 封膜階段 -->
+                    <div id="seal-stage" class="stage hidden">
+                        <div class="seal-container">
+                            <div class="cup-final" id="cup-final">
+                                <div class="seal-film" id="seal-film"></div>
+                            </div>
+                            <div class="seal-instruction">向右滑動封膜！</div>
+                            <div class="seal-progress">
+                                <div class="seal-bar" id="seal-bar"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 完成階段 -->
+                    <div id="complete-stage" class="stage hidden">
+                        <div class="complete-container">
+                            <div class="finished-drink">🧋</div>
+                            <div class="complete-text">完成！</div>
+                            <div class="rating" id="rating"></div>
+                            <div class="coins-earned">
+                                <span class="coin-icon">💰</span>
+                                <span id="coins-earned">0</span>
+                            </div>
+                            <button class="next-button" id="next-button">下一位顧客</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 開始按鈕 -->
+                <button id="start-button" class="start-button">開始製作 🧋</button>
+            </div>
+
+            <!-- 柴犬店員 -->
+            <div id="shiba-staff">
+                <div class="shiba-avatar">🐕</div>
+                <div class="shiba-name">小柴</div>
+            </div>
+        </div>
+
+        <!-- 底部統計 -->
+        <div id="bottom-bar">
+            <div class="stat">
+                <span class="stat-label">完成杯數</span>
+                <span class="stat-value" id="drinks-made">0</span>
+            </div>
+            <div class="stat">
+                <span class="stat-label">完美次數</span>
+                <span class="stat-value" id="perfect-count">0</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 教學提示 -->
+    <div id="tutorial-overlay" class="tutorial-overlay">
+        <div class="tutorial-content">
+            <h2>🐕 歡迎來到柴犬珍奶店！</h2>
+            <div class="tutorial-steps">
+                <div class="tutorial-step">
+                    <span class="step-number">1</span>
+                    <span class="step-desc">搖茶 - 左右拖曳搖晃器</span>
+                </div>
+                <div class="tutorial-step">
+                    <span class="step-number">2</span>
+                    <span class="step-desc">倒茶 - 長按倒到目標線</span>
+                </div>
+                <div class="tutorial-step">
+                    <span class="step-number">3</span>
+                    <span class="step-desc">加珍珠 - 點擊加入配料</span>
+                </div>
+                <div class="tutorial-step">
+                    <span class="step-number">4</span>
+                    <span class="step-desc">封膜 - 向右滑動完成</span>
+                </div>
+            </div>
+            <button id="start-tutorial" class="tutorial-button">開始遊戲！</button>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+    <script>
+        // 確保教學提示顯示
+        window.addEventListener('DOMContentLoaded', function() {
+            const overlay = document.getElementById('tutorial-overlay');
+            if (overlay) {
+                overlay.classList.remove('hidden');
+                console.log('教學提示強制顯示');
+            }
+        });
+    </script>
+</body>
+</html>
+

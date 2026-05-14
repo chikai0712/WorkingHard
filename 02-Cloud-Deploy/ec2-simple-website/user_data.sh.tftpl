@@ -1,0 +1,403 @@
+#!/bin/bash
+set -euo pipefail
+
+cat > /etc/yum.repos.d/nginx.repo <<'REPO'
+[nginx-stable]
+name=nginx stable repo
+baseurl=http://nginx.org/packages/amzn/2023/$basearch/
+gpgcheck=1
+enabled=1
+gpgkey=https://nginx.org/keys/nginx_signing.key
+module_hotfixes=true
+REPO
+
+dnf update -y
+dnf install -y nginx
+
+cat > /usr/share/nginx/html/index.html <<'HTML'
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>${site_title}</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #070b17;
+      --card: rgba(17, 24, 39, 0.82);
+      --line: rgba(148, 163, 184, 0.24);
+      --text: #e5e7eb;
+      --muted: #94a3b8;
+      --accent: #38bdf8;
+      --ok: #22c55e;
+      --warn: #f59e0b;
+      --bad: #ef4444;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(56, 189, 248, 0.22), transparent 32rem),
+        radial-gradient(circle at 80% 0%, rgba(34, 197, 94, 0.16), transparent 28rem),
+        var(--bg);
+      color: var(--text);
+      padding: 24px;
+    }
+    main {
+      width: min(960px, 100%);
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      padding: 42px;
+      background: var(--card);
+      box-shadow: 0 28px 80px rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(16px);
+    }
+    .badge {
+      display: inline-flex;
+      gap: 8px;
+      align-items: center;
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(34, 197, 94, 0.3);
+      color: #bbf7d0;
+      background: rgba(34, 197, 94, 0.1);
+      font-size: 14px;
+      font-weight: 700;
+    }
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--ok);
+      box-shadow: 0 0 18px var(--ok);
+    }
+    h1 {
+      margin: 24px 0 12px;
+      font-size: clamp(34px, 6vw, 64px);
+      line-height: 0.95;
+      letter-spacing: -0.06em;
+    }
+    h2 {
+      margin: 0 0 10px;
+      font-size: 22px;
+      letter-spacing: -0.03em;
+    }
+    p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 18px;
+      line-height: 1.7;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 14px;
+      margin-top: 32px;
+    }
+    .item, .panel {
+      padding: 16px;
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      background: rgba(15, 23, 42, 0.72);
+    }
+    .panel {
+      margin-top: 16px;
+      padding: 22px;
+    }
+    .label {
+      color: var(--muted);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      margin-bottom: 8px;
+    }
+    .value {
+      color: var(--text);
+      font-weight: 800;
+      word-break: break-word;
+    }
+    .toolbar {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+      margin-top: 16px;
+    }
+    input, button {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 11px 13px;
+      font: inherit;
+    }
+    input {
+      min-width: min(360px, 100%);
+      flex: 1;
+      background: rgba(2, 6, 23, 0.72);
+      color: var(--text);
+      outline: none;
+    }
+    button {
+      cursor: pointer;
+      color: #03111f;
+      background: linear-gradient(135deg, #7dd3fc, #22c55e);
+      font-weight: 800;
+    }
+    button:disabled {
+      cursor: wait;
+      opacity: 0.72;
+    }
+    .result {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+      margin-top: 16px;
+    }
+    .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 14px;
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 700;
+    }
+    pre {
+      margin: 16px 0 0;
+      max-height: 260px;
+      overflow: auto;
+      white-space: pre-wrap;
+      word-break: break-word;
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: rgba(2, 6, 23, 0.9);
+      color: #dbeafe;
+      font-size: 13px;
+      line-height: 1.55;
+    }
+    .hint {
+      margin-top: 10px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="badge"><span class="dot"></span> EC2 website online</div>
+    <h1>Cloud Site Rebuilt</h1>
+    <p>新的 AWS 帳號、東京區域、EC2 + Nginx 已準備完成。第一階段先用 Elastic IP 驗證，下一階段再接回網域與 HTTPS。</p>
+    <section class="grid">
+      <div class="item">
+        <div class="label">Domain Plan</div>
+        <div class="value">${domain_name}</div>
+      </div>
+      <div class="item">
+        <div class="label">Region</div>
+        <div class="value">ap-northeast-1</div>
+      </div>
+      <div class="item">
+        <div class="label">Environment</div>
+        <div class="value">${environment}</div>
+      </div>
+    </section>
+
+    <section class="panel" aria-labelledby="cdn-title">
+      <h2 id="cdn-title">DNS / CDN 檢測</h2>
+      <p>瀏覽器不能直接執行系統 `dig`，這裡使用 DNS-over-HTTPS 查詢 CNAME、A、AAAA，並讀取目前頁面的 HTTP headers 來推測是否經過 CDN。</p>
+      <div class="toolbar">
+        <input id="domainInput" value="${domain_name}" aria-label="要檢測的網域" />
+        <button id="checkBtn" type="button">執行檢測</button>
+      </div>
+      <div class="status" id="checkStatus">尚未檢測</div>
+      <div class="result">
+        <div class="item">
+          <div class="label">Detected CDN</div>
+          <div class="value" id="cdnValue">-</div>
+        </div>
+        <div class="item">
+          <div class="label">Current Host</div>
+          <div class="value" id="hostValue">-</div>
+        </div>
+        <div class="item">
+          <div class="label">Resolution Path</div>
+          <div class="value" id="pathValue">-</div>
+        </div>
+      </div>
+      <pre id="digOutput">等待檢測...</pre>
+      <div class="hint">判斷依據包含 CNAME pattern、A/AAAA 回應與同源回應標頭。若直接用 Elastic IP 開站，預期會顯示 Direct / EC2-Nginx。</div>
+    </section>
+  </main>
+
+  <script>
+    const domainInput = document.getElementById("domainInput");
+    const checkBtn = document.getElementById("checkBtn");
+    const checkStatus = document.getElementById("checkStatus");
+    const cdnValue = document.getElementById("cdnValue");
+    const hostValue = document.getElementById("hostValue");
+    const pathValue = document.getElementById("pathValue");
+    const digOutput = document.getElementById("digOutput");
+
+    const cdnMatchers = [
+      { name: "AWS CloudFront", patterns: ["cloudfront.net", "x-amz-cf-", "x-cache"] },
+      { name: "Cloudflare", patterns: ["cloudflare", "cf-cache-status", "cf-ray"] },
+      { name: "Fastly", patterns: ["fastly", "x-served-by", "x-cache-hits"] },
+      { name: "Akamai", patterns: ["akamai", "edgesuite.net", "edgekey.net", "akamai-x"] },
+      { name: "Vercel Edge Network", patterns: ["vercel", "x-vercel-"] },
+      { name: "Netlify Edge", patterns: ["netlify", "x-nf-"] }
+    ];
+
+    function setStatus(text, color) {
+      checkStatus.textContent = text;
+      checkStatus.style.color = color || "#94a3b8";
+    }
+
+    function isIpAddress(value) {
+      return /^\d{1,3}(\.\d{1,3}){3}$/.test(value) || value.includes(":");
+    }
+
+    async function dohQuery(name, type) {
+      const url = "https://dns.google/resolve?name=" + encodeURIComponent(name) + "&type=" + encodeURIComponent(type);
+      const response = await fetch(url, { headers: { accept: "application/dns-json" }, cache: "no-store" });
+      if (!response.ok) {
+        throw new Error("DNS query failed for " + type + ": HTTP " + response.status);
+      }
+      return response.json();
+    }
+
+    function answersOf(data) {
+      return (data.Answer || []).map(function(answer) {
+        return {
+          name: answer.name,
+          type: answer.type,
+          ttl: answer.TTL,
+          data: answer.data
+        };
+      });
+    }
+
+    async function readSameOriginHeaders() {
+      try {
+        const response = await fetch(window.location.href, { method: "HEAD", cache: "no-store" });
+        const headers = [];
+        response.headers.forEach(function(value, key) {
+          headers.push(key + ": " + value);
+        });
+        return headers;
+      } catch (error) {
+        return ["headers unavailable: " + error.message];
+      }
+    }
+
+    function detectCdn(records, headers) {
+      const haystack = records.concat(headers).join("\n").toLowerCase();
+      for (const cdn of cdnMatchers) {
+        if (cdn.patterns.some(function(pattern) { return haystack.includes(pattern); })) {
+          return cdn.name;
+        }
+      }
+      if (window.location.hostname && isIpAddress(window.location.hostname)) {
+        return "Direct / EC2-Nginx likely";
+      }
+      return "No common CDN signature detected";
+    }
+
+    function renderRecords(label, records) {
+      if (!records.length) return label + ": no answer";
+      return records.map(function(record) {
+        return label + " " + record.name + " " + record.ttl + " IN " + record.data;
+      }).join("\n");
+    }
+
+    async function runCheck() {
+      const name = domainInput.value.trim() || window.location.hostname;
+      checkBtn.disabled = true;
+      cdnValue.textContent = "checking...";
+      hostValue.textContent = window.location.host || "-";
+      pathValue.textContent = "checking...";
+      digOutput.textContent = "querying DNS-over-HTTPS...";
+      setStatus("檢測中", "#f59e0b");
+
+      try {
+        const cnameData = isIpAddress(name) ? { Answer: [] } : await dohQuery(name, "CNAME");
+        const aData = isIpAddress(name) ? { Answer: [] } : await dohQuery(name, "A");
+        const aaaaData = isIpAddress(name) ? { Answer: [] } : await dohQuery(name, "AAAA");
+        const headers = await readSameOriginHeaders();
+
+        const cnameRecords = answersOf(cnameData);
+        const aRecords = answersOf(aData);
+        const aaaaRecords = answersOf(aaaaData);
+        const dnsLines = [];
+        dnsLines.push("Target: " + name);
+        dnsLines.push("Current URL: " + window.location.href);
+        dnsLines.push("");
+        dnsLines.push(renderRecords("CNAME", cnameRecords));
+        dnsLines.push(renderRecords("A", aRecords));
+        dnsLines.push(renderRecords("AAAA", aaaaRecords));
+        dnsLines.push("");
+        dnsLines.push("HTTP response headers visible to browser:");
+        dnsLines.push(headers.length ? headers.join("\n") : "no visible headers");
+
+        const flatRecords = cnameRecords.concat(aRecords).concat(aaaaRecords).map(function(record) {
+          return record.data;
+        });
+        const detected = detectCdn(flatRecords, headers);
+        const chain = cnameRecords.length ? cnameRecords.map(function(record) { return record.data; }).join(" -> ") : "No CNAME chain";
+
+        cdnValue.textContent = detected;
+        pathValue.textContent = chain;
+        digOutput.textContent = dnsLines.join("\n");
+        setStatus("完成", detected.includes("No common") ? "#f59e0b" : "#22c55e");
+      } catch (error) {
+        cdnValue.textContent = "檢測失敗";
+        pathValue.textContent = "-";
+        digOutput.textContent = error.message;
+        setStatus("失敗", "#ef4444");
+      } finally {
+        checkBtn.disabled = false;
+      }
+    }
+
+    checkBtn.addEventListener("click", runCheck);
+    hostValue.textContent = window.location.host || "-";
+    if (window.location.hostname && !domainInput.value) {
+      domainInput.value = window.location.hostname;
+    }
+    runCheck();
+  </script>
+</body>
+</html>
+HTML
+
+cat > /etc/nginx/conf.d/default.conf <<'NGINX'
+server {
+    listen 80;
+    listen [::]:80;
+    server_name _;
+
+    root /usr/share/nginx/html;
+    index index.html;
+
+    add_header X-Cloudsite-Origin "ec2-nginx" always;
+
+    location / {
+        try_files $uri $uri/ =404;
+    }
+
+    location = /health {
+        add_header Content-Type text/plain;
+        return 200 'ok';
+    }
+}
+NGINX
+
+systemctl enable nginx
+systemctl restart nginx

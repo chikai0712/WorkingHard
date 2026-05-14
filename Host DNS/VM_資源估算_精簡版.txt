@@ -1,7 +1,0 @@
-項目	規格	數量	單價	總價	備註
-實體主機	雙路16C / 128GB / 2TB SSD + 8TB HDD / 2x10GbE	3	=輸入單價	=E2*D2	每台可跑 2-3 個 DNS VM
-DNS VM	8 vCPU / 16GB / 100GB SSD + 200GB HDD	4	0	0	主要服務節點（每台可處理 8k-12k QPS）
-監控 VM	4 vCPU / 16GB / 300GB SSD + 1000GB HDD	1	0	0	Prometheus + Loki（90天保留）
-Bastion VM	2 vCPU / 4GB / 50GB SSD	1	0	0	管理跳板機
-總計				=SUM(F2:F5)	月折舊成本 = 總價 / (5年*12月)
-

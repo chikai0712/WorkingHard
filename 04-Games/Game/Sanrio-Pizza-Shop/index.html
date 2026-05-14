@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🍕 三麗鷗披薩店 | Sanrio Pizza Shop</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="game-container">
+        <!-- 頂部狀態欄 -->
+        <div id="top-bar">
+            <div class="stat">
+                <span class="icon">💰</span>
+                <span id="money">0</span>
+            </div>
+            <div class="stat">
+                <span class="icon">⭐</span>
+                <span id="reputation">100</span>
+            </div>
+            <div class="stat">
+                <span class="icon">👥</span>
+                <span>第 <span id="day">1</span> 天</span>
+            </div>
+        </div>
+
+        <!-- 主遊戲區域 -->
+        <div id="game-area">
+            <!-- 客人排隊區 -->
+            <div id="customer-queue">
+                <h3>🎀 等待的客人</h3>
+                <div id="customers"></div>
+            </div>
+
+            <!-- 製作區 -->
+            <div id="cooking-area">
+                <h3>🍕 製作披薩</h3>
+                
+                <!-- 角色走動區域 -->
+                <div id="character-stage"></div>
+                
+                <!-- 當前訂單 -->
+                <div id="current-order">
+                    <div class="order-card">
+                        <p>選擇一位客人開始製作！</p>
+                    </div>
+                </div>
+
+                <!-- 披薩製作台 -->
+                <div id="pizza-station">
+                    <div class="pizza-base">
+                        <div id="pizza-canvas"></div>
+                    </div>
+                    
+                    <!-- 配料選擇 -->
+                    <div id="toppings-bar">
+                        <button class="topping-btn" data-topping="sauce">
+                            <span class="topping-icon">🍅</span>
+                            <span>醬料</span>
+                        </button>
+                        <button class="topping-btn" data-topping="cheese">
+                            <span class="topping-icon">🧀</span>
+                            <span>起司</span>
+                        </button>
+                        <button class="topping-btn" data-topping="pepperoni">
+                            <span class="topping-icon">🍖</span>
+                            <span>臘腸</span>
+                        </button>
+                        <button class="topping-btn" data-topping="mushroom">
+                            <span class="topping-icon">🍄</span>
+                            <span>蘑菇</span>
+                        </button>
+                        <button class="topping-btn" data-topping="olive">
+                            <span class="topping-icon">🫒</span>
+                            <span>橄欖</span>
+                        </button>
+                        <button class="topping-btn" data-topping="pineapple">
+                            <span class="topping-icon">🍍</span>
+                            <span>鳳梨</span>
+                        </button>
+                    </div>
+
+                    <!-- 操作按鈕 -->
+                    <div id="action-buttons">
+                        <button id="cook-btn" class="action-btn" disabled>
+                            <span>🔥</span> 烤披薩 (5秒)
+                        </button>
+                        <button id="serve-btn" class="action-btn" disabled>
+                            <span>✨</span> 上菜
+                        </button>
+                        <button id="trash-btn" class="action-btn">
+                            <span>🗑️</span> 重做
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 角色區 -->
+            <div id="character-area">
+                <div class="character active" data-character="cinnamoroll">
+                    <div class="character-avatar">🐶</div>
+                    <div class="character-name">大耳狗</div>
+                    <div class="character-skill">速度 +20%</div>
+                </div>
+                <div class="character" data-character="kuromi">
+                    <div class="character-avatar">😈</div>
+                    <div class="character-name">庫洛米</div>
+                    <div class="character-skill">收入 +30%</div>
+                </div>
+                <div class="character locked" data-character="pompompurin">
+                    <div class="character-avatar">🐶</div>
+                    <div class="character-name">布丁狗</div>
+                    <div class="character-skill">🔒 500💰</div>
+                </div>
+                <div class="character locked" data-character="mymelody">
+                    <div class="character-avatar">🐰</div>
+                    <div class="character-name">美樂蒂</div>
+                    <div class="character-skill">🔒 1000💰</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 烤箱動畫 -->
+        <div id="oven-overlay" class="hidden">
+            <div class="oven-container">
+                <div class="oven">🔥</div>
+                <div class="cooking-text">烤披薩中...</div>
+                <div class="progress-bar">
+                    <div class="progress-fill"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 結果彈窗 -->
+        <div id="result-modal" class="hidden">
+            <div class="modal-content">
+                <h2 id="result-title">完美！</h2>
+                <div id="result-stars">⭐⭐⭐</div>
+                <p id="result-message">客人非常滿意！</p>
+                <div id="result-reward">+50💰 +10⭐</div>
+                <button id="continue-btn" class="action-btn">繼續</button>
+            </div>
+        </div>
+
+        <!-- 一天結束 -->
+        <div id="day-end-modal" class="hidden">
+            <div class="modal-content">
+                <h2>🌙 一天結束了</h2>
+                <div class="day-summary">
+                    <p>今日收入：<span id="daily-income">0</span>💰</p>
+                    <p>服務客人：<span id="daily-customers">0</span>位</p>
+                    <p>評價變化：<span id="daily-reputation">0</span>⭐</p>
+                </div>
+                <button id="next-day-btn" class="action-btn">開始新的一天</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>
+

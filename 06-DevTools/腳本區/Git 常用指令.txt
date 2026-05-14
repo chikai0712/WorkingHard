@@ -1,0 +1,44 @@
+add origin <遠程庫> ：關聯一個遠端庫
+git remote rm origin ：刪除關聯遠程庫
+git remote -v ：顯示詳細的遠端庫資訊
+git init ：把這個目錄變成Git可以管理的倉庫
+git add <file>：把檔添加到倉庫，可反復多次使用，添加多個檔
+git commit -m "..." ：把文件提交到倉庫
+git rm <file> ：從版本庫中刪除檔，並且git commit
+git push -u origin <name> ：把本地庫的內容推送到遠端，-u參數會把本地的master分支和遠端的master分支關聯起來。
+git pull ：把最新的提交從origin/dev抓下來
+git clone <Git庫地址> ：克隆一個本地庫
+git status :隨時掌握工作區的狀態
+git diff :如果git status告訴你有檔被修改過，用git diff可以查看修改內容。
+git log ：命令顯示從最近到最遠的提交日誌
+git log --graph --pretty=oneline --abbrev-commit ：看到分支合併圖加上--graph，嫌輸出資訊太多，加上--pretty=oneline參數。
+git reflog ：記錄每一次命令，要重返未來，用git reflog查看命令歷史
+git reset --hard HEAD^ ：回退到上一個版本，HEAD指向的版本就是當前版本
+git reset --hard HEAD^^ ：把當前版本回退到上上一個版本
+git reset --hard 3628164 ：指定回到commit id為3628164的版本
+git checkout -- file ：丟棄工作區的修改，回到最近一次git commit或git add時的狀態；也可用於把誤刪的檔案修復到最新版本，但會丟失最近一次提交後修改的內容。
+git reset HEAD file ：把暫存區的修改撤銷掉（unstage），重新放回工作區，用HEAD時，表示最新的版本。
+git checkout -b <name> ：創建並切換到此分支
+git branch ：命令查看當前分支
+git merge <name> ：合併指定分支到當前分支
+git merge --no-ff -m "merge with no-ff" <name> ：用普通模式合併，合併後的歷史有分支，能看出來曾經做過合併，而fast forward合併就看不出來曾經做過合併。
+git branch -d <name> ：刪除分支，git branch -D <name>強行刪除一個沒有被合併過的分支
+git stash :把當前工作現場“儲藏”起來，等以後恢復現場後繼續工作
+git stash list ：查看被儲藏起來工作現場的狀態
+git stash pop ：恢復工作現場的同時把stash內容也刪了
+git tag <tagname> ：用於新建一個標籤，默認為HEAD，也可以指定一個commit id。
+git tag -a <tagname> -m "..." ：指定標籤資訊，-a指定標籤名，-m指定說明文字
+git tag -s <tagname> -m "..." ：-s用PGP簽名一個標籤。
+git tag ：可以查看所有標籤，標籤不是按時間順序列出，而是按字母排序的。
+git show <tagname> ：查看標籤信息
+git tag -d <tagname> ：刪除標籤，創建的標籤不會自動推送到遠程。打錯的標籤可以在本地安全刪除。
+git push origin <tagname> ：推送某個標籤到遠程
+git push origin :refs/tags/<tagname> ：可以刪除一個遠端標籤，需先刪除本地標籤。
+
+git更新單個文件：
+git fetch origin <name> 
+git checkout origin/<name> <file_path>
+
+從本地推送分支，使用git push origin branch-name，如果推送失敗，先用git pull抓取遠程的新提交；
+如果git pull提示“no tracking information”，則說明本地分支和遠端分支的連結關係沒有創建，用命令git branch --set-upstream branch-name origin/branch-name。
+

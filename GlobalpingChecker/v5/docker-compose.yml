@@ -1,0 +1,81 @@
+# GlobalpingChecker V5 - Docker Compose
+
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: globalping_v5_postgres
+    environment:
+      POSTGRES_USER: globalping
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-globalping_v5_password}
+      POSTGRES_DB: globalping_v5_db
+      TZ: Asia/Taipei
+      PGTZ: Asia/Taipei
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5433:5432"   # 改用 5433 避免與 v4.1 衝突
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U globalping -d globalping_v5_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  web:
+    build: .
+    container_name: globalping_v5_web
+    environment:
+      DATABASE_URL: postgresql://globalping:${POSTGRES_PASSWORD:-globalping_v5_password}@postgres:5432/globalping_v5_db
+      GLOBALPING_TOKEN: ${GLOBALPING_TOKEN}
+      CHECK_INTERVAL_MINUTES: ${CHECK_INTERVAL_MINUTES:-90}
+      ABNORMAL_CHECK_HOUR: ${ABNORMAL_CHECK_HOUR:-1}
+      NORMAL_CHECK_HOUR: ${NORMAL_CHECK_HOUR:-9}
+      MAX_ITERATIONS: ${MAX_ITERATIONS:-10}
+      NORMAL_ZONE_RESET_HOUR: ${NORMAL_ZONE_RESET_HOUR:-0}
+      DOMAINS_FILE: /app/domains.txt
+      # 目標國家開關
+      ENABLE_INDONESIA: ${ENABLE_INDONESIA:-true}
+      ENABLE_VIETNAM: ${ENABLE_VIETNAM:-false}
+      ENABLE_THAILAND: ${ENABLE_THAILAND:-false}
+      ENABLE_MALAYSIA: ${ENABLE_MALAYSIA:-false}
+      ENABLE_PHILIPPINES: ${ENABLE_PHILIPPINES:-false}
+      ENABLE_SINGAPORE: ${ENABLE_SINGAPORE:-false}
+      # 節點池
+      NODE_POOL_TTL_HOURS: ${NODE_POOL_TTL_HOURS:-24}
+      NODE_POOL_REFRESH_HOUR: ${NODE_POOL_REFRESH_HOUR:-3}
+      NODES_PER_COUNTRY: ${NODES_PER_COUNTRY:-5}
+      # API 額度
+      API_QUOTA_WARNING_THRESHOLD: ${API_QUOTA_WARNING_THRESHOLD:-50}
+      API_QUOTA_WAIT_ON_ERROR: ${API_QUOTA_WAIT_ON_ERROR:-3600}
+      # Telegram
+      TELEGRAM_BOT_TOKEN: ${TELEGRAM_BOT_TOKEN:-}
+      TELEGRAM_CHAT_ID: ${TELEGRAM_CHAT_ID:-}
+      TELEGRAM_NOTIFY_ON_ZONE_CHANGE: ${TELEGRAM_NOTIFY_ON_ZONE_CHANGE:-true}
+      TELEGRAM_NOTIFY_ON_API_ERROR: ${TELEGRAM_NOTIFY_ON_API_ERROR:-true}
+      # Web
+      HOST: 0.0.0.0
+      PORT: 8000
+      TZ: Asia/Taipei
+    volumes:
+      - ./domains.txt:/app/domains.txt:ro
+      - ./blocked_ips.txt:/app/blocked_ips.txt:ro
+      - ./templates:/app/templates:ro
+      - ./static:/app/static:ro
+    ports:
+      - "8001:8000"   # 本機 port 8001，避免與其他服務衝突
+    depends_on:
+      postgres:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/api/stats"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+
+networks:
+  default:
+    name: globalping_v5_network

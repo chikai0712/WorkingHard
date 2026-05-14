@@ -1,0 +1,174 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: 'Globalping 域名檢測系統 - AWS 部署'
+
+Parameters:
+  GlobalpingToken:
+    Type: String
+    Description: 'Globalping API Token (可選，留空使用免費配額)'
+    Default: ''
+    NoEcho: true
+  
+  NotificationEmail:
+    Type: String
+    Description: '接收檢測報告的 Email 地址'
+    Default: ''
+  
+  ScheduleExpression:
+    Type: String
+    Description: '執行排程 (Cron 表達式)'
+    Default: 'cron(0 2 * * ? *)'  # 每天凌晨 2 點 (UTC)
+
+Resources:
+  # S3 Bucket - 存儲域名列表和檢測結果
+  GlobalpingBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Sub 'globalping-checker-${AWS::AccountId}'
+      VersioningConfiguration:
+        Status: Enabled
+      LifecycleConfiguration:
+        Rules:
+          - Id: DeleteOldResults
+            Status: Enabled
+            ExpirationInDays: 90
+            Prefix: results/
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: true
+        BlockPublicPolicy: true
+        IgnorePublicAcls: true
+        RestrictPublicBuckets: true
+      Tags:
+        - Key: Project
+          Value: GlobalpingChecker
+
+  # SNS Topic - 通知
+  NotificationTopic:
+    Type: AWS::SNS::Topic
+    Properties:
+      TopicName: GlobalpingCheckerNotifications
+      DisplayName: 'Globalping 檢測通知'
+      Subscription:
+        - !If
+          - HasEmail
+          - Endpoint: !Ref NotificationEmail
+            Protocol: email
+          - !Ref AWS::NoValue
+
+  # IAM Role for Lambda
+  LambdaExecutionRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: GlobalpingCheckerLambdaRole
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+            Action: sts:AssumeRole
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+      Policies:
+        - PolicyName: S3Access
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action:
+                  - s3:GetObject
+                  - s3:PutObject
+                  - s3:ListBucket
+                Resource:
+                  - !GetAtt GlobalpingBucket.Arn
+                  - !Sub '${GlobalpingBucket.Arn}/*'
+        - PolicyName: SNSPublish
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action:
+                  - sns:Publish
+                Resource: !Ref NotificationTopic
+
+  # Lambda Function
+  GlobalpingCheckerFunction:
+    Type: AWS::Lambda::Function
+    Properties:
+      FunctionName: GlobalpingChecker
+      Runtime: python3.11
+      Handler: lambda_function.lambda_handler
+      Role: !GetAtt LambdaExecutionRole.Arn
+      Timeout: 900  # 15 分鐘
+      MemorySize: 512
+      Environment:
+        Variables:
+          S3_BUCKET_NAME: !Ref GlobalpingBucket
+          DOMAINS_S3_KEY: 'domains.txt'
+          SNS_TOPIC_ARN: !Ref NotificationTopic
+          GLOBALPING_TOKEN: !Ref GlobalpingToken
+      Code:
+        ZipFile: |
+          # Placeholder - 需要上傳實際代碼
+          def lambda_handler(event, context):
+              return {'statusCode': 200, 'body': 'Please upload actual code'}
+      Tags:
+        - Key: Project
+          Value: GlobalpingChecker
+
+  # EventBridge Rule - 定時觸發
+  ScheduledRule:
+    Type: AWS::Events::Rule
+    Properties:
+      Name: GlobalpingCheckerSchedule
+      Description: '定時執行 Globalping 域名檢測'
+      ScheduleExpression: !Ref ScheduleExpression
+      State: ENABLED
+      Targets:
+        - Arn: !GetAtt GlobalpingCheckerFunction.Arn
+          Id: GlobalpingCheckerTarget
+
+  # Lambda Permission for EventBridge
+  LambdaInvokePermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      FunctionName: !Ref GlobalpingCheckerFunction
+      Action: lambda:InvokeFunction
+      Principal: events.amazonaws.com
+      SourceArn: !GetAtt ScheduledRule.Arn
+
+  # CloudWatch Log Group
+  LambdaLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub '/aws/lambda/${GlobalpingCheckerFunction}'
+      RetentionInDays: 30
+
+Conditions:
+  HasEmail: !Not [!Equals [!Ref NotificationEmail, '']]
+
+Outputs:
+  BucketName:
+    Description: 'S3 Bucket 名稱'
+    Value: !Ref GlobalpingBucket
+    Export:
+      Name: !Sub '${AWS::StackName}-BucketName'
+  
+  LambdaFunctionArn:
+    Description: 'Lambda 函數 ARN'
+    Value: !GetAtt GlobalpingCheckerFunction.Arn
+    Export:
+      Name: !Sub '${AWS::StackName}-LambdaArn'
+  
+  SNSTopicArn:
+    Description: 'SNS Topic ARN'
+    Value: !Ref NotificationTopic
+    Export:
+      Name: !Sub '${AWS::StackName}-SNSTopicArn'
+  
+  UploadDomainsCommand:
+    Description: '上傳域名列表的命令'
+    Value: !Sub 'aws s3 cp domains.txt s3://${GlobalpingBucket}/domains.txt'
+  
+  ViewResultsCommand:
+    Description: '查看結果的命令'
+    Value: !Sub 'aws s3 ls s3://${GlobalpingBucket}/results/ --recursive'

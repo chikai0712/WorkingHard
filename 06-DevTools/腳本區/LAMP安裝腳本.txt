@@ -1,0 +1,472 @@
+#!/bin/bash
+#Auth AnyISalIn
+#Version 0.01
+#On CentOS 6 
+#
+cat > /etc/yum.repos.d/ustc.repo << "EOF"
+# CentOS-Base.repo
+#
+# The mirror system uses the connecting IP address of the client and the
+# update status of each mirror to pick mirrors that are updated to and
+# geographically close to the client.  You should use this for CentOS updates
+# unless you are manually picking other mirrors.
+#
+# If the mirrorlist= does not work for you, as a fall back you can try the 
+# remarked out baseurl= line instead.
+#
+#
+  
+[base]
+name=CentOS-$releasever - Base - mirrors.ustc.edu.cn
+baseurl=http://mirrors.ustc.edu.cn/centos/$releasever/os/$basearch/
+#mirrorlist=http://mirrorlist.centos.org/?release=$releasever&arch=$basearch&repo=os
+gpgcheck=0
+gpgkey=http://mirrors.ustc.edu.cn/centos/RPM-GPG-KEY-CentOS-6
+  
+#released updates 
+[updates]
+name=CentOS-$releasever - Updates - mirrors.ustc.edu.cn
+baseurl=http://mirrors.ustc.edu.cn/centos/$releasever/updates/$basearch/
+#mirrorlist=http://mirrorlist.centos.org/?release=$releasever&arch=$basearch&repo=updates
+gpgcheck=0
+gpgkey=http://mirrors.ustc.edu.cn/centos/RPM-GPG-KEY-CentOS-6
+  
+#additional packages that may be useful
+[extras]
+name=CentOS-$releasever - Extras - mirrors.ustc.edu.cn
+baseurl=http://mirrors.ustc.edu.cn/centos/$releasever/extras/$basearch/
+#mirrorlist=http://mirrorlist.centos.org/?release=$releasever&arch=$basearch&repo=extras
+gpgcheck=0
+gpgkey=http://mirrors.ustc.edu.cn/centos/RPM-GPG-KEY-CentOS-6
+  
+#additional packages that extend functionality of existing packages
+[centosplus]
+name=CentOS-$releasever - Plus - mirrors.ustc.edu.cn
+baseurl=http://mirrors.ustc.edu.cn/centos/$releasever/centosplus/$basearch/
+#mirrorlist=http://mirrorlist.centos.org/?release=$releasever&arch=$basearch&repo=centosplus
+gpgcheck=0
+enabled=0
+gpgkey=http://mirrors.ustc.edu.cn/centos/RPM-GPG-KEY-CentOS-6
+ 
+[epel]
+name=Extra Packages for Enterprise Linux 6 - $basearch
+baseurl=http://mirrors.ustc.edu.cn/epel/6/$basearch
+#mirrorlist=https://mirrors.fedoraproject.org/metalink?repo=epel-6&arch=$basearch
+failovermethod=priority
+enabled=1
+gpgcheck=0
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-6
+  
+[epel-debuginfo]
+name=Extra Packages for Enterprise Linux 6 - $basearch - Debug
+baseurl=http://mirrors.ustc.edu.cn/epel/6/$basearch/debug
+#mirrorlist=https://mirrors.fedoraproject.org/metalink?repo=epel-debug-6&arch=$basearch
+failovermethod=priority
+enabled=0
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-6
+gpgcheck=0
+  
+[epel-source]
+name=Extra Packages for Enterprise Linux 6 - $basearch - Source
+baseurl=http://mirrors.ustc.edu.cn/epel/6/SRPMS
+#mirrorlist=https://mirrors.fedoraproject.org/metalink?repo=epel-source-6&arch=$basearch
+failovermethod=priority
+enabled=0
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-6
+gpgcheck=0
+  
+#contrib - packages by Centos Users
+[contrib]
+name=CentOS-$releasever - Contrib - mirrors.ustc.edu.cn
+baseurl=http://mirrors.ustc.edu.cn/centos/$releasever/contrib/$basearch/
+#mirrorlist=http://mirrorlist.centos.org/?release=$releasever&arch=$basearch&repo=contrib
+gpgcheck=0
+enabled=0
+gpgkey=http://mirrors.ustc.edu.cn/centos/RPM-GPG-KEY-CentOS-6
+EOF
+ 
+cat << EOF
+==============Thank Use LAMP Automaic Deploy Script======================================
+=========================================================================================
+=========================================================================================
+===============Powerd by AnyISalIn, QQ: 1449472454=======================================
+===================================================================Thank MagEdu=========
+EOF
+ 
+function help {
+ 
+cat << EOF
+apr      =====> Install apr
+apr-util =====> Install apr-util (depend on apr)
+httpd    =====> Install httpd (deepend on apr and apr-util)
+mariadb  =====> Install MariaDB
+php      =====> Install php(The module provides, Need MariaDB and Httpd)
+all      =====> Install All : apr --> apr-util --> httpd --> MariaDB --> php
+EOF
+}
+if $(yum repolist &> /dev/null); then 
+  echo "Please With, Some may want to install Pkgs"
+    yum groupinstall -y "Development Tools" "Server Platform Development" &> /dev/null
+  echo "Installed Complete"
+    if [ $? -gt 0 ]; then
+      echo "Install pkgs group failure"
+      exit 1
+    fi
+else 
+    echo "Your repository is not available"
+    exit 1
+fi
+ 
+ 
+function apr {
+    cat << EOF
+ 
+    ==================WILL INSTALL  APR==============================
+    |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+EOF
+    cd /usr/src/
+ 
+    if $(tar xf apr-1.4.6.tar.bz2); then
+        cd apr-1.4.6
+    else
+        echo "decompression apr is failure"
+        exit 2
+    fi
+ 
+    ./configure --prefix=/usr/local/apr &> /dev/null
+    if [ $? -eq 0 ]; then
+        make -j 4 &> /dev/null && make install &> /dev/null
+    else
+        echo "apr configure failure"
+        exit 2
+    fi
+ 
+    cat << EOF
+ 
+    ==================APR INSTALL COMPLETE=================================
+    |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+EOF
+}
+ 
+function apr-util {
+    cat << EOF
+ 
+    ==================WILL INSTALL  APR-UTILS==============================
+    |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+EOF
+ 
+    cd /usr/src
+ 
+    if $(tar xf apr-util-1.5.2.tar.bz2); then
+        cd apr-util-1.5.2
+    else
+        echo "decompression apr-util is failure"
+        exit 2
+    fi
+ 
+    ./configure --prefix=/usr/local/apr-util --with-apr=/usr/local/apr &> /dev/null
+    if [ $? -eq 0 ]; then
+        make -j 4 &> /dev/null && make install &> /dev/null
+    else
+        echo "apr-util configure failure"
+        exit 2
+    fi
+ 
+    cat << EOF
+ 
+    ==================APR-UTILS INSTALL COMPLETE==============================
+    ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+EOF
+}
+ 
+ 
+function httpd {
+    cat << EOF
+ 
+    ==================WILL INSTALL HTTPD======================================
+    ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+EOF
+    cd /usr/src
+    if $(tar xf httpd-2.4.9.tar.bz2); then
+        cd httpd-2.4.9
+    else
+        echo "decompression httpd is failure"
+        exit 2
+    fi
+ 
+    yum install pcre-devel -y &> /dev/null
+    ./configure --prefix=/usr/local/apache --sysconfdir=/etc/httpd24 --enable-so --enable-ssl --enable-cgi --enable-rewrite --with-zlib --with-pcre --with-apr=/usr/local/apr --with-apr-util=/usr/local/apr-util --enable-modules=most --enable-mpms-shared=all  &> /dev/null
+    if [ $? -eq 0 ]; then
+        make -j 4 &> /dev/null && make install &> /dev/null
+    else
+        echo "httpd configure failure"
+        exit 2
+    fi
+ 
+cat > /etc/init.d/httpd << "EOF"
+#!/bin/bash
+#
+# httpd        Startup script for the Apache HTTP Server
+#
+# chkconfig: - 85 15
+# description: Apache is a World Wide Web server.  It is used to serve \
+#        HTML files and CGI.
+# processname: httpd
+# config: /etc/httpd/conf/httpd.conf
+# config: /etc/sysconfig/httpd
+# pidfile: /var/run/httpd.pid
+ 
+# Source function library.
+. /etc/rc.d/init.d/functions
+ 
+if [ -f /etc/sysconfig/httpd ]; then
+        . /etc/sysconfig/httpd
+fi
+ 
+# Start httpd in the C locale by default.
+HTTPD_LANG=${HTTPD_LANG-"C"}
+ 
+# This will prevent initlog from swallowing up a pass-phrase prompt if
+# mod_ssl needs a pass-phrase from the user.
+INITLOG_ARGS=""
+ 
+# Set HTTPD=/usr/sbin/httpd.worker in /etc/sysconfig/httpd to use a server
+# with the thread-based "worker" MPM; BE WARNED that some modules may not
+# work correctly with a thread-based MPM; notably PHP will refuse to start.
+ 
+# Path to the apachectl script, server binary, and short-form for messages.
+apachectl=/usr/local/apache/bin/apachectl
+httpd=${HTTPD-/usr/local/apache/bin/httpd}
+prog=httpd
+pidfile=${PIDFILE-/usr/local/apache/logs/httpd.pid}
+lockfile=${LOCKFILE-/var/lock/subsys/httpd}
+RETVAL=0
+ 
+start() {
+        echo -n $"Starting $prog: "
+        LANG=$HTTPD_LANG daemon --pidfile=${pidfile} $httpd $OPTIONS
+        RETVAL=$?
+        echo
+        [ $RETVAL = 0 ] && touch ${lockfile}
+        return $RETVAL
+}
+ 
+stop() {
+  echo -n $"Stopping $prog: "
+  killproc -p ${pidfile} -d 10 $httpd
+  RETVAL=$?
+  echo
+  [ $RETVAL = 0 ] && rm -f ${lockfile} ${pidfile}
+}
+reload() {
+    echo -n $"Reloading $prog: "
+    if ! LANG=$HTTPD_LANG $httpd $OPTIONS -t >&/dev/null; then
+        RETVAL=$?
+        echo $"not reloading due to configuration syntax error"
+        failure $"not reloading $httpd due to configuration syntax error"
+    else
+        killproc -p ${pidfile} $httpd -HUP
+        RETVAL=$?
+    fi
+    echo
+}
+ 
+# See how we were called.
+case "$1" in
+  start)
+  start
+  ;;
+  stop)
+  stop
+  ;;
+  status)
+        status -p ${pidfile} $httpd
+  RETVAL=$?
+  ;;
+  restart)
+  stop
+  start
+  ;;
+  condrestart)
+  if [ -f ${pidfile} ] ; then
+    stop
+    start
+  fi
+  ;;
+  reload)
+        reload
+  ;;
+  graceful|help|configtest|fullstatus)
+  $apachectl $@
+  RETVAL=$?
+  ;;
+  *)
+  echo $"Usage: $prog {start|stop|restart|condrestart|reload|status|fullstatus|graceful|help|configtest}"
+  exit 1
+esac
+exit $RETVAL
+EOF
+ 
+    chmod a+x /etc/init.d/httpd
+    chkconfig --add httpd
+ 
+    service httpd start &> /dev/null
+    if [ $? -gt 0 ]; then
+      echo "Install some problems "
+      exit 2
+    fi
+ 
+cat << "EOF"
+ 
+    ==================HTTPD INSTALL COMPLETE==============================
+    ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+EOF
+}
+ 
+ 
+function mariadb {
+    cat << EOF
+ 
+    ==================WILL INSTALL MARIADB================================
+    ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+EOF
+ 
+    cd /usr/src
+ 
+    if $(tar xf mariadb-5.5.32-linux-x86_64.tar.gz); then
+        ln -sv  /usr/src/mariadb-5.5.32-linux-x86_64 /usr/local/mysql &> /dev/null
+    else
+        echo "decompression mariadb is failure"
+        exit 2
+    fi
+ 
+    cd /usr/local/mysql
+ 
+    if [ cat /etc/group | grep "mysql\>" &> /dev/null ]; then
+      echo "Group mysql is exists"
+    else
+      groupadd -g 3306 -r mysql
+    fi
+ 
+    if [[ ! $(id mysql &> /dev/null) ]]; then
+      useradd -r -u 3306 mysql -g mysql -s /sbin/nologin
+    else
+      echo "User mysql is exists"
+    fi
+ 
+    chown -R mysql.mysql  .
+    mkdir /mydata ; chown -R mysql.mysql $!
+ 
+    ./scripts/mysql_install_db --datadir=/mydata --user=mysql &> /dev/null
+ 
+    if [ $? -gt 0 ]; then
+      echo "initialize mysql_db is failure"
+      exit 1
+    fi
+ 
+    install support-files/mysql.server /etc/rc.d/init.d/mysqld || echo "Create start script file failure" exit 1
+    chkconfig --add mysqld || exit 1
+    install support-files/my-large.cnf /etc/my.cnf || $( echo "Create conf file failure" exit 1 )
+    sed -i '41adatadir = /mydata' /etc/my.cnf || $( echo "edit config failure" && exit 1 )
+    sed -i '42ainnodb_file_per_table = on ' /etc/my.cnf || $( echo "edit config failure" && exit 1 )
+    sed -i '43askip_name_resolve = on ' /etc/my.cnf || $( echo "edit config failure" && exit 1 )
+ 
+    service mysqld start &> /dev/null || $(echo "start mysqld failure" && exit 1)
+    service mysqld start &> /dev/null
+ 
+    cat << EOF
+ 
+    ==================MARIADB INSTALLE COMPLETE===========================
+    ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+EOF
+ 
+}
+ 
+ 
+function php {
+    cat << EOF
+ 
+    ==================WILL INSTALL PHP===========================
+    ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+EOF
+ 
+    cd /usr/src
+ 
+    if $(tar xf php-5.4.19.tar.bz2); then
+      cd php-5.4.19
+ 
+    else
+      echo "decompression is failure"
+    fi
+ 
+    echo "install some dep pkgs" && yum -y install bzip2-devel libmcrypt-devel libxml2-devel &> /dev/null
+    ./configure --prefix=/usr/local/php --with-mysql=/usr/local/mysql --with-openssl --with-mysqli=/usr/local/mysql/bin/mysql_config --enable-mbstring --with-freetype-dir --with-jpeg-dir --with-png-dir --with-zlib --with-libxml-dir=/usr --enable-xml  --enable-sockets --with-apxs2=/usr/local/apache/bin/apxs --with-mcrypt  --with-config-file-path=/etc --with-config-file-scan-dir=/etc/php.d --with-bz2  --enable-maintainer-zts &> /dev/null
+ 
+    if [ $? -eq 0 ]; then
+      make -j4 &> /dev/null && make install &> /dev/null
+    else
+      echo "configure is failure" 
+      exit 1
+    fi
+ 
+    install php.ini-production /etc/php.ini
+ 
+    sed -i '378aAddType application/x-httpd-php .php' /etc/httpd24/httpd.conf
+    sed -i '379aAddtype application/x-httpd-php-source .phps' /etc/httpd24/httpd.conf
+    sed -i 's/DirectoryIndex.*index.*/DirectoryIndex index.php index.html/g' /etc/httpd24/httpd.conf
+ 
+    cat >> /usr/local/apache/htdocs/index.php << "EOF"
+    <?php
+      $conn = mysql_connect('127.0.0.1','root','');
+      if ($conn)
+        echo "Sucess";
+      else
+        echo "Failure";
+      mysql_close();
+      phpinfo();
+    ?>
+ 
+EOF
+ 
+    echo "Enter Your IP Test"
+     
+    cat << EOF
+    ==================PHP INSTALLED COMPLETE===========================
+    ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+EOF
+}
+ 
+ 
+while true ; do 
+read -p "What do you need to install? (h shows help) ： " pro
+case $pro in 
+  apr)
+    apr
+    ;;
+  apr-util)
+    apr-util
+    ;;
+  httpd)
+    httpd
+    ;;
+  mariadb)
+    mariadb
+    ;;
+  php)
+    php
+    ;;
+  all)
+    apr
+    apr-util
+    httpd
+    mariadb
+    php
+    ;;
+  quit)
+    break
+    ;;
+  *)
+    help
+    ;;
+esac
+done

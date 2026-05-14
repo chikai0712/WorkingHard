@@ -1,0 +1,592 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Comic Sans MS', 'Arial Rounded MT Bold', cursive;
+    background: linear-gradient(135deg, #FFE5EC 0%, #FFC4D6 100%);
+    overflow: hidden;
+    user-select: none;
+}
+
+#game-container {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* 頂部狀態欄 */
+#top-bar {
+    background: linear-gradient(135deg, #FF69B4 0%, #FF1493 100%);
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-around;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.stat {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(255,255,255,0.3);
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+.icon {
+    font-size: 28px;
+}
+
+/* 主遊戲區域 */
+#game-area {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 250px 1fr 200px;
+    gap: 20px;
+    padding: 20px;
+    overflow: hidden;
+}
+
+/* 客人排隊區 */
+#customer-queue {
+    background: rgba(255,255,255,0.9);
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    overflow-y: auto;
+}
+
+#customer-queue h3 {
+    color: #FF69B4;
+    margin-bottom: 15px;
+    font-size: 20px;
+}
+
+.customer-card {
+    background: linear-gradient(135deg, #FFF9E6 0%, #FFE5B4 100%);
+    border-radius: 15px;
+    padding: 15px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: all 0.3s;
+    border: 3px solid transparent;
+}
+
+.customer-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(255,105,180,0.3);
+    border-color: #FF69B4;
+}
+
+.customer-card.selected {
+    border-color: #FF1493;
+    background: linear-gradient(135deg, #FFE5EC 0%, #FFC4D6 100%);
+}
+
+.customer-avatar {
+    font-size: 40px;
+    text-align: center;
+    margin-bottom: 10px;
+    animation: customerWait 2s ease-in-out infinite;
+}
+
+@keyframes customerWait {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(-3px); }
+}
+
+.customer-card.selected .customer-avatar {
+    animation: customerExcited 0.5s ease-in-out infinite;
+}
+
+@keyframes customerExcited {
+    0%, 100% { transform: scale(1) rotate(0deg); }
+    25% { transform: scale(1.1) rotate(-5deg); }
+    75% { transform: scale(1.1) rotate(5deg); }
+}
+
+.customer-name {
+    font-size: 16px;
+    font-weight: bold;
+    color: #FF1493;
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+.customer-order {
+    font-size: 12px;
+    color: #666;
+    margin: 5px 0;
+}
+
+.patience-bar {
+    background: #ddd;
+    height: 8px;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-top: 10px;
+}
+
+.patience-fill {
+    background: linear-gradient(90deg, #4CAF50 0%, #8BC34A 100%);
+    height: 100%;
+    transition: width 1s linear;
+}
+
+.patience-fill.warning {
+    background: linear-gradient(90deg, #FFC107 0%, #FF9800 100%);
+}
+
+.patience-fill.danger {
+    background: linear-gradient(90deg, #F44336 0%, #E91E63 100%);
+}
+
+/* 製作區 */
+#cooking-area {
+    background: rgba(255,255,255,0.9);
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+/* 角色走動區域 */
+#character-stage {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    right: 20px;
+    height: 120px;
+    pointer-events: none;
+    z-index: 10;
+}
+
+.walking-character {
+    position: absolute;
+    font-size: 60px;
+    transition: left 2s linear, transform 0.3s;
+    animation: walk 0.6s steps(2) infinite;
+    filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.3));
+}
+
+.walking-character.flip {
+    transform: scaleX(-1);
+}
+
+@keyframes walk {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+}
+
+.walking-character.flip {
+    animation: walkFlip 0.6s steps(2) infinite;
+}
+
+@keyframes walkFlip {
+    0%, 100% { transform: scaleX(-1) translateY(0); }
+    50% { transform: scaleX(-1) translateY(-5px); }
+}
+
+/* 角色表情變化 */
+.walking-character.happy {
+    animation: walkHappy 0.6s steps(2) infinite;
+}
+
+@keyframes walkHappy {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-8px) scale(1.1); }
+}
+
+#cooking-area h3 {
+    color: #FF69B4;
+    margin-bottom: 15px;
+    font-size: 24px;
+}
+
+#current-order {
+    background: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%);
+    border-radius: 15px;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+.order-card {
+    font-size: 14px;
+    color: #1976D2;
+}
+
+.order-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin: 5px 0;
+}
+
+/* 披薩製作台 */
+#pizza-station {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.pizza-base {
+    background: #8B4513;
+    border-radius: 20px;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 300px;
+}
+
+#pizza-canvas {
+    width: 250px;
+    height: 250px;
+    background: #FFE4B5;
+    border-radius: 50%;
+    position: relative;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    border: 5px solid #DEB887;
+}
+
+.topping {
+    position: absolute;
+    font-size: 30px;
+    animation: placeTopping 0.3s ease-out;
+}
+
+@keyframes placeTopping {
+    0% {
+        transform: scale(0) rotate(0deg);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.2) rotate(180deg);
+    }
+    100% {
+        transform: scale(1) rotate(360deg);
+        opacity: 1;
+    }
+}
+
+/* 配料選擇 */
+#toppings-bar {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 10px;
+}
+
+.topping-btn {
+    background: linear-gradient(135deg, #FFF9E6 0%, #FFE5B4 100%);
+    border: 3px solid #FFD700;
+    border-radius: 15px;
+    padding: 15px 10px;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+.topping-btn:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(255,215,0,0.5);
+    border-color: #FFA500;
+}
+
+.topping-btn:active {
+    transform: translateY(0);
+}
+
+.topping-btn.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.topping-icon {
+    font-size: 32px;
+}
+
+.topping-btn span:last-child {
+    font-size: 12px;
+    color: #8B4513;
+    font-weight: bold;
+}
+
+/* 操作按鈕 */
+#action-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+}
+
+.action-btn {
+    background: linear-gradient(135deg, #4CAF50 0%, #8BC34A 100%);
+    border: none;
+    border-radius: 15px;
+    padding: 15px;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.action-btn:hover:not(:disabled) {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+}
+
+.action-btn:active:not(:disabled) {
+    transform: translateY(0);
+}
+
+.action-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+#cook-btn {
+    background: linear-gradient(135deg, #FF6B6B 0%, #FF8E53 100%);
+}
+
+#serve-btn {
+    background: linear-gradient(135deg, #4ECDC4 0%, #44A08D 100%);
+}
+
+#trash-btn {
+    background: linear-gradient(135deg, #95A5A6 0%, #7F8C8D 100%);
+}
+
+/* 角色區 */
+#character-area {
+    background: rgba(255,255,255,0.9);
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.character {
+    background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%);
+    border-radius: 15px;
+    padding: 15px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s;
+    border: 3px solid transparent;
+}
+
+.character:hover:not(.locked) {
+    transform: scale(1.05);
+    border-color: #4CAF50;
+}
+
+.character.active {
+    border-color: #FF1493;
+    background: linear-gradient(135deg, #FFE5EC 0%, #FFC4D6 100%);
+}
+
+.character.locked {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.character-avatar {
+    font-size: 50px;
+    margin-bottom: 10px;
+    display: inline-block;
+    animation: characterIdle 3s ease-in-out infinite;
+}
+
+@keyframes characterIdle {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-5px) rotate(3deg); }
+}
+
+.character.active .character-avatar {
+    animation: characterActive 1s ease-in-out infinite;
+}
+
+@keyframes characterActive {
+    0%, 100% { transform: scale(1) rotate(0deg); }
+    25% { transform: scale(1.1) rotate(-10deg); }
+    75% { transform: scale(1.1) rotate(10deg); }
+}
+
+.character-name {
+    font-size: 14px;
+    font-weight: bold;
+    color: #FF1493;
+    margin-bottom: 5px;
+}
+
+.character-skill {
+    font-size: 11px;
+    color: #666;
+}
+
+/* 烤箱動畫 */
+#oven-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.oven-container {
+    background: white;
+    border-radius: 30px;
+    padding: 50px;
+    text-align: center;
+}
+
+.oven {
+    font-size: 100px;
+    animation: cooking 0.5s infinite;
+}
+
+@keyframes cooking {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+}
+
+.cooking-text {
+    font-size: 24px;
+    font-weight: bold;
+    color: #FF6B6B;
+    margin: 20px 0;
+}
+
+.progress-bar {
+    width: 300px;
+    height: 20px;
+    background: #ddd;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #FF6B6B 0%, #FF8E53 100%);
+    width: 0%;
+    transition: width 0.1s linear;
+}
+
+/* 結果彈窗 */
+#result-modal, #day-end-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: white;
+    border-radius: 30px;
+    padding: 50px;
+    text-align: center;
+    max-width: 500px;
+    animation: modalAppear 0.5s ease-out;
+}
+
+@keyframes modalAppear {
+    0% {
+        transform: scale(0.5);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+#result-title {
+    font-size: 36px;
+    color: #FF1493;
+    margin-bottom: 20px;
+}
+
+#result-stars {
+    font-size: 50px;
+    margin: 20px 0;
+}
+
+#result-message {
+    font-size: 20px;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+#result-reward {
+    font-size: 28px;
+    font-weight: bold;
+    color: #4CAF50;
+    margin-bottom: 30px;
+}
+
+.day-summary {
+    background: #F5F5F5;
+    border-radius: 15px;
+    padding: 20px;
+    margin: 20px 0;
+}
+
+.day-summary p {
+    font-size: 18px;
+    margin: 10px 0;
+    color: #333;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* 響應式設計 */
+@media (max-width: 1200px) {
+    #game-area {
+        grid-template-columns: 200px 1fr 180px;
+    }
+}
+
+@media (max-width: 768px) {
+    #game-area {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto 1fr auto;
+    }
+    
+    #customer-queue, #character-area {
+        max-height: 200px;
+    }
+    
+    #toppings-bar {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+

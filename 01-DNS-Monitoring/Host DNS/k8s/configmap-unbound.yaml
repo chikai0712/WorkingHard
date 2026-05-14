@@ -1,0 +1,102 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: unbound-config
+  namespace: dns
+  labels:
+    app: unbound
+    component: resolver
+data:
+  unbound.conf: |
+    # ============================================
+    # Unbound Configuration for Recursive DNS Resolver
+    # Optimized for Kubernetes deployment with RFC 8767 support
+    # ============================================
+
+    server:
+        # Network Interface & Port
+        interface: 127.0.0.1
+        port: 5353
+        proxy-protocol-port: 5353
+        
+        # Concurrency & Performance
+        num-threads: 4
+        msg-cache-slabs: 4
+        rrset-cache-slabs: 4
+        infra-cache-slabs: 4
+        key-cache-slabs: 4
+        so-rcvbuf: 4m
+        so-sndbuf: 4m
+        
+        # RFC 8767 - Serving Stale (Fast Recovery)
+        serve-expired: yes
+        serve-expired-ttl: 86400
+        serve-expired-client-timeout: 1800
+        serve-expired-reply-ttl: 30
+        serve-expired-client-only: yes
+        
+        # Cache Configuration
+        msg-cache-size: 100m
+        rrset-cache-size: 200m
+        cache-max-negative-ttl: 10
+        
+        # Prefetching
+        prefetch: yes
+        prefetch-key: yes
+        
+        # DNSSEC Validation
+        auto-trust-anchor-file: "/etc/unbound/root.key"
+        harden-glue: yes
+        harden-dnssec-stripped: yes
+        harden-below-nxdomain: yes
+        harden-referral-path: yes
+        use-caps-for-id: yes
+        
+        # Privacy & Security
+        hide-version: yes
+        hide-identity: yes
+        ratelimit: 1000
+        ratelimit-factor: 0
+        
+        # DNSTAP Logging
+        dnstap:
+            dnstap-enable: yes
+            dnstap-socket-path: "/var/run/dnstap/dnstap.sock"
+            dnstap-log-client-query-messages: yes
+            dnstap-log-client-response-messages: yes
+            dnstap-log-forwarder-query-messages: yes
+            dnstap-log-forwarder-response-messages: yes
+        
+        # Forwarding & Upstream
+        root-hints: "/etc/unbound/root.hints"
+        
+        # Access Control
+        access-control: 127.0.0.1/32 allow
+        access-control: ::1/128 allow
+        
+        # Performance Tuning
+        edns-buffer-size: 1232
+        max-udp-size: 1232
+        tcp-upstream: yes
+        
+        # Monitoring & Statistics
+        statistics-interval: 0
+        statistics-cumulative: no
+        extended-statistics: yes
+        control-interface: 127.0.0.1
+        control-port: 8953
+        
+        # Logging
+        verbosity: 1
+        log-servfail: yes
+        
+        # Resource Limits
+        num-queries-per-thread: 4096
+        outgoing-range: 4096
+        outgoing-num-tcp: 10
+        incoming-num-tcp: 10
+        
+        # Timeouts
+        timeout: 2
+        tcp-timeout: 2
+

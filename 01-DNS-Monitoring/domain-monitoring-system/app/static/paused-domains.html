@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>暫停域名列表 - Domain Monitoring System</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header h1 {
+            color: #2d3748;
+            font-size: 28px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .back-btn {
+            background: #667eea;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .back-btn:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .check-btn {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .check-btn:hover {
+            background: linear-gradient(135deg, #059669, #047857);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(16, 185, 129, 0.4);
+        }
+
+        .check-btn:disabled {
+            background: #9ca3af;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .stats-card {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            margin-bottom: 30px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 10px;
+            color: white;
+        }
+
+        .stat-value {
+            font-size: 36px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .domains-card {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .domains-card h2 {
+            color: #2d3748;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        .domain-item {
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 15px;
+            transition: all 0.3s;
+        }
+
+        .domain-item:hover {
+            border-color: #667eea;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .domain-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .domain-name {
+            font-size: 20px;
+            font-weight: 600;
+            color: #2d3748;
+        }
+
+        .time-badge {
+            background: #fbbf24;
+            color: #78350f;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .resume-btn {
+            background: #10b981;
+            color: white;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .resume-btn:hover {
+            background: #059669;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
+        }
+
+        .resume-btn:disabled {
+            background: #9ca3af;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .domain-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .info-item {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .info-label {
+            font-size: 12px;
+            color: #718096;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        .info-value {
+            font-size: 14px;
+            color: #2d3748;
+        }
+
+        .reason-badge {
+            background: #fee2e2;
+            color: #991b1b;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 13px;
+            display: inline-block;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #718096;
+            font-size: 16px;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        .empty-state-icon {
+            font-size: 64px;
+            margin-bottom: 20px;
+        }
+
+        .empty-state-text {
+            color: #718096;
+            font-size: 18px;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .domain-item {
+            animation: fadeIn 0.5s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>
+                ⏸️ 暫停域名列表
+            </h1>
+            <div style="display: flex; gap: 10px;">
+                <button class="check-btn" onclick="checkNoRecordDomains()">
+                    🔍 立即檢測無記錄域名
+                </button>
+                <a href="/" class="back-btn">← 返回監控面板</a>
+            </div>
+        </div>
+
+        <div class="stats-card">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-value" id="totalPaused">-</div>
+                    <div class="stat-label">暫停中的域名</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="avgRemaining">-</div>
+                    <div class="stat-label">平均剩餘時間（小時）</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="domains-card">
+            <h2>暫停域名詳情</h2>
+            <div id="domainsContainer">
+                <div class="loading">載入中...</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE = window.location.origin + '/api';
+
+        async function loadPausedDomains() {
+            try {
+                const response = await fetch(`${API_BASE}/domains/paused`);
+                const data = await response.json();
+
+                // 更新統計
+                document.getElementById('totalPaused').textContent = data.total;
+                
+                if (data.total > 0) {
+                    const avgHours = Math.round(
+                        data.domains.reduce((sum, d) => sum + d.remaining_hours, 0) / data.total
+                    );
+                    document.getElementById('avgRemaining').textContent = avgHours;
+                } else {
+                    document.getElementById('avgRemaining').textContent = '0';
+                }
+
+                // 渲染域名列表
+                const container = document.getElementById('domainsContainer');
+                
+                if (data.total === 0) {
+                    container.innerHTML = `
+                        <div class="empty-state">
+                            <div class="empty-state-icon">✨</div>
+                            <div class="empty-state-text">目前沒有暫停的域名</div>
+                        </div>
+                    `;
+                    return;
+                }
+
+                container.innerHTML = data.domains.map(domain => `
+                    <div class="domain-item" data-domain-id="${domain.id}">
+                        <div class="domain-header">
+                            <div class="domain-name">${domain.domain}</div>
+                            <div style="display: flex; gap: 10px; align-items: center;">
+                                <div class="time-badge">⏱️ 剩餘 ${domain.remaining_hours} 小時</div>
+                                <button class="resume-btn" onclick="resumeDomain(${domain.id}, '${domain.domain}')">
+                                    ▶️ 立即恢復
+                                </button>
+                            </div>
+                        </div>
+                        <div class="domain-info">
+                            <div class="info-item">
+                                <div class="info-label">暫停原因</div>
+                                <div class="info-value">
+                                    <span class="reason-badge">${domain.pause_reason || '未知'}</span>
+                                </div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-label">暫停至</div>
+                                <div class="info-value">${formatDateTime(domain.paused_until)}</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-label">域名 ID</div>
+                                <div class="info-value">#${domain.id}</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-label">狀態</div>
+                                <div class="info-value">${domain.is_active ? '✅ 啟用' : '❌ 停用'}</div>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+
+            } catch (error) {
+                console.error('Error loading paused domains:', error);
+                document.getElementById('domainsContainer').innerHTML = 
+                    '<div class="loading">載入失敗，請重試</div>';
+            }
+        }
+
+        function formatDateTime(isoString) {
+            if (!isoString) return '-';
+            const date = new Date(isoString);
+            return date.toLocaleString('zh-TW', {
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+        }
+
+        async function resumeDomain(domainId, domainName) {
+            if (!confirm(`確定要立即恢復域名 "${domainName}" 的監控嗎？`)) {
+                return;
+            }
+
+            const btn = event.target;
+            btn.disabled = true;
+            btn.textContent = '恢復中...';
+
+            try {
+                const response = await fetch(`${API_BASE}/domains/${domainId}/resume`, {
+                    method: 'POST'
+                });
+
+                if (!response.ok) {
+                    throw new Error('恢復失敗');
+                }
+
+                const result = await response.json();
+                
+                // 顯示成功消息
+                alert(`✅ 域名 "${domainName}" 已成功恢復監控！`);
+                
+                // 重新加載列表
+                loadPausedDomains();
+
+            } catch (error) {
+                console.error('Error resuming domain:', error);
+                alert(`❌ 恢復失敗：${error.message}`);
+                btn.disabled = false;
+                btn.innerHTML = '▶️ 立即恢復';
+            }
+        }
+
+        async function checkNoRecordDomains() {
+            if (!confirm('確定要立即檢測所有域名並暫停無記錄的域名嗎？\n\n這將檢查所有啟用的域名，無法解析的域名會被暫停 24 小時。')) {
+                return;
+            }
+
+            const btn = event.target;
+            btn.disabled = true;
+            btn.innerHTML = '⏳ 檢測中...';
+
+            try {
+                const response = await fetch(`${API_BASE}/domains/check-no-record`, {
+                    method: 'POST'
+                });
+
+                if (!response.ok) {
+                    throw new Error('檢測失敗');
+                }
+
+                const result = await response.json();
+                
+                // 顯示結果
+                let message = `✅ 檢測完成！\n\n`;
+                message += `檢查了 ${result.checked} 個域名\n`;
+                message += `暫停了 ${result.paused} 個無記錄的域名\n`;
+                
+                if (result.paused > 0 && result.paused_domains) {
+                    message += `\n暫停的域名：\n`;
+                    result.paused_domains.forEach(d => {
+                        message += `- ${d.domain}\n`;
+                    });
+                }
+                
+                alert(message);
+                
+                // 重新加載列表
+                loadPausedDomains();
+
+            } catch (error) {
+                console.error('Error checking domains:', error);
+                alert(`❌ 檢測失敗：${error.message}`);
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = '🔍 立即檢測無記錄域名';
+            }
+        }
+
+        // 初始加載
+        loadPausedDomains();
+
+        // 每 30 秒自動刷新
+        setInterval(loadPausedDomains, 30000);
+    </script>
+</body>
+</html>
+

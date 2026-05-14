@@ -1,0 +1,57 @@
+#!/bin/bash
+ 
+declare -i cc_flag=0,c_flag=0,sh_flag=0
+ 
+function main {
+if [ $# -le 0 ];then
+  echo -e "\033[31mUsage: $0 <cpp_file_name | c_file_name | sh_file_name>\033[0m"
+  exit 1
+fi
+ 
+if [ -e $1 ];then
+  return 0
+fi
+ 
+# identify which template should be made accroding to the file suffix
+if echo $1 | egrep ".*\.cc|cpp\>" &> /dev/null; then
+  cc_flag=1
+elif echo $1 | egrep ".*\.c\>" &> /dev/null; then
+  c_flag=1
+elif echo $1 | grep ".*\.sh\>" &> /dev/null; then
+  sh_flag=1
+else
+  echo -e "\033[31mBad file! Not a C++_file or C_file or SH_file\033[0m";
+fi
+ 
+# accroding the flag to make template
+if [ $cc_flag -eq 1 ];then
+cat >> $1 <<EOF
+#include <iostream>
+using namespace std;
+ 
+int main(int argc, char *argv[])
+{
+    return 0;
+}
+EOF
+elif [ $c_flag -eq 1 ];then
+cat >> $1 << EOF
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+ 
+int main(int argc, char *argv[])
+{
+    return 0;
+}
+EOF
+elif [ $sh_flag -eq 1 ] ;then
+cat >> $1 << EOF
+#!/bin/bash
+# date : `date`
+EOF
+fi
+}
+ 
+main $*
+vim $1
