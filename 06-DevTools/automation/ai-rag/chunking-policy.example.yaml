@@ -1,0 +1,23 @@
+version: 1
+name: heading-based-default
+strategies:
+  - id: markdown-heading-chunks
+    source_type: document
+    split_on:
+      - "# "
+      - "## "
+      - "### "
+    target_chunk_size_chars: 1800
+    overlap_chars: 250
+    preserve_headings: true
+  - id: event-summary-record
+    source_type: event-summary
+    split_on:
+      - record
+    target_chunk_size_chars: 1200
+    overlap_chars: 0
+    preserve_headings: false
+policies:
+  require_metadata: true
+  reject_empty_chunks: true
+  reject_unclassified_sensitivity: true

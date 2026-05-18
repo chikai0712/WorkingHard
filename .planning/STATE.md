@@ -20,6 +20,9 @@ Read 03-Data-Analytics/Cloudflare-DNS-data/.planning/STATE.md and ROADMAP.md, th
 
 # XE-Rate-Scraper
 Read 03-Data-Analytics/XE-Rate-Scraper/.planning/STATE.md and ROADMAP.md, then tell me current progress.
+
+# DB-Automation
+Read 08-Database/DB-Automation/.planning/STATE.md and ROADMAP.md, then tell me current progress.
 ```
 
 ## 子專案索引
@@ -28,10 +31,11 @@ Read 03-Data-Analytics/XE-Rate-Scraper/.planning/STATE.md and ROADMAP.md, then t
 |------|------|------|-----------|----------|
 | **GlobalpingChecker V5** | `GlobalpingChecker/.planning/` | ⏸️ Paused | Phase 2 — 部署驗證 | 2026-03-19 |
 | **Cloud Deploy** | `02-Cloud-Deploy/.planning/` | 🔄 In progress | Phase 4 — EC2 實機部署驗證 | 2026-05-07 |
-| **Personal / Resume** | `07-Personal/Resume/` | ✅ Updated | 履歷分析與 MD 優化版 | 2026-05-08 |
+| **Personal / Resume** | `07-Personal/Resume/` | ✅ Updated | 履歷分析、AI 維運架構 README | 2026-05-16 |
 | **台指期監控系統** | `03-Data-Analytics/Stock_Analize/.planning/` | 🔄 In progress | Phase A — A-06b Windows 實機測試 | 2026-03-26 |
 | **Cloudflare DNS data** | `03-Data-Analytics/Cloudflare-DNS-data/.planning/` | 🔲 Pending | Phase 0 — 需求確認 | 2026-03-25 |
 | **XE-Rate-Scraper** | `03-Data-Analytics/XE-Rate-Scraper/.planning/` | ✅ Stable | Phase 1 完成，Phase 2 選配 | 2026-03 |
+| **DB-Automation** | `08-Database/DB-Automation/.planning/` | ⏸️ Paused | Phase 5 — DB AI Analysis + RAG Enablement | 2026-05-18 |
 
 ## 工作區層級進度
 
@@ -40,6 +44,27 @@ Read 03-Data-Analytics/XE-Rate-Scraper/.planning/STATE.md and ROADMAP.md, then t
 - [ ] **Phase 3**: 驗證與調整（根據實際使用回饋優化規則）
 
 ---
+
+### [2026-05-18 13:05] — 根目錄 README 改寫為中英雙語極簡首頁版
+- **Phase**: Phase 3 — 驗證與調整
+- **Status**: Complete
+- **Done**: 將根目錄 `README.md` 改寫為更適合作為 GitHub 首頁的中英雙語極簡版本，保留主架構圖、Workspace Mapping、Project Roles、Principles 與 Direction；並統一命名規則，將 `GlobalpingChecker` 視為 `01-DNS-Monitoring` 底下子模組，不再作為平行主類別。
+- **Next**: 若需要，可再延伸成雙語完整版 README、主管簡報首頁版，或補 root README 與 `00-README.md` 的定位分工說明。
+- **Blocker**: 無
+
+### [2026-05-18 12:40] — 盤點工作區維運自動化與 AIOps 架構成熟度
+- **Phase**: Phase 3 — 驗證與調整
+- **Status**: Complete
+- **Done**: 盤點 `01-DNS-Monitoring`、`02-Cloud-Deploy`、`06-DevTools`、`08-Database/DB-Automation`、`GlobalpingChecker`，確認工作區已具備跨交付層、監控層、資料層與治理層的維運自動化 skeleton，其中 `06-DevTools` + `08-Database/DB-Automation` 已明確納入 AIOps / AI-RAG / recommendation-only control-plane 設計；同時整理出目前仍偏 skeleton / 文件化、尚未形成 production-ready 閉環的缺口。
+- **Next**: 若要繼續，可將本次盤點收斂成單一「AIOps Platform Master Blueprint」，再補 capability matrix、target operating model、integration roadmap 與 KPI / maturity scorecard。
+- **Blocker**: 目前多數模組仍停留在 spec / template / local dry-run / scoped artifact 階段，尚未大規模接真實事件匯流排、CMDB/service catalog、ITSM、approval engine 與 production telemetry。
+
+### [2026-05-16 12:10] — 建立根目錄 README 並整理 AI 維運整合架構
+- **Phase**: Phase 3 — 驗證與調整
+- **Status**: Complete
+- **Done**: 依 AI 維運 / AIOps 討論內容建立根目錄 `README.md`，整理四層式架構說明、Mermaid 圖、MVP 導入順序、KPI 與履歷可用敘述，並補充 `.planning/ROADMAP.md` 任務紀錄。
+- **Next**: 若需要，可再延伸為簡報版、美化 Mermaid 版或 AWS/GCP/K8s 技術棧對應版。
+- **Blocker**: 無
 
 ### [2026-05-12 12:02] — 產出 SRE 履歷完整英文版
 - **Phase**: Personal / Resume — 履歷整理

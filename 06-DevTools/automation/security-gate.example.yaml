@@ -1,0 +1,26 @@
+gate_name: shared-security-gate
+scope:
+  - commit
+  - build
+  - deploy
+checks:
+  - name: secret_scanning
+    required: true
+    on_fail: block
+  - name: sast_scan
+    required: true
+    on_fail: hold_or_block
+  - name: dependency_or_filesystem_scan
+    required: true
+    on_fail: hold_or_block
+  - name: exception_validation
+    required: true
+    on_fail: block
+thresholds:
+  critical_vulnerabilities: block
+  high_vulnerabilities: hold
+  unknown_findings: hold
+exceptions:
+  require_ticket: true
+  require_owner: true
+  require_expiry: true

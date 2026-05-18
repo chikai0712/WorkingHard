@@ -16,6 +16,8 @@ SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 
 GITHUB_TEMPLATE="$SCRIPT_DIR/github-actions-example.yml"
 GITLAB_TEMPLATE="$SCRIPT_DIR/gitlab-ci-example.yml"
+JENKINS_TEMPLATE="$SCRIPT_DIR/Jenkinsfile.example"
+JENKINS_CONFIG="$SCRIPT_DIR/jenkins-pipeline.example.yaml"
 
 echo "[cicd] provider=$CI_PROVIDER pipeline=$PIPELINE_NAME env=$DEPLOY_ENV artifact=$ARTIFACT_PATH dry_run=$DRY_RUN"
 
@@ -28,6 +30,8 @@ echo "[cicd] Step 5: publish artifact metadata"
 echo "[cicd] Available templates:"
 echo "- GitHub Actions: $GITHUB_TEMPLATE"
 echo "- GitLab CI: $GITLAB_TEMPLATE"
+echo "- Jenkinsfile: $JENKINS_TEMPLATE"
+echo "- Jenkins config: $JENKINS_CONFIG"
 
 if [[ "$DRY_RUN" == "true" ]]; then
   echo "[cicd] Dry run only. No remote CI provider invoked."

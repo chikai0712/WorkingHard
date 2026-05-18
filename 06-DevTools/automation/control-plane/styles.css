@@ -1,0 +1,167 @@
+:root {
+  color-scheme: dark;
+  --bg: #0b1020;
+  --panel: #121934;
+  --panel-2: #182242;
+  --border: #2b3968;
+  --text: #e8ecff;
+  --muted: #9fb1e0;
+  --accent: #77a7ff;
+  --success: #4fd18b;
+  --warning: #f8c146;
+  --danger: #ff6b81;
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, sans-serif;
+  background: linear-gradient(180deg, #0b1020 0%, #0f1730 100%);
+  color: var(--text);
+}
+.layout {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  min-height: 100vh;
+}
+.sidebar {
+  border-right: 1px solid var(--border);
+  padding: 24px;
+  background: rgba(10, 15, 31, 0.92);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.content {
+  padding: 24px;
+  display: grid;
+  gap: 20px;
+}
+.card {
+  background: rgba(18, 25, 52, 0.92);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 20px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.22);
+}
+.hero {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  align-items: center;
+}
+.grid.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+.eyebrow {
+  margin: 0 0 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--accent);
+  font-size: 12px;
+}
+.muted { color: var(--muted); }
+.nav, .module-list, .action-list, .gate-grid, .stats, .recommendation-list, .history-list {
+  display: grid;
+  gap: 12px;
+}
+.nav button, .module-card, .action-btn {
+  width: 100%;
+  text-align: left;
+  border: 1px solid var(--border);
+  background: var(--panel-2);
+  color: var(--text);
+  border-radius: 14px;
+  padding: 14px;
+  cursor: pointer;
+}
+.nav button.active, .module-card.active {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px rgba(119, 167, 255, 0.35);
+}
+.module-card h4, .gate-card h4 {
+  margin: 0 0 8px;
+}
+.module-card p, .gate-card p, .action-btn p, .recommendation-panel p, .recommendation-list li {
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
+}
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+.badge {
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  border: 1px solid var(--border);
+  color: var(--text);
+}
+.badge.pass { background: rgba(79, 209, 139, 0.16); color: var(--success); }
+.badge.hold { background: rgba(248, 193, 70, 0.16); color: var(--warning); }
+.badge.block { background: rgba(255, 107, 129, 0.16); color: var(--danger); }
+.badge.info { background: rgba(119, 167, 255, 0.16); color: var(--accent); }
+.gate-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+.gate-card, .recommendation-panel, .history-item {
+  background: var(--panel-2);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 16px;
+}
+.stat {
+  background: var(--panel-2);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 14px;
+  min-width: 120px;
+}
+.stat strong {
+  display: block;
+  font-size: 24px;
+  margin-top: 4px;
+}
+.result-panel {
+  background: #0b1020;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 16px;
+  min-height: 220px;
+  overflow: auto;
+  white-space: pre-wrap;
+}
+.recommendation-meta {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin: 12px 0;
+}
+.recommendation-list {
+  margin: 12px 0 0;
+  padding-left: 18px;
+}
+.action-btn strong, .history-item strong { display: block; margin-bottom: 6px; }
+.history-item code { color: var(--accent); }
+.history-controls { display: flex; gap: 10px; flex-wrap: wrap; }
+.history-control, .history-clear-btn {
+  border: 1px solid var(--border);
+  background: var(--panel-2);
+  color: var(--text);
+  border-radius: 10px;
+  padding: 10px 12px;
+}
+.history-toggle { display: inline-flex; align-items: center; gap: 8px; color: var(--muted); }
+.history-compare-panel { margin-top: 12px; }
+.history-clear-btn { cursor: pointer; }
+@media (max-width: 1100px) {
+  .layout, .grid.two-col { grid-template-columns: 1fr; }
+  .sidebar { border-right: none; border-bottom: 1px solid var(--border); }
+  .gate-grid { grid-template-columns: 1fr; }
+  .hero { flex-direction: column; align-items: flex-start; }
+}

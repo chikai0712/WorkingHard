@@ -115,6 +115,19 @@ DNS/CDN、network device、CI provider、IaC backend 都使用 adapter 思維。
 5. 才進入 apply 或正式變更
 6. 變更後再做 verification / rollback decision
 
+## Shared Gate Framework
+
+跨專案的 health / source / security 檢測模型統一收斂在：
+- `06-DevTools/automation/SHARED-GATE-FRAMEWORK.md`
+- `06-DevTools/automation/health-gate.example.yaml`
+- `06-DevTools/automation/source-gate.example.yaml`
+- `06-DevTools/automation/security-gate.example.yaml`
+
+這些 shared gates 提供一致的：
+- pre-change / post-change gate 觀念
+- `pass / hold / block / rollback / fallback` 決策輸出
+- 對 CI/CD、release、IaC、backup、migration 等模組的統一治理語言
+
 ## RACI Model
 
 | Activity | Responsible | Accountable | Consulted | Informed |

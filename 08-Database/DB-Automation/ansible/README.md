@@ -40,6 +40,9 @@ ansible/
 ### Inventory 是拓樸與責任邊界
 `inventory` 不只是主機清單，也是實際環境的分層描述。dev / prod 分離、內外網 LB 分離，都是為了讓檢查結果能映射回真實責任範圍。
 
+### Check summary producer 是 AI 導入橋接層
+與其讓 AI 直接解讀大量 facts 或設備回應，先由 `generate_ansible_summary.py` 將 check-only 的結果摘要化，更容易與 recommendation contract、metadata filter 與審批邊界對齊。
+
 ### Check-only 先行，避免直接改網
 網路設備與 LB 變更風險高，因此這裡先以標準化欄位輸出、facts 收集與一致化檢查為主，再逐步往 compliance / drift remediation 推進。
 

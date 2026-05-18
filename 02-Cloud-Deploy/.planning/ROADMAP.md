@@ -104,6 +104,28 @@
   - 驗證方式：README 補上 practical templates、sequence flow 與架構原理。
   - 相關路徑：`02-Cloud-Deploy/automation/dns-cdn/`、`network/`、`security/`
 
+### Phase 8：Jenkins 串接自動化流程 skeleton 🔄
+**Goal**: 在既有 CI/CD skeleton 上補 Jenkins pipeline 可套用模板。
+
+- [x] 建立 Jenkinsfile / pipeline config 範本
+  - 驗證方式：存在 Jenkins pipeline 樣板，包含 checkout、lint/test/build、artifact、deploy gate 等階段。
+  - 相關路徑：`02-Cloud-Deploy/automation/cicd/`
+- [x] 建立 Jenkins parameter / credential / agent 使用說明
+  - 驗證方式：存在 Jenkins 參數、憑證邊界與 agent/container 使用說明。
+  - 相關路徑：`02-Cloud-Deploy/automation/cicd/README.md`
+- [x] 建立實務範例檔
+  - 驗證方式：存在 Jenkins 專用 example config 或 pipeline 對照檔。
+  - 相關路徑：`02-Cloud-Deploy/automation/cicd/`
+- [x] 補 Slack / Jira 通知 skeleton
+  - 驗證方式：Jenkins pipeline 與 README 包含 Slack/Jira notification hook、credential placeholder 與事件對照。
+  - 相關路徑：`02-Cloud-Deploy/automation/cicd/`
+- [x] 將 shared health / source / security gates 套入 CI 入口
+  - 驗證方式：GitHub workflow 與 Jenkinsfile 至少包含 source gate、security gate、post-deploy health gate 的對應階段或 job。
+  - 相關路徑：`.github/workflows/`、`02-Cloud-Deploy/automation/cicd/`
+- [x] 將 shared gates 套入 release / iac
+  - 驗證方式：`release` 與 `iac` 文件/範本至少包含 source gate、security gate、health gate 對應描述或欄位。
+  - 相關路徑：`02-Cloud-Deploy/automation/release/`、`automation/iac/`
+
 ## Progress
 
 | Phase | 完成 | 狀態 |
@@ -116,3 +138,4 @@
 | Phase 5 CI/CD + Release 實戰版 skeleton | 3/3 | ✅ Complete |
 | Phase 6 Terraform / IaC 實戰版 skeleton | 3/3 | ✅ Complete |
 | Phase 7 DNS/CDN + Network/Security 實戰版 skeleton | 3/3 | ✅ Complete |
+| Phase 8 Jenkins 串接自動化流程 skeleton | 3/3 | ✅ Complete |

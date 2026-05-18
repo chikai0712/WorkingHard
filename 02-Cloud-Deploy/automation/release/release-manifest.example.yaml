@@ -9,7 +9,19 @@ artifact:
 source:
   commit_sha: REPLACE_ME
   branch: main
+  source_gate:
+    lint_status: pass
+    test_status: pass
+    artifact_metadata_status: pass
 deployment:
   strategy: rolling
   target_env: dev
   rollback_to: previous-stable
+security_gate:
+  vulnerability_status: hold
+  exception_ticket: SEC-000
+  approval_required: true
+health_gate:
+  smoke_test_required: true
+  readiness_check_required: true
+  rollback_threshold: error_rate_gt_5_percent

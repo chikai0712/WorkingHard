@@ -1,0 +1,69 @@
+version: 1
+name: db-ai-rag-sources
+project: 08-Database/DB-Automation
+sources:
+  - id: db-backup-docs
+    module: backup-recovery
+    source_type: document
+    sensitivity: internal
+    ingestion_mode: heading-based
+    examples:
+      - backup-recovery/README.md
+      - backup-recovery/checklists/restore-drill-checklist.md
+      - backup-recovery/checklists/restore-drill-checklist.mysql.md
+      - backup-recovery/backup-metadata.mysql.example.json
+  - id: db-migration-docs
+    module: migration
+    source_type: document
+    sensitivity: internal
+    ingestion_mode: heading-based
+    examples:
+      - migration/README.md
+      - migration/rollback-guidelines.md
+      - migration/precheck.example.sql
+      - migration/postcheck.example.sql
+      - migration/precheck.mysql.example.sql
+      - migration/postcheck.mysql.example.sql
+      - migration/flyway.mysql.conf.example
+  - id: db-monitoring-docs
+    module: monitoring/k8s
+    source_type: document
+    sensitivity: internal
+    ingestion_mode: heading-based
+    examples:
+      - monitoring/k8s/README.md
+      - monitoring/k8s/helm/README.md
+  - id: db-ops-summaries
+    module: shared
+    source_type: event-summary
+    sensitivity: internal
+    ingestion_mode: record-based
+    examples:
+      - ai-rag/db-migration-summary.example.json
+      - ai-rag/db-migration-summary.mysql.example.json
+      - ai-rag/db-backup-summary.example.json
+      - ai-rag/db-backup-summary.mysql.example.json
+      - ai-rag/producer-artifacts/monitoring-summary.local.json
+      - ai-rag/producer-artifacts/ansible-summary.f5.local.json
+  - id: db-mysql-evidence
+    module: shared
+    source_type: validation-evidence
+    sensitivity: internal
+    ingestion_mode: record-based
+    examples:
+      - ai-rag/db-mysql-restore-evidence.example.json
+      - ai-rag/db-mysql-precheck-evidence.example.json
+      - ai-rag/db-mysql-postcheck-evidence.example.json
+  - id: db-monitoring-ansible-evidence
+    module: shared
+    source_type: validation-evidence
+    sensitivity: internal
+    ingestion_mode: record-based
+    examples:
+      - ai-rag/db-monitoring-evidence.example.json
+      - ai-rag/db-ansible-evidence.example.json
+policies:
+  require_sanitization: true
+  disallow_raw_production_dump: true
+  disallow_credentials: true
+  require_owner_tag: true

@@ -1,0 +1,9 @@
+title = "Project gitleaks config"
+
+[allowlist]
+description = "Allow example files and documentation placeholders"
+paths = [
+  '''06-DevTools/automation/''',
+  '''02-Cloud-Deploy/automation/''',
+  '''08-Database/DB-Automation/'''
+]

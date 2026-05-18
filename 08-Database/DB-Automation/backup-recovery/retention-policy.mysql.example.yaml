@@ -1,0 +1,12 @@
+policy_name: mysql-retention-example
+backup_classes:
+  logical_full:
+    retain_days: 14
+    min_copies: 2
+  binlog:
+    retain_days: 7
+    min_copies: 5
+verification:
+  checksum_required: true
+  restore_drill_frequency: weekly
+  binlog_chain_validation: true

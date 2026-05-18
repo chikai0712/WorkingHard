@@ -1,0 +1,6 @@
+rules:
+  - id: avoid-hardcoded-example-secrets
+    pattern: '(?i)(api[_-]?key|secret|token)\s*[:=]\s*["\'']?(replace_me|replace-me|example|dummy)'
+    message: Example placeholders are allowed, but real secrets must not be committed.
+    severity: INFO
+    languages: [python, javascript, typescript, yaml, generic]

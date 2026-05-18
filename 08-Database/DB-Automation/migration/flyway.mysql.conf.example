@@ -1,0 +1,6 @@
+flyway.url=jdbc:mysql://replace-me:3306/exampledb
+flyway.user=replace_me
+flyway.password=replace_me
+flyway.locations=filesystem:./sql/mysql
+flyway.baselineOnMigrate=true
+flyway.validateMigrationNaming=true

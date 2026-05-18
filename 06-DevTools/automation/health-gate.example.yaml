@@ -1,0 +1,27 @@
+gate_name: shared-health-gate
+scope:
+  - deploy
+  - failover
+  - migration
+  - restore
+pre_change_checks:
+  - name: endpoint_reachability
+    required: true
+    threshold: success_rate >= 99
+  - name: dependency_readiness
+    required: true
+    threshold: all_required_dependencies_ready
+post_change_checks:
+  - name: smoke_test
+    required: true
+    threshold: all_critical_paths_pass
+  - name: rollback_trigger
+    required: true
+    threshold: error_rate < 5_percent
+periodic_checks:
+  - name: scheduled_health_verification
+    interval: 5m
+on_fail:
+  decision: hold_or_rollback
+  notify_owner: true
+  create_incident: true

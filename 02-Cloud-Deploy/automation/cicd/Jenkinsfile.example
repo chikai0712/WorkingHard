@@ -1,0 +1,136 @@
+pipeline {
+  agent any
+
+  options {
+    timestamps()
+    ansiColor('xterm')
+    disableConcurrentBuilds()
+  }
+
+  parameters {
+    choice(name: 'DEPLOY_ENV', choices: ['dev', 'staging', 'production'], description: 'Target environment')
+    booleanParam(name: 'RUN_DEPLOY', defaultValue: false, description: 'Execute deploy stage')
+    string(name: 'APP_NAME', defaultValue: 'example-service', description: 'Application name')
+    string(name: 'JIRA_TICKET', defaultValue: 'OPS-000', description: 'Related Jira ticket')
+  }
+
+  environment {
+    ARTIFACT_DIR = 'dist'
+    BUILD_VERSION = "${env.BUILD_NUMBER}"
+    SLACK_CHANNEL = '#deployments'
+    SLACK_CREDENTIALS_ID = 'slack-webhook'
+    JIRA_BASE_URL = 'https://jira.example.com'
+    JIRA_CREDENTIALS_ID = 'jira-api-token'
+  }
+
+  stages {
+    stage('Checkout') {
+      steps {
+        checkout scm
+      }
+    }
+
+    stage('Source Gate') {
+      stages {
+        stage('Lint') {
+          steps {
+            sh 'echo "Replace with lint command"'
+          }
+        }
+        stage('Test') {
+          steps {
+            sh 'echo "Replace with test command"'
+          }
+        }
+        stage('Artifact Metadata Validation') {
+          steps {
+            sh 'echo "Replace with artifact/manifest validation"'
+          }
+        }
+      }
+    }
+
+    stage('Security Gate') {
+      parallel {
+        stage('Secret Scan') {
+          steps {
+            sh 'echo "Replace with gitleaks or secret scan command"'
+          }
+        }
+        stage('SAST Scan') {
+          steps {
+            sh 'echo "Replace with semgrep or SAST command"'
+          }
+        }
+        stage('Filesystem / Dependency Scan') {
+          steps {
+            sh 'echo "Replace with trivy or dependency scan command"'
+          }
+        }
+      }
+    }
+
+    stage('Build') {
+      steps {
+        sh 'mkdir -p dist && echo "sample artifact" > dist/build.txt'
+      }
+    }
+
+    stage('Archive Artifact') {
+      steps {
+        archiveArtifacts artifacts: 'dist/**', fingerprint: true
+      }
+    }
+
+    stage('Deploy Gate') {
+      when {
+        expression { return params.RUN_DEPLOY }
+      }
+      steps {
+        script {
+          echo "Slack notify placeholder: deploy gate waiting for ${params.APP_NAME} to ${params.DEPLOY_ENV}"
+          echo "Jira comment placeholder: ${params.JIRA_TICKET} waiting for deploy approval"
+        }
+        input message: "Deploy ${params.APP_NAME} to ${params.DEPLOY_ENV}?", ok: 'Deploy'
+      }
+    }
+
+    stage('Deploy') {
+      when {
+        expression { return params.RUN_DEPLOY }
+      }
+      steps {
+        sh 'echo "Replace with deploy command"'
+      }
+    }
+
+    stage('Post-Deploy Health Gate') {
+      when {
+        expression { return params.RUN_DEPLOY }
+      }
+      steps {
+        sh 'echo "Replace with endpoint health / smoke test command"'
+        sh 'echo "Replace with rollback / fallback decision logic"'
+      }
+    }
+  }
+
+  post {
+    success {
+      script {
+        if (params.RUN_DEPLOY) {
+          echo "Slack notify placeholder: deploy success for ${params.APP_NAME} ${env.BUILD_VERSION}"
+          echo "Jira comment placeholder: ${params.JIRA_TICKET} deploy success"
+        } else {
+          echo 'Pipeline completed successfully.'
+        }
+      }
+    }
+    failure {
+      script {
+        echo "Slack notify placeholder: build/deploy failed for ${params.APP_NAME} ${env.BUILD_URL}"
+        echo "Jira comment placeholder: ${params.JIRA_TICKET} pipeline failed"
+      }
+    }
+  }
+}

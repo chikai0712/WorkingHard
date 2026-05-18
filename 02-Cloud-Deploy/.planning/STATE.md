@@ -26,6 +26,62 @@
 - **Next**: 使用者在 `02-Cloud-Deploy/ec2-simple-website/` 執行 `./deploy.sh`，建立 EC2 + Nginx + Elastic IP，並用輸出的 URL 驗證網站。
 - **Blocker**: 尚未實際 `terraform apply`；DNS `clouddeployment168.site` 管理位置尚未確認。
 
+### [2026-05-14 15:30] — 完成 release / iac shared gate 套用第一輪
+- **Phase**: Phase 8 — Jenkins 串接自動化流程 skeleton
+- **Status**: Complete
+- **Done**: 更新 `automation/release/README.md` 與 `release-manifest.example.yaml`，將 source/security/health gate 納入 release control flow；更新 `automation/iac/README.md` 與 `terraform_wrapper.sh`，將 source gate、security gate、post-apply health gate 納入 IaC workflow 與 wrapper 提示。已完成 shell syntax、內容檢查與 lint 檢查。
+- **Next**: 依一次一步原則，等待使用者確認後，再決定是否把 shared gates 套入 backup-recovery、dns-cdn、network、security、monitoring 等其他模組。
+- **Blocker**: 目前仍為 skeleton，不含真實 policy engine、plan risk parser、smoke test 命令或 rollback automation。
+
+### [2026-05-14 15:20] — 啟動 release / iac shared gate 套用
+- **Phase**: Phase 8 — Jenkins 串接自動化流程 skeleton
+- **Status**: In progress
+- **Done**: 規劃將 shared `source / security / health` gate 套入 `automation/release/` 與 `automation/iac/`，包含 README、manifest/config 與 wrapper 使用說明。
+- **Next**: 更新 release / iac 文件與範本，補上對應 gate mapping 與 decision flow。
+- **Blocker**: 無
+
+### [2026-05-14 15:12] — 完成 CI/Jenkins shared gate 落地第一輪
+- **Phase**: Phase 8 — Jenkins 串接自動化流程 skeleton
+- **Status**: Complete
+- **Done**: 更新 root-level `.github/workflows/defensive-security-scans.yml`，新增 `source-gate` 與 `post-deploy-health-gate` job，並讓 `gitleaks`、`semgrep`、`trivy` 形成 `security gate`；更新 `automation/cicd/Jenkinsfile.example`，加入 `Source Gate`、`Security Gate`、`Post-Deploy Health Gate` stages；同步更新 `automation/cicd/README.md`，補上 shared gate mapping 與 CI flow。已完成結構檢查與 lint 檢查。
+- **Next**: 依一次一步原則，等待使用者確認後，再決定是否把 shared gates 套進 release、iac、backup-recovery、dns-cdn、security 等模組。
+- **Blocker**: 目前仍為 skeleton，不含真實 lint/test/security 指令、真實 smoke test endpoint、或自動 rollback implementation。
+
+### [2026-05-14 15:02] — 啟動 CI/Jenkins shared gate 落地
+- **Phase**: Phase 8 — Jenkins 串接自動化流程 skeleton
+- **Status**: In progress
+- **Done**: 依 shared gate framework 規劃先在 CI 入口層實作 `source gate`、`security gate` 與 `post-deploy health gate`，範圍限定於 `.github/workflows/` 與 `automation/cicd/`。
+- **Next**: 更新 GitHub workflow、Jenkinsfile 與 CI/CD README，並做 lint / syntax 驗證。
+- **Blocker**: 無
+
+### [2026-05-14 14:28] — 完成 Jenkins Slack / Jira 通知 skeleton
+- **Phase**: Phase 8 — Jenkins 串接自動化流程 skeleton
+- **Status**: Complete
+- **Done**: 更新 `Jenkinsfile.example`，加入 `JIRA_TICKET` 參數與 Slack/Jira notification placeholders，涵蓋 build failure、deploy gate、deploy success、deploy failure；新增 `notifications.example.yaml`，並更新 `README.md` 與 `jenkins-pipeline.example.yaml`，補上事件對照、credential 邊界與通知治理說明。已完成 shell syntax 與 lint 檢查。
+- **Next**: 若需要，可再接真實 Slack plugin/webhook、Jira REST API comment/transition、Slack thread/update 與通知模板標準化。
+- **Blocker**: 目前仍為 skeleton，不接真實 Slack webhook、Jira API token、plugin 或 production workflow。
+
+### [2026-05-14 14:20] — 啟動 Jenkins Slack / Jira 通知 skeleton
+- **Phase**: Phase 8 — Jenkins 串接自動化流程 skeleton
+- **Status**: In progress
+- **Done**: 依預設規格規劃 `Slack + Jira skeleton`，事件包含 build failure、deploy gate、deploy success、deploy failure；Jira 先做 ticket 關聯與 comment placeholder，不接真實 token。
+- **Next**: 更新 `Jenkinsfile.example`、補通知設定範本與 README 使用說明。
+- **Blocker**: 無
+
+### [2026-05-14 14:12] — 完成 Jenkins 串接自動化流程 skeleton
+- **Phase**: Phase 8 — Jenkins 串接自動化流程 skeleton
+- **Status**: Complete
+- **Done**: 在 `automation/cicd/` 新增 `Jenkinsfile.example` 與 `jenkins-pipeline.example.yaml`，並更新 `README.md` 與 `pipeline.sh`，補上 Jenkins declarative pipeline、deploy gate、credential/agent 邊界與 RACI。已完成 shell 語法檢查、模板內容檢查與 lint 檢查。
+- **Next**: 若需要，可再補 multi-branch pipeline、shared library、Docker/Kubernetes agent、artifact registry push 與 Jenkins 對接 Slack/Jira 通知。
+- **Blocker**: 目前仍為模板層級，尚未接真實 Jenkins master、agent label、credentials ID、registry 或部署目標。
+
+### [2026-05-14 14:05] — 啟動 Jenkins 串接自動化流程 skeleton
+- **Phase**: Phase 8 — Jenkins 串接自動化流程 skeleton
+- **Status**: In progress
+- **Done**: 確認目前 `automation/cicd/` 已有 GitHub Actions / GitLab CI 範例，但尚缺 Jenkins pipeline 樣板；規劃以 `Jenkinsfile`、參數化 pipeline 與 README 說明方式補齊 Jenkins 路線。
+- **Next**: 建立 Jenkinsfile 範本、參數與 credential 邊界說明、並補充 CI/CD README。
+- **Blocker**: 無
+
 ### [2026-05-14 13:28] — 將 decision matrix 表格化並補 RACI
 - **Phase**: Phase 7 — DNS/CDN + Network/Security 實戰版 skeleton / 文件強化
 - **Status**: Complete

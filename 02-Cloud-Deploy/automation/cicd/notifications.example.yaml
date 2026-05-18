@@ -1,0 +1,24 @@
+slack:
+  credentials_id: slack-webhook
+  channel: '#deployments'
+  events:
+    - build_failure
+    - deploy_gate
+    - deploy_success
+    - deploy_failure
+  message_templates:
+    build_failure: '[${JOB_NAME}] build failed: ${BUILD_URL}'
+    deploy_gate: '[${JOB_NAME}] deploy gate waiting: ${BUILD_URL}'
+    deploy_success: '[${JOB_NAME}] deploy success (${DEPLOY_ENV})'
+    deploy_failure: '[${JOB_NAME}] deploy failed (${DEPLOY_ENV})'
+
+jira:
+  credentials_id: jira-api-token
+  base_url: https://jira.example.com
+  ticket_parameter: JIRA_TICKET
+  comment_events:
+    - build_failure
+    - deploy_gate
+    - deploy_success
+    - deploy_failure
+  transition_events: []

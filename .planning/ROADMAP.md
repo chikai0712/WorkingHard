@@ -40,6 +40,12 @@
 **Goal**: 根據實際使用回饋優化 Rules 與工作流程
 - [ ] 03-01: 評估 GSD 流程效果，調整 Cursor Rules
 - [ ] 03-02: 更新 AGENTS.md 與工作區文件
+- [x] 03-03: 建立根目錄 README.md，整理 AI 維運整合架構文件  
+  **Validation**: 根目錄 `README.md` 存在，包含 Mermaid 架構圖、用途說明與模組解釋。  
+  **Files**: `README.md`, `.planning/STATE.md`, `.planning/ROADMAP.md`
+- [x] 03-04: 盤點工作區維運自動化與 AIOps 成熟度，產出架構規劃建議  
+  **Validation**: 已完成跨 `01-DNS-Monitoring`、`02-Cloud-Deploy`、`06-DevTools`、`08-Database/DB-Automation`、`GlobalpingChecker` 的文件盤點，並可明確說明現況、缺口與建議導入順序。  
+  **Files**: `.planning/STATE.md`, `.planning/ROADMAP.md`
 
 ---
 
@@ -54,4 +60,4 @@
 |-------|------|------|
 | 1. GSD 框架整合 | 2/2 | ✅ Complete |
 | 2. 子專案 Planning 目錄 | 6/6 | ✅ Complete |
-| 3. 驗證與調整 | 1/3 | 🔄 In progress |
+| 3. 驗證與調整 | 2/4 | 🔄 In progress |

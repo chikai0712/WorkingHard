@@ -1,0 +1,22 @@
+gate_name: shared-source-gate
+scope:
+  - pull_request
+  - build
+  - release
+checks:
+  - name: lint
+    required: true
+    on_fail: block
+  - name: unit_tests
+    required: true
+    on_fail: block
+  - name: artifact_metadata_validation
+    required: true
+    on_fail: hold
+  - name: manifest_schema_validation
+    required: false
+    on_fail: hold
+outputs:
+  require_artifact: true
+  require_build_metadata: true
+  require_traceability: true

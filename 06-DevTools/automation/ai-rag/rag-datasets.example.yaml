@@ -1,0 +1,54 @@
+version: 1
+name: platform-ai-rag-datasets
+owner: platform-automation
+indexes:
+  - name: docs-index
+    description: SOP, runbooks, README, architecture docs
+  - name: ops-events-index
+    description: summarized gate, alert, dry-run, incident events
+  - name: db-operations-index
+    description: DB operational knowledge and validation evidence
+sources:
+  - id: devtools-automation-docs
+    project: 06-DevTools
+    module: automation
+    source_type: document
+    path_globs:
+      - automation/**/*.md
+    chunk_strategy: heading-based
+    sensitivity: internal
+    target_index: docs-index
+  - id: db-automation-docs
+    project: 08-Database/DB-Automation
+    module: all
+    source_type: document
+    path_globs:
+      - backup-recovery/**/*.md
+      - migration/**/*.md
+      - monitoring/**/*.md
+      - ansible/**/*.md
+      - remediation/**/*.md
+    chunk_strategy: heading-based
+    sensitivity: internal
+    target_index: db-operations-index
+  - id: ops-summary-events
+    project: shared
+    module: reporting
+    source_type: event-summary
+    path_globs:
+      - reporting/examples/**/*.md
+      - ai-rag/examples/events/**/*.json
+    chunk_strategy: record-based
+    sensitivity: internal
+    target_index: ops-events-index
+embedding:
+  provider: placeholder
+  model: placeholder-embedding-model
+retrieval:
+  mode: hybrid
+  top_k: 8
+  rerank: optional
+policies:
+  allow_only_sanitized_sources: true
+  block_secrets: true
+  require_metadata: true

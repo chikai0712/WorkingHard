@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Automation Control Plane</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="layout">
+      <aside class="sidebar">
+        <div>
+          <p class="eyebrow">Control Plane</p>
+          <h1>Automation Manager</h1>
+          <p class="muted">統一查看 shared gates、模組狀態、AI recommendation 與 mock actions。</p>
+        </div>
+        <nav class="nav" id="module-nav"></nav>
+      </aside>
+
+      <main class="content">
+        <section class="hero card">
+          <div>
+            <p class="eyebrow">Overview</p>
+            <h2>Cross-Project Automation Dashboard</h2>
+            <p id="summary-text" class="muted"></p>
+          </div>
+          <div class="stats" id="summary-stats"></div>
+        </section>
+
+        <section class="grid two-col">
+          <div class="card">
+            <div class="section-header">
+              <div>
+                <p class="eyebrow">Modules</p>
+                <h3>Managed Modules</h3>
+              </div>
+            </div>
+            <div class="module-list" id="module-list"></div>
+          </div>
+
+          <div class="card">
+            <div class="section-header">
+              <div>
+                <p class="eyebrow">Selection</p>
+                <h3 id="detail-title">Select a module</h3>
+              </div>
+              <span class="badge" id="detail-status">N/A</span>
+            </div>
+            <p id="detail-description" class="muted">點選左側模組卡片查看詳細 gate 狀態。</p>
+            <div class="gate-grid" id="gate-grid"></div>
+          </div>
+        </section>
+
+        <section class="grid two-col">
+          <div class="card">
+            <div class="section-header">
+              <div>
+                <p class="eyebrow">AI Recommendation</p>
+                <h3>Assisted Analysis</h3>
+              </div>
+            </div>
+            <div id="recommendation-panel" class="recommendation-panel">
+              <p class="muted">選擇模組後載入 AI recommendation。</p>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="section-header">
+              <div>
+                <p class="eyebrow">Actions</p>
+                <h3>Basic Mock Operations</h3>
+              </div>
+            </div>
+            <div class="action-list" id="action-list"></div>
+          </div>
+        </section>
+
+        <section class="card">
+          <div class="section-header">
+            <div>
+              <p class="eyebrow">Result</p>
+              <h3>Action Output</h3>
+            </div>
+          </div>
+          <pre id="action-result" class="result-panel">Select a module and run a mock action.</pre>
+        </section>
+
+        <section class="card">
+          <div class="section-header">
+            <div>
+              <p class="eyebrow">History</p>
+              <h3>Recent Action Snapshots</h3>
+            </div>
+            <div class="history-controls">
+              <select id="history-filter" class="history-control">
+                <option value="">All Modules</option>
+                <option value="cicd">CI / Jenkins Entry</option>
+                <option value="release">Release Control</option>
+                <option value="iac">IaC Control</option>
+                <option value="db-ops">DB Ops</option>
+              </select>
+              <select id="history-sort" class="history-control">
+                <option value="desc">Newest First</option>
+                <option value="asc">Oldest First</option>
+              </select>
+              <label class="history-toggle"><input id="history-only-changed" type="checkbox" /> Only Changed</label>
+              <select id="history-compare-a" class="history-control"></select>
+              <select id="history-compare-b" class="history-control"></select>
+              <button id="history-compare-run" class="history-clear-btn">Compare A/B</button>
+              <button id="history-clear" class="history-clear-btn">Clear</button>
+            </div>
+          </div>
+          <div id="action-history" class="history-list">
+            <p class="muted">No action snapshots yet.</p>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="./app.js"></script>
+  </body>
+</html>

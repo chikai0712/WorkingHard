@@ -1,0 +1,23 @@
+pipeline_name: example-jenkins-pipeline
+agent_label: linux-docker
+credentials:
+  - id: github-token
+    usage: source checkout or API access
+  - id: deploy-ssh-key
+    usage: deploy target authentication
+  - id: slack-webhook
+    usage: Slack incoming webhook or plugin credential
+  - id: jira-api-token
+    usage: Jira API token for comment/transition integration
+parameters:
+  deploy_env: [dev, staging, production]
+  run_deploy: [true, false]
+  app_name: example-service
+  jira_ticket: OPS-000
+notifications:
+  slack:
+    channel: '#deployments'
+    events: [build_failure, deploy_gate, deploy_success, deploy_failure]
+  jira:
+    comment_on: [build_failure, deploy_gate, deploy_success, deploy_failure]
+    transition_on: []
