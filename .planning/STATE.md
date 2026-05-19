@@ -6,6 +6,9 @@
 ## 恢復指令（按專案貼入）
 
 ```
+# DNS/CDN Monitor
+Read 01-DNS-Monitoring/.planning/STATE.md and ROADMAP.md, then tell me current progress.
+
 # GlobalpingChecker
 Read GlobalpingChecker/.planning/STATE.md and ROADMAP.md, then tell me current progress.
 
@@ -29,6 +32,7 @@ Read 08-Database/DB-Automation/.planning/STATE.md and ROADMAP.md, then tell me c
 
 | 專案 | 路徑 | 狀態 | 當前 Phase | 上次活動 |
 |------|------|------|-----------|----------|
+| **DNS/CDN Monitor** | `01-DNS-Monitoring/.planning/` | 🔄 In progress | Phase 1 — 命名與範圍重整規格 | 2026-05-18 |
 | **GlobalpingChecker V5** | `GlobalpingChecker/.planning/` | ⏸️ Paused | Phase 2 — 部署驗證 | 2026-03-19 |
 | **Cloud Deploy** | `02-Cloud-Deploy/.planning/` | 🔄 In progress | Phase 4 — EC2 實機部署驗證 | 2026-05-07 |
 | **Personal / Resume** | `07-Personal/Resume/` | ✅ Updated | 履歷分析、AI 維運架構 README | 2026-05-16 |
@@ -44,6 +48,13 @@ Read 08-Database/DB-Automation/.planning/STATE.md and ROADMAP.md, then tell me c
 - [ ] **Phase 3**: 驗證與調整（根據實際使用回饋優化規則）
 
 ---
+
+### [2026-05-18 13:35] — 初始化 DNS/CDN Monitor planning 並建立 Multi-CDN RUM 規格任務
+- **Phase**: Phase 3 — 驗證與調整
+- **Status**: Complete
+- **Done**: 為 `01-DNS-Monitoring/` 建立獨立 `.planning/CONTEXT.md`、`ROADMAP.md`、`STATE.md`，將其對外架構名稱統一定位為 `DNS/CDN Monitor`，並定義 `GlobalpingChecker` 為其子模組；同時建立 Multi-CDN + RUM 動態選路的規劃任務、Acceptance Criteria 與 phased roadmap，並把根目錄 `.planning/STATE.md` 索引補上該子專案恢復入口。
+- **Next**: 補 `DNS/CDN Monitor` 能力地圖、RUM probe / decision / policy / observability 高階架構圖，以及 MVP / Beta / Production rollout 規格。
+- **Blocker**: 尚未決定第一版採 client-side decision、server-assisted decision 或 hybrid 模式作為正式導入策略。
 
 ### [2026-05-18 13:05] — 根目錄 README 改寫為中英雙語極簡首頁版
 - **Phase**: Phase 3 — 驗證與調整
