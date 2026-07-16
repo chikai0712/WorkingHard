@@ -1,0 +1,25 @@
+id: bfla-orders-all-exposure
+info:
+  name: BFLA - 普通用戶存取全部訂單
+  author: redsaas
+  severity: high
+  description: |
+    BFLA（OWASP API5）。普通用戶呼叫 /workshop/api/shop/orders/all
+    可取得系統中所有用戶的訂單記錄，不需要管理員權限。
+  tags: api,bfla,owasp-api5,data-exposure,crapi
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/workshop/api/shop/orders/all"
+    matchers-condition: and
+    matchers:
+      - type: status
+        status:
+          - 200
+      - type: word
+        part: body
+        words:
+          - "orders"
+          - "count"
+        condition: and

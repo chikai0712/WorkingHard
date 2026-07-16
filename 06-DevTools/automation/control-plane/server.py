@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 from __future__ import annotations
 
+import hashlib
 import json
 import os
 import shutil
@@ -24,7 +25,21 @@ F = B / "data" / "action-history.json"
 MF = "action-manifest.json"
 E = {"DRY_RUN": "true", "CI_PROVIDER": "local-control-plane", "TARGET_ENV": "dev"}
 KEEP = 6
-C={("cicd","run-source"):["bash",str(W/"02-Cloud-Deploy/automation/cicd/pipeline.sh")],("release","prepare-release"):["bash",str(W/"02-Cloud-Deploy/automation/release/release.sh"),"status"],("release","run-smoke"):["bash",str(W/"02-Cloud-Deploy/automation/release/release.sh"),"deploy"],("iac","run-plan"):["bash",str(W/"02-Cloud-Deploy/automation/iac/terraform_wrapper.sh"),".","plan"],("iac","run-post-apply"):["bash",str(W/"02-Cloud-Deploy/automation/iac/terraform_wrapper.sh"),".","apply-dry-run"],("db-ops","verify-backup"):["bash",str(W/"08-Database/DB-Automation/backup-recovery/verify_backup.sh")],("db-ops","run-precheck"):["bash",str(W/"08-Database/DB-Automation/migration/migrate.sh"),"precheck"],("db-ops","verify-monitoring"):["python3",str(W/"08-Database/DB-Automation/monitoring/k8s/generate_monitoring_summary.py")],("db-ops","run-network-check"):["python3",str(W/"08-Database/DB-Automation/ansible/generate_ansible_summary.py")]}
+C={
+    ("cicd","run-source"):["bash",str(W/"02-Cloud-Deploy/automation/cicd/pipeline.sh")],
+    ("cicd","run-security"):["bash",str(W/"02-Cloud-Deploy/automation/cicd/pipeline.sh")],
+    ("cicd","run-health"):["bash",str(W/"02-Cloud-Deploy/automation/cicd/pipeline.sh")],
+    ("release","prepare-release"):["bash",str(W/"02-Cloud-Deploy/automation/release/release.sh"),"status"],
+    ("release","review-approval"):["bash",str(W/"02-Cloud-Deploy/automation/release/release.sh"),"status"],
+    ("release","run-smoke"):["bash",str(W/"02-Cloud-Deploy/automation/release/release.sh"),"deploy"],
+    ("iac","run-plan"):["bash",str(W/"02-Cloud-Deploy/automation/iac/terraform_wrapper.sh"),".","plan"],
+    ("iac","run-policy"):["bash",str(W/"02-Cloud-Deploy/automation/iac/terraform_wrapper.sh"),".","plan"],
+    ("iac","run-post-apply"):["bash",str(W/"02-Cloud-Deploy/automation/iac/terraform_wrapper.sh"),".","apply-dry-run"],
+    ("db-ops","verify-backup"):["bash",str(W/"08-Database/DB-Automation/backup-recovery/verify_backup.sh")],
+    ("db-ops","run-precheck"):["bash",str(W/"08-Database/DB-Automation/migration/migrate.sh"),"precheck"],
+    ("db-ops","verify-monitoring"):["python3",str(W/"08-Database/DB-Automation/monitoring/k8s/generate_monitoring_summary.py")],
+    ("db-ops","run-network-check"):["python3",str(W/"08-Database/DB-Automation/ansible/generate_ansible_summary.py")]
+}
 V={("db-ops","verify-backup"):{"SUMMARY_OUT":"db-backup-summary.local.json","EVIDENCE_OUT":"db-mysql-restore-evidence.local.json","DB_ENGINE":"mysql"},("db-ops","run-precheck"):{"SUMMARY_OUT":"db-migration-summary.local.json","EVIDENCE_OUT":"db-mysql-precheck-evidence.local.json","DB_ENGINE":"mysql"},("db-ops","verify-monitoring"):{"SUMMARY_OUT":"monitoring-summary.local.json","EVIDENCE_OUT":"monitoring-evidence.local.json","ALERT_NAME":"DBMonitoringHealthWarning"},("db-ops","run-network-check"):{"SUMMARY_OUT":"ansible-summary.f5.local.json","EVIDENCE_OUT":"ansible-evidence.f5.local.json","DEVICE_FAMILY":"f5"}}
 R={("db-ops","verify-backup"):[{"command":["python3",str(W/"08-Database/DB-Automation/monitoring/k8s/generate_monitoring_summary.py")],"env":{"SUMMARY_OUT":"monitoring-summary.local.json","EVIDENCE_OUT":"monitoring-evidence.local.json","ALERT_NAME":"DBBackupSignalsWarning"}},{"command":["python3",str(W/"08-Database/DB-Automation/ansible/generate_ansible_summary.py")],"env":{"SUMMARY_OUT":"ansible-summary.f5.local.json","EVIDENCE_OUT":"ansible-evidence.f5.local.json","DEVICE_FAMILY":"f5"}}],("db-ops","run-precheck"):[{"command":["python3",str(W/"08-Database/DB-Automation/monitoring/k8s/generate_monitoring_summary.py")],"env":{"SUMMARY_OUT":"monitoring-summary.local.json","EVIDENCE_OUT":"monitoring-evidence.local.json","ALERT_NAME":"DBPrecheckSignalsWarning"}},{"command":["python3",str(W/"08-Database/DB-Automation/ansible/generate_ansible_summary.py")],"env":{"SUMMARY_OUT":"ansible-summary.f5.local.json","EVIDENCE_OUT":"ansible-evidence.f5.local.json","DEVICE_FAMILY":"f5"}}]}
 M={"db-ops":[W/"08-Database/DB-Automation/ai-rag/db-backup-summary.example.json",W/"08-Database/DB-Automation/ai-rag/db-backup-summary.mysql.example.json",W/"08-Database/DB-Automation/ai-rag/db-migration-summary.example.json",W/"08-Database/DB-Automation/ai-rag/db-migration-summary.mysql.example.json",W/"08-Database/DB-Automation/ai-rag/db-monitoring-summary.example.json",W/"08-Database/DB-Automation/ai-rag/db-remediation-summary.example.json",W/"08-Database/DB-Automation/ai-rag/db-ansible-summary.example.json"]}
@@ -50,6 +65,58 @@ def X(c, w, e=None):
 
 def MP(scope):
     return P / scope / MF
+
+
+def SHA(path):
+    h = hashlib.sha256()
+    with path.open("rb") as f:
+        for chunk in iter(lambda: f.read(65536), b""):
+            h.update(chunk)
+    return h.hexdigest()
+
+
+def JC(payload):
+    if isinstance(payload, list):
+        return len(payload)
+    if isinstance(payload, dict):
+        for key in ("records", "items", "results", "data"):
+            value = payload.get(key)
+            if isinstance(value, list):
+                return len(value)
+        return len(payload)
+    return None
+
+
+def DS(path):
+    if not path.exists() or not path.is_file():
+        return None
+    item = {"path": str(path.relative_to(W)), "size_bytes": path.stat().st_size, "sha256": SHA(path)}
+    try:
+        payload = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return item
+    count = JC(payload)
+    if count is not None:
+        item["record_count"] = count
+    if isinstance(payload, list) and payload and isinstance(payload[0], dict):
+        item["sample_record_type"] = payload[0].get("record_type") or payload[0].get("module")
+    return item
+
+
+def AS(d, artifact_sources):
+    files, total = [], 0
+    declared = set(artifact_sources)
+    for path in sorted(d.rglob("*")):
+        if not path.is_file() or path.name == MF:
+            continue
+        entry = {"path": str(path.relative_to(W)), "size_bytes": path.stat().st_size, "sha256": SHA(path), "is_declared_source": path.name in declared}
+        files.append(entry)
+        total += entry["size_bytes"]
+    return {"file_count": len(files), "total_size_bytes": total, "files": files}
+
+
+def MS(scope):
+    return {"latest_scoped_dataset": DS(LS), "scanned_dataset": DS(S)}
 def Y(m="", s="desc"):
  d = L(F)
  r = d if isinstance(d, list) else []
@@ -176,8 +243,11 @@ def DB(m, a, d, scope):
  return run_steps(steps, d)
 
 
-def WM(module_id, action_id, scope, command, artifact_sources, result, refresh):
+def WM(module_id, action_id, scope, command, artifact_sources, result, refresh, d):
  manifest = {"module_id": module_id, "action_id": action_id, "action_scope": scope, "manifest_path": str(MP(scope).relative_to(W)), "artifact_sources": artifact_sources, "command": command, "returncode": result.returncode, "timestamp": datetime.now(UTC).strftime("%Y-%m-%dT%H:%M:%SZ"), "refresh_steps": [{"command": item.get("command"), "returncode": item.get("returncode")} for item in refresh]}
+ WJ(MP(scope), manifest)
+ manifest["artifact_summary"] = AS(d, artifact_sources)
+ manifest["dataset_summary"] = MS(scope)
  WJ(MP(scope), manifest)
  return manifest
 class N(SimpleHTTPRequestHandler):
@@ -223,7 +293,7 @@ class N(SimpleHTTPRequestHandler):
   r = X(c, W, scoped_env(k, d))
   extra = DB(*k, d, scope) if p.get("moduleId") == "db-ops" else []
   sources = G(*k)
-  manifest = WM(p.get("moduleId"), p.get("actionId"), scope, c, sources, r, extra)
+  manifest = WM(p.get("moduleId"), p.get("actionId"), scope, c, sources, r, extra, d)
   return self.J(HTTPStatus.OK, {"moduleId": p.get("moduleId"), "actionId": p.get("actionId"), "command": c, "returncode": r.returncode, "stdout": r.stdout, "stderr": r.stderr, "mode": "local-dry-run-adapter", "action_scope": scope, "artifact_sources": sources, "manifest": manifest, "post_action_refresh": extra})
 
  def do_DELETE(self):

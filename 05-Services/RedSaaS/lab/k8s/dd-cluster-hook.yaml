@@ -1,0 +1,26 @@
+apiVersion: execution.securecodebox.io/v1
+kind: ClusterScanCompletionHook
+metadata:
+  name: dd-hook-cluster
+spec:
+  type: ReadAndWrite
+  priority: 0
+  image: docker.io/securecodebox/hook-persistence-defectdojo:5.8.0
+  imagePullPolicy: IfNotPresent
+  env:
+  - name: DEFECTDOJO_URL
+    value: http://192.168.1.106:8001
+  - name: DEFECTDOJO_APIKEY
+    valueFrom:
+      secretKeyRef:
+        key: apikey
+        name: defectdojo-credentials
+  - name: DEFECTDOJO_LOW_PRIVILEGED_MODE
+    value: "false"
+  resources:
+    requests:
+      cpu: 200m
+      memory: 100Mi
+    limits:
+      cpu: 400m
+      memory: 200Mi

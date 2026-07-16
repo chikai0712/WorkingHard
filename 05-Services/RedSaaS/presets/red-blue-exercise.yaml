@@ -1,0 +1,88 @@
+name: 紅藍對抗演練
+id: redblue
+desc: 紅隊攻擊全程寫入 Kafka，藍隊即時監控攔截
+kafka_topic: redsaas-redblue
+kafka_blue_topic: redsaas-blue-alerts
+
+steps:
+  - id: nmap
+    name: Nmap 偵察
+    engine: docker
+    cmd: >
+      docker run --rm --network host instrumentisto/nmap
+      -sV -sC --open -T4 -p 80,443,8080,8443,8888,3000,5000,9000
+      {target}
+    timeout: 300
+    kafka_event: redblue.nmap.done
+    blue_alert: "紅隊偵察開始：{target} 埠掃描"
+
+  - id: nuclei
+    name: Nuclei 漏洞掃描
+    engine: docker
+    cmd: >
+      docker run --rm --network host projectdiscovery/nuclei
+      -u {target}
+      -t exposures/ -t cves/ -severity medium,high,critical
+      -jsonl -o /tmp/nuclei-{job_id}.jsonl
+    timeout: 600
+    kafka_event: redblue.nuclei.done
+    blue_alert: "紅隊漏洞掃描：{target} Nuclei 模板執行中"
+
+  - id: zap
+    name: ZAP Web 攻擊
+    engine: docker
+    cmd: >
+      docker run --rm --network host
+      -v /tmp:/zap/wrk ghcr.io/zaproxy/zaproxy:stable
+      zap-baseline.py -t {target}
+      -J /zap/wrk/zap-{job_id}.json
+    timeout: 900
+    kafka_event: redblue.zap.done
+    blue_alert: "紅隊 DAST 攻擊：ZAP 主動掃描 {target}"
+
+  - id: sqlmap
+    name: SQLMap 注入
+    engine: docker
+    cmd: >
+      docker run --rm --network host cytopia/sqlmap
+      -u "{target}" --forms --crawl=2 --batch
+      --output-dir=/tmp/sqlmap-{job_id}
+    timeout: 600
+    kafka_event: redblue.sqlmap.done
+    blue_alert: "紅隊注入攻擊：SQLMap 掃描 {target}"
+
+  - id: sliver
+    name: Sliver C2 植入
+    engine: sliver
+    action: generate_implant
+    params:
+      os: linux
+      arch: amd64
+      protocol: http
+    kafka_event: redblue.sliver.ready
+    blue_alert: "🚨 高危：C2 植入準備完成，等待確認"
+
+  - id: bloodhound
+    name: BloodHound AD 分析
+    engine: bloodhound
+    action: query_shortest_path
+    kafka_event: redblue.bloodhound.done
+    blue_alert: "紅隊 AD 偵察：BloodHound 路徑查詢"
+
+  - id: kafka
+    name: 寫入事件中台
+    engine: kafka
+    action: flush_events
+    kafka_event: redblue.events.flushed
+
+  - id: defectdojo
+    name: DefectDojo 歸檔
+    engine: api
+    action: import_findings
+    kafka_event: redblue.import.done
+
+  - id: report
+    name: 對抗演練報告
+    engine: report
+    action: generate_word
+    kafka_event: redblue.report.done

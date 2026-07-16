@@ -1,0 +1,93 @@
+id: gambling-token-leak-detection
+info:
+  name: Gambling Platform - API Token / Secret Leakage
+  author: redsaas-team
+  severity: high
+  description: |
+    偵測博弈平台常見的 token/secret 洩露端點。
+    包含 debug、health、actuator、日誌端點，
+    以及常見的 PHP/Laravel 錯誤頁面洩露 DB 憑證或 JWT secret。
+  reference:
+    - https://owasp.org/API-Security/editions/2023/en/0xa2-broken-authentication/
+  tags: gambling,token,jwt,leak,debug,auth,secret
+  metadata:
+    max-request: 20
+
+http:
+  # ── 常見 debug / health 端點
+  - method: GET
+    path:
+      - "{{BaseURL}}/api/debug"
+      - "{{BaseURL}}/api/status"
+      - "{{BaseURL}}/api/health"
+      - "{{BaseURL}}/api/v1/debug"
+      - "{{BaseURL}}/api/internal/status"
+      - "{{BaseURL}}/debug/vars"
+      # Spring Boot Actuator
+      - "{{BaseURL}}/actuator"
+      - "{{BaseURL}}/actuator/env"
+      - "{{BaseURL}}/actuator/configprops"
+      - "{{BaseURL}}/actuator/beans"
+      # Laravel / PHP
+      - "{{BaseURL}}/_debugbar/open"
+      - "{{BaseURL}}/telescope/requests"
+      - "{{BaseURL}}/horizon/api/stats"
+      # 常見配置洩露
+      - "{{BaseURL}}/.env"
+      - "{{BaseURL}}/config.php"
+      - "{{BaseURL}}/config/app.php"
+      - "{{BaseURL}}/storage/logs/laravel.log"
+      - "{{BaseURL}}/app/logs/app.log"
+      - "{{BaseURL}}/server-status"
+
+    matchers-condition: or
+    matchers:
+      - type: regex
+        name: jwt-token
+        part: body
+        regex:
+          - "eyJ[a-zA-Z0-9_-]{10,}\\.eyJ[a-zA-Z0-9_-]{10,}\\.[a-zA-Z0-9_-]{10,}"
+
+      - type: regex
+        name: bearer-token
+        part: body
+        regex:
+          - '"token"\s*:\s*"[a-zA-Z0-9_\-\.]{20,}"'
+          - '"access_token"\s*:\s*"[a-zA-Z0-9_\-\.]{20,}"'
+          - '"refresh_token"\s*:\s*"[a-zA-Z0-9_\-\.]{20,}"'
+
+      - type: word
+        name: secret-keys
+        part: body
+        words:
+          - "APP_KEY"
+          - "APP_SECRET"
+          - "JWT_SECRET"
+          - "DB_PASSWORD"
+          - "SECRET_KEY"
+          - "api_secret"
+          - "private_key"
+        condition: or
+
+      - type: word
+        name: laravel-debug
+        part: body
+        words:
+          - "Whoops! There was an error"
+          - "illuminate\\foundation"
+          - "laravel.log"
+          - "APP_KEY=base64:"
+        condition: or
+
+    extractors:
+      - type: regex
+        name: extracted-jwt
+        part: body
+        regex:
+          - "eyJ[a-zA-Z0-9_-]{10,}\\.eyJ[a-zA-Z0-9_-]{10,}\\.[a-zA-Z0-9_-]{10,}"
+      - type: regex
+        name: extracted-env-key
+        part: body
+        regex:
+          - "APP_KEY=([^\\s]+)"
+          - "DB_PASSWORD=([^\\s]+)"

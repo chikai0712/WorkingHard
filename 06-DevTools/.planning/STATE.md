@@ -24,6 +24,13 @@
 - Downstream Affected Use Cases: SOP QA, alert triage, migration risk analysis, backup/restore evidence review
 - Required Verification: manual review + structure checks on markdown/yaml/json examples
 
+### [2026-05-18 02:10] — 補上 action manifest dataset/artifact 摘要
+- **Phase**: Phase 6 — AI Analysis Architecture + RAG Foundation
+- **Status**: Complete
+- **Done**: 更新 `control-plane/server.py`，讓 `action-manifest.json` 額外帶出 artifact file count / total bytes / per-file checksum，以及 latest-scoped / scanned dataset 的 size、checksum、record count 摘要；同步更新 `app.js`、README 與 recommendation spec，讓 UI 可直接顯示 manifest 中的 artifact / dataset 統計，方便 compare 與 traceability。
+- **Next**: 可再補 compare 結果導出、pinned snapshot UX，或把 dataset checksum 進一步接到獨立 ledger / registry。
+- **Blocker**: 目前 checksum / record count 仍屬本地 JSON artifact 摘要，尚未接正式 artifact registry、checksum ledger 或跨使用者審計模型。
+
 ### [2026-05-18 01:55] — 暫停於 action manifest / compare 完成後
 - **Phase**: Phase 6 — AI Analysis Architecture + RAG Foundation
 - **Status**: Complete

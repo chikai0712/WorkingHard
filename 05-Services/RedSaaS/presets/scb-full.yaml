@@ -1,0 +1,57 @@
+name: secureCodeBox 全掃
+id: scb-full
+desc: K8s 原生掃描，適合 CI/CD 自動化整合
+kafka_topic: redsaas-scb
+
+steps:
+  - id: scb-nmap
+    name: SCB Nmap 網路掃描
+    engine: scb
+    scan_type: nmap
+    parameters: ["-p-", "--open", "-sV"]
+    timeout: 300
+    kafka_event: scb.nmap.done
+
+  - id: scb-nuclei
+    name: SCB Nuclei 漏洞模板
+    engine: scb
+    scan_type: nuclei
+    parameters: ["-severity", "medium,high,critical"]
+    timeout: 600
+    kafka_event: scb.nuclei.done
+
+  - id: scb-zap
+    name: SCB ZAP DAST
+    engine: scb
+    scan_type: zap-baseline
+    parameters: []
+    timeout: 900
+    kafka_event: scb.zap.done
+
+  - id: scb-trivy
+    name: SCB Trivy 容器掃描
+    engine: scb
+    scan_type: trivy
+    parameters: ["--severity", "HIGH,CRITICAL"]
+    timeout: 300
+    kafka_event: scb.trivy.done
+
+  - id: scb-semgrep
+    name: SCB Semgrep SAST
+    engine: scb
+    scan_type: semgrep
+    parameters: ["--config=auto"]
+    timeout: 300
+    kafka_event: scb.semgrep.done
+
+  - id: defectdojo
+    name: DefectDojo 匯入
+    engine: api
+    action: import_findings
+    kafka_event: scb.import.done
+
+  - id: report
+    name: AI 報告生成
+    engine: report
+    action: generate_word
+    kafka_event: scb.report.done

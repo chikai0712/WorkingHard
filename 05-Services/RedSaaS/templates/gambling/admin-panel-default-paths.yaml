@@ -1,0 +1,105 @@
+id: gambling-admin-panel-default-paths
+info:
+  name: Gambling Platform - Admin / Backoffice Panel Exposure
+  author: redsaas-team
+  severity: high
+  description: |
+    偵測博弈平台常見的後台管理入口是否暴露。
+    亞洲博弈平台慣用 PHP（Laravel/CodeIgniter）架構，
+    後台路徑具有高度規律性，且常缺乏 IP 白名單或 MFA 保護。
+  reference:
+    - https://owasp.org/API-Security/editions/2023/en/0xa5-broken-function-level-authorization/
+  tags: gambling,admin,backoffice,exposure,panel,asia
+  metadata:
+    max-request: 40
+
+http:
+  - method: GET
+    path:
+      # 通用後台路徑
+      - "{{BaseURL}}/admin"
+      - "{{BaseURL}}/admin/login"
+      - "{{BaseURL}}/administrator"
+      - "{{BaseURL}}/administrator/login"
+      - "{{BaseURL}}/backoffice"
+      - "{{BaseURL}}/backoffice/login"
+      - "{{BaseURL}}/backend"
+      - "{{BaseURL}}/backend/login"
+      - "{{BaseURL}}/manage"
+      - "{{BaseURL}}/management"
+      - "{{BaseURL}}/panel"
+      - "{{BaseURL}}/controlpanel"
+      # 代理/招商後台
+      - "{{BaseURL}}/agent"
+      - "{{BaseURL}}/agent/login"
+      - "{{BaseURL}}/agent-admin"
+      - "{{BaseURL}}/agent/admin"
+      - "{{BaseURL}}/affiliate"
+      - "{{BaseURL}}/affiliate/login"
+      - "{{BaseURL}}/super-admin"
+      - "{{BaseURL}}/superadmin"
+      # 亞洲博弈平台慣用路徑
+      - "{{BaseURL}}/cms"
+      - "{{BaseURL}}/cms/login"
+      - "{{BaseURL}}/boss"
+      - "{{BaseURL}}/boss/login"
+      - "{{BaseURL}}/master"
+      - "{{BaseURL}}/master/login"
+      - "{{BaseURL}}/operator"
+      - "{{BaseURL}}/operator/login"
+      - "{{BaseURL}}/report"
+      - "{{BaseURL}}/reports"
+      - "{{BaseURL}}/finance"
+      - "{{BaseURL}}/finance/login"
+      - "{{BaseURL}}/cashier"
+      - "{{BaseURL}}/cashier/login"
+      # Laravel/CodeIgniter 常見路徑
+      - "{{BaseURL}}/admin/dashboard"
+      - "{{BaseURL}}/admin/index"
+      - "{{BaseURL}}/index.php/admin"
+      - "{{BaseURL}}/index.php/admin/login"
+      # 客服後台
+      - "{{BaseURL}}/cs"
+      - "{{BaseURL}}/cs/login"
+      - "{{BaseURL}}/service"
+
+    stop-at-first-match: false
+
+    matchers-condition: and
+    matchers:
+      - type: status
+        status:
+          - 200
+          - 301
+          - 302
+
+      - type: word
+        words:
+          - "login"
+          - "username"
+          - "password"
+          - "sign in"
+          - "帳號"
+          - "密碼"
+          - "登入"
+          - "管理後台"
+          - "後台管理"
+          - "代理登入"
+          - "超級管理"
+        condition: or
+        case-insensitive: true
+
+      - type: word
+        words:
+          - "404 not found"
+          - "page not found"
+        negative: true
+        condition: or
+        case-insensitive: true
+
+    extractors:
+      - type: regex
+        name: admin-path
+        part: request
+        regex:
+          - "(?:admin|backoffice|backend|panel|agent|boss|operator|cashier)[^\\s]*"

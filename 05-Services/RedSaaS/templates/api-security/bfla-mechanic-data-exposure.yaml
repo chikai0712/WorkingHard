@@ -1,0 +1,35 @@
+id: bfla-mechanic-data-exposure
+info:
+  name: BFLA - 普通用戶存取技師資料（資料洩露）
+  author: redsaas
+  severity: high
+  description: |
+    BFLA（Broken Function Level Authorization，OWASP API5）。
+    普通用戶帳號可直接呼叫 /workshop/api/mechanic，
+    回傳所有技師的 email、mechanic_code 等敏感資訊。
+  tags: api,bfla,owasp-api5,data-exposure,crapi
+  reference:
+    - https://owasp.org/API-Security/editions/2023/en/0xa5-broken-function-level-authorization/
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/workshop/api/mechanic"
+    matchers-condition: and
+    matchers:
+      - type: status
+        status:
+          - 200
+      - type: word
+        part: body
+        words:
+          - "mechanic_code"
+          - "mechanics"
+        condition: and
+
+    extractors:
+      - type: regex
+        name: mechanic_emails
+        part: body
+        regex:
+          - '"email":\s*"[^"]+"'

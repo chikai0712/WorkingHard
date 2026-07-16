@@ -32,10 +32,11 @@ Read 08-Database/DB-Automation/.planning/STATE.md and ROADMAP.md, then tell me c
 
 | 專案 | 路徑 | 狀態 | 當前 Phase | 上次活動 |
 |------|------|------|-----------|----------|
+| **RedSaaS** | `05-Services/RedSaaS/.planning/` | 🔲 新建立 | Phase 1 — 內部工具化 | 2026-07-09 |
 | **DNS/CDN Monitor** | `01-DNS-Monitoring/.planning/` | 🔄 In progress | Phase 1 — 命名與範圍重整規格 | 2026-05-18 |
 | **GlobalpingChecker V5** | `GlobalpingChecker/.planning/` | ⏸️ Paused | Phase 2 — 部署驗證 | 2026-03-19 |
 | **Cloud Deploy** | `02-Cloud-Deploy/.planning/` | 🔄 In progress | Phase 4 — EC2 實機部署驗證 | 2026-05-07 |
-| **Personal / Resume** | `07-Personal/Resume/` | ✅ Updated | 履歷分析、AI 維運架構 README | 2026-05-16 |
+| **Personal / Resume** | `07-Personal/Resume/` | ✅ Updated | Phase 19 — AMD Director of Customer Engineering HTML Variant | 2026-06-03 |
 | **台指期監控系統** | `03-Data-Analytics/Stock_Analize/.planning/` | 🔄 In progress | Phase A — A-06b Windows 實機測試 | 2026-03-26 |
 | **Cloudflare DNS data** | `03-Data-Analytics/Cloudflare-DNS-data/.planning/` | 🔲 Pending | Phase 0 — 需求確認 | 2026-03-25 |
 | **XE-Rate-Scraper** | `03-Data-Analytics/XE-Rate-Scraper/.planning/` | ✅ Stable | Phase 1 完成，Phase 2 選配 | 2026-03 |

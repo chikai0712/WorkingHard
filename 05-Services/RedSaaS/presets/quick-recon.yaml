@@ -1,0 +1,56 @@
+name: 快速偵察
+id: recon
+desc: 外部暴露面掃描，適合授權測試第一階段
+kafka_topic: redsaas-recon
+
+auth:
+  login_url: "{target}/identity/api/auth/login"
+  body:
+    email: "redsaas@test.com"
+    password: "Passw0rd@123"
+  token_field: "token"
+
+steps:
+  - id: nmap
+    name: Nmap 資產盤點
+    engine: docker
+    cmd: >
+      docker run --rm --network host instrumentisto/nmap
+      -sV -sC --open -T4 --top-ports 1000
+      {target_host}
+    timeout: 120
+    kafka_event: recon.nmap.done
+
+  - id: nuclei
+    name: Nuclei 漏洞掃描（帶認證）
+    engine: docker
+    cmd: >
+      docker run --rm --network host
+      -v /tmp:/tmp
+      -v /Users/ckchiu/Desktop/Project/05-Services/RedSaaS/templates:/custom-templates:ro
+      -v /Users/ckchiu/Desktop/Project/05-Services/RedSaaS/lab/nuclei-templates:/root/nuclei-templates
+      -e NUCLEI_ALLOWED_UNSIGNED=true
+      projectdiscovery/nuclei
+      -u {target}
+      -t /root/nuclei-templates/http/exposures/
+      -t /root/nuclei-templates/http/misconfiguration/
+      -t /root/nuclei-templates/http/vulnerabilities/
+      -t /custom-templates/api-security/
+      -t /custom-templates/gambling/
+      -H "Authorization: Bearer {token}"
+      -severity info,medium,high,critical
+      -jsonl -o /tmp/nuclei-{job_id}.jsonl
+    timeout: 600
+    kafka_event: recon.nuclei.done
+
+  - id: defectdojo
+    name: DefectDojo 匯入
+    engine: api
+    action: import_findings
+    kafka_event: recon.import.done
+
+  - id: report
+    name: AI 報告生成
+    engine: report
+    action: generate_word
+    kafka_event: recon.report.done

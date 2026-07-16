@@ -14,6 +14,9 @@
 
 #### Query Parameters
 - `module_id`: required
+- `action_id`: optional，用於指定 action 對應的 recommendation context
+- `action_scope`: optional，用於指定最近一次 action 的 scoped artifact 範圍
+- `latest_only`: optional，若為 `true`，優先根據最近 action / scoped artifacts 生成 recommendation
 - `context_type`: optional, e.g. `runbook-qa`, `alert-triage`, `change-risk`
 
 #### Example Response
@@ -82,6 +85,7 @@
 - action history 應保存 recommendation snapshot，至少包含 policy、source、evidence/artifact count、retrieval evidence、scoped artifact list、action scope 與 action manifest metadata
 - action history 若需跨刷新保留，應有本地持久化 API 或 JSON data source，且支援 filter / sort / clear / compare / only-changed 基本管理能力
 - action manifest 應成為 recommendation、history 與 artifact scope 的共享對齊來源，避免多處以不同欄位推測同一 action 上下文
+- action manifest 可進一步附帶 artifact size、dataset checksum 與 record count 摘要，幫助 compare 與 traceability
 
 ## Backend Notes
 

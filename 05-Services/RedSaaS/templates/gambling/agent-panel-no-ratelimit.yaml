@@ -1,0 +1,74 @@
+id: gambling-agent-panel-no-ratelimit
+info:
+  name: Gambling Platform - Agent / Admin Login Missing Rate Limiting
+  author: redsaas-team
+  severity: medium
+  description: |
+    偵測代理/管理後台登入端點是否缺少 Rate Limiting 保護。
+    代理帳號擁有調整會員點數、查看財務報表等高權限，
+    若無 Rate Limiting，攻擊者可對代理帳號進行暴力破解或憑證填充攻擊。
+    判斷邏輯：連續送出錯誤憑證，若第 5 次仍未回傳 429/lockout，視為缺少保護。
+  reference:
+    - https://owasp.org/API-Security/editions/2023/en/0xa4-unrestricted-resource-consumption/
+  tags: gambling,agent,brute-force,rate-limit,auth,owasp-api4
+  metadata:
+    max-request: 25
+
+http:
+  - method: POST
+    path:
+      - "{{BaseURL}}/agent/login"
+      - "{{BaseURL}}/agent/api/login"
+      - "{{BaseURL}}/agent/api/v1/auth/login"
+      - "{{BaseURL}}/affiliate/login"
+      - "{{BaseURL}}/admin/login"
+      - "{{BaseURL}}/api/admin/login"
+      - "{{BaseURL}}/api/v1/admin/auth"
+      - "{{BaseURL}}/backoffice/login"
+      - "{{BaseURL}}/boss/login"
+      - "{{BaseURL}}/operator/login"
+    headers:
+      Content-Type: "application/json"
+      X-Forwarded-For: "1.2.3.{{attempt}}"
+    body: '{"username":"probe_agent_{{attempt}}","password":"WrongPass{{attempt}}!"}'
+    payloads:
+      attempt:
+        - "1"
+        - "2"
+        - "3"
+        - "4"
+        - "5"
+    attack: clusterbomb
+
+    matchers-condition: and
+    matchers:
+      # 仍然回應（沒有被封鎖）
+      - type: status
+        status:
+          - 200
+          - 400
+          - 401
+          - 422
+
+      # 沒有出現封鎖/驗證碼/限速相關字樣
+      - type: word
+        part: body
+        words:
+          - "too many"
+          - "rate limit"
+          - "rate_limit"
+          - "locked"
+          - "captcha"
+          - "blocked"
+          - "try again later"
+          - "請稍後再試"
+          - "帳號已鎖定"
+        negative: true
+        condition: or
+
+    extractors:
+      - type: dsl
+        name: missing-ratelimit-headers
+        dsl:
+          - "header('X-RateLimit-Remaining')"
+          - "header('Retry-After')"

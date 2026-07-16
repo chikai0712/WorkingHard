@@ -1,0 +1,615 @@
+# RedSaaS 本地測試靶場環境
+# 包含：crAPI、DVWA、DefectDojo、Nuclei、ZAP 及全套掃描工具
+#
+# ── 一般啟動 ────────────────────────────────────────────────
+#   cd lab/docker
+#   docker compose --profile reporting up -d          # DefectDojo
+#   docker compose --profile redteam up -d            # ZAP daemon
+#
+# ── 掃描工具 Image 倉庫管理 ─────────────────────────────────
+#   # 一次拉取全部工具 image（首次或更新時執行）
+#   docker compose --profile tools pull
+#
+#   # 查看目前本機已有的版本
+#   docker compose --profile tools images
+#
+#   # 更新單一工具（改 compose 裡的 tag 後執行）
+#   docker compose --profile tools pull nuclei-tool
+#
+# ── 工具版本對照表 ──────────────────────────────────────────
+#   工具            Image                             版本
+#   Nmap            instrumentisto/nmap               7.95
+#   Nuclei          projectdiscovery/nuclei           v3.11.0
+#   ZAP             zaproxy/zap-stable                2.17.0
+#   SQLMap          paoloo/sqlmap                     latest
+#   Gobuster        alpine/gobuster                   latest
+#   Nikto           frapsoft/nikto                    latest
+#
+# ── 升級工具版本流程 ─────────────────────────────────────────
+#   1. 修改 docker-compose.yml 中對應 *-tool service 的 image tag
+#   2. 同步修改 presets/web-pentest.yaml 裡的 image tag
+#   3. docker compose --profile tools pull <tool-name>
+#   4. 重跑一次 web-pentest preset 驗證
+#
+
+#   docker compose up -d
+#   docker compose ps
+
+services:
+
+  # -----------------------------------------------
+  # crAPI — OWASP 官方 API 安全漏洞靶場
+  # Web UI: http://localhost:8888
+  # Mail:   http://localhost:8025
+  # -----------------------------------------------
+  crapi-identity:
+    image: crapi/crapi-identity:latest
+    platform: linux/amd64
+    environment:
+      - DB_NAME=crapi
+      - DB_USER=admin
+      - DB_PASSWORD=crapisecretpassword
+      - DB_HOST=crapi-postgres
+      - DB_PORT=5432
+      - SERVER_PORT=8080
+      - JWT_SECRET=crapi
+      - MAILHOG_HOST=crapi-mailhog
+      - MAILHOG_PORT=1025
+      - MAILHOG_DOMAIN=example.com
+      - ENABLE_SHELL_INJECTION=false
+      - ENABLE_LOG4J=false
+      - TLS_ENABLED=false
+      - TLS_KEYSTORE_TYPE=PKCS12
+      - TLS_KEYSTORE=classpath:certs/server.p12
+      - TLS_KEYSTORE_PASSWORD=passw0rd
+      - TLS_KEY_PASSWORD=passw0rd
+      - TLS_KEY_ALIAS=identity
+      - API_GATEWAY_URL=https://api.mypremiumdealership.com
+      - JWT_EXPIRATION=604800000
+      - SMTP_HOST=smtp.example.com
+      - SMTP_PORT=587
+      - SMTP_EMAIL=user@example.com
+      - SMTP_PASS=xxxxxxxxxxxxxx
+      - SMTP_FROM=no-reply@example.com
+      - SMTP_AUTH=true
+      - SMTP_STARTTLS=true
+    depends_on:
+      crapi-postgres:
+        condition: service_healthy
+      crapi-mongodb:
+        condition: service_healthy
+      crapi-mailhog:
+        condition: service_healthy
+    healthcheck:
+      test: /app/health.sh
+      interval: 15s
+      timeout: 15s
+      retries: 15
+    networks:
+      - lab-network
+
+  crapi-community:
+    image: crapi/crapi-community:latest
+    platform: linux/amd64
+    environment:
+      - IDENTITY_SERVICE=crapi-identity:8080
+      - DB_NAME=crapi
+      - DB_USER=admin
+      - DB_PASSWORD=crapisecretpassword
+      - DB_HOST=crapi-postgres
+      - DB_PORT=5432
+      - SERVER_PORT=8087
+      - MONGO_DB_HOST=crapi-mongodb
+      - MONGO_DB_PORT=27017
+      - MONGO_DB_USER=admin
+      - MONGO_DB_PASSWORD=crapisecretpassword
+      - MONGO_DB_NAME=crapi
+    depends_on:
+      crapi-postgres:
+        condition: service_healthy
+      crapi-mongodb:
+        condition: service_healthy
+      crapi-identity:
+        condition: service_healthy
+    healthcheck:
+      test: /app/health.sh
+      interval: 15s
+      timeout: 15s
+      retries: 15
+    networks:
+      - lab-network
+
+  crapi-workshop:
+    image: crapi/crapi-workshop:latest
+    platform: linux/amd64
+    environment:
+      - IDENTITY_SERVICE=crapi-identity:8080
+      - DB_NAME=crapi
+      - DB_USER=admin
+      - DB_PASSWORD=crapisecretpassword
+      - DB_HOST=crapi-postgres
+      - DB_PORT=5432
+      - SERVER_PORT=8000
+      - MONGO_DB_HOST=crapi-mongodb
+      - MONGO_DB_PORT=27017
+      - MONGO_DB_USER=admin
+      - MONGO_DB_PASSWORD=crapisecretpassword
+      - MONGO_DB_NAME=crapi
+      - SECRET_KEY=crapi
+      - API_GATEWAY_URL=https://api.mypremiumdealership.com
+    depends_on:
+      crapi-postgres:
+        condition: service_healthy
+      crapi-mongodb:
+        condition: service_healthy
+      crapi-identity:
+        condition: service_healthy
+      crapi-community:
+        condition: service_healthy
+    healthcheck:
+      test: /app/health.sh
+      interval: 15s
+      timeout: 15s
+      retries: 15
+    networks:
+      - lab-network
+
+  crapi-web:
+    image: crapi/crapi-web:latest
+    platform: linux/amd64
+    ports:
+      - "8888:80"
+    environment:
+      - COMMUNITY_SERVICE=crapi-community:8087
+      - IDENTITY_SERVICE=crapi-identity:8080
+      - WORKSHOP_SERVICE=crapi-workshop:8000
+      - CHATBOT_SERVICE=crapi-chatbot:5002
+      - MAILHOG_WEB_SERVICE=crapi-mailhog:8025
+      - TLS_ENABLED=false
+    depends_on:
+      crapi-community:
+        condition: service_healthy
+      crapi-identity:
+        condition: service_healthy
+      crapi-workshop:
+        condition: service_healthy
+    healthcheck:
+      test: curl 0.0.0.0:80/health
+      interval: 15s
+      timeout: 15s
+      retries: 15
+    networks:
+      - lab-network
+
+  crapi-postgres:
+    image: postgres:14-alpine
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=crapisecretpassword
+      - POSTGRES_DB=crapi
+    volumes:
+      - crapi-postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U admin -d crapi"]
+      interval: 15s
+      timeout: 15s
+      retries: 15
+    networks:
+      - lab-network
+
+  crapi-mongodb:
+    image: mongo:4.4
+    platform: linux/amd64
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=crapisecretpassword
+    volumes:
+      - crapi-mongodb-data:/data/db
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongo localhost:27017/test --quiet
+      interval: 15s
+      timeout: 15s
+      retries: 15
+      start_period: 20s
+    networks:
+      - lab-network
+
+  crapi-mailhog:
+    image: mailhog/mailhog
+    ports:
+      - "8025:8025"
+    healthcheck:
+      test: ["CMD", "nc", "-z", "localhost", "8025"]
+      interval: 15s
+      timeout: 15s
+      retries: 15
+    networks:
+      - lab-network
+
+  crapi-chatbot:
+    image: alpine/socat
+    command: TCP-LISTEN:5002,fork,reuseaddr /dev/null
+    networks:
+      - lab-network
+
+  # -----------------------------------------------
+  # DVWA — 通用網頁漏洞靶場
+  # Web UI: http://localhost:8080
+  # 帳密：admin / password
+  # -----------------------------------------------
+  dvwa:
+    image: vulnerables/web-dvwa:latest
+    platform: linux/amd64
+    ports:
+      - "8080:80"
+    networks:
+      - lab-network
+
+  # -----------------------------------------------
+  # DefectDojo — 漏洞管理後台
+  # Web UI: http://localhost:8001
+  # 帳密：admin / Admin1234!
+  #
+  # 首次啟動後需手動執行：
+  #   docker exec docker-defectdojo-1 python manage.py migrate
+  #   docker exec -e DJANGO_SUPERUSER_PASSWORD=Admin1234! docker-defectdojo-1 \
+  #     python manage.py createsuperuser --username admin --email admin@lab.local --noinput
+  #   docker exec docker-defectdojo-1 python manage.py loaddata dojo/fixtures/development_environment.json
+  #   docker exec -u root docker-defectdojo-1 chown -R defectdojo /app/static
+  #   docker exec docker-defectdojo-1 python manage.py collectstatic --noinput
+  # -----------------------------------------------
+  defectdojo:
+    image: defectdojo/defectdojo-django:latest
+    profiles:
+      - reporting
+    environment:
+      - DD_DATABASE_URL=postgresql://dojo:dojo_password@defectdojo-db/dojo
+      - DD_SECRET_KEY=lab-secret-key-change-in-production
+      - DD_ALLOWED_HOSTS=localhost,127.0.0.1,defectdojo-nginx,192.168.1.106,*
+      - DD_CELERY_BROKER_URL=redis://defectdojo-redis:6379/0
+    depends_on:
+      - defectdojo-db
+      - defectdojo-redis
+    volumes:
+      - defectdojo-media:/app/media
+      - defectdojo-static:/app/static
+    networks:
+      - lab-network
+
+  defectdojo-nginx:
+    image: nginx:alpine
+    profiles:
+      - reporting
+    ports:
+      - "8001:80"
+    volumes:
+      - defectdojo-static:/usr/share/nginx/static:ro
+      - defectdojo-media:/usr/share/nginx/media:ro
+      - ./defectdojo-nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    depends_on:
+      - defectdojo
+    networks:
+      - lab-network
+
+  defectdojo-worker:
+    image: defectdojo/defectdojo-django:latest
+    profiles:
+      - reporting
+    entrypoint: ["celery", "-A", "dojo", "worker", "-l", "INFO", "--concurrency=1"]
+    environment:
+      - DD_DATABASE_URL=postgresql://dojo:dojo_password@defectdojo-db/dojo
+      - DD_SECRET_KEY=lab-secret-key-change-in-production
+      - DD_CELERY_BROKER_URL=redis://defectdojo-redis:6379/0
+    depends_on:
+      - defectdojo-db
+      - defectdojo-redis
+    networks:
+      - lab-network
+
+  defectdojo-db:
+    image: postgres:14-alpine
+    profiles:
+      - reporting
+    environment:
+      - POSTGRES_USER=dojo
+      - POSTGRES_PASSWORD=dojo_password
+      - POSTGRES_DB=dojo
+    volumes:
+      - defectdojo-db-data:/var/lib/postgresql/data
+    networks:
+      - lab-network
+
+  defectdojo-redis:
+    image: redis:7-alpine
+    profiles:
+      - reporting
+    networks:
+      - lab-network
+
+  # -----------------------------------------------
+  # Nuclei — 掃描引擎（手動觸發，不常駐）
+  # 執行方式：
+  #   docker compose run --rm nuclei \
+  #     -t /templates/gambling/ \
+  #     -u http://crapi-web \
+  #     -o /output/result.jsonl -jsonl
+  # -----------------------------------------------
+  nuclei:
+    image: projectdiscovery/nuclei:v3.11.0
+    profiles:
+      - scan
+    volumes:
+      - ../../templates:/templates:ro
+      - ./scan-results:/output
+    networks:
+      - lab-network
+
+  # -----------------------------------------------
+  # 模組② — 紅隊前線作戰工作站  profile: redteam
+  #
+  # OWASP ZAP  — 流量攔截代理 / Web 自動化掃描
+  #   Proxy:   http://localhost:8090
+  #   Web UI:  http://localhost:8091
+  #
+  # Faraday    — 探測紀錄同步 / 團隊協作
+  #   Web UI:  http://localhost:5985
+  #   帳密：    faraday / changeme（首次登入後改密）
+  #
+  # 啟動：docker compose --profile redteam up -d
+  # -----------------------------------------------
+  zap:
+    image: zaproxy/zap-stable:2.17.0
+    profiles:
+      - redteam
+    command: zap.sh -daemon -host 0.0.0.0 -port 8090 -config api.addrs.addr.name=.* -config api.addrs.addr.regex=true -config api.key=redsaas
+    ports:
+      - "8090:8090"
+    volumes:
+      - zap-data:/zap/wrk
+    networks:
+      - lab-network
+
+  faraday:
+    image: faradaysec/faraday:latest
+    profiles:
+      - redteam
+    ports:
+      - "5985:5985"
+    environment:
+      - PGSSLMODE=disable
+    depends_on:
+      - faraday-db
+    volumes:
+      - faraday-data:/home/faraday/.faraday
+    networks:
+      - lab-network
+
+  faraday-db:
+    image: postgres:14-alpine
+    profiles:
+      - redteam
+    environment:
+      - POSTGRES_USER=faraday
+      - POSTGRES_PASSWORD=changeme
+      - POSTGRES_DB=faraday
+    volumes:
+      - faraday-db-data:/var/lib/postgresql/data
+    networks:
+      - lab-network
+
+  # -----------------------------------------------
+  # 模組③ — AD 攻擊路徑分析  profile: adrecon
+  #
+  # BloodHound CE — AD 關係圖視覺化
+  #   Web UI:  http://localhost:8765
+  #   帳密：    admin / bloodhoundcommunityedition
+  #
+  # 啟動：docker compose --profile adrecon up -d
+  # 資料收集：在目標 AD 環境執行 SharpHound，
+  #           將產出的 ZIP 上傳至 BloodHound UI
+  # -----------------------------------------------
+  bloodhound:
+    image: docker.io/specterops/bloodhound:latest
+    profiles:
+      - adrecon
+    ports:
+      - "8765:8080"
+    environment:
+      - bhe_disable_cypher_complexity_limit=false
+      - bhe_database_connection=host=bloodhound-db port=5432 user=bloodhound dbname=bloodhound password=bloodhoundpassword sslmode=disable
+      - bhe_neo4j_connection=bolt://neo4j:bloodhoundpassword@bloodhound-neo4j:7687/
+    depends_on:
+      - bloodhound-db
+      - bloodhound-neo4j
+    networks:
+      - lab-network
+
+  bloodhound-db:
+    image: postgres:14-alpine
+    profiles:
+      - adrecon
+    environment:
+      - POSTGRES_USER=bloodhound
+      - POSTGRES_PASSWORD=bloodhoundpassword
+      - POSTGRES_DB=bloodhound
+    volumes:
+      - bloodhound-db-data:/var/lib/postgresql/data
+    networks:
+      - lab-network
+
+  bloodhound-neo4j:
+    image: neo4j:4.4
+    profiles:
+      - adrecon
+    environment:
+      - NEO4J_AUTH=neo4j/bloodhoundpassword
+      - NEO4J_dbms_memory_pagecache_size=512M
+      - NEO4J_dbms_memory_heap_max__size=512M
+    volumes:
+      - bloodhound-neo4j-data:/data
+    networks:
+      - lab-network
+
+  # -----------------------------------------------
+  # 模組④ — 情報中樞與 AI 報告引擎  profile: platform
+  #
+  # Elasticsearch  — 日誌索引與搜尋
+  # Kibana         — 視覺化分析面板  http://localhost:5601
+  # Ghostwriter    — 報告自動化系統  http://localhost:8002
+  #                  帳密：admin / specterops
+  #
+  # 注意：DefectDojo 已在 reporting profile 定義，
+  #       platform profile 僅補 ELK + Ghostwriter
+  #
+  # 啟動：docker compose --profile reporting --profile platform up -d
+  # -----------------------------------------------
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.13.4
+    profiles:
+      - platform
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+      - ES_JAVA_OPTS=-Xms512m -Xmx512m
+    volumes:
+      - elasticsearch-data:/usr/share/elasticsearch/data
+    networks:
+      - lab-network
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana:8.13.4
+    profiles:
+      - platform
+    ports:
+      - "5601:5601"
+    environment:
+      - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
+    depends_on:
+      - elasticsearch
+    networks:
+      - lab-network
+
+  ghostwriter:
+    image: ghcr.io/ghostwriterofficial/ghostwriter:latest
+    profiles:
+      - platform
+    ports:
+      - "8002:8000"
+    environment:
+      - DJANGO_SUPERUSER_USERNAME=admin
+      - DJANGO_SUPERUSER_PASSWORD=specterops
+      - DJANGO_SUPERUSER_EMAIL=admin@lab.local
+      - DATABASE_URL=postgresql://ghostwriter:ghostwriterpassword@ghostwriter-db/ghostwriter
+      - REDIS_URL=redis://ghostwriter-redis:6379/0
+    depends_on:
+      - ghostwriter-db
+      - ghostwriter-redis
+    networks:
+      - lab-network
+
+  ghostwriter-worker:
+    image: ghcr.io/ghostwriterofficial/ghostwriter:latest
+    profiles:
+      - platform
+    entrypoint: ["python", "manage.py", "qcluster"]
+    environment:
+      - DATABASE_URL=postgresql://ghostwriter:ghostwriterpassword@ghostwriter-db/ghostwriter
+      - REDIS_URL=redis://ghostwriter-redis:6379/0
+    depends_on:
+      - ghostwriter-db
+      - ghostwriter-redis
+    networks:
+      - lab-network
+
+  ghostwriter-db:
+    image: postgres:14-alpine
+    profiles:
+      - platform
+    environment:
+      - POSTGRES_USER=ghostwriter
+      - POSTGRES_PASSWORD=ghostwriterpassword
+      - POSTGRES_DB=ghostwriter
+    volumes:
+      - ghostwriter-db-data:/var/lib/postgresql/data
+    networks:
+      - lab-network
+
+  ghostwriter-redis:
+    image: redis:7-alpine
+    profiles:
+      - platform
+    networks:
+      - lab-network
+
+  # -----------------------------------------------
+  # 掃描工具 Image 倉庫  profile: tools
+  #
+  # 用途：統一管理所有掃描工具的 image 版本，
+  #       pre-pull 到本機快取，掃描時不再臨時下載。
+  #
+  # 一次拉取全部：
+  #   docker compose --profile tools pull
+  #
+  # 確認目前版本：
+  #   docker compose --profile tools images
+  #
+  # 更新單一工具（例如 nuclei）：
+  #   docker compose --profile tools pull nuclei-tool
+  # -----------------------------------------------
+
+  nmap-tool:
+    image: instrumentisto/nmap:7.95
+    profiles:
+      - tools
+    command: ["--version"]
+    network_mode: none
+
+  nuclei-tool:
+    image: projectdiscovery/nuclei:v3.11.0
+    profiles:
+      - tools
+    command: ["-version"]
+    network_mode: none
+
+  zap-tool:
+    image: zaproxy/zap-stable:2.17.0
+    profiles:
+      - tools
+    command: ["zap.sh", "-version"]
+    network_mode: none
+
+  pentest-tools:
+    build:
+      context: .
+      dockerfile: Dockerfile.pentest-tools
+    image: redsaas-pentest-tools:latest
+    profiles:
+      - tools
+    command: ["sqlmap", "--version"]
+    network_mode: none
+
+  nikto-tool:
+    image: frapsoft/nikto:latest
+    platform: linux/amd64
+    profiles:
+      - tools
+    command: ["-Version"]
+    network_mode: none
+
+networks:
+  lab-network:
+    driver: bridge
+
+volumes:
+  crapi-postgres-data:
+  crapi-mongodb-data:
+  defectdojo-media:
+  defectdojo-db-data:
+  zap-data:
+  faraday-data:
+  faraday-db-data:
+  bloodhound-db-data:
+  bloodhound-neo4j-data:
+  elasticsearch-data:
+  defectdojo-static:
+  ghostwriter-db-data:

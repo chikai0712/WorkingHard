@@ -1,0 +1,35 @@
+id: user-dashboard-pii-exposure
+info:
+  name: 用戶 Dashboard - PII 資料洩露
+  author: redsaas
+  severity: medium
+  description: |
+    /identity/api/v2/user/dashboard 回傳用戶 PII（email、電話等）。
+    確認 API 回應沒有對敏感欄位做遮蔽（masking），
+    且不需要額外的二次驗證即可存取完整個人資料。
+  tags: api,pii,exposure,owasp-api3,crapi
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/identity/api/v2/user/dashboard"
+    matchers-condition: and
+    matchers:
+      - type: status
+        status:
+          - 200
+      - type: word
+        part: body
+        words:
+          - "email"
+          - "number"
+        condition: and
+
+    extractors:
+      - type: regex
+        name: pii_fields
+        part: body
+        regex:
+          - '"email":\s*"[^"]+"'
+          - '"number":\s*"[^"]+"'
+          - '"name":\s*"[^"]+"'
