@@ -1,0 +1,36 @@
+{
+  "event_id": "mysql-precheck-evidence-001",
+  "module": "migration",
+  "engine": "mysql",
+  "evidence_type": "db-check",
+  "stage": "precheck",
+  "status": "warning",
+  "summary": "MySQL precheck found acceptable schema state, but replica lag and metadata lock windows require review before execution.",
+  "checks": [
+    {
+      "name": "replica_lag_seconds",
+      "status": "warning",
+      "value": 11,
+      "notes": "Near warning threshold for planned change window"
+    },
+    {
+      "name": "metadata_lock_risk",
+      "status": "warning",
+      "value": true,
+      "notes": "Potential long-running reads during release window"
+    },
+    {
+      "name": "target_schema_selected",
+      "status": "ok",
+      "value": true,
+      "notes": "Correct schema selected for migration"
+    }
+  ],
+  "recommended_checks": [
+    "Confirm release window traffic pattern",
+    "Validate replication lag before execution",
+    "Re-run lock risk check immediately before apply"
+  ],
+  "recommended_policy": "hold",
+  "updated_at": "2026-05-17T15:40:00Z"
+}

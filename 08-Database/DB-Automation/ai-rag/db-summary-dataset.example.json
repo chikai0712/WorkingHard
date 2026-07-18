@@ -1,0 +1,155 @@
+[
+  {
+    "source_file": "db-backup-summary.example.json",
+    "record_type": "summary",
+    "module": "backup-recovery",
+    "event_id": "backup-summary-001",
+    "summary": {
+      "event_id": "backup-summary-001",
+      "module": "backup-recovery",
+      "backup_type": "full",
+      "status": "warning",
+      "summary": "Backup artifact exists but restore drill evidence is pending review.",
+      "evidence": [
+        "backup-metadata.example.json",
+        "restore-drill-checklist.md"
+      ],
+      "recommended_checks": [
+        "Confirm artifact checksum",
+        "Review restore drill completion status"
+      ],
+      "recommended_policy": "hold",
+      "updated_at": "2026-05-17T12:30:00Z"
+    }
+  },
+  {
+    "source_file": "db-backup-summary.mysql.example.json",
+    "record_type": "summary",
+    "module": "backup-recovery",
+    "event_id": "backup-summary-mysql-001",
+    "summary": {
+      "event_id": "backup-summary-mysql-001",
+      "module": "backup-recovery",
+      "backup_type": "logical_full",
+      "status": "warning",
+      "summary": "MySQL logical backup exists but restore drill and binlog chain validation are pending review.",
+      "evidence": [
+        "backup-metadata.mysql.example.json",
+        "checklists/restore-drill-checklist.mysql.md"
+      ],
+      "recommended_checks": [
+        "Confirm dump checksum",
+        "Validate binlog chain completeness",
+        "Review MySQL restore drill completion status"
+      ],
+      "recommended_policy": "hold",
+      "updated_at": "2026-05-17T15:00:00Z"
+    }
+  },
+  {
+    "source_file": "db-migration-summary.example.json",
+    "record_type": "summary",
+    "module": "migration",
+    "event_id": "migration-summary-001",
+    "summary": {
+      "event_id": "migration-summary-001",
+      "module": "migration",
+      "stage": "precheck",
+      "status": "warning",
+      "summary": "Precheck completed with pending capacity validation before migration approval.",
+      "possible_causes": [
+        "Storage growth threshold near warning",
+        "Approval window not finalized"
+      ],
+      "rollback_reference": [
+        "rollback-guidelines.md"
+      ],
+      "recommended_policy": "hold",
+      "updated_at": "2026-05-17T12:30:00Z"
+    }
+  },
+  {
+    "source_file": "db-migration-summary.mysql.example.json",
+    "record_type": "summary",
+    "module": "migration",
+    "event_id": "migration-summary-mysql-001",
+    "summary": {
+      "event_id": "migration-summary-mysql-001",
+      "module": "migration",
+      "stage": "precheck",
+      "status": "warning",
+      "summary": "MySQL precheck completed with pending replication lag and metadata lock validation before migration approval.",
+      "possible_causes": [
+        "Replica lag threshold near warning",
+        "Potential metadata lock window not validated"
+      ],
+      "rollback_reference": [
+        "rollback-guidelines.md"
+      ],
+      "recommended_policy": "hold",
+      "updated_at": "2026-05-17T15:00:00Z"
+    }
+  },
+  {
+    "source_file": "db-monitoring-summary.example.json",
+    "record_type": "summary",
+    "module": "monitoring/k8s",
+    "event_id": "monitoring-summary-001",
+    "summary": {
+      "event_id": "monitoring-summary-001",
+      "module": "monitoring/k8s",
+      "alert_name": "DBReplicationLagHigh",
+      "severity": "warning",
+      "summary": "Replication lag exceeded warning threshold for one replica.",
+      "affected_targets": [
+        "mysql-replica-01"
+      ],
+      "recommended_checks": [
+        "Review exporter metrics",
+        "Validate storage and network latency",
+        "Check recent migration or maintenance windows"
+      ],
+      "recommended_policy": "hold",
+      "updated_at": "2026-05-17T12:30:00Z"
+    }
+  },
+  {
+    "source_file": "db-remediation-summary.example.json",
+    "record_type": "summary",
+    "module": "remediation",
+    "event_id": "remediation-summary-001",
+    "summary": {
+      "event_id": "remediation-summary-001",
+      "module": "remediation",
+      "action_type": "restart-exporter",
+      "status": "proposed",
+      "summary": "Proposed exporter restart requires operator approval due to repeated alert pattern.",
+      "risk_level": "medium",
+      "human_approval_required": true,
+      "recommended_policy": "hold",
+      "updated_at": "2026-05-17T12:30:00Z"
+    }
+  },
+  {
+    "source_file": "db-ansible-summary.example.json",
+    "record_type": "summary",
+    "module": "ansible",
+    "event_id": "ansible-summary-001",
+    "summary": {
+      "event_id": "ansible-summary-001",
+      "module": "ansible",
+      "device_family": "f5",
+      "status": "warning",
+      "summary": "Consistency check found one VIP without expected backend pool member state.",
+      "affected_devices": [
+        "f5-external-01"
+      ],
+      "recommended_checks": [
+        "Review pool member health",
+        "Compare current VS mapping with expected inventory"
+      ],
+      "recommended_policy": "hold",
+      "updated_at": "2026-05-17T12:30:00Z"
+    }
+  }
+]

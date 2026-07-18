@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "DB Monitoring Evidence",
+  "type": "object",
+  "required": [
+    "event_id",
+    "module",
+    "evidence_type",
+    "alert_name",
+    "status",
+    "summary",
+    "updated_at"
+  ],
+  "properties": {
+    "event_id": {"type": "string"},
+    "module": {"const": "monitoring/k8s"},
+    "evidence_type": {"const": "alert-evidence"},
+    "alert_name": {"type": "string"},
+    "status": {"type": "string", "enum": ["ok", "warning", "critical"]},
+    "summary": {"type": "string"},
+    "affected_targets": {"type": "array", "items": {"type": "string"}},
+    "observations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "status", "value"],
+        "properties": {
+          "name": {"type": "string"},
+          "status": {"type": "string", "enum": ["ok", "warning", "critical"]},
+          "value": {"type": ["string", "number", "boolean"]},
+          "notes": {"type": "string"}
+        }
+      }
+    },
+    "recommended_checks": {"type": "array", "items": {"type": "string"}},
+    "recommended_policy": {"type": "string", "enum": ["pass", "hold", "block", "rollback", "fallback"]},
+    "updated_at": {"type": "string"}
+  }
+}

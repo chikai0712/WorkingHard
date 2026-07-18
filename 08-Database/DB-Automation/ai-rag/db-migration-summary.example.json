@@ -1,0 +1,16 @@
+{
+  "event_id": "migration-summary-001",
+  "module": "migration",
+  "stage": "precheck",
+  "status": "warning",
+  "summary": "Precheck completed with pending capacity validation before migration approval.",
+  "possible_causes": [
+    "Storage growth threshold near warning",
+    "Approval window not finalized"
+  ],
+  "rollback_reference": [
+    "rollback-guidelines.md"
+  ],
+  "recommended_policy": "hold",
+  "updated_at": "2026-05-17T12:30:00Z"
+}

@@ -1,0 +1,17 @@
+{
+  "event_id": "monitoring-summary-local",
+  "module": "monitoring/k8s",
+  "alert_name": "DBMonitoringHealthWarning",
+  "severity": "warning",
+  "summary": "Monitoring summary generated in skeleton mode; exporter readiness and alert evidence still require operator review.",
+  "affected_targets": [
+    "mysql-exporter-01"
+  ],
+  "recommended_checks": [
+    "Review exporter readiness",
+    "Confirm Prometheus target health",
+    "Check alert rule and dashboard mapping"
+  ],
+  "recommended_policy": "hold",
+  "updated_at": "2026-05-17T16:50:49Z"
+}

@@ -1,0 +1,36 @@
+{
+  "event_id": "mysql-postcheck-evidence-001",
+  "module": "migration",
+  "engine": "mysql",
+  "evidence_type": "db-check",
+  "stage": "postcheck",
+  "status": "warning",
+  "summary": "MySQL postcheck completed, but replica catch-up and smoke query evidence are still pending final approval.",
+  "checks": [
+    {
+      "name": "schema_object_validation",
+      "status": "ok",
+      "value": true,
+      "notes": "Expected table and index objects present"
+    },
+    {
+      "name": "smoke_query_status",
+      "status": "warning",
+      "value": "pending-review",
+      "notes": "Operator has not attached sanitized query output yet"
+    },
+    {
+      "name": "replica_catch_up",
+      "status": "warning",
+      "value": false,
+      "notes": "Replica lag not yet back to baseline"
+    }
+  ],
+  "recommended_checks": [
+    "Attach smoke query evidence",
+    "Wait for replica lag recovery",
+    "Confirm application compatibility before close"
+  ],
+  "recommended_policy": "hold",
+  "updated_at": "2026-05-17T15:45:00Z"
+}

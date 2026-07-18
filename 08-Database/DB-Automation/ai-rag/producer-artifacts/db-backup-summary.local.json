@@ -1,0 +1,18 @@
+{
+  "event_id": "backup-summary-local",
+  "module": "backup-recovery",
+  "backup_type": "checksum",
+  "status": "warning",
+  "summary": "Backup verification ran in skeleton mode; restore drill evidence still requires operator review.",
+  "evidence": [
+    "/Users/ckchiu/Desktop/Project/08-Database/DB-Automation/backup-recovery/backup-metadata.mysql.example.json",
+    "/Users/ckchiu/Desktop/Project/08-Database/DB-Automation/backup-recovery/checklists/restore-drill-checklist.mysql.md"
+  ],
+  "recommended_checks": [
+    "Confirm backup artifact metadata",
+    "Review retention policy",
+    "Complete restore drill evidence review"
+  ],
+  "recommended_policy": "hold",
+  "updated_at": "2026-05-17T16:15:30Z"
+}

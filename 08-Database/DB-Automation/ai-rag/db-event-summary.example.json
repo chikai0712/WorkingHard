@@ -1,0 +1,13 @@
+{
+  "event_id": "db-migration-summary-001",
+  "module": "migration",
+  "source_type": "event-summary",
+  "environment": "template",
+  "sensitivity": "internal",
+  "status": "warning",
+  "summary": "Precheck found pending approval before migration window.",
+  "recommended_policy": "hold",
+  "tags": ["db", "migration", "precheck"],
+  "owner": "platform-dba",
+  "updated_at": "2026-05-17"
+}

@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "DB Monitoring Alert Summary",
+  "type": "object",
+  "required": [
+    "event_id",
+    "module",
+    "alert_name",
+    "severity",
+    "summary",
+    "recommended_policy",
+    "updated_at"
+  ],
+  "properties": {
+    "event_id": {"type": "string"},
+    "module": {"const": "monitoring/k8s"},
+    "alert_name": {"type": "string"},
+    "severity": {"type": "string", "enum": ["info", "warning", "critical"]},
+    "summary": {"type": "string"},
+    "affected_targets": {"type": "array", "items": {"type": "string"}},
+    "recommended_checks": {"type": "array", "items": {"type": "string"}},
+    "recommended_policy": {"type": "string", "enum": ["pass", "hold", "block", "rollback", "fallback"]},
+    "updated_at": {"type": "string"}
+  }
+}

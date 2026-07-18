@@ -1,0 +1,11 @@
+{
+  "dimensions": [
+    "account",
+    "service",
+    "environment",
+    "owner",
+    "cost_center"
+  ],
+  "aggregation": "monthly",
+  "top_n": 10
+}

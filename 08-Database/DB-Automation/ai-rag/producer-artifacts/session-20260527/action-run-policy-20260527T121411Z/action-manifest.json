@@ -1,0 +1,37 @@
+{
+  "module_id": "iac",
+  "action_id": "run-policy",
+  "action_scope": "session-20260527/action-run-policy-20260527T121411Z",
+  "manifest_path": "08-Database/DB-Automation/ai-rag/producer-artifacts/session-20260527/action-run-policy-20260527T121411Z/action-manifest.json",
+  "artifact_sources": [],
+  "command": [
+    "bash",
+    "/Users/ckchiu/Desktop/Project/02-Cloud-Deploy/automation/iac/terraform_wrapper.sh",
+    ".",
+    "plan"
+  ],
+  "returncode": 0,
+  "timestamp": "2026-05-27T12:14:11Z",
+  "refresh_steps": [],
+  "artifact_summary": {
+    "file_count": 0,
+    "total_size_bytes": 0,
+    "files": []
+  },
+  "dataset_summary": {
+    "latest_scoped_dataset": {
+      "path": "08-Database/DB-Automation/ai-rag/db-summary-dataset.latest-scoped.example.json",
+      "size_bytes": 2533,
+      "sha256": "4a7437dc8f8193f0900119694edd9b4a88b2870240b14662b269a6c9b535748b",
+      "record_count": 2,
+      "sample_record_type": "evidence"
+    },
+    "scanned_dataset": {
+      "path": "08-Database/DB-Automation/ai-rag/db-summary-dataset.scanned.example.json",
+      "size_bytes": 36252,
+      "sha256": "6d6a58cf365f63ad1bb2cbade8f928edb20f0d54c1184723e9a4de624854cc26",
+      "record_count": 31,
+      "sample_record_type": "summary"
+    }
+  }
+}

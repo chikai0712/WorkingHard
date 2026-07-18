@@ -1,0 +1,18 @@
+{
+  "event_id": "backup-summary-mysql-001",
+  "module": "backup-recovery",
+  "backup_type": "logical_full",
+  "status": "warning",
+  "summary": "MySQL logical backup exists but restore drill and binlog chain validation are pending review.",
+  "evidence": [
+    "backup-metadata.mysql.example.json",
+    "checklists/restore-drill-checklist.mysql.md"
+  ],
+  "recommended_checks": [
+    "Confirm dump checksum",
+    "Validate binlog chain completeness",
+    "Review MySQL restore drill completion status"
+  ],
+  "recommended_policy": "hold",
+  "updated_at": "2026-05-17T15:00:00Z"
+}

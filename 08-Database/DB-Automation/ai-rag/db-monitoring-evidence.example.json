@@ -1,0 +1,38 @@
+{
+  "event_id": "monitoring-evidence-001",
+  "module": "monitoring/k8s",
+  "evidence_type": "alert-evidence",
+  "alert_name": "DBReplicationLagHigh",
+  "status": "warning",
+  "summary": "Monitoring evidence captured exporter and alert observations for a replica lag warning that still requires operator review.",
+  "affected_targets": [
+    "mysql-replica-01"
+  ],
+  "observations": [
+    {
+      "name": "prometheus_target_health",
+      "status": "ok",
+      "value": "up",
+      "notes": "Exporter target is reachable"
+    },
+    {
+      "name": "replication_lag_seconds",
+      "status": "warning",
+      "value": 18,
+      "notes": "Lag is above warning threshold"
+    },
+    {
+      "name": "alert_rule_state",
+      "status": "warning",
+      "value": "firing",
+      "notes": "Alert remains active pending operator review"
+    }
+  ],
+  "recommended_checks": [
+    "Review exporter metrics",
+    "Validate lag trend and workload window",
+    "Confirm dashboard and alert routing evidence"
+  ],
+  "recommended_policy": "hold",
+  "updated_at": "2026-05-18T00:20:00Z"
+}

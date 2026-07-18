@@ -1,0 +1,32 @@
+{
+  "event_id": "monitoring-evidence-local",
+  "module": "monitoring/k8s",
+  "evidence_type": "alert-evidence",
+  "alert_name": "DBMonitoringHealthWarning",
+  "status": "warning",
+  "summary": "Monitoring evidence generated in skeleton mode; target health and alert observations still require operator review.",
+  "affected_targets": [
+    "mysql-exporter-01"
+  ],
+  "observations": [
+    {
+      "name": "prometheus_target_health",
+      "status": "ok",
+      "value": "up",
+      "notes": "Exporter target is reachable in skeleton mode"
+    },
+    {
+      "name": "alert_rule_state",
+      "status": "warning",
+      "value": "firing",
+      "notes": "Placeholder alert remains active for review"
+    }
+  ],
+  "recommended_checks": [
+    "Review exporter readiness",
+    "Confirm Prometheus target health",
+    "Check alert rule and dashboard mapping"
+  ],
+  "recommended_policy": "hold",
+  "updated_at": "2026-05-17T16:50:49Z"
+}

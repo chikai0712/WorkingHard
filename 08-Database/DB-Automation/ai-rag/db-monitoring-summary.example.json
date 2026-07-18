@@ -1,0 +1,17 @@
+{
+  "event_id": "monitoring-summary-001",
+  "module": "monitoring/k8s",
+  "alert_name": "DBReplicationLagHigh",
+  "severity": "warning",
+  "summary": "Replication lag exceeded warning threshold for one replica.",
+  "affected_targets": [
+    "mysql-replica-01"
+  ],
+  "recommended_checks": [
+    "Review exporter metrics",
+    "Validate storage and network latency",
+    "Check recent migration or maintenance windows"
+  ],
+  "recommended_policy": "hold",
+  "updated_at": "2026-05-17T12:30:00Z"
+}

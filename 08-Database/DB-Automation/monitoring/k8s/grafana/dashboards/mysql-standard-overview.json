@@ -1,0 +1,18 @@
+{
+  "annotations": {"list": []},
+  "editable": true,
+  "graphTooltip": 0,
+  "panels": [
+    {
+      "type": "stat",
+      "title": "MySQL Up",
+      "targets": [{"expr": "up{job=\"mysqld-exporter\"}", "refId": "A"}],
+      "gridPos": {"h": 4, "w": 6, "x": 0, "y": 0}
+    }
+  ],
+  "schemaVersion": 39,
+  "style": "dark",
+  "tags": ["mysql", "standard-template"],
+  "title": "MySQL Standard Overview",
+  "version": 1
+}

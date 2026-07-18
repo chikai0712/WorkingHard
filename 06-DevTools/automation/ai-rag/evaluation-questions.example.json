@@ -1,0 +1,26 @@
+[
+  {
+    "question": "如果 DB migration precheck 失敗，應優先參考哪些文件？",
+    "expected_sources": [
+      "08-Database/DB-Automation/migration/README.md",
+      "08-Database/DB-Automation/migration/rollback-guidelines.md"
+    ],
+    "intent": "runbook-qa"
+  },
+  {
+    "question": "DB backup restore drill 應該先檢查哪些證據？",
+    "expected_sources": [
+      "08-Database/DB-Automation/backup-recovery/README.md",
+      "08-Database/DB-Automation/backup-recovery/checklists/restore-drill-checklist.md"
+    ],
+    "intent": "evidence-review"
+  },
+  {
+    "question": "control plane 未來如何顯示 AI recommendation 的信心與建議動作？",
+    "expected_sources": [
+      "06-DevTools/automation/control-plane/AI-RECOMMENDATION-SPEC.md",
+      "06-DevTools/automation/ai-rag/AI-RAG-ARCHITECTURE.md"
+    ],
+    "intent": "architecture-qa"
+  }
+]

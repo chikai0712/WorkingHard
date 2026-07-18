@@ -1,0 +1,38 @@
+{
+  "event_id": "ansible-evidence-001",
+  "module": "ansible",
+  "evidence_type": "consistency-check",
+  "device_family": "f5",
+  "status": "warning",
+  "summary": "Ansible evidence captured check-only observations showing one load balancer mapping still requires operator review.",
+  "affected_devices": [
+    "f5-external-01"
+  ],
+  "observations": [
+    {
+      "name": "inventory_mapping_loaded",
+      "status": "ok",
+      "value": true,
+      "notes": "Device inventory was loaded successfully"
+    },
+    {
+      "name": "virtual_server_policy_match",
+      "status": "warning",
+      "value": false,
+      "notes": "Expected VS to pool mapping differs from placeholder check output"
+    },
+    {
+      "name": "change_boundary_confirmed",
+      "status": "warning",
+      "value": false,
+      "notes": "Operator must confirm approval boundary before remediation"
+    }
+  ],
+  "recommended_checks": [
+    "Review inventory mapping",
+    "Compare VS and pool policy to expected state",
+    "Confirm approval boundary for network changes"
+  ],
+  "recommended_policy": "hold",
+  "updated_at": "2026-05-18T00:20:00Z"
+}

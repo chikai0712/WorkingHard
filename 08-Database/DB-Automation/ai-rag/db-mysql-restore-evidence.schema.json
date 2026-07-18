@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "MySQL Restore Evidence",
+  "type": "object",
+  "required": [
+    "event_id",
+    "module",
+    "engine",
+    "evidence_type",
+    "restore_target",
+    "status",
+    "summary",
+    "evidence",
+    "recommended_policy",
+    "updated_at"
+  ],
+  "properties": {
+    "event_id": {"type": "string"},
+    "module": {"const": "backup-recovery"},
+    "engine": {"const": "mysql"},
+    "evidence_type": {"const": "restore-drill"},
+    "restore_target": {"type": "string"},
+    "status": {"type": "string", "enum": ["ok", "warning", "critical"]},
+    "summary": {"type": "string"},
+    "evidence": {"type": "array", "items": {"type": "string"}},
+    "restore_started_at": {"type": "string"},
+    "restore_completed_at": {"type": "string"},
+    "binlog_validation": {
+      "type": "object",
+      "properties": {
+        "required": {"type": "boolean"},
+        "status": {"type": "string", "enum": ["ok", "warning", "critical", "not_applicable"]},
+        "recovery_target": {"type": "string"}
+      },
+      "required": ["required", "status"]
+    },
+    "recommended_checks": {"type": "array", "items": {"type": "string"}},
+    "recommended_policy": {"type": "string", "enum": ["pass", "hold", "block", "rollback", "fallback"]},
+    "updated_at": {"type": "string"}
+  }
+}

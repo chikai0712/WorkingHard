@@ -1,0 +1,22 @@
+{
+  "module_id": "db-migration",
+  "context_type": "change-risk",
+  "summary": "Precheck summary suggests approval and storage review before migration window.",
+  "possible_causes": [
+    "Pending DBA approval",
+    "Storage threshold close to warning level"
+  ],
+  "recommended_checks": [
+    "Review precheck output",
+    "Validate rollback artifact readiness",
+    "Confirm backup verification status"
+  ],
+  "related_artifacts": [
+    "08-Database/DB-Automation/migration/README.md",
+    "08-Database/DB-Automation/migration/rollback-guidelines.md"
+  ],
+  "confidence": "medium",
+  "recommended_policy": "hold",
+  "human_approval_required": true,
+  "generated_at": "2026-05-17T12:30:00Z"
+}

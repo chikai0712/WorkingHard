@@ -1,0 +1,52 @@
+{
+  "module_id": "db-ops",
+  "action_id": "verify-monitoring",
+  "action_scope": "session-20260517/action-verify-monitoring-20260517T171333Z",
+  "manifest_path": "08-Database/DB-Automation/ai-rag/producer-artifacts/session-20260517/action-verify-monitoring-20260517T171333Z/action-manifest.json",
+  "artifact_sources": [
+    "monitoring-evidence.local.json",
+    "monitoring-summary.local.json"
+  ],
+  "command": [
+    "python3",
+    "/Users/ckchiu/Desktop/Project/08-Database/DB-Automation/monitoring/k8s/generate_monitoring_summary.py"
+  ],
+  "returncode": 0,
+  "timestamp": "2026-05-17T17:13:33Z",
+  "refresh_steps": [
+    {
+      "command": [
+        "python3",
+        "/Users/ckchiu/Desktop/Project/08-Database/DB-Automation/ai-rag/validate_db_summary.py"
+      ],
+      "returncode": 0
+    },
+    {
+      "command": [
+        "python3",
+        "/Users/ckchiu/Desktop/Project/08-Database/DB-Automation/ai-rag/ingest_db_summaries.py",
+        "--scan-dir",
+        "/Users/ckchiu/Desktop/Project/08-Database/DB-Automation/ai-rag/producer-artifacts",
+        "--scope-prefix",
+        "session-20260517/action-verify-monitoring-20260517T171333Z",
+        "--include-evidence",
+        "--scoped-only",
+        "--output",
+        "/Users/ckchiu/Desktop/Project/08-Database/DB-Automation/ai-rag/db-summary-dataset.latest-scoped.example.json"
+      ],
+      "returncode": 0
+    },
+    {
+      "command": [
+        "python3",
+        "/Users/ckchiu/Desktop/Project/08-Database/DB-Automation/ai-rag/ingest_db_summaries.py",
+        "--scan-dir",
+        "/Users/ckchiu/Desktop/Project/08-Database/DB-Automation/ai-rag/producer-artifacts",
+        "--include-evidence",
+        "--output",
+        "/Users/ckchiu/Desktop/Project/08-Database/DB-Automation/ai-rag/db-summary-dataset.scanned.example.json"
+      ],
+      "returncode": 0
+    }
+  ]
+}

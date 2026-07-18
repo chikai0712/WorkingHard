@@ -1,0 +1,17 @@
+{
+  "event_id": "backup-summary-001",
+  "module": "backup-recovery",
+  "backup_type": "full",
+  "status": "warning",
+  "summary": "Backup artifact exists but restore drill evidence is pending review.",
+  "evidence": [
+    "backup-metadata.example.json",
+    "restore-drill-checklist.md"
+  ],
+  "recommended_checks": [
+    "Confirm artifact checksum",
+    "Review restore drill completion status"
+  ],
+  "recommended_policy": "hold",
+  "updated_at": "2026-05-17T12:30:00Z"
+}

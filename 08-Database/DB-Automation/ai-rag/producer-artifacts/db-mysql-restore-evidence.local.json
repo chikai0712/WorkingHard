@@ -1,0 +1,27 @@
+{
+  "event_id": "mysql-restore-evidence-local",
+  "module": "backup-recovery",
+  "engine": "mysql",
+  "evidence_type": "restore-drill",
+  "restore_target": "staging-mysql-restore-local",
+  "status": "warning",
+  "summary": "MySQL restore drill skeleton ran locally; binlog replay evidence still requires operator review.",
+  "evidence": [
+    "/Users/ckchiu/Desktop/Project/08-Database/DB-Automation/backup-recovery/checklists/restore-drill-checklist.mysql.md",
+    "/Users/ckchiu/Desktop/Project/08-Database/DB-Automation/backup-recovery/backup-metadata.mysql.example.json"
+  ],
+  "restore_started_at": "2026-05-17T16:15:30Z",
+  "restore_completed_at": "2026-05-17T16:15:30Z",
+  "binlog_validation": {
+    "required": true,
+    "status": "warning",
+    "recovery_target": "mysql-bin.local:pending-review"
+  },
+  "recommended_checks": [
+    "Review restore drill checklist",
+    "Validate binlog replay evidence",
+    "Record final RTO and estimated RPO"
+  ],
+  "recommended_policy": "hold",
+  "updated_at": "2026-05-17T16:15:30Z"
+}

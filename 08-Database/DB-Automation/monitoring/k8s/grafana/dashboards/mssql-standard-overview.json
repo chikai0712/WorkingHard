@@ -1,0 +1,18 @@
+{
+  "annotations": {"list": []},
+  "editable": true,
+  "graphTooltip": 0,
+  "panels": [
+    {
+      "type": "stat",
+      "title": "MSSQL Exporter Up",
+      "targets": [{"expr": "up{job=\"mssql-exporter\"}", "refId": "A"}],
+      "gridPos": {"h": 4, "w": 6, "x": 0, "y": 0}
+    }
+  ],
+  "schemaVersion": 39,
+  "style": "dark",
+  "tags": ["mssql", "standard-template"],
+  "title": "MSSQL Standard Overview",
+  "version": 1
+}

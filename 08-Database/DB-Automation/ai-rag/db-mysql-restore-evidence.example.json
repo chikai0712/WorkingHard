@@ -1,0 +1,27 @@
+{
+  "event_id": "mysql-restore-evidence-001",
+  "module": "backup-recovery",
+  "engine": "mysql",
+  "evidence_type": "restore-drill",
+  "restore_target": "staging-mysql-restore-01",
+  "status": "warning",
+  "summary": "MySQL restore drill completed in isolated environment, but binlog replay validation still needs operator review.",
+  "evidence": [
+    "backup-recovery/checklists/restore-drill-checklist.mysql.md",
+    "backup-recovery/backup-metadata.mysql.example.json"
+  ],
+  "restore_started_at": "2026-05-17T15:10:00Z",
+  "restore_completed_at": "2026-05-17T15:32:00Z",
+  "binlog_validation": {
+    "required": true,
+    "status": "warning",
+    "recovery_target": "mysql-bin.000128:456789"
+  },
+  "recommended_checks": [
+    "Review binlog replay evidence",
+    "Confirm key query validation output",
+    "Record final RTO and estimated RPO"
+  ],
+  "recommended_policy": "hold",
+  "updated_at": "2026-05-17T15:35:00Z"
+}

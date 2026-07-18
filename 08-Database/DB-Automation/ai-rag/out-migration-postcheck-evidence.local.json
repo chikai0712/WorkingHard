@@ -1,0 +1,30 @@
+{
+  "event_id": "mysql-postcheck-evidence-local",
+  "module": "migration",
+  "engine": "mysql",
+  "evidence_type": "db-check",
+  "stage": "postcheck",
+  "status": "warning",
+  "summary": "MySQL postcheck skeleton ran locally; smoke query and replica catch-up evidence still require operator review.",
+  "checks": [
+    {
+      "name": "schema_object_validation",
+      "status": "ok",
+      "value": true,
+      "notes": "Placeholder success in skeleton mode"
+    },
+    {
+      "name": "replica_catch_up",
+      "status": "warning",
+      "value": false,
+      "notes": "Operator must confirm replica baseline recovery"
+    }
+  ],
+  "recommended_checks": [
+    "Review postcheck SQL template",
+    "Attach smoke query evidence",
+    "Confirm application compatibility before close"
+  ],
+  "recommended_policy": "hold",
+  "updated_at": "2026-05-17T15:57:25Z"
+}

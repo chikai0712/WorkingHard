@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "DB Migration Summary",
+  "type": "object",
+  "required": [
+    "event_id",
+    "module",
+    "stage",
+    "status",
+    "summary",
+    "recommended_policy",
+    "updated_at"
+  ],
+  "properties": {
+    "event_id": {"type": "string"},
+    "module": {"const": "migration"},
+    "stage": {"type": "string", "enum": ["precheck", "execution", "postcheck", "info"]},
+    "status": {"type": "string", "enum": ["ok", "warning", "critical"]},
+    "summary": {"type": "string"},
+    "possible_causes": {"type": "array", "items": {"type": "string"}},
+    "rollback_reference": {"type": "array", "items": {"type": "string"}},
+    "recommended_policy": {"type": "string", "enum": ["pass", "hold", "block", "rollback", "fallback"]},
+    "updated_at": {"type": "string"}
+  }
+}

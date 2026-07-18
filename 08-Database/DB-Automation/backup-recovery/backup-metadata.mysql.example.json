@@ -1,0 +1,28 @@
+{
+  "database": "exampledb",
+  "engine": "mysql",
+  "backup_type": "full",
+  "backup_path": "/backups/exampledb-full-20260517.sql.gz",
+  "checksum": "replace-me",
+  "created_at": "2026-05-17T15:00:00Z",
+  "expires_at": "2026-06-16T15:00:00Z",
+  "compressed": true,
+  "encryption": "none",
+  "source_gate": {
+    "metadata_status": "pass",
+    "checksum_status": "pass",
+    "retention_metadata_status": "pass"
+  },
+  "security_gate": {
+    "encryption_policy_status": "hold",
+    "exception_ticket": "SEC-000",
+    "access_boundary_reviewed": true
+  },
+  "health_gate": {
+    "restore_drill_required": true,
+    "restore_drill_status": "hold",
+    "rto_target_met": false,
+    "rpo_target_met": false
+  },
+  "notes": "mysql logical dump example metadata only"
+}

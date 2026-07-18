@@ -1,0 +1,30 @@
+{
+  "event_id": "mysql-precheck-evidence-local",
+  "module": "migration",
+  "engine": "mysql",
+  "evidence_type": "db-check",
+  "stage": "precheck",
+  "status": "warning",
+  "summary": "MySQL precheck skeleton ran locally; replica lag and metadata lock checks still require operator review.",
+  "checks": [
+    {
+      "name": "replica_lag_seconds",
+      "status": "warning",
+      "value": 0,
+      "notes": "Placeholder value in skeleton mode"
+    },
+    {
+      "name": "metadata_lock_risk",
+      "status": "warning",
+      "value": true,
+      "notes": "Operator must review before execution"
+    }
+  ],
+  "recommended_checks": [
+    "Review precheck SQL template",
+    "Validate replication lag before apply",
+    "Confirm metadata lock window"
+  ],
+  "recommended_policy": "hold",
+  "updated_at": "2026-05-17T15:57:25Z"
+}

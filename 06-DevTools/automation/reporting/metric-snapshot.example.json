@@ -1,0 +1,8 @@
+{
+  "service": "example-service",
+  "window": "24h",
+  "availability": 99.95,
+  "error_rate": 0.05,
+  "p95_latency_ms": 280,
+  "alert_count": 6
+}

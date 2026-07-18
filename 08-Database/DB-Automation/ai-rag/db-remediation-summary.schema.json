@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "DB Remediation Summary",
+  "type": "object",
+  "required": [
+    "event_id",
+    "module",
+    "action_type",
+    "status",
+    "summary",
+    "human_approval_required",
+    "updated_at"
+  ],
+  "properties": {
+    "event_id": {"type": "string"},
+    "module": {"const": "remediation"},
+    "action_type": {"type": "string"},
+    "status": {"type": "string", "enum": ["proposed", "approved", "executed", "rejected"]},
+    "summary": {"type": "string"},
+    "risk_level": {"type": "string", "enum": ["low", "medium", "high"]},
+    "human_approval_required": {"type": "boolean"},
+    "recommended_policy": {"type": "string", "enum": ["pass", "hold", "block", "rollback", "fallback"]},
+    "updated_at": {"type": "string"}
+  }
+}

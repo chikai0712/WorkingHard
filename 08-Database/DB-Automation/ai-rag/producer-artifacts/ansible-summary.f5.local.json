@@ -1,0 +1,17 @@
+{
+  "event_id": "ansible-summary-local",
+  "module": "ansible",
+  "device_family": "f5",
+  "status": "warning",
+  "summary": "Ansible consistency summary generated in skeleton mode; inventory and device evidence still require operator review.",
+  "affected_devices": [
+    "f5-sample-01"
+  ],
+  "recommended_checks": [
+    "Review inventory mapping",
+    "Compare expected policy to check output",
+    "Confirm approval boundary for network changes"
+  ],
+  "recommended_policy": "hold",
+  "updated_at": "2026-05-17T16:25:19Z"
+}

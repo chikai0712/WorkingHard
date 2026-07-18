@@ -1,0 +1,16 @@
+{
+  "event_id": "migration-summary-mysql-001",
+  "module": "migration",
+  "stage": "precheck",
+  "status": "warning",
+  "summary": "MySQL precheck completed with pending replication lag and metadata lock validation before migration approval.",
+  "possible_causes": [
+    "Replica lag threshold near warning",
+    "Potential metadata lock window not validated"
+  ],
+  "rollback_reference": [
+    "rollback-guidelines.md"
+  ],
+  "recommended_policy": "hold",
+  "updated_at": "2026-05-17T15:00:00Z"
+}

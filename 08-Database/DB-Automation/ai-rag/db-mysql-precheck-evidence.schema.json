@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "MySQL Precheck Evidence",
+  "type": "object",
+  "required": [
+    "event_id",
+    "module",
+    "engine",
+    "evidence_type",
+    "stage",
+    "status",
+    "summary",
+    "checks",
+    "recommended_policy",
+    "updated_at"
+  ],
+  "properties": {
+    "event_id": {"type": "string"},
+    "module": {"const": "migration"},
+    "engine": {"const": "mysql"},
+    "evidence_type": {"const": "db-check"},
+    "stage": {"const": "precheck"},
+    "status": {"type": "string", "enum": ["ok", "warning", "critical"]},
+    "summary": {"type": "string"},
+    "checks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "status"],
+        "properties": {
+          "name": {"type": "string"},
+          "status": {"type": "string", "enum": ["ok", "warning", "critical"]},
+          "value": {"type": ["string", "number", "boolean"]},
+          "notes": {"type": "string"}
+        }
+      }
+    },
+    "recommended_checks": {"type": "array", "items": {"type": "string"}},
+    "recommended_policy": {"type": "string", "enum": ["pass", "hold", "block", "rollback", "fallback"]},
+    "updated_at": {"type": "string"}
+  }
+}

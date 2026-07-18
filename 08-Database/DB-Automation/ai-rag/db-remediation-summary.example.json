@@ -1,0 +1,11 @@
+{
+  "event_id": "remediation-summary-001",
+  "module": "remediation",
+  "action_type": "restart-exporter",
+  "status": "proposed",
+  "summary": "Proposed exporter restart requires operator approval due to repeated alert pattern.",
+  "risk_level": "medium",
+  "human_approval_required": true,
+  "recommended_policy": "hold",
+  "updated_at": "2026-05-17T12:30:00Z"
+}

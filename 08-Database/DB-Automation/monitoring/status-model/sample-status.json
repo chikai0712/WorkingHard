@@ -1,0 +1,12 @@
+{
+  "check_name": "sample_health_check",
+  "status": "warn",
+  "details": "Replication lag is above threshold",
+  "host": "dbnode01",
+  "timestamp": "2026-05-13T01:55:00Z",
+  "category": "mysql",
+  "severity": "warning",
+  "environment": "prod",
+  "database_engine": "mysql",
+  "recommended_action": "Check replica delay and source I/O load"
+}

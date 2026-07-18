@@ -1,0 +1,13 @@
+{
+  "doc_id": "example-doc-id",
+  "project": "06-DevTools",
+  "module": "automation",
+  "source_type": "document",
+  "environment": "template",
+  "sensitivity": "internal",
+  "owner": "platform-team",
+  "tags": ["automation", "runbook"],
+  "chunk_strategy": "heading-based",
+  "updated_at": "2026-05-17",
+  "status": "approved-for-ingestion"
+}

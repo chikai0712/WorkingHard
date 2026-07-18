@@ -1,0 +1,21 @@
+{
+  "name": "login-demo",
+  "version": "1.0.0",
+  "description": "登入網站演示，集成 SentinelJS 指紋識別",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "dependencies": {
+    "express": "^4.21.2",
+    "cors": "^2.8.5",
+    "body-parser": "^1.20.3"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.9",
+    "puppeteer": "^21.11.0"
+  }
+}
+

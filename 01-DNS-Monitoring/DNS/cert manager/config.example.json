@@ -1,0 +1,53 @@
+{
+  "alert_threshold_days": 14,
+  "renew_threshold_days": 30,
+  "certificates": [
+    {
+      "domain": "example.com",
+      "cert_path": "/etc/letsencrypt/live/example.com/fullchain.pem",
+      "key_path": "/etc/letsencrypt/live/example.com/privkey.pem",
+      "auto_renew": true
+    },
+    {
+      "domain": "www.example.com",
+      "cert_path": "/etc/letsencrypt/live/www.example.com/fullchain.pem",
+      "key_path": "/etc/letsencrypt/live/www.example.com/privkey.pem",
+      "auto_renew": true
+    }
+  ],
+  "renewer": {
+    "certbot_path": "certbot",
+    "acme_dir": "/etc/letsencrypt",
+    "webroot": "/var/www/html",
+    "email": "admin@example.com",
+    "use_staging": false,
+    "save_dir": "./certs"
+  },
+  "uploader": {
+    "save_dir": "./certs",
+    "serverlist_path": "serverlist.json"
+  },
+  "alert_methods": {
+    "log": {
+      "enabled": true
+    },
+    "email": {
+      "enabled": false,
+      "smtp_host": "smtp.gmail.com",
+      "smtp_port": 587,
+      "use_tls": true,
+      "username": "your-email@gmail.com",
+      "password": "your-app-password",
+      "from": "your-email@gmail.com",
+      "to": ["admin@example.com"]
+    },
+    "webhook": {
+      "enabled": false,
+      "url": "https://hooks.slack.com/services/YOUR/WEBHOOK/URL",
+      "headers": {
+        "Content-Type": "application/json"
+      }
+    }
+  }
+}
+

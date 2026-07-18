@@ -1,0 +1,16 @@
+{
+  "event_id": "migration-summary-local",
+  "module": "migration",
+  "stage": "precheck",
+  "status": "warning",
+  "summary": "Migration command ran in skeleton mode; precheck and rollback readiness still require operator review.",
+  "possible_causes": [
+    "Pending approval gate",
+    "No real database connection in skeleton mode"
+  ],
+  "rollback_reference": [
+    "/Users/ckchiu/Desktop/Project/08-Database/DB-Automation/migration/rollback-guidelines.md"
+  ],
+  "recommended_policy": "hold",
+  "updated_at": "2026-05-17T16:15:30Z"
+}

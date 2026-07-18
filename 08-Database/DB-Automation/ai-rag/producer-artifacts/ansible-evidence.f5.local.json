@@ -1,0 +1,32 @@
+{
+  "event_id": "ansible-evidence-local",
+  "module": "ansible",
+  "evidence_type": "consistency-check",
+  "device_family": "f5",
+  "status": "warning",
+  "summary": "Ansible evidence generated in skeleton mode; device consistency observations still require operator review.",
+  "affected_devices": [
+    "f5-sample-01"
+  ],
+  "observations": [
+    {
+      "name": "inventory_mapping_loaded",
+      "status": "ok",
+      "value": true,
+      "notes": "Inventory mapping loaded in skeleton mode"
+    },
+    {
+      "name": "policy_alignment",
+      "status": "warning",
+      "value": false,
+      "notes": "Placeholder check output differs from expected policy"
+    }
+  ],
+  "recommended_checks": [
+    "Review inventory mapping",
+    "Compare expected policy to check output",
+    "Confirm approval boundary for network changes"
+  ],
+  "recommended_policy": "hold",
+  "updated_at": "2026-05-17T16:25:19Z"
+}

@@ -1,0 +1,20 @@
+{
+  "categories": [
+    {
+      "name": "範例圖片（需上傳）",
+      "images": [
+        {
+          "id": "example_1",
+          "name": "提示：點擊「上傳本地圖片」來載入您的著色圖",
+          "url": "",
+          "thumbnail": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Crect fill='%23f0f0f0' width='200' height='200'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='%23999' font-size='14'%3E上傳圖片開始著色%3C/text%3E%3C/svg%3E",
+          "isPlaceholder": true
+        }
+      ]
+    }
+  ],
+  "instructions": {
+    "zh": "由於跨域限制，建議使用「上傳本地圖片」功能來載入著色圖",
+    "en": "Due to CORS restrictions, please use 'Upload Local Image' to load coloring pages"
+  }
+}

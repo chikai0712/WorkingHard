@@ -1,0 +1,16 @@
+{
+  "event_id": "ansible-summary-001",
+  "module": "ansible",
+  "device_family": "f5",
+  "status": "warning",
+  "summary": "Consistency check found one VIP without expected backend pool member state.",
+  "affected_devices": [
+    "f5-external-01"
+  ],
+  "recommended_checks": [
+    "Review pool member health",
+    "Compare current VS mapping with expected inventory"
+  ],
+  "recommended_policy": "hold",
+  "updated_at": "2026-05-17T12:30:00Z"
+}
