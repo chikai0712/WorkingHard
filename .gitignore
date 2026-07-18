@@ -48,6 +48,8 @@ Thumbs.db
 .env
 .env.local
 .env.*.local
+# RedSaaS .env 備份（token 為本地 localhost DefectDojo，無外網風險）
+!05-Services/RedSaaS/.env
 
 # Cookies 和敏感資訊
 xe_cookies.json

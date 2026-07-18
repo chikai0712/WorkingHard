@@ -1,5 +1,6 @@
 # 敏感設定
-.env
+# .env 已納入 git 備份（token 為本地 DefectDojo，無外網風險）
+# 重裝後需更新 DD_TOKEN 為新 DefectDojo 實例的 token
 
 # Python 虛擬環境
 .venv/
