@@ -82,6 +82,11 @@ temp/
 *.tmp
 
 
-07-Personal/Resume/
+.tmp_pdf/
+.tmp_opencc_env/
 
-07-Personal/
+# 個人目錄 binary 排除
+07-Personal/Ollie/*.mp3
+07-Personal/Ollie/*.jpg
+07-Personal/Ollie/*.png
+07-Personal/login-demo/node_modules/

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登入系統 - SentinelJS 指紋識別演示</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- 嵌入 SentinelJS -->
+    <script src="https://sentinel-api-demo.568win.com/52k3j5h2mnasdi?apiKey=3F775140-442B-439B-AC60-BCA6148AA347" defer></script>
+</head>
+<body> 
+    <div class="container">
+        <div class="login-card">
+            <h1>🔐 登入系統</h1>
+            <p class="subtitle">SentinelJS 指紋識別演示</p> 
+            
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="username">用戶名</label>
+                    <input 
+                        type="text" 
+                        id="username" 
+                        name="username" 
+                        placeholder="輸入用戶名"
+                        required
+                        autocomplete="username"
+                    >
+                </div>
+                
+                <div class="form-group" style="display: none;">
+                    <label for="password">密碼</label>
+                    <input 
+                        type="password" 
+                        id="password" 
+                        name="password" 
+                        value="1234qwer"
+                        autocomplete="current-password"
+                    >
+                </div>
+                
+                <button type="submit" id="submitBtn" class="btn-primary" style="display: none;">
+                    <span id="btnText">登入</span>
+                    <span id="btnLoading" class="loading" style="display: none;">載入中...</span>
+                </button>
+            </form>
+            
+            <div id="message" class="message" style="display: none;"></div>
+            
+            <div class="fingerprint-info">
+                <h3>📊 指紋信息</h3>
+                <div id="fingerprintStatus" class="status">
+                    <span class="status-indicator" id="statusIndicator">⏳</span>
+                    <span id="statusText">正在收集指紋數據...</span>
+                </div>
+                <div id="fingerprintDetails" class="details" style="display: none;">
+                    <div class="detail-item">
+                        <strong>Fingerprint Hash:</strong>
+                        <code id="fpHash">-</code>
+                    </div>
+                    <div class="detail-item">
+                        <strong>Sentinel Hash:</strong>
+                        <code id="sentinelHash">-</code>
+                    </div>
+                    <div class="detail-item">
+                        <strong>Fuzzy Hash:</strong>
+                        <code id="fuzzyHash">-</code>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="info-card">
+            <h3>ℹ️ 關於此演示</h3>
+            <ul>
+                <li>此網站集成了 <strong>SentinelJS</strong> 指紋識別庫</li>
+                <li>登入時會自動收集瀏覽器指紋數據</li>
+                <li>可以使用壓測工具模擬多個用戶登入</li>
+                <li>所有指紋數據會發送到服務器進行分析</li>
+            </ul>
+        </div>
+    </div>
+    
+    <script src="app.js"></script>
+</body>
+</html>
+
