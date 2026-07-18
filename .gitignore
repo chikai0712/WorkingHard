@@ -19,15 +19,14 @@ yarn-debug.log*
 yarn-error.log*
 package-lock.json
 
-# 輸出文件
-*.json
+# 輸出文件（只排除根目錄下的輸出，不影響子專案的 JSON schema/config）
 *.csv
 *.xlsx
 data/
 logs/
 *.log
-
-# GSD planning config (exception for *.json rule above)
+# 根目錄 JSON 輸出排除，但保留子專案的 JSON
+/*.json
 !.planning/config.json
 
 # IDE
