@@ -7,7 +7,7 @@ import uuid
 from flask import Blueprint, jsonify
 
 from core.job_store import jobs, log
-from data.image_catalog import IMAGE_CATALOG
+from core.image_catalog import IMAGE_CATALOG
 
 bp = Blueprint("images", __name__)
 

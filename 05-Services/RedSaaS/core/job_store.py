@@ -1,4 +1,5 @@
 """Jobs 狀態字典與 log 輔助函式。所有 engine / route 都從這裡 import。"""
+from __future__ import annotations
 from datetime import datetime
 
 jobs: dict[str, dict] = {}

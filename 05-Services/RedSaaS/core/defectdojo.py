@@ -1,4 +1,5 @@
 """DefectDojo 輔助函式：自動建立 product / engagement。"""
+from __future__ import annotations
 from datetime import datetime
 import requests
 from core.config import DD_URL, DD_TOKEN
