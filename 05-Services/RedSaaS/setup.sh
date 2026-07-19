@@ -49,6 +49,20 @@ for pkg in git python3 curl; do
   ok "$pkg $(command -v "$pkg")"
 done
 
+# Python 版本檢查：需要 3.10+ 才支援 X | Y 型別語法
+PYTHON_MINOR=$(/usr/bin/python3 -c "import sys; print(sys.version_info.minor)" 2>/dev/null || echo "0")
+if [[ "$PYTHON_MINOR" -lt 10 ]]; then
+  warn "系統 Python 3.${PYTHON_MINOR} 低於 3.10，安裝 python@3.11..."
+  brew install python@3.11
+  # 更新 PATH 讓後續指令使用 3.11
+  export PATH="/opt/homebrew/opt/python@3.11/bin:$PATH"
+  ok "Python $(/opt/homebrew/opt/python@3.11/bin/python3.11 --version)"
+  PYTHON3_BIN="/opt/homebrew/opt/python@3.11/bin/python3.11"
+else
+  ok "Python 3.${PYTHON_MINOR} 版本符合需求"
+  PYTHON3_BIN="$(command -v python3)"
+fi
+
 # ── 3. Docker Desktop ────────────────────────────────────────
 sep
 log "Phase 3 — Docker Desktop"
@@ -88,7 +102,7 @@ cd "$DIR"
 # 主 venv
 if [[ ! -f ".venv/bin/python3" ]]; then
   log "建立 .venv..."
-  python3 -m venv .venv
+  "$PYTHON3_BIN" -m venv .venv
 fi
 ok "主 venv: $DIR/.venv"
 
@@ -198,7 +212,23 @@ for i in $(seq 1 40); do
   sleep 3
 done
 echo
-$DD_READY || warn "DefectDojo 尚未完全就緒，可稍後再訪問 http://localhost:8001"
+if $DD_READY; then
+  : # 已就緒，跳過 migration
+else
+  warn "DefectDojo HTTP 未回應，嘗試跑 DB migration（全新安裝通常需要）..."
+  DD_CONTAINER=$(docker ps --format "{{.Names}}" 2>/dev/null | grep -E "defectdojo[^-]|defectdojo-1$" | head -1 || true)
+  if [[ -n "$DD_CONTAINER" ]]; then
+    log "對 $DD_CONTAINER 執行 migrate..."
+    docker exec "$DD_CONTAINER" python manage.py migrate --noinput 2>&1 | tail -5 || true
+    log "建立預設 superuser（admin / admin）..."
+    docker exec "$DD_CONTAINER" python manage.py shell -c \
+      "from django.contrib.auth import get_user_model; U=get_user_model(); U.objects.filter(username='admin').exists() or U.objects.create_superuser('admin','admin@localhost','admin')" \
+      2>&1 | tail -3 || true
+    ok "Migration 完成，DefectDojo → http://localhost:8001 (admin / admin)"
+  else
+    warn "找不到 DefectDojo container，請手動執行 migrate 後更新 DD_TOKEN"
+  fi
+fi
 
 # ── 9. 啟動 Flask ────────────────────────────────────────────
 sep
